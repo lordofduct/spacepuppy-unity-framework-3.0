@@ -6,7 +6,9 @@ namespace com.spacepuppy.Utils
 {
     public static class TransformUtil
     {
-        
+
+        #region Convert Methods
+
         public static Trans ToTrans(this Transform trans)
         {
             return Trans.GetGlobal(trans);
@@ -38,6 +40,8 @@ namespace com.spacepuppy.Utils
         {
             return Matrix4x4.TRS(trans.localPosition, trans.localRotation, trans.localScale);
         }
+
+        #endregion
 
 
 
@@ -176,6 +180,78 @@ namespace com.spacepuppy.Utils
         #endregion
 
         #region Transform Methods
+
+        public static void ZeroOut(this GameObject go, bool bIgnoreScale, bool bGlobal = false)
+        {
+            if (bGlobal)
+            {
+                go.transform.position = Vector3.zero;
+                go.transform.rotation = Quaternion.identity;
+                if (!bIgnoreScale) go.transform.localScale = Vector3.one;
+            }
+            else
+            {
+                go.transform.localPosition = Vector3.zero;
+                go.transform.localRotation = Quaternion.identity;
+                if (!bIgnoreScale) go.transform.localScale = Vector3.one;
+            }
+
+            var rb = go.GetComponent<Rigidbody>();
+            if (rb != null && !rb.isKinematic)
+            {
+                rb.velocity = Vector3.zero;
+                rb.angularVelocity = Vector3.zero;
+
+            }
+        }
+
+        public static void ZeroOut(this Transform trans, bool bIgnoreScale, bool bGlobal = false)
+        {
+            if (bGlobal)
+            {
+                trans.position = Vector3.zero;
+                trans.rotation = Quaternion.identity;
+                if (!bIgnoreScale) trans.localScale = Vector3.one;
+            }
+            else
+            {
+                trans.localPosition = Vector3.zero;
+                trans.localRotation = Quaternion.identity;
+                if (!bIgnoreScale) trans.localScale = Vector3.one;
+            }
+        }
+
+        public static void ZeroOut(this Rigidbody body)
+        {
+            if (body.isKinematic) return;
+
+            body.velocity = Vector3.zero;
+            body.angularVelocity = Vector3.zero;
+        }
+
+        public static void CopyTransform(GameObject src, GameObject dst, bool bSetScale = false)
+        {
+            if (src == null) throw new System.ArgumentNullException("src");
+            if (dst == null) throw new System.ArgumentNullException("dst");
+            CopyTransform(src.transform, dst.transform);
+        }
+
+        public static void CopyTransform(Transform src, Transform dst, bool bSetScale = false)
+        {
+            if (src == null) throw new System.ArgumentNullException("src");
+            if (dst == null) throw new System.ArgumentNullException("dst");
+
+            Trans.GetGlobal(src).SetToGlobal(dst, bSetScale);
+
+            foreach (Transform child in dst)
+            {
+                //match the transform by name
+                var srcChild = src.Find(child.name);
+                if (srcChild != null) CopyTransform(srcChild, child);
+            }
+        }
+
+
 
         public static Vector3 GetRelativePosition(this Transform trans, Transform relativeTo)
         {
@@ -536,6 +612,6 @@ namespace com.spacepuppy.Utils
         }
 
         #endregion
-
+        
     }
 }

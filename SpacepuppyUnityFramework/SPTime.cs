@@ -277,7 +277,7 @@ namespace com.spacepuppy
                 if (createIfNotExists)
                 {
                     _customTimes = new Dictionary<string, CustomTimeSupplier>();
-                    GameLoopEntry.RegisterInternalEarlyUpdate(SPTime.Update);
+                    GameLoop.RegisterInternalEarlyUpdate(SPTime.Update);
                     var ct = new CustomTimeSupplier(id);
                     _customTimes[ct.Id] = ct;
                     return ct;

@@ -361,7 +361,10 @@ namespace com.spacepuppy.Utils
         {
             if (c == null) return false;
 
-            return c.name == name;
+            if (c is SPEntity)
+                return (c as SPEntity).CompareName(name);
+            else
+                return c.name == name;
         }
 
         public static GameObject Find(this GameObject go, string spath)
@@ -801,43 +804,7 @@ namespace com.spacepuppy.Utils
 
             return null;
         }
-
-        /*
-         * ReduceToParent
-         */
-
-        public static IEnumerable<GameObject> ReduceToParentWithTag(this IEnumerable<GameObject> e, string tag, bool bdistinct = true)
-        {
-            if (bdistinct)
-            {
-                foreach (var obj in ReduceToParentWithTag(e, tag, false).Distinct()) yield return obj;
-            }
-            else
-            {
-                foreach (var obj in e)
-                {
-                    var o = FindParentWithTag(obj, tag);
-                    if (o != null) yield return o;
-                }
-            }
-        }
-
-        public static IEnumerable<GameObject> ReduceToParentWithTag(this IEnumerable<Component> e, string tag, bool bdistinct = true)
-        {
-            if (bdistinct)
-            {
-                foreach (var obj in ReduceToParentWithTag(e, tag, false).Distinct()) yield return obj;
-            }
-            else
-            {
-                foreach (var obj in e)
-                {
-                    var o = FindParentWithTag(obj, tag);
-                    if (o != null) yield return o;
-                }
-            }
-        }
-
+        
 #endregion
 
 #region Find Root
@@ -982,33 +949,7 @@ namespace com.spacepuppy.Utils
         }
 
 #endregion
-
-#region RigidBody Parenting
-
-        public static Rigidbody FindRigidbody(this GameObject go, bool stopAtRoot = false)
-        {
-            if (go == null) return null;
-
-            var rb = go.GetComponent<Rigidbody>();
-            if (rb != null) return rb;
-
-            foreach (var p in go.GetParents(stopAtRoot))
-            {
-                rb = p.GetComponent<Rigidbody>();
-                if (rb != null) return rb;
-            }
-
-            return null;
-        }
-
-        public static Rigidbody FindRigidbody(this Component comp, bool stopAtRoot = false)
-        {
-            if (comp == null) return null;
-            return FindRigidbody(comp.gameObject, stopAtRoot);
-        }
-
-#endregion
-
+        
 #region Parenting
 
         public static IEnumerable<Transform> IterateAllChildren(this Transform trans)
@@ -1305,89 +1246,7 @@ namespace com.spacepuppy.Utils
         }
 
 #endregion
-
-#region Transform
-
-        public static void ZeroOut(this GameObject go, bool bIgnoreScale, bool bGlobal = false)
-        {
-            if (bGlobal)
-            {
-                go.transform.position = Vector3.zero;
-                go.transform.rotation = Quaternion.identity;
-                if (!bIgnoreScale) go.transform.localScale = Vector3.one;
-            }
-            else
-            {
-                go.transform.localPosition = Vector3.zero;
-                go.transform.localRotation = Quaternion.identity;
-                if (!bIgnoreScale) go.transform.localScale = Vector3.one;
-            }
-
-            var rb = go.GetComponent<Rigidbody>();
-            if (rb != null && !rb.isKinematic)
-            {
-                rb.velocity = Vector3.zero;
-                rb.angularVelocity = Vector3.zero;
-
-            }
-        }
-
-        public static void ZeroOut(this Transform trans, bool bIgnoreScale, bool bGlobal = false)
-        {
-            if (bGlobal)
-            {
-                trans.position = Vector3.zero;
-                trans.rotation = Quaternion.identity;
-                if (!bIgnoreScale) trans.localScale = Vector3.one;
-            }
-            else
-            {
-                trans.localPosition = Vector3.zero;
-                trans.localRotation = Quaternion.identity;
-                if (!bIgnoreScale) trans.localScale = Vector3.one;
-            }
-        }
-
-        public static void ZeroOut(this Rigidbody body)
-        {
-            if (body.isKinematic) return;
-
-            body.velocity = Vector3.zero;
-            body.angularVelocity = Vector3.zero;
-        }
-
-        public static void CopyTransform(GameObject src, GameObject dst, bool bSetScale = false)
-        {
-            if (src == null) throw new System.ArgumentNullException("src");
-            if (dst == null) throw new System.ArgumentNullException("dst");
-            CopyTransform(src.transform, dst.transform);
-        }
-
-        public static void CopyTransform(Transform src, Transform dst, bool bSetScale = false)
-        {
-            if (src == null) throw new System.ArgumentNullException("src");
-            if (dst == null) throw new System.ArgumentNullException("dst");
-
-            Trans.GetGlobal(src).SetToGlobal(dst, bSetScale);
-
-            foreach (Transform child in dst)
-            {
-                //match the transform by name
-                var srcChild = src.Find(child.name);
-                if (srcChild != null) CopyTransform(srcChild, child);
-            }
-        }
-
-#endregion
-
-
-
-
-        public static bool Equals(this object obj, params object[] any)
-        {
-            return System.Array.IndexOf(any, obj) >= 0;
-        }
-
+        
     }
 }
 

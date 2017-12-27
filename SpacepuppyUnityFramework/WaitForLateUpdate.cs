@@ -58,7 +58,7 @@ namespace com.spacepuppy
                 if (_onLateUpdateCallback == null)
                     _onLateUpdateCallback = (s, e) =>
                     {
-                        GameLoopEntry.OnLateUpdate -= OnLateUpdateCallback;
+                        GameLoop.OnLateUpdate -= OnLateUpdateCallback;
                         _active = false;
                         if (_handle != null && _handle._handler != null)
                         {
@@ -77,7 +77,7 @@ namespace com.spacepuppy
             if(!_active)
             {
                 _active = true;
-                GameLoopEntry.OnLateUpdate += OnLateUpdateCallback;
+                GameLoop.OnLateUpdate += OnLateUpdateCallback;
             }
 
             return _handle;

@@ -317,34 +317,8 @@ namespace com.spacepuppy.Utils
         
 #endregion
 
-#region GetComponent
-
-        /// <summary>
-        /// Generic access of GetComponent that supports interfaces.
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="obj"></param>
-        /// <returns></returns>
-        [System.Obsolete("No longer needed, unity added appropriate support for generic component access by interface.")]
-        public static T GetComponentAlt<T>(this GameObject obj) where T : class
-        {
-            if (obj == null) return null;
-            return obj.GetComponent(typeof(T)) as T;
-        }
-
-        /// <summary>
-        /// Generic access of GetComponent that supports interfaces.
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="obj"></param>
-        /// <returns></returns>
-        [System.Obsolete("No longer needed, unity added appropriate support for generic component access by interface.")]
-        public static T GetComponentAlt<T>(this Component obj) where T : class
-        {
-            if (obj == null) return null;
-            return obj.GetComponent(typeof(T)) as T;
-        }
-
+        #region GetComponent
+        
         public static bool GetComponent<T>(this GameObject obj, out T comp) where T : class
         {
             if (obj == null)
@@ -390,53 +364,14 @@ namespace com.spacepuppy.Utils
         #endregion
 
         #region GetComponents
-
-        /// <summary>
-        /// Generic access of GetComponents that supports interfaces.
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="obj"></param>
-        /// <returns></returns>
-        [System.Obsolete("No longer needed, unity added appropriate support for generic component access by interface.")]
-        public static T[] GetComponentsAlt<T>(this GameObject obj) where T : class
-        {
-            //if (obj == null) return Enumerable.Empty<T>();
-            //return obj.GetComponents(typeof(T)).Cast<T>();
-
-            if (obj == null) return ArrayUtil.Empty<T>();
-
-            using (var tmpLst = TempCollection.GetList<Component>())
-            {
-                obj.GetComponents(typeof(T), tmpLst);
-                T[] result = new T[tmpLst.Count];
-                for (int i = 0; i < tmpLst.Count; i++)
-                {
-                    result[i] = tmpLst[i] as T;
-                }
-                return result;
-            }
-        }
-
-        /// <summary>
-        /// Generic access of GetComponents that supports interfaces.
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="obj"></param>
-        /// <returns></returns>
-        [System.Obsolete("No longer needed, unity added appropriate support for generic component access by interface.")]
-        public static T[] GetComponentsAlt<T>(this Component obj) where T : class
-        {
-            if (obj == null) return ArrayUtil.Empty<T>();
-            return GetComponentsAlt<T>(obj.gameObject);
-        }
-
+        
         /// <summary>
         /// Generic access of GetComponents that supports collections other than just List<T>/>
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="obj"></param>
         /// <returns></returns>
-        public static void GetComponentsAlt<T>(this GameObject obj, ICollection<T> lst) where T : class
+        public static void GetComponents<T>(this GameObject obj, ICollection<T> lst) where T : class
         {
             if (obj == null) return;
 
@@ -459,11 +394,11 @@ namespace com.spacepuppy.Utils
         /// <typeparam name="T"></typeparam>
         /// <param name="obj"></param>
         /// <returns></returns>
-        public static void GetComponentsAlt<T>(this Component obj, ICollection<T> lst) where T : class
+        public static void GetComponents<T>(this Component obj, ICollection<T> lst) where T : class
         {
             if (obj == null) return;
 
-            GetComponentsAlt<T>(obj.gameObject, lst);
+            GetComponents<T>(obj.gameObject, lst);
         }
        
         public static void GetComponents<T>(this GameObject obj, ICollection<T> lst, System.Func<Component, T> filter) where T : class
@@ -530,7 +465,7 @@ namespace com.spacepuppy.Utils
 
 #endregion
 
-#region ChildComponent
+#region Child Component
 
         public static bool GetComponentInChildren<T>(this GameObject obj, out T comp) where T : class
         {
@@ -619,28 +554,6 @@ namespace com.spacepuppy.Utils
         {
             if (coll == null) throw new System.ArgumentNullException("coll");
             if (obj == null) return;
-
-            //using (var tmpLst = TempCollection.GetList<Component>())
-            //{
-            //    if (bIncludeSelf)
-            //    {
-            //        obj.GetComponentsInChildren<Component>(bIncludeInactive, tmpLst);
-            //        var e = tmpLst.GetEnumerator();
-            //        while (e.MoveNext())
-            //        {
-            //            if (e.Current is T) coll.Add(e.Current as T);
-            //        }
-            //    }
-            //    else
-            //    {
-            //        obj.GetComponentsInChildren<Component>(bIncludeInactive, tmpLst);
-            //        var e = tmpLst.GetEnumerator();
-            //        while (e.MoveNext())
-            //        {
-            //            if (e.Current is T && e.Current.gameObject != obj) coll.Add(e.Current as T);
-            //        }
-            //    }
-            //}
 
             using (var tmpLst = TempCollection.GetList<T>())
             {
@@ -735,35 +648,7 @@ namespace com.spacepuppy.Utils
 #endregion
 
 #region RemoveComponent
-
-        //public static void RemoveComponent<T>(this GameObject obj) where T : class
-        //{
-        //    RemoveComponent(obj, typeof(T));
-        //}
-
-        //public static void RemoveComponent<T>(this Component obj) where T : class
-        //{
-        //    RemoveComponent(obj, typeof(T));
-        //}
-
-        //public static void RemoveComponent(this GameObject obj, System.Type tp)
-        //{
-        //    var comp = obj.GetComponent(tp);
-        //    if (comp != null)
-        //    {
-        //        ObjUtil.SmartDestroy(comp);
-        //    }
-        //}
-
-        //public static void RemoveComponent(this Component obj, System.Type tp)
-        //{
-        //    var comp = obj.GetComponent(tp);
-        //    if (comp != null)
-        //    {
-        //        ObjUtil.SmartDestroy(comp);
-        //    }
-        //}
-
+        
         public static void RemoveComponents<T>(this GameObject obj) where T : class
         {
             RemoveComponents(obj, typeof(T));
@@ -794,7 +679,7 @@ namespace com.spacepuppy.Utils
             }
         }
 
-        public static void RemoveFromOwner(this Component comp)
+        public static void Remove(this Component comp)
         {
             if (comp != null)
             {

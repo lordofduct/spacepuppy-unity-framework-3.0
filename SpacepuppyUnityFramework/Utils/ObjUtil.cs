@@ -610,7 +610,7 @@ namespace com.spacepuppy.Utils
                         if (entity != null) set.Add(entity);
                     }
                     if (ComponentUtil.IsAcceptableComponentType(tp))
-                        go.GetComponentsAlt<T>(set);
+                        go.GetComponents<T>(set);
                 }
 
                 return set.Count > 0 ? set.ToArray() : ArrayUtil.Empty<T>();

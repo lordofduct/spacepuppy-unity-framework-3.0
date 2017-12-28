@@ -36,6 +36,39 @@ namespace com.spacepuppy
         Always = 7
     }
 
+    [System.Flags()]
+    public enum Constraint
+    {
+        None = UnityEngine.RigidbodyConstraints.None,
+        XPosition = UnityEngine.RigidbodyConstraints.FreezePositionX,
+        YPosition = UnityEngine.RigidbodyConstraints.FreezePositionY,
+        ZPosition = UnityEngine.RigidbodyConstraints.FreezePositionZ,
+        Position = UnityEngine.RigidbodyConstraints.FreezePosition,
+        XRotation = UnityEngine.RigidbodyConstraints.FreezeRotationX,
+        YRotation = UnityEngine.RigidbodyConstraints.FreezeRotationY,
+        ZRotation = UnityEngine.RigidbodyConstraints.FreezeRotationZ,
+        Rotation = UnityEngine.RigidbodyConstraints.FreezeRotation,
+        All = UnityEngine.RigidbodyConstraints.FreezeAll
+    }
+
+    public enum EntityRelativity
+    {
+        Entity = 0,
+        Self = 1,
+        SelfAndChildren = 2
+    }
+
+    /// <summary>
+    /// Enum used by InfoboxAttribute to define which message box type to display as.
+    /// </summary>
+    public enum InfoBoxMessageType
+    {
+        None = 0,
+        Info = 1,
+        Warning = 2,
+        Error = 3
+    }
+
     /// <summary>
     /// Search parameter type
     /// </summary>

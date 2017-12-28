@@ -57,6 +57,11 @@
     <Compile Include="Base\AdvancedAnimationInspector.cs" />
     <Compile Include="Base\ComparisonOperatorPropertyDrawer.cs" />
     <Compile Include="Base\ConstraintPropertyDrawer.cs" />
+    <Compile Include="Base\Events\EventTriggerTargetPropertyDrawer.cs" />
+    <Compile Include="Base\Events\ITriggerableMechanismAddonDrawer.cs" />
+    <Compile Include="Base\Events\ObservableTargetDataPropertyDrawer.cs" />
+    <Compile Include="Base\Events\TriggerableTargetObjectPropertyDrawer.cs" />
+    <Compile Include="Base\Events\TriggerPropertyDrawer.cs" />
     <Compile Include="Base\Project\CustomTimeLayersDataInspector.cs" />
     <Compile Include="Base\Project\TagDataInspector.cs" />
     <Compile Include="Commands\FindReferencesToObjectMenu.cs" />

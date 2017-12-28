@@ -51,6 +51,13 @@ namespace com.spacepuppy
         All = UnityEngine.RigidbodyConstraints.FreezeAll
     }
 
+    public enum EnableMode
+    {
+        Enable = 0,
+        Disable = 1,
+        Toggle = 2
+    }
+
     public enum EntityRelativity
     {
         Entity = 0,

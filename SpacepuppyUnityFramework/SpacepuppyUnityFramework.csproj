@@ -86,6 +86,16 @@
     <Compile Include="Dynamic\TypeAccessWrapper.cs" />
     <Compile Include="Dynamic\Variant.cs" />
     <Compile Include="Enums.cs" />
+    <Compile Include="Events\Enums.cs" />
+    <Compile Include="Events\EventTriggerTarget.cs" />
+    <Compile Include="Events\IObservableTrigger.cs" />
+    <Compile Include="Events\ITriggerable.cs" />
+    <Compile Include="Events\ObservableTargetData.cs" />
+    <Compile Include="Events\SPEvent.cs" />
+    <Compile Include="Events\Trigger.cs" />
+    <Compile Include="Events\Triggerable.cs" />
+    <Compile Include="Events\TriggerableOrderComparer.cs" />
+    <Compile Include="Events\TriggerableTargetObject.cs" />
     <Compile Include="Exceptions.cs" />
     <Compile Include="GameLoop.cs" />
     <Compile Include="Geom\RaycastInfo.cs" />
@@ -126,6 +136,7 @@
     <Compile Include="SPTime.cs" />
     <Compile Include="SPTimeEnums.cs" />
     <Compile Include="SPTimePeriod.cs" />
+    <Compile Include="TempEventArgs.cs" />
     <Compile Include="TypeReference.cs" />
     <Compile Include="Utils\ArrayUtil.cs" />
     <Compile Include="Utils\Assertions.cs" />

@@ -117,6 +117,7 @@
     <Compile Include="IRadicalYieldInstruction.cs" />
     <Compile Include="IRandom.cs" />
     <Compile Include="IResettingYieldInstruction.cs" />
+    <Compile Include="IService.cs" />
     <Compile Include="ISPDisposable.cs" />
     <Compile Include="ITimeSupplier.cs" />
     <Compile Include="IUpdateable.cs" />
@@ -145,6 +146,7 @@
     <Compile Include="Utils\CompareUtil.cs" />
     <Compile Include="Utils\ComponentUtil.cs" />
     <Compile Include="Utils\ConvertUtil.cs" />
+    <Compile Include="Utils\CoroutineUtil.cs" />
     <Compile Include="Utils\EnumUtil.cs" />
     <Compile Include="Utils\GameObjUtil.cs" />
     <Compile Include="Utils\LayerUtil.cs" />
@@ -162,8 +164,10 @@
     <Compile Include="Utils\TypeUtil.cs" />
     <Compile Include="Utils\VectorUtil.cs" />
     <Compile Include="VariantReference.cs" />
+    <Compile Include="WaitForComplete.cs" />
     <Compile Include="WaitForDuration.cs" />
     <Compile Include="WaitForLateUpdate.cs" />
+    <Compile Include="WaitUntilTime.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -6,7 +6,7 @@ using com.spacepuppy.Hooks;
 namespace com.spacepuppy
 {
     
-    public class GameLoop : SPComponent
+    public class GameLoop : ServiceComponent<GameLoop>, IService
     {
 
         #region Events
@@ -67,22 +67,12 @@ namespace com.spacepuppy
                 }
             }
             
-            var go = new GameObject("Spacepuppy.GameLoop");
-            Object.DontDestroyOnLoad(go);
-            _instance = go.AddComponent<GameLoop>();
+            _instance = Services.Create<GameLoop>(true, "Spacepuppy.GameLoop");
         }
 
-        protected override void Awake()
+        protected override void OnValidAwake()
         {
-            if(!object.ReferenceEquals(_instance, null) && !object.ReferenceEquals(_instance, this))
-            {
-                ObjUtil.SmartDestroy(this.gameObject);
-                Debug.LogWarning("Attempted to create more than one GameLoop, do not attach this script to any GameObject in a scene.");
-                return;
-            }
-
-            base.Awake();
-
+            _instance = this;
 
             _updateHook = this.gameObject.AddComponent<UpdateEventHooks>();
             _tardyUpdateHook = this.gameObject.AddComponent<TardyExecutionUpdateEventHooks>();

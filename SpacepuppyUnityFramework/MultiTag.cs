@@ -5,7 +5,6 @@ using System.Linq;
 using com.spacepuppy.Collections;
 using com.spacepuppy.Project;
 using com.spacepuppy.Utils;
-using System.Collections;
 
 namespace com.spacepuppy
 {
@@ -246,7 +245,7 @@ namespace com.spacepuppy
                 }
             }
 
-            object IEnumerator.Current
+            object System.Collections.IEnumerator.Current
             {
                 get
                 {

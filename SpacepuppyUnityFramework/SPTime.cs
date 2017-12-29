@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 
 using com.spacepuppy.Utils;
-using System;
 
 namespace com.spacepuppy
 {
@@ -601,7 +600,7 @@ namespace com.spacepuppy
                 }
             }
 
-            event EventHandler IScalableTimeSupplier.TimeScaleChanged
+            event System.EventHandler IScalableTimeSupplier.TimeScaleChanged
             {
                 add
                 {

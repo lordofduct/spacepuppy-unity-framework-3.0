@@ -1,4 +1,6 @@
-﻿namespace com.spacepuppy
+﻿
+
+namespace com.spacepuppy
 {
 
     /// <summary>

@@ -28,6 +28,7 @@ namespace com.spacepuppy
 
         #region Singleton Interface
 
+        private const string SPECIAL_NAME = "Spacepuppy.GameLoop";
         private static GameLoop _instance;
 
         #endregion
@@ -67,7 +68,7 @@ namespace com.spacepuppy
                 }
             }
             
-            _instance = Services.Create<GameLoop>(true, "Spacepuppy.GameLoop");
+            _instance = Services.Create<GameLoop>(true, SPECIAL_NAME);
         }
 
         protected override void OnValidAwake()

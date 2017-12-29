@@ -41,6 +41,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Serialization\Json\JsonException.cs" />
+    <Compile Include="Serialization\Json\JsonFormatter.cs" />
+    <Compile Include="Serialization\Json\JsonNodeType.cs" />
+    <Compile Include="Serialization\Json\JsonReader.cs" />
+    <Compile Include="Serialization\Json\JsonWriter.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SpacepuppyUnityFramework\SpacepuppyUnityFramework.csproj">
@@ -48,5 +53,6 @@
       <Name>SpacepuppyUnityFramework</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

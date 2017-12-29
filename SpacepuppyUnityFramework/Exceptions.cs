@@ -2,6 +2,7 @@
 
 namespace com.spacepuppy
 {
+
     public class TypeArgumentMismatchException : System.ArgumentException
     {
 
@@ -55,4 +56,22 @@ namespace com.spacepuppy
         #endregion
 
     }
+
+    public class DuplicateKeyException : Exception
+    {
+
+        public DuplicateKeyException() :
+            base("An item was added that generated a duplicate key for an existing item.")
+        {
+
+        }
+
+        public DuplicateKeyException(Exception innerException) :
+            base("An item was added that generated a duplicate key for an existing item.", innerException)
+        {
+
+        }
+
+    }
+
 }

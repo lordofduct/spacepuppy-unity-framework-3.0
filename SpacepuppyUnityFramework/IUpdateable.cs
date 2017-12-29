@@ -26,13 +26,14 @@ namespace com.spacepuppy
 
         public bool Contains(IUpdateable obj)
         {
-            return _set.Contains(obj);
+            return _set.Contains(obj) && !_toRemove.Contains(obj);
         }
 
         public void Add(IUpdateable obj)
         {
             if (_inUpdate)
             {
+                if (_set.Contains(obj) && !_toRemove.Contains(obj)) return;
                 _toAdd.Add(obj);
             }
             else

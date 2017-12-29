@@ -5,7 +5,7 @@ using System.Linq;
 
 using com.spacepuppy.Events;
 
-namespace com.spacepuppyeditor.Scenario
+namespace com.spacepuppyeditor.Base.Events
 {
     [CustomAddonDrawer(typeof(ITriggerable), displayAsFooter = true)]
     public class ITriggerableMechanismAddonDrawer : SPEditorAddonDrawer

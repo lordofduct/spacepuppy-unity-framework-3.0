@@ -130,6 +130,7 @@
     <Compile Include="RadicalCoroutine.cs" />
     <Compile Include="RadicalCoroutineManager.cs" />
     <Compile Include="RadicalEnums.cs" />
+    <Compile Include="ShortUid.cs" />
     <Compile Include="SPComponent.cs" />
     <Compile Include="SPConstants.cs" />
     <Compile Include="SPEntity.cs" />

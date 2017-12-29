@@ -46,6 +46,15 @@
     <Compile Include="Anim\IScriptableAnimationClip.cs" />
     <Compile Include="Anim\ISPAnim.cs" />
     <Compile Include="Anim\ISPAnimationSource.cs" />
+    <Compile Include="Anim\Legacy\AnimationEventCallback.cs" />
+    <Compile Include="Anim\Legacy\Exceptions.cs" />
+    <Compile Include="Anim\Legacy\MaskCollection.cs" />
+    <Compile Include="Anim\Legacy\SPAnim.cs" />
+    <Compile Include="Anim\Legacy\SPAnimationController.cs" />
+    <Compile Include="Anim\Legacy\SPAnimClip.cs" />
+    <Compile Include="Anim\Legacy\SPAnimClipCollection.cs" />
+    <Compile Include="Anim\Legacy\SPAnimUtil.cs" />
+    <Compile Include="Anim\Legacy\TransformMask.cs" />
     <Compile Include="Anim\PropertyAttributes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -55,8 +64,6 @@
       <Name>SpacepuppyUnityFramework</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Anim\Legacy\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

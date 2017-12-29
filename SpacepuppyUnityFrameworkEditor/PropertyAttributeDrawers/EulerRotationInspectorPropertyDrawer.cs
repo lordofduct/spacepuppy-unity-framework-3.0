@@ -82,7 +82,7 @@ namespace com.spacepuppyeditor.PropertyAttributeDrawers
             }
 
 
-            int id = GUIUtility.GetControlID(FocusType.Native, rect);
+            int id = GUIUtility.GetControlID(FocusType.Passive, rect);
 
             Rect knobRect = new Rect(rect.x, rect.y, rect.height, rect.height);
 

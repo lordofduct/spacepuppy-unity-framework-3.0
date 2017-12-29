@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿#pragma warning disable 0169 // variable declared but not used.
+
+using UnityEngine;
 using System.Collections;
 using System.Linq;
 

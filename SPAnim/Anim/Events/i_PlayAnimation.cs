@@ -1,4 +1,6 @@
-﻿#pragma warning disable 0649 // variable declared but not used.
+﻿#pragma warning disable 0414 // variable declared but not used.
+#pragma warning disable 0649 // variable declared but not used.
+
 using UnityEngine;
 using UnityEngine.Serialization;
 using System.Collections.Generic;

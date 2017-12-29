@@ -68,7 +68,7 @@ namespace com.spacepuppy.Anim.Legacy
 
 
         [System.NonSerialized()]
-        private SPAnimationController _controller;
+        private SPLegacyAnimController _controller;
         [System.NonSerialized()]
         private AnimationState _state;
 
@@ -119,7 +119,7 @@ namespace com.spacepuppy.Anim.Legacy
             //_lastFrame = -1;
         }
         
-        public void Init(SPAnimationController controller, string uniqueHash = null)
+        public void Init(SPLegacyAnimController controller, string uniqueHash = null)
         {
             if (_controller != null) throw new System.InvalidOperationException("Cannot initialize a clip that has already been initialized.");
             if (controller == null) throw new System.ArgumentNullException("controller");
@@ -138,7 +138,7 @@ namespace com.spacepuppy.Anim.Legacy
         /// <param name="controller"></param>
         /// <param name="id"></param>
         /// <param name="state"></param>
-        internal void SetAnimState(SPAnimationController controller, string id, AnimationState state)
+        internal void SetAnimState(SPLegacyAnimController controller, string id, AnimationState state)
         {
             //we reset the controller and id to what the SPAnimationController decided it should be
             _controller = controller;
@@ -317,7 +317,7 @@ namespace com.spacepuppy.Anim.Legacy
             }
         }
 
-        public SPAnimationController Controller { get { return _controller; } }
+        public SPLegacyAnimController Controller { get { return _controller; } }
 
         //public Animation Container { get { return _container; } }
 

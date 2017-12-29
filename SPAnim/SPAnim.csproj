@@ -43,9 +43,13 @@
   <ItemGroup>
     <Compile Include="Anim\AnimEventScheduler.cs" />
     <Compile Include="Anim\AnimUtil.cs" />
+    <Compile Include="Anim\Events\AnimSettings.cs" />
+    <Compile Include="Anim\Events\i_PlayAnimation.cs" />
+    <Compile Include="Anim\Events\i_StopAnimation.cs" />
     <Compile Include="Anim\IScriptableAnimationClip.cs" />
     <Compile Include="Anim\ISPAnim.cs" />
     <Compile Include="Anim\ISPAnimationSource.cs" />
+    <Compile Include="Anim\ISPAnimator.cs" />
     <Compile Include="Anim\Legacy\AnimationEventCallback.cs" />
     <Compile Include="Anim\Legacy\Exceptions.cs" />
     <Compile Include="Anim\Legacy\MaskCollection.cs" />

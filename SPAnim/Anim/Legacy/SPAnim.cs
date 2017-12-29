@@ -12,7 +12,7 @@ namespace com.spacepuppy.Anim.Legacy
 
         #region Fields
 
-        private SPAnimationController _controller;
+        private SPLegacyAnimController _controller;
 
         private string _clipId;
         private float _weight = 1.0f;
@@ -210,7 +210,7 @@ namespace com.spacepuppy.Anim.Legacy
 
         #region ISPAnim Interface
 
-        public SPAnimationController Controller
+        public SPLegacyAnimController Controller
         {
             get { return _controller; }
         }
@@ -407,12 +407,12 @@ namespace com.spacepuppy.Anim.Legacy
         {
             if (anim == null) throw new System.ArgumentNullException("anim");
             var a = _pool.GetInstance();
-            a._controller = anim.AddOrGetComponent<SPAnimationController>();
+            a._controller = anim.AddOrGetComponent<SPLegacyAnimController>();
             a._clipId = clipId;
             return a;
         }
 
-        public static SPAnim Create(SPAnimationController anim, string clipId)
+        public static SPAnim Create(SPLegacyAnimController anim, string clipId)
         {
             if (anim == null) throw new System.ArgumentNullException("anim");
             var a = _pool.GetInstance();
@@ -442,7 +442,7 @@ namespace com.spacepuppy.Anim.Legacy
 
             #region ISPAnim Interface
 
-            public SPAnimationController Controller { get { return null; } }
+            public SPLegacyAnimController Controller { get { return null; } }
 
             public int Layer
             {

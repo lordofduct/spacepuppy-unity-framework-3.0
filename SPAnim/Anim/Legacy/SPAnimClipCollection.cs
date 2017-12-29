@@ -18,7 +18,7 @@ namespace com.spacepuppy.Anim.Legacy
         #region Fields
 
         [System.NonSerialized()]
-        private SPAnimationController _controller;
+        private SPLegacyAnimController _controller;
         [System.NonSerialized()]
         private Dictionary<string, SPAnimClip> _dict = new Dictionary<string, SPAnimClip>();
         [System.NonSerialized()]
@@ -41,7 +41,7 @@ namespace com.spacepuppy.Anim.Legacy
 
         public bool Initialized { get { return !object.ReferenceEquals(_controller, null); } }
 
-        public SPAnimationController Controller { get { return _controller; } }
+        public SPLegacyAnimController Controller { get { return _controller; } }
 
         public string UniqueHash { get { return _uniqueHash; } }
 
@@ -65,7 +65,7 @@ namespace com.spacepuppy.Anim.Legacy
         /// Associate the collection as a master collection for an SPAnimationController
         /// </summary>
         /// <param name="controller"></param>
-        internal void InitMasterCollection(SPAnimationController controller)
+        internal void InitMasterCollection(SPLegacyAnimController controller)
         {
             if (controller == null) throw new System.ArgumentNullException("container");
             if (this.Initialized) throw new System.InvalidOperationException("SPAnimClipCollection already has been initilized.");
@@ -101,7 +101,7 @@ namespace com.spacepuppy.Anim.Legacy
         /// </summary>
         /// <param name="controller"></param>
         /// <param name="uniqueHash"></param>
-        public void Init(SPAnimationController controller, string uniqueHash = null)
+        public void Init(SPLegacyAnimController controller, string uniqueHash = null)
         {
             if (controller == null) throw new System.ArgumentNullException("controller");
             if (this.Initialized) throw new System.InvalidOperationException("SPAnimClipCollection already has been initilized.");

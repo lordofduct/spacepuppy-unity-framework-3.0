@@ -21,7 +21,7 @@ namespace com.spacepuppy.Anim.Legacy
     /// Add a way to update all playing animations if 'speed' changes at runtime
     /// </summary>
     [DisallowMultipleComponent()]
-    public class SPAnimationController : SPComponent, ISPAnimationSource
+    public class SPLegacyAnimController : SPComponent, ISPAnimationSource
     {
 
         #region Fields
@@ -623,14 +623,14 @@ namespace com.spacepuppy.Anim.Legacy
 
         private class ScriptableAnimCollection : IUpdateable, IEnumerable<IScriptableAnimationCallback>
         {
-            private SPAnimationController _controller;
+            private SPLegacyAnimController _controller;
             private HashSet<IScriptableAnimationCallback> _set = new HashSet<IScriptableAnimationCallback>();
             private HashSet<IScriptableAnimationCallback> _toAdd = new HashSet<IScriptableAnimationCallback>();
             private HashSet<IScriptableAnimationCallback> _toRemove = new HashSet<IScriptableAnimationCallback>();
             private HashSet<IScriptableAnimationCallback> _toRemoveAndDispose = new HashSet<IScriptableAnimationCallback>();
             private bool _inUpdate;
 
-            public ScriptableAnimCollection(SPAnimationController controller)
+            public ScriptableAnimCollection(SPLegacyAnimController controller)
             {
                 _controller = controller;
             }

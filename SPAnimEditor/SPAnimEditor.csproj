@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{2E21B07E-0968-4F86-97FD-692397DBFC20}</ProjectGuid>
+    <ProjectGuid>{DA26B8BD-BB04-49DA-88A1-C59178282858}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>com.spacepuppy</RootNamespace>
-    <AssemblyName>SPAnim</AssemblyName>
+    <RootNamespace>com.spacepuppyeditor</RootNamespace>
+    <AssemblyName>SPAnimEditor</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -36,27 +36,31 @@
     <Reference Include="System.Xml.Linq" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Xml" />
+    <Reference Include="UnityEditor">
+      <HintPath>..\Resources\UnityEditor.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine">
       <HintPath>..\Resources\UnityEngine.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Anim\AnimEventScheduler.cs" />
-    <Compile Include="Anim\AnimUtil.cs" />
-    <Compile Include="Anim\IScriptableAnimationClip.cs" />
-    <Compile Include="Anim\ISPAnim.cs" />
-    <Compile Include="Anim\ISPAnimationSource.cs" />
-    <Compile Include="Anim\PropertyAttributes.cs" />
+    <Compile Include="Anim\AnimLayerPropertyDrawer.cs" />
+    <Compile Include="Anim\IAnimLayerInformationSupplier.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\SpacepuppyUnityFrameworkEditor\SpacepuppyUnityFrameworkEditor.csproj">
+      <Project>{7fe0b8d6-ba29-43a6-b272-5d4f442fc4fa}</Project>
+      <Name>SpacepuppyUnityFrameworkEditor</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SpacepuppyUnityFramework\SpacepuppyUnityFramework.csproj">
       <Project>{3b57db6b-ba67-46ad-b929-fdd8e6ae511e}</Project>
       <Name>SpacepuppyUnityFramework</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Anim\Legacy\" />
+    <ProjectReference Include="..\SPAnim\SPAnim.csproj">
+      <Project>{2e21b07e-0968-4f86-97fd-692397dbfc20}</Project>
+      <Name>SPAnim</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

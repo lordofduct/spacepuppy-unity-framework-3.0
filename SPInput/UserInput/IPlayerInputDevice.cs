@@ -2,7 +2,7 @@
 
 namespace com.spacepuppy.UserInput
 {
-    public interface IPlayerInputDevice
+    public interface IPlayerInputDevice : IInputSignature
     {
 
         bool Active { get; set; }

@@ -53,4 +53,71 @@ namespace com.spacepuppy.UserInput
         Vector2 CurrentState { get; }
     }
 
+    public abstract class BaseInputSignature : IInputSignature
+    {
+
+        #region Static Interface
+
+        private static int _lastHash = 0;
+
+        public static int GetNextHash()
+        {
+            _lastHash++;
+            return _lastHash;
+        }
+
+        #endregion
+
+
+        #region Fields
+
+        private string _id;
+        private int _hash;
+
+        #endregion
+
+        #region CONSTRUCTOR
+
+        public BaseInputSignature(string id)
+        {
+            _id = id;
+            _hash = BaseInputSignature.GetNextHash();
+        }
+
+        public BaseInputSignature(string id, int hash)
+        {
+            _id = id;
+            _hash = hash;
+        }
+
+        #endregion
+
+        #region IInputSignature Interfacce
+
+        public string Id { get { return _id; } }
+
+        public int Hash { get { return _hash; } }
+
+        public float Precedence { get; set; }
+
+        public abstract void Update();
+
+        public virtual void FixedUpdate()
+        {
+
+        }
+
+        #endregion
+
+        #region HashCodeOverride
+
+        public override int GetHashCode()
+        {
+            return _hash;
+        }
+
+        #endregion
+
+    }
+
 }

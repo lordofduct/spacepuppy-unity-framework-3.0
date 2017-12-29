@@ -45,7 +45,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Anim\AnimLayerPropertyDrawer.cs" />
+    <Compile Include="Anim\Events\i_PlayAnimationInspector.cs" />
+    <Compile Include="Anim\Events\i_StopAnimationInspector.cs" />
     <Compile Include="Anim\IAnimLayerInformationSupplier.cs" />
+    <Compile Include="Anim\Legacy\MaskCollectionPropertyDrawer.cs" />
+    <Compile Include="Anim\Legacy\SPLegacyAnimControllerInspector.cs" />
+    <Compile Include="Anim\Legacy\SPAnimClipCollectionPropertyDrawer.cs" />
+    <Compile Include="Anim\Legacy\SPAnimClipPropertyDrawer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -62,8 +68,6 @@
       <Name>SPAnim</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Anim\Events\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

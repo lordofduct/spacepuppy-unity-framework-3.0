@@ -140,7 +140,6 @@
     <Compile Include="TempEventArgs.cs" />
     <Compile Include="TypeReference.cs" />
     <Compile Include="Utils\ArrayUtil.cs" />
-    <Compile Include="Utils\Assertions.cs" />
     <Compile Include="Utils\AudioUtils.cs" />
     <Compile Include="Utils\ColorUtil.cs" />
     <Compile Include="Utils\CompareUtil.cs" />

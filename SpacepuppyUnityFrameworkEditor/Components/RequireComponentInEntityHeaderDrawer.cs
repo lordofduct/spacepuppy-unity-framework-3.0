@@ -44,9 +44,9 @@ namespace com.spacepuppyeditor.Components
             var c = serializedObject.targetObject as Component;
             missingComponentType = null;
             if (c == null) return true;
-            return !com.spacepuppy.Utils.Assertions.AssertRequireComponentInEntityAttrib(c, out missingComponentType, true);
+            return !Assertions.AssertRequireComponentInEntityAttrib(c, out missingComponentType, true);
         }
-
+        
     }
 
 }

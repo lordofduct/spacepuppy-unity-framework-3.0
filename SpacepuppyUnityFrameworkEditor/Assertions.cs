@@ -1,7 +1,10 @@
 ﻿using UnityEngine;
 using System.Linq;
 
-namespace com.spacepuppy.Utils
+using com.spacepuppy;
+using com.spacepuppy.Utils;
+
+namespace com.spacepuppyeditor
 {
 
     public static class Assertions
@@ -83,7 +86,7 @@ namespace com.spacepuppy.Utils
 
             return false;
         }
-        
+
         public static bool AssertRequireComponentInEntityAttrib(Component comp, bool silent = false)
         {
             System.Type missingCompType;

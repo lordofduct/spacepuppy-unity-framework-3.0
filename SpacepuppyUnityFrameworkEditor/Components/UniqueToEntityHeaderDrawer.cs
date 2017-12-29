@@ -41,7 +41,7 @@ namespace com.spacepuppyeditor.Components
         {
             var c = serializedObject.targetObject as Component;
             if (c == null) return true;
-            return !com.spacepuppy.Utils.Assertions.AssertUniqueToEntityAttrib(c, true);
+            return !Assertions.AssertUniqueToEntityAttrib(c, true);
         }
 
     }

@@ -51,6 +51,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assertions.cs" />
     <Compile Include="AssetHelper.cs" />
     <Compile Include="Base\AdvancedAnimationInspector.cs" />
     <Compile Include="Base\ComparisonOperatorPropertyDrawer.cs" />

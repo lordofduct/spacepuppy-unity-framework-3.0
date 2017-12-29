@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{F6049E27-3B8A-4702-9334-CFEB49FE6E91}</ProjectGuid>
+    <ProjectGuid>{CC2654D4-DF57-4690-B9D4-DAF95903B9BD}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>com.spacepuppy</RootNamespace>
-    <AssemblyName>SPSerialization</AssemblyName>
+    <RootNamespace>com.spacepuppyeditor</RootNamespace>
+    <AssemblyName>SPSerializationEditor</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -36,31 +36,30 @@
     <Reference Include="System.Xml.Linq" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Xml" />
+    <Reference Include="UnityEditor">
+      <HintPath>..\Resources\UnityEditor.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine">
       <HintPath>..\Resources\UnityEngine.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Serialization\IPersistantUnityObject.cs" />
-    <Compile Include="Serialization\Json\JsonException.cs" />
-    <Compile Include="Serialization\Json\JsonFormatter.cs" />
-    <Compile Include="Serialization\Json\JsonNodeType.cs" />
-    <Compile Include="Serialization\Json\JsonReader.cs" />
-    <Compile Include="Serialization\Json\JsonWriter.cs" />
-    <Compile Include="Serialization\PersistantAssetToken.cs" />
-    <Compile Include="Serialization\PersistantUnityObjectSerializedProxy.cs" />
-    <Compile Include="Serialization\PersistentGameObject.cs" />
-    <Compile Include="Serialization\SimpleUnityStructureSurrogate.cs" />
-    <Compile Include="Serialization\SPSerializationSurrogate.cs" />
-    <Compile Include="Serialization\SPSerializer.cs" />
+    <Compile Include="Serialization\PersistentGameObjectInspector.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\SpacepuppyUnityFrameworkEditor\SpacepuppyUnityFrameworkEditor.csproj">
+      <Project>{7fe0b8d6-ba29-43a6-b272-5d4f442fc4fa}</Project>
+      <Name>SpacepuppyUnityFrameworkEditor</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SpacepuppyUnityFramework\SpacepuppyUnityFramework.csproj">
       <Project>{3b57db6b-ba67-46ad-b929-fdd8e6ae511e}</Project>
       <Name>SpacepuppyUnityFramework</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SPSerialization\SPSerialization.csproj">
+      <Project>{f6049e27-3b8a-4702-9334-cfeb49fe6e91}</Project>
+      <Name>SPSerialization</Name>
+    </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

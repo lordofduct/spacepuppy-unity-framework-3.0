@@ -140,6 +140,7 @@
     <Compile Include="SPTime.cs" />
     <Compile Include="SPTimeEnums.cs" />
     <Compile Include="SPTimePeriod.cs" />
+    <Compile Include="TagMask.cs" />
     <Compile Include="TempEventArgs.cs" />
     <Compile Include="TypeReference.cs" />
     <Compile Include="Utils\ArrayUtil.cs" />

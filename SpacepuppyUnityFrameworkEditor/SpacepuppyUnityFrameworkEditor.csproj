@@ -56,6 +56,7 @@
     <Compile Include="Base\AdvancedAnimationInspector.cs" />
     <Compile Include="Base\ComparisonOperatorPropertyDrawer.cs" />
     <Compile Include="Base\ConstraintPropertyDrawer.cs" />
+    <Compile Include="Base\DiscreteFloatPropertyDrawer.cs" />
     <Compile Include="Base\Events\EventTriggerTargetPropertyDrawer.cs" />
     <Compile Include="Base\Events\ITriggerableMechanismAddonDrawer.cs" />
     <Compile Include="Base\Events\ObservableTargetDataPropertyDrawer.cs" />

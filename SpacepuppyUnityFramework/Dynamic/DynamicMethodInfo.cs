@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Reflection;
 
-using com.spacepuppy.Dynamic.Accessors;
 using com.spacepuppy.Utils;
 
 namespace com.spacepuppy.Dynamic
@@ -87,7 +86,6 @@ namespace com.spacepuppy.Dynamic
 
         public override object Invoke(object obj, BindingFlags invokeAttr, Binder binder, object[] parameters, System.Globalization.CultureInfo culture)
         {
-            //return DynamicUtil.InvokeMethod(obj, _name);
             if (obj is IDynamic)
                 return (obj as IDynamic).InvokeMethod(_name, parameters);
             else

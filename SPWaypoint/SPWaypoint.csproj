@@ -45,6 +45,7 @@
     <Compile Include="Waypoints\BezierSplinePath.cs" />
     <Compile Include="Waypoints\CardinalSplinePath.cs" />
     <Compile Include="Waypoints\CurveConstantSpeedTable.cs" />
+    <Compile Include="Waypoints\Events\i_MoveOnPath.cs" />
     <Compile Include="Waypoints\IWaypoint.cs" />
     <Compile Include="Waypoints\IWaypointPath.cs" />
     <Compile Include="Waypoints\LinearPath.cs" />
@@ -62,8 +63,6 @@
       <Name>SPTween</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Waypoints\Events\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

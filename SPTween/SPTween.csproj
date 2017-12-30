@@ -42,6 +42,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Dynamic\Accessors\BasicMemberAccessor.cs" />
+    <Compile Include="Dynamic\Accessors\DynamicMemberAccessor.cs" />
+    <Compile Include="Dynamic\Accessors\FastTransformMemberAccessor.cs" />
+    <Compile Include="Dynamic\Accessors\FieldAccessor.cs" />
+    <Compile Include="Dynamic\Accessors\IMemberAccessor.cs" />
+    <Compile Include="Dynamic\Accessors\MemberAccessor.cs" />
+    <Compile Include="Dynamic\Accessors\MemberAccessorException.cs" />
+    <Compile Include="Dynamic\Accessors\MemberAccessorPool.cs" />
+    <Compile Include="Dynamic\Accessors\PropertyAccessor.cs" />
     <Compile Include="Dynamic\IStateModifier.cs" />
     <Compile Include="Dynamic\StateToken.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -55,7 +55,7 @@ namespace com.spacepuppy.Events
         {
             base.Start();
 
-            if (_activateOn.HasFlag(ActivateEvent.OnStart))
+            if (_activateOn.HasFlag(ActivateEvent.OnStart) || _activateOn.HasFlag(ActivateEvent.OnEnable))
             {
                 this.Trigger(this, null);
             }

@@ -43,6 +43,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Events\i_SetValueInspector.cs" />
+    <Compile Include="Events\i_TriggerOnEvalInspector.cs" />
+    <Compile Include="Events\i_TriggerOnIfThenInspector.cs" />
+    <Compile Include="Events\i_TriggerRandomEliminationInspector.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -59,8 +63,6 @@
       <Name>SPTriggers</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Events\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

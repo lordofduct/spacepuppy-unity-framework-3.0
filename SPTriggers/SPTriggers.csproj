@@ -41,7 +41,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Events\i_DebugLog.cs" />
+    <Compile Include="Events\i_Destroy.cs" />
+    <Compile Include="Events\i_SetValue.cs" />
     <Compile Include="Events\i_Trigger.cs" />
+    <Compile Include="Events\i_TriggerOnEval.cs" />
+    <Compile Include="Events\i_TriggerOnIfThen.cs" />
+    <Compile Include="Events\i_TriggerRandom.cs" />
+    <Compile Include="Events\i_TriggerRandomElimination.cs" />
     <Compile Include="Events\t_OnDisable.cs" />
     <Compile Include="Events\t_OnEnable.cs" />
     <Compile Include="Events\t_OnStart.cs" />

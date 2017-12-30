@@ -16,6 +16,9 @@ namespace com.spacepuppy.Events
         private int _order;
 
         [SerializeField()]
+        private ActivateEvent _activateOn = ActivateEvent.None;
+
+        [SerializeField()]
         private SPEvent _trigger;
 
         [SerializeField()]
@@ -29,9 +32,37 @@ namespace com.spacepuppy.Events
 
         #region CONSTRUCTOR
 
+        protected override void Start()
+        {
+            base.Start();
+
+            if (_activateOn.HasFlag(ActivateEvent.OnStart) || _activateOn.HasFlag(ActivateEvent.OnEnable))
+            {
+                this.ActivateTrigger(null);
+            }
+        }
+
+        protected override void OnEnable()
+        {
+            base.OnEnable();
+
+            if (_activateOn.HasFlag(ActivateEvent.OnStart) && !this.started) return;
+
+            if (_activateOn.HasFlag(ActivateEvent.OnEnable))
+            {
+                this.ActivateTrigger(null);
+            }
+        }
+
         #endregion
 
         #region Properties
+
+        public ActivateEvent ActivateOn
+        {
+            get { return _activateOn; }
+            set { _activateOn = value; }
+        }
 
         public SPEvent Trigger
         {

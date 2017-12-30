@@ -3,7 +3,7 @@
 namespace com.spacepuppy.Events
 {
 
-    public class i_DebugLog : Triggerable
+    public class i_DebugLog : AutoTriggerable
     {
 
         #region Fields

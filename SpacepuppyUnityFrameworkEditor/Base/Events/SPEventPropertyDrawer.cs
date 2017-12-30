@@ -14,7 +14,7 @@ namespace com.spacepuppyeditor.Base.Events
 {
 
     [CustomPropertyDrawer(typeof(SPEvent), true)]
-    public class TriggerPropertyDrawer : PropertyDrawer
+    public class SPEventPropertyDrawer : PropertyDrawer
     {
 
         private const float MARGIN = 2.0f;

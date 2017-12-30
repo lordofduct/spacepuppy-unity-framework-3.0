@@ -20,13 +20,15 @@ After adding the SpaceuppyUnityFramework you can pick and choose the modules to 
 
 - SPInput - An input library that defines input devices as a IPlayerInputDevice interface. Can be integrated with built in UnityInput, as well with 3rd party.
 
+- SPSensors - attach an 'aspect' to an object, and then your AI/Player can use a 'sensor' of various shapes/types to determine if said aspect can be seen.
+
 - SPSerialization - a serialization library built on top of the .Net serialization interface. It supports various formats (json/binary included), and attempts to allow serializing GameObjects as asset id's that can be pulled from Resources/AssetBundles.
 
 - SPTriggers - A feature of SPEvent that UnityEvent does not contain is an interface for simple visual programming by using GameObjects as trigger nodes in a chain of commands. SPTriggers is a collection of reusable commands such as 'T_OnStart', 'I_SetValue', 'I_Destroy', and many more. We have found these tools to be very useful for creating scenarios in game. Note, various other modules contain commands specific to their module. SPAnim has a 'I_PlayAnimation', SPTween has 'I_Tween', and SPWaypoint has 'I_MoveOnPath'.
 
 - SPTween - a tween engine built on Spacepuppy
 
-- SPWaypoint - a waypoint library with algorithms for bezier, catmull-rom, linear, as well as a UI to set up paths in your game. This is very useful for setting up camera paths and other animated events. (warning - this is not a pathfinding system, that is in development in another module)
+- SPWaypoint - (requires SPTween) a waypoint library with algorithms for bezier, catmull-rom, linear, as well as a UI to set up paths in your game. This is very useful for setting up camera paths and other animated events. (warning - this is not a pathfinding system, that is in development in another module)
 
 # License
 Copyright (c) 2015, Dylan Engelman, Jupiter Lighthouse Studio

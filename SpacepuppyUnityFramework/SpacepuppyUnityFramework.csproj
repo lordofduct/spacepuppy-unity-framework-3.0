@@ -67,7 +67,6 @@
     <Compile Include="DiscreteFloat.cs" />
     <Compile Include="Dynamic\DoubleEvaluator.cs" />
     <Compile Include="Dynamic\DynamicMethodInfo.cs" />
-    <Compile Include="Dynamic\DynamicObjectAccessor.cs" />
     <Compile Include="Dynamic\DynamicParameterInfo.cs" />
     <Compile Include="Dynamic\DynamicPropertyInfo.cs" />
     <Compile Include="Dynamic\Evaluator.cs" />

@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{9C78E277-9614-4780-8C49-59B228F5A0BE}</ProjectGuid>
+    <ProjectGuid>{16075F05-366B-42EA-A9C8-28F0B85BD444}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>com.spacepuppy</RootNamespace>
-    <AssemblyName>SPTriggers</AssemblyName>
+    <RootNamespace>com.spacepuppyeditor</RootNamespace>
+    <AssemblyName>SPTriggersEditor</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -35,24 +35,32 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Xml" />
+    <Reference Include="UnityEditor">
+      <HintPath>..\Resources\UnityEditor.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine">
       <HintPath>..\Resources\UnityEngine.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Events\i_DebugLog.cs" />
-    <Compile Include="Events\i_Trigger.cs" />
-    <Compile Include="Events\t_OnDisable.cs" />
-    <Compile Include="Events\t_OnEnable.cs" />
-    <Compile Include="Events\t_OnStart.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\SpacepuppyUnityFrameworkEditor\SpacepuppyUnityFrameworkEditor.csproj">
+      <Project>{7fe0b8d6-ba29-43a6-b272-5d4f442fc4fa}</Project>
+      <Name>SpacepuppyUnityFrameworkEditor</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SpacepuppyUnityFramework\SpacepuppyUnityFramework.csproj">
       <Project>{3b57db6b-ba67-46ad-b929-fdd8e6ae511e}</Project>
       <Name>SpacepuppyUnityFramework</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SPTriggers\SPTriggers.csproj">
+      <Project>{9c78e277-9614-4780-8c49-59b228f5a0be}</Project>
+      <Name>SPTriggers</Name>
+    </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Events\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

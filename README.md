@@ -16,9 +16,17 @@ The base framework includes a number of types. Several of them are extensions or
 
 After adding the SpaceuppyUnityFramework you can pick and choose the modules to include with it for those tools sets.
 
-SPTween - a tween engine built on Spacepuppy
+- SPAnim - an extension of the Unity Legacy Animation system. If you don't like mecanim (like me), but find the legacy animation system a bit lacking. This perks it up a bit.
 
-SPAnim - an extension of the Unity Legacy Animation system. If you don't like mecanim (like me), but find the legacy animation system a bit lacking. This perks it up a bit.
+- SPInput - An input library that defines input devices as a IPlayerInputDevice interface. Can be integrated with built in UnityInput, as well with 3rd party.
+
+- SPSerialization - a serialization library built on top of the .Net serialization interface. It supports various formats (json/binary included), and attempts to allow serializing GameObjects as asset id's that can be pulled from Resources/AssetBundles.
+
+- SPTriggers - A feature of SPEvent that UnityEvent does not contain is an interface for simple visual programming by using GameObjects as trigger nodes in a chain of commands. SPTriggers is a collection of reusable commands such as 'T_OnStart', 'I_SetValue', 'I_Destroy', and many more. We have found these tools to be very useful for creating scenarios in game. Note, various other modules contain commands specific to their module. SPAnim has a 'I_PlayAnimation', SPTween has 'I_Tween', and SPWaypoint has 'I_MoveOnPath'.
+
+- SPTween - a tween engine built on Spacepuppy
+
+- SPWaypoint - a waypoint library with algorithms for bezier, catmull-rom, linear, as well as a UI to set up paths in your game. This is very useful for setting up camera paths and other animated events. (warning - this is not a pathfinding system, that is in development in another module)
 
 # License
 Copyright (c) 2015, Dylan Engelman, Jupiter Lighthouse Studio

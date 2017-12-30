@@ -41,6 +41,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Sensors\Collision\ColliderAspect.cs" />
+    <Compile Include="Sensors\Collision\ColliderSensor.cs" />
+    <Compile Include="Sensors\Collision\RaycastSensor.cs" />
     <Compile Include="Sensors\CompositeSensor.cs" />
     <Compile Include="Sensors\IAspect.cs" />
     <Compile Include="Sensors\Sensor.cs" />

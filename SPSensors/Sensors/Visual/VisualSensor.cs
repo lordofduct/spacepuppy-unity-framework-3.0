@@ -18,8 +18,8 @@ namespace com.spacepuppy.Sensors.Visual
         private bool _canDetectSelf;
         [SerializeField()]
         private LayerMask _aspectLayerMask = -1;
-        //[SerializeField()]
-        //private TagMask _aspectTagMask;
+        [SerializeField()]
+        private TagMask _aspectTagMask;
 
         [SerializeField()]
         private bool _requiresLineOfSight;
@@ -48,10 +48,10 @@ namespace com.spacepuppy.Sensors.Visual
             set { _aspectLayerMask = value; }
         }
 
-        //public TagMask AspectTagMask
-        //{
-        //    get { return _aspectTagMask; }
-        //}
+        public TagMask AspectTagMask
+        {
+            get { return _aspectTagMask; }
+        }
 
         public bool RequiresLineOfSight
         {
@@ -112,7 +112,7 @@ namespace com.spacepuppy.Sensors.Visual
             if (vaspect == null) return false;
             if (!vaspect.isActiveAndEnabled) return false;
             if (_aspectLayerMask != -1 && !vaspect.gameObject.IntersectsLayerMask(_aspectLayerMask)) return false;
-            //if (!_aspectTagMask.Intersects(vaspect)) return false;
+            if (!_aspectTagMask.Intersects(vaspect)) return false;
             if (!_canDetectSelf && vaspect.entityRoot == this.entityRoot) return false;
 
             return true;
@@ -159,7 +159,7 @@ namespace com.spacepuppy.Sensors.Visual
             if (vaspect == null) return false;
             if (!vaspect.isActiveAndEnabled) return false;
             if (_aspectLayerMask != -1 && !aspect.gameObject.IntersectsLayerMask(_aspectLayerMask)) return false;
-            //if (!_aspectTagMask.Intersects(vaspect)) return false;
+            if (!_aspectTagMask.Intersects(vaspect)) return false;
             if (!_canDetectSelf && vaspect.entityRoot == this.entityRoot) return false;
             return this.TestVisibility(vaspect);
         }

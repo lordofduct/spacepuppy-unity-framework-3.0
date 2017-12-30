@@ -42,6 +42,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Dynamic\IStateModifier.cs" />
+    <Compile Include="Dynamic\StateToken.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tween\Accessors\CustomTweenMemberAccessorFactory.cs" />
     <Compile Include="Tween\Accessors\FollowTargetPositionAccessor.cs" />

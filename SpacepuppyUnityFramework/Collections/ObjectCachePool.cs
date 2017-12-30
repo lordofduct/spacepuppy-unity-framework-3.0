@@ -109,21 +109,6 @@ namespace com.spacepuppy.Collections
             {
                 return false;
             }
-
-            /*
-            if (_inactive.Count > 0)
-            {
-                result = _inactive.Pop();
-                if (_resetOnGet && _resetObjectDelegate != null)
-                    _resetObjectDelegate(result);
-                return true;
-            }
-            else
-            {
-                result = null;
-                return false;
-            }
-            */
         }
 
         public T GetInstance()
@@ -146,21 +131,6 @@ namespace com.spacepuppy.Collections
             {
                 return _constructorDelegate();
             }
-
-            /*
-            //## stack
-            if (_inactive.Count > 0)
-            {
-                var obj = _inactive.Pop();
-                if (_resetOnGet && _resetObjectDelegate != null)
-                    _resetObjectDelegate(obj);
-                return obj;
-            }
-            else
-            {
-                return _constructorDelegate();
-            }
-            */
         }
 
         public bool Release(T obj)
@@ -180,34 +150,6 @@ namespace com.spacepuppy.Collections
             }
 
             return false;
-
-            /*
-            if(_cacheSize > 0)
-            {
-                if(_inactive.Count < _cacheSize)
-                {
-                    if (!_resetOnGet && _resetObjectDelegate != null) _resetObjectDelegate(obj);
-                    //_inactive.Add(obj); //## hashset
-                    _inactive.Push(obj); //## stack
-                    return true;
-                }
-            }
-            else
-            {
-                //TODO - we want to gather some average usage, and calculate what we should resize down to, maybe even do the averaging even when there is a defined limit
-                //currently we'll top out at 1024 as a soft limit
-                if(_inactive.Count < 1024)
-                {
-                    if (!_resetOnGet && _resetObjectDelegate != null) _resetObjectDelegate(obj);
-                    //_inactive.Add(obj); //## hashset
-                    _inactive.Push(obj); //## stack
-                    return true;
-                }
-            }
-
-            return false;
-            
-            */
         }
 
         void ICachePool<T>.Release(T obj)

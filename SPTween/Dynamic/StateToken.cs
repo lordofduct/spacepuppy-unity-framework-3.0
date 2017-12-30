@@ -289,20 +289,20 @@ namespace com.spacepuppy.Dynamic
         void IDisposable.Dispose()
         {
             _table.Clear();
-            if (_tempTokens == null) _tempTokens = new SamplingStack<StateToken>(TEMP_STACKSIZE);
-            _tempTokens.Push(this);
+            if (_tempTokens == null) _tempTokens = new ObjectCachePool<StateToken>(TEMP_STACKSIZE);
+            _tempTokens.Release(this);
         }
 
         #endregion
 
         #region Static Utils
         
-        private static SamplingStack<StateToken> _tempTokens;
+        private static ObjectCachePool<StateToken> _tempTokens;
 
         public static StateToken GetTempToken()
         {
             StateToken t;
-            if(_tempTokens != null && _tempTokens.TryPop(out t))
+            if(_tempTokens != null && _tempTokens.TryGetInstance(out t))
             {
                 return t;
             }
@@ -310,6 +310,11 @@ namespace com.spacepuppy.Dynamic
             {
                 return new StateToken();
             }
+        }
+
+        public static void ReleaseTempToken(StateToken token)
+        {
+            if (token != null) (token as System.IDisposable).Dispose();
         }
 
         #endregion

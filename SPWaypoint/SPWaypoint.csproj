@@ -50,11 +50,16 @@
     <Compile Include="Waypoints\LinearPath.cs" />
     <Compile Include="Waypoints\Waypoint.cs" />
     <Compile Include="Waypoints\WaypointPathComponent.cs" />
+    <Compile Include="Waypoints\WaypointPathTweenCurve.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SpacepuppyUnityFramework\SpacepuppyUnityFramework.csproj">
       <Project>{3b57db6b-ba67-46ad-b929-fdd8e6ae511e}</Project>
       <Name>SpacepuppyUnityFramework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SPTween\SPTween.csproj">
+      <Project>{614b8c0c-0833-481b-8a76-d566887306f4}</Project>
+      <Name>SPTween</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

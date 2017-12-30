@@ -45,6 +45,12 @@
     <Compile Include="Sensors\IAspect.cs" />
     <Compile Include="Sensors\Sensor.cs" />
     <Compile Include="Sensors\SensorCollection.cs" />
+    <Compile Include="Sensors\Visual\OmnispectiveSensor.cs" />
+    <Compile Include="Sensors\Visual\RightCylindricalVisualSensor.cs" />
+    <Compile Include="Sensors\Visual\SphericalVisualSensor.cs" />
+    <Compile Include="Sensors\Visual\TunnelVisionVisualSensor.cs" />
+    <Compile Include="Sensors\Visual\VisualAspect.cs" />
+    <Compile Include="Sensors\Visual\VisualSensor.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SpacepuppyUnityFramework\SpacepuppyUnityFramework.csproj">
@@ -52,8 +58,6 @@
       <Name>SpacepuppyUnityFramework</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Sensors\Visual\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

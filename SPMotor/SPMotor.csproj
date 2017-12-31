@@ -40,6 +40,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Motor\IMotor.cs" />
+    <Compile Include="Motor\CharacterMotor.cs" />
+    <Compile Include="Motor\RigidbodyMotor.cs" />
+    <Compile Include="Motor\SimulatedRigidbodyMotor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -48,8 +52,6 @@
       <Name>SpacepuppyUnityFramework</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Motor\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

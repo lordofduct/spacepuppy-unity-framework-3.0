@@ -42,9 +42,13 @@ namespace com.spacepuppy
         private UpdateEventHooks _updateHook;
         private TardyExecutionUpdateEventHooks _tardyUpdateHook;
 
+        private static UpdatePump _earlyUpdatePump;
+        private static UpdatePump _earlyFixedUpdatePump;
         private static UpdatePump _updatePump;
         private static UpdatePump _fixedUpdatePump;
         private static UpdatePump _lateUpdatePump;
+        private static UpdatePump _tardyUpdatePump;
+        private static UpdatePump _tardyFixedUpdatePump;
 
         private static com.spacepuppy.Async.InvokePump _updateInvokeHandle;
         private static com.spacepuppy.Async.InvokePump _fixedUpdateInvokeHandle;
@@ -87,9 +91,13 @@ namespace com.spacepuppy
             _updateHook.LateUpdateHook += _updateHook_LateUpdate;
             _tardyUpdateHook.LateUpdateHook += _tardyUpdateHook_LateUpdate;
 
+            _earlyUpdatePump = new UpdatePump();
+            _earlyFixedUpdatePump = new UpdatePump();
             _updatePump = new UpdatePump();
             _fixedUpdatePump = new UpdatePump();
             _lateUpdatePump = new UpdatePump();
+            _tardyUpdatePump = new UpdatePump();
+            _tardyFixedUpdatePump = new UpdatePump();
 
             _updateInvokeHandle = new com.spacepuppy.Async.InvokePump();
             _fixedUpdateInvokeHandle = new com.spacepuppy.Async.InvokePump();
@@ -125,9 +133,17 @@ namespace com.spacepuppy
         /// </summary>
         public static bool ApplicationClosing { get { return _quitState == QuitState.Quit; } }
 
+        public static UpdatePump EarlyUpdatePump { get { return _earlyUpdatePump; } }
+
         public static UpdatePump UpdatePump { get { return _updatePump; } }
 
+        public static UpdatePump TardyUpdatePump { get { return _tardyUpdatePump; } }
+
+        public static UpdatePump EarlyFixedUpdatePump { get { return _earlyFixedUpdatePump; } }
+
         public static UpdatePump FixedUpdatePump { get { return _fixedUpdatePump; } }
+
+        public static UpdatePump TardyFixedUpdatePump { get { return _tardyFixedUpdatePump; } }
 
         public static UpdatePump LateUpdatePump { get { return _lateUpdatePump; } }
 
@@ -211,6 +227,7 @@ namespace com.spacepuppy
 
             if (_internalEarlyUpdate != null) _internalEarlyUpdate(false);
 
+            _earlyUpdatePump.Update();
             _updateInvokeHandle.Update();
 
             if (EarlyUpdate != null) EarlyUpdate(this, System.EventArgs.Empty);
@@ -218,12 +235,13 @@ namespace com.spacepuppy
 
         private void _updateHook_Update(object sender, System.EventArgs e)
         {
-            if (OnUpdate != null) OnUpdate(this, e);
             _updatePump.Update();
+            if (OnUpdate != null) OnUpdate(this, e);
         }
 
         private void _tardyUpdateHook_Update(object sender, System.EventArgs e)
         {
+            _tardyUpdatePump.Update();
             if (TardyUpdate != null) TardyUpdate(this, e);
         }
 
@@ -236,6 +254,7 @@ namespace com.spacepuppy
 
             if (_internalEarlyUpdate != null) _internalEarlyUpdate(true);
 
+            _earlyFixedUpdatePump.Update();
             _fixedUpdateInvokeHandle.Update();
 
             if (EarlyFixedUpdate != null) EarlyFixedUpdate(this, System.EventArgs.Empty);
@@ -243,12 +262,13 @@ namespace com.spacepuppy
 
         private void _updateHook_FixedUpdate(object sender, System.EventArgs e)
         {
-            if (OnFixedUpdate != null) OnFixedUpdate(this, e);
             _fixedUpdatePump.Update();
+            if (OnFixedUpdate != null) OnFixedUpdate(this, e);
         }
 
         private void _tardyUpdateHook_FixedUpdate(object sender, System.EventArgs e)
         {
+            _tardyFixedUpdatePump.Update();
             if (TardyFixedUpdate != null) TardyFixedUpdate(this, e);
 
             ////Track exit of fixedupdate loop
@@ -265,8 +285,8 @@ namespace com.spacepuppy
 
         private void _updateHook_LateUpdate(object sender, System.EventArgs e)
         {
-            if (OnLateUpdate != null) OnLateUpdate(this, e);
             _lateUpdatePump.Update();
+            if (OnLateUpdate != null) OnLateUpdate(this, e);
         }
 
         private void _tardyUpdateHook_LateUpdate(object sender, System.EventArgs e)

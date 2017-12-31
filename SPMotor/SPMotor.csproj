@@ -40,10 +40,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Motor\Enums.cs" />
     <Compile Include="Motor\IMotor.cs" />
     <Compile Include="Motor\CharacterMotor.cs" />
+    <Compile Include="Motor\IMovementStyle.cs" />
+    <Compile Include="Motor\MovementStyleController.cs" />
     <Compile Include="Motor\RigidbodyMotor.cs" />
     <Compile Include="Motor\SimulatedRigidbodyMotor.cs" />
+    <Compile Include="Motor\StyleChangedEvent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

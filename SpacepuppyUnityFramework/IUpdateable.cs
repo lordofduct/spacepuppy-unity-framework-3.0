@@ -57,13 +57,18 @@ namespace com.spacepuppy
 
         public void Update()
         {
-            _inUpdate = true;
-            var e = _set.GetEnumerator();
-            while(e.MoveNext())
+            HashSet<IUpdateable>.Enumerator e;
+
+            if(_set.Count > 0)
             {
-                e.Current.Update();
+                _inUpdate = true;
+                e = _set.GetEnumerator();
+                while (e.MoveNext())
+                {
+                    e.Current.Update();
+                }
+                _inUpdate = false;
             }
-            _inUpdate = false;
 
             if (_toAdd.Count > 0)
             {

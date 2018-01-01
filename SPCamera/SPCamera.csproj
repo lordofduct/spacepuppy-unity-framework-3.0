@@ -40,6 +40,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Cameras\CameraManager.cs" />
+    <Compile Include="Cameras\CameraPool.cs" />
+    <Compile Include="Cameras\CameraToken.cs" />
+    <Compile Include="Cameras\Enums.cs" />
+    <Compile Include="Cameras\Events.cs" />
+    <Compile Include="Cameras\ICamera.cs" />
+    <Compile Include="Cameras\IPostProcessingEffect.cs" />
+    <Compile Include="Cameras\IPostProcessingManager.cs" />
+    <Compile Include="Cameras\UnityCamera.cs" />
+    <Compile Include="ICameraManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -48,8 +58,6 @@
       <Name>SpacepuppyUnityFramework</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Cameras\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

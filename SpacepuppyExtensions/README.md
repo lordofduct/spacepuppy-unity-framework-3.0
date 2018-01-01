@@ -1,4 +1,4 @@
-The contents of these folders are scripts that can be included into your project directly (as opposed to the spacepuppy dll's) to added exensibility features to it.
+The contents of these folders are scripts that can be included into your project directly (as opposed to the spacepuppy dll's) to add exensibility features to it.
 
 - SPAGAstartBridge - a couple of classes to make 'Aron Granberg A* Project' and 'SPPathfinding' to get alone nicely together.
 

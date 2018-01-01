@@ -18,7 +18,13 @@ After adding the SpaceuppyUnityFramework you can pick and choose the modules to 
 
 - SPAnim - an extension of the Unity Legacy Animation system. If you don't like mecanim (like me), but find the legacy animation system a bit lacking. This perks it up a bit.
 
+- SPCamera - a uniform interface and manager for cameras and their effects. One feature of this interface is that it facilitates treating a group of cameras as one. For example if you wanted to make a racing game and have multiple view modes for it. Your ICamera script can handle the swapping of actual cameras, but itself be accessed by all other scripts as if it were the camera regardless of which is active.
+
 - SPInput - An input library that defines input devices as a IPlayerInputDevice interface. Can be integrated with built in UnityInput, as well with 3rd party.
+
+- SPMotor - motor scripts to facilitate movement of player and enemies. This includes a generalized interface IMotor so you can handle Rigidbody and CharacterController as a uniform type. As well as a state machine for movement styles.
+
+- SPPathfinding - currently is in early development, but is planned to house a robust pathfinding (A*) system for use in games. Currently only houses basic implementations of the algorithms as well as fundamental interface/contracts for use with AI agents.
 
 - SPSensors - attach an 'aspect' to an object, and then your AI/Player can use a 'sensor' of various shapes/types to determine if said aspect can be seen.
 

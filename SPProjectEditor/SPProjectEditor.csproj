@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{3EFA3AA0-2F60-4876-93D7-9BA2E806F2DE}</ProjectGuid>
+    <ProjectGuid>{21A1F01A-7F94-4074-A794-8C265D9ECCA1}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>com.spacepuppy</RootNamespace>
-    <AssemblyName>SPProject</AssemblyName>
+    <RootNamespace>com.spacepuppyeditor</RootNamespace>
+    <AssemblyName>SPProjectEditor</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -35,25 +35,31 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Xml" />
+    <Reference Include="UnityEditor">
+      <HintPath>..\Resources\UnityEditor.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine">
       <HintPath>..\Resources\UnityEngine.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Project\ITextSource.cs" />
-    <Compile Include="Project\QueryableAssetSet.cs" />
-    <Compile Include="Project\SceneRef.cs" />
-    <Compile Include="Project\TextDocument.cs" />
-    <Compile Include="Project\TextRef.cs" />
+    <Compile Include="Project\SceneRefPropertyDrawer.cs" />
+    <Compile Include="Project\TextRefPropertyDrawer.cs" />
+    <Compile Include="Project\WeightedTextDocumentInspector.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="README.md" />
-  </ItemGroup>
-  <ItemGroup>
+    <ProjectReference Include="..\SpacepuppyUnityFrameworkEditor\SpacepuppyUnityFrameworkEditor.csproj">
+      <Project>{7fe0b8d6-ba29-43a6-b272-5d4f442fc4fa}</Project>
+      <Name>SpacepuppyUnityFrameworkEditor</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SpacepuppyUnityFramework\SpacepuppyUnityFramework.csproj">
       <Project>{3b57db6b-ba67-46ad-b929-fdd8e6ae511e}</Project>
       <Name>SpacepuppyUnityFramework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SPProject\SPProject.csproj">
+      <Project>{3efa3aa0-2f60-4876-93d7-9ba2e806f2de}</Project>
+      <Name>SPProject</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

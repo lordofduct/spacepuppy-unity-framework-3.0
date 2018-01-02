@@ -75,6 +75,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SPScenes", "SPScenes\SPScen
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SPProject", "SPProject\SPProject.csproj", "{3EFA3AA0-2F60-4876-93D7-9BA2E806F2DE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SPProjectEditor", "SPProjectEditor\SPProjectEditor.csproj", "{21A1F01A-7F94-4074-A794-8C265D9ECCA1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -169,6 +171,10 @@ Global
 		{3EFA3AA0-2F60-4876-93D7-9BA2E806F2DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3EFA3AA0-2F60-4876-93D7-9BA2E806F2DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3EFA3AA0-2F60-4876-93D7-9BA2E806F2DE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{21A1F01A-7F94-4074-A794-8C265D9ECCA1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{21A1F01A-7F94-4074-A794-8C265D9ECCA1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{21A1F01A-7F94-4074-A794-8C265D9ECCA1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{21A1F01A-7F94-4074-A794-8C265D9ECCA1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

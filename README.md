@@ -42,11 +42,7 @@ After adding the SpaceuppyUnityFramework you can pick and choose the modules to 
 
 Download the latest build from the github project and unzip contents into your project's Asset folder.
 
-# Building
-
-You can build via the Solution project and manually copy all the corresponding *.dll's into your project in whatever manner you'd like.
-
-Or you can use the included build script.
+# Quick Build
 
 First open 'dobuild.release.bat' and make sure the path to MSBuild.exe matches where you have it installed on your computer.
 
@@ -55,6 +51,24 @@ Run 'dobuild.release.bat'.
 A 'Builds' folder will be created, copy the 'SpaceuppyUnityFramework' folder in there into your project wherever you'd like (this is the same thing you would find in the downloaded builds from the github page).
 
 Delete any module's dll's you don't want. You could also have commented out the xcopy lines for any modules you don't want in the bat file.
+
+# Manual Build
+
+Open the SpacepuppyUnityFramework.sln in Visual Studio (or other suitable IDE) and select Build like you would any project.
+
+Traverse through each module's output directories (%module%/bin/Release) and copy the appropriate *.dll for that module into an appropriate folder in Assets. I prefer to name mine 'Assets/SpaceuppyUnityFramework'.
+
+Traverse through each module's editor output directories (%module%editor/bin/Release) and copy the appropriate *.dll for that module editor into an appropriate Editor folder in Assets. I prefer to name mine 'Assets/SpacepuppyUnityFramework/Editor'.
+
+Go into the 'Resources' folder.
+
+If you use the SPSensors module, copy 'Shaders' folder into the previously created editor folder for the editor script dll's.
+
+Make sure you have 'Visible Meta Files' enabled in 'Edit->Project Settings->Editor Settings'.
+
+Copy 'SpacepuppyUnityFramework.dll.meta' to the same folder as 'SpacepuppyUnityFramework.dll', overwrite if Unity already created the meta file.
+
+If you don't show meta files in your project, and would like to keep it that way, you may have to manually configure the execution order. In this case open the SpacepuppyUnityFramework.dll.meta and locate the 'executionOrder' line, in your project go to 'Edit->Project Settings->Script Execution Order' and in the appropriate screen drag in the matching scripts and set them to the corresponding values. It is advised to use the included meta file though as it's easier.
 
 # License
 Copyright (c) 2015, Dylan Engelman, Jupiter Lighthouse Studio

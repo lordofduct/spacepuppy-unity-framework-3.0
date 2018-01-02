@@ -134,6 +134,8 @@
     <Compile Include="Project\TagData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PropertyAttributes.cs" />
+    <Compile Include="Proxy.cs" />
+    <Compile Include="ProxyTarget.cs" />
     <Compile Include="RadicalCoroutine.cs" />
     <Compile Include="RadicalCoroutineManager.cs" />
     <Compile Include="RadicalEnums.cs" />

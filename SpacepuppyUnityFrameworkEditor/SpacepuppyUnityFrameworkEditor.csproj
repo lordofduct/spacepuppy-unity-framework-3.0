@@ -64,6 +64,7 @@
     <Compile Include="Base\Events\SPEventPropertyDrawer.cs" />
     <Compile Include="Base\Project\CustomTimeLayersDataInspector.cs" />
     <Compile Include="Base\Project\TagDataInspector.cs" />
+    <Compile Include="Base\ProxyPropertyDrawer.cs" />
     <Compile Include="Base\ShortUidPropertyDrawer.cs" />
     <Compile Include="Base\TagMaskPropertyDrawer.cs" />
     <Compile Include="Commands\FindReferencesToObjectMenu.cs" />

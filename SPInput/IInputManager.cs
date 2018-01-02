@@ -6,7 +6,7 @@ using com.spacepuppy.UserInput;
 namespace com.spacepuppy
 {
 
-    public interface IGameInputManager : IService, IEnumerable<IPlayerInputDevice>
+    public interface IInputManager : IService, IEnumerable<IPlayerInputDevice>
     {
 
         int Count { get; }

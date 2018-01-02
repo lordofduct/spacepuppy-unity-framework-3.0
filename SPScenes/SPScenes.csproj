@@ -45,7 +45,7 @@
     <Compile Include="Scenes\Enums.cs" />
     <Compile Include="Scenes\Events\i_LoadScene.cs" />
     <Compile Include="Scenes\LoadSceneAsyncWaitHandle.cs" />
-    <Compile Include="Scenes\SceneManager.cs" />
+    <Compile Include="Scenes\SPSceneManager.cs" />
     <Compile Include="Scenes\SceneManagerEventArgs.cs" />
     <Compile Include="Scenes\SceneManagerUtils.cs" />
   </ItemGroup>

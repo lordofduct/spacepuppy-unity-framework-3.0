@@ -40,10 +40,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IGameInputManager.cs" />
+    <Compile Include="IInputManager.cs" />
     <Compile Include="UserInput\Enums.cs" />
     <Compile Include="UserInput\Events\t_OnSimpleButtonPress.cs" />
-    <Compile Include="UserInput\GameInputManager.cs" />
+    <Compile Include="UserInput\SPInputManager.cs" />
     <Compile Include="UserInput\IInputSignature.cs" />
     <Compile Include="UserInput\InputSignatureCollection.cs" />
     <Compile Include="UserInput\InputUtil.cs" />

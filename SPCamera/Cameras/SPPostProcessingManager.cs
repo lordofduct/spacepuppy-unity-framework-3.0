@@ -9,23 +9,7 @@ using com.spacepuppy.Utils;
 namespace com.spacepuppy.Cameras
 {
 
-    public interface IPostProcessingManager : IService
-    {
-
-        IList<IPostProcessingEffect> GlobalEffects { get; }
-
-        /// <summary>
-        /// Applies all global post processing effects.
-        /// </summary>
-        /// <param name="source"></param>
-        /// <param name="destination"></param>
-        /// <param name="callback"></param>
-        /// <returns>Returns true if effects were processed.</returns>
-        bool ApplyGlobalPostProcessing(ICamera camera, RenderTexture source, RenderTexture destination);
-
-    }
-
-    public class PostProcessingManager : ServiceComponent<IPostProcessingManager>, IPostProcessingManager
+    public class SPPostProcessingManager : ServiceComponent<IPostProcessingManager>, IPostProcessingManager
     {
 
         #region Fields
@@ -186,13 +170,13 @@ namespace com.spacepuppy.Cameras
 
             #region Fields
 
-            private PostProcessingManager _owner;
+            private SPPostProcessingManager _owner;
 
             #endregion
 
             #region CONSTRUCTOR
 
-            public GlobalEffectsList(PostProcessingManager owner)
+            public GlobalEffectsList(SPPostProcessingManager owner)
             {
                 _owner = owner;
             }
@@ -329,7 +313,7 @@ namespace com.spacepuppy.Cameras
 
             #region Fields
 
-            private PostProcessingManager _manager;
+            private SPPostProcessingManager _manager;
             private Camera _camera;
 
             #endregion
@@ -344,7 +328,7 @@ namespace com.spacepuppy.Cameras
                 _camera.depth = float.MaxValue;
             }
 
-            public void Init(PostProcessingManager manager)
+            public void Init(SPPostProcessingManager manager)
             {
                 _manager = manager;
             }

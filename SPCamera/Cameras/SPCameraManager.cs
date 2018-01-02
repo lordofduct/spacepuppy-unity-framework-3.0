@@ -8,7 +8,7 @@ using com.spacepuppy.Utils;
 namespace com.spacepuppy.Cameras
 {
 
-    public class CameraManager : ServiceComponent<ICameraManager>, ICameraManager
+    public class SPCameraManager : ServiceComponent<ICameraManager>, ICameraManager
     {
 
         #region Fields

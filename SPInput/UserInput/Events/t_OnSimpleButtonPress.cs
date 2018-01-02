@@ -46,7 +46,7 @@ namespace com.spacepuppy.UserInput.Events
 
         private void Update()
         {
-            var service = Services.Get<IGameInputManager>();
+            var service = Services.Get<IInputManager>();
             if(service != null)
             {
                 var input = string.IsNullOrEmpty(_deviceId) ? service.Main : service.GetDevice(_deviceId);

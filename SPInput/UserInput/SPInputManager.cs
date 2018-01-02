@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace com.spacepuppy.UserInput
 {
 
-    public class GameInputManager : ServiceComponent<IGameInputManager>, IGameInputManager
+    public class SPInputManager : ServiceComponent<IInputManager>, IInputManager
     {
 
         #region Fields
@@ -17,7 +17,7 @@ namespace com.spacepuppy.UserInput
 
         #region CONSTRUCTOR
 
-        public GameInputManager()
+        public SPInputManager()
         {
 
         }

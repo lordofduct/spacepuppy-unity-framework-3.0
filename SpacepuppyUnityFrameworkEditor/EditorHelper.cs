@@ -125,7 +125,7 @@ namespace com.spacepuppyeditor
                 return obj.targetObject.GetType();
             }
         }
-
+        
         /// <summary>
         /// Gets the object the property represents.
         /// </summary>

@@ -54,6 +54,7 @@ namespace com.spacepuppyeditor.PropertyAttributeDrawers
                 else
                 {
                     var pchild = property.GetArrayElementAtIndex(0);
+                    /*
                     if (_internalDrawer != null)
                     {
                         lst.elementHeight = _internalDrawer.GetPropertyHeight(pchild, label);
@@ -75,6 +76,8 @@ namespace com.spacepuppyeditor.PropertyAttributeDrawers
                     {
                         lst.elementHeight = SPEditorGUI.GetDefaultPropertyHeight(pchild, label) + 1f;
                     }
+                    */
+                    lst.elementHeight = this.GetElementHeight(pchild, label, false) + 2f;
                 }
             }
             else
@@ -114,6 +117,11 @@ namespace com.spacepuppyeditor.PropertyAttributeDrawers
         #endregion
 
         #region Properties
+
+        protected ReorderableList ListDrawer
+        {
+            get { return _lst; }
+        }
 
         public bool DisallowFoldout
         {
@@ -175,6 +183,7 @@ namespace com.spacepuppyeditor.PropertyAttributeDrawers
                     if (_drawElementAtBottom && _lst.index >= 0 && _lst.index < property.arraySize)
                     {
                         var pchild = property.GetArrayElementAtIndex(_lst.index);
+                        /*
                         if (_internalDrawer != null)
                         {
                             h += _internalDrawer.GetPropertyHeight(pchild, label) + BOTTOM_PAD + TOP_PAD;
@@ -189,6 +198,8 @@ namespace com.spacepuppyeditor.PropertyAttributeDrawers
                         {
                             h += SPEditorGUI.GetDefaultPropertyHeight(pchild, label, false) + BOTTOM_PAD + TOP_PAD;
                         }
+                        */
+                        h += this.GetElementHeight(pchild, label, true) + BOTTOM_PAD + TOP_PAD;
                     }
                 }
                 else
@@ -296,7 +307,7 @@ namespace com.spacepuppyeditor.PropertyAttributeDrawers
 
         #region Masks ReorderableList Handlers
 
-        private void _maskList_DrawHeader(Rect area)
+        protected virtual void _maskList_DrawHeader(Rect area)
         {
             if (this.Label != null)
             {
@@ -308,7 +319,7 @@ namespace com.spacepuppyeditor.PropertyAttributeDrawers
             }
         }
 
-        private void _maskList_DrawElement(Rect area, int index, bool isActive, bool isFocused)
+        protected virtual void _maskList_DrawElement(Rect area, int index, bool isActive, bool isFocused)
         {
             var element = _lst.serializedProperty.GetArrayElementAtIndex(index);
             if (element == null) return;
@@ -344,41 +355,72 @@ namespace com.spacepuppyeditor.PropertyAttributeDrawers
             }
             else
             {
-                if (_internalDrawer != null)
-                {
-                    _internalDrawer.OnGUI(area, element, label);
-                }
-                else if (ElementIsFlatChildField(element))
-                {
-                    //we don't draw this way if it's a built-in type from Unity
-
-                    if (_hideElementLabel)
-                    {
-                        //no label
-                        SPEditorGUI.FlatChildPropertyField(area, element);
-                    }
-                    else
-                    {
-                        //showing label
-                        var labelArea = new Rect(area.xMin, area.yMin, area.width, EditorGUIUtility.singleLineHeight);
-                        EditorGUI.LabelField(labelArea, label);
-                        var childArea = new Rect(area.xMin, area.yMin + EditorGUIUtility.singleLineHeight + 1f, area.width, area.height - EditorGUIUtility.singleLineHeight);
-                        SPEditorGUI.FlatChildPropertyField(childArea, element);
-                    }
-                }
-                else
-                {
-                    SPEditorGUI.DefaultPropertyField(area, element, label, false);
-                }
+                this.DrawElement(area, element, label, index);
             }
 
             if (GUI.enabled) ReorderableListHelper.DrawDraggableElementDeleteContextMenu(_lst, area, index, isActive, isFocused);
+        }
+        
+        protected virtual void DrawElement(Rect area, SerializedProperty element, GUIContent label, int elementIndex)
+        {
+            if (_internalDrawer != null)
+            {
+                _internalDrawer.OnGUI(area, element, label);
+            }
+            else if (ElementIsFlatChildField(element))
+            {
+                //we don't draw this way if it's a built-in type from Unity
+
+                if (_hideElementLabel)
+                {
+                    //no label
+                    SPEditorGUI.FlatChildPropertyField(area, element);
+                }
+                else
+                {
+                    //showing label
+                    var labelArea = new Rect(area.xMin, area.yMin, area.width, EditorGUIUtility.singleLineHeight);
+                    EditorGUI.LabelField(labelArea, label);
+                    var childArea = new Rect(area.xMin, area.yMin + EditorGUIUtility.singleLineHeight + 1f, area.width, area.height - EditorGUIUtility.singleLineHeight);
+                    SPEditorGUI.FlatChildPropertyField(childArea, element);
+                }
+            }
+            else
+            {
+                area = EditorGUI.PrefixLabel(area, label);
+                SPEditorGUI.DefaultPropertyField(area, element, label, false);
+            }
+        }
+
+        protected virtual float GetElementHeight(SerializedProperty element, GUIContent label, bool elementIsAtBottom)
+        {
+            if (_internalDrawer != null)
+            {
+                return _internalDrawer.GetPropertyHeight(element, label);
+            }
+            else if (ElementIsFlatChildField(element))
+            {
+                //we don't draw this way if it's a built-in type from Unity
+                element.isExpanded = true;
+                if(_hideElementLabel || elementIsAtBottom)
+                {
+                    return SPEditorGUI.GetDefaultPropertyHeight(element, label, true) - EditorGUIUtility.singleLineHeight;
+                }
+                else
+                {
+                    return SPEditorGUI.GetDefaultPropertyHeight(element, label, true);
+                }
+            }
+            else
+            {
+                return SPEditorGUI.GetDefaultPropertyHeight(element, label, false);
+            }
         }
 
         #endregion
 
 
-        private GUIContent TempElementLabel(SerializedProperty element, int index)
+        protected GUIContent TempElementLabel(SerializedProperty element, int index)
         {
             var target = EditorHelper.GetTargetObjectOfProperty(element);
             string slbl = ConvertUtil.ToString(com.spacepuppy.Dynamic.DynamicUtil.GetValue(target, _childPropertyAsLabel));
@@ -414,7 +456,7 @@ namespace com.spacepuppyeditor.PropertyAttributeDrawers
 
         #region Static Utils
 
-        private static bool ElementIsFlatChildField(SerializedProperty property)
+        protected static bool ElementIsFlatChildField(SerializedProperty property)
         {
             //return property.hasChildren && property.objectReferenceValue is MonoBehaviour;
             return property.hasChildren && property.propertyType == SerializedPropertyType.Generic;

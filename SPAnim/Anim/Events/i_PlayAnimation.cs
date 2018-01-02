@@ -27,15 +27,13 @@ namespace com.spacepuppy.Anim.Events
         #region Fields
 
         [SerializeField]
-        private PlayByMode _mode;
-
-        [SerializeField]
         [TriggerableTargetObject.Config(typeof(UnityEngine.Object))]
         private TriggerableTargetObject _targetAnimator;
 
         [SerializeField]
+        private PlayByMode _mode;
+        [SerializeField]
         private string _id;
-
         [SerializeField]
         private UnityEngine.Object _clip;
 

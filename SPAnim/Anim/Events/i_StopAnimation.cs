@@ -24,6 +24,7 @@ namespace com.spacepuppy.Anim.Events
         #region Fields
 
         [SerializeField()]
+        [TriggerableTargetObject.Config(typeof(UnityEngine.Object))]
         private TriggerableTargetObject _targetAnimator;
 
         [SerializeField]

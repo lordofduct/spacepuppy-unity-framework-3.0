@@ -30,7 +30,7 @@ After adding the SpaceuppyUnityFramework you can pick and choose the modules to 
 
 - SPSerialization - a serialization library built on top of the .Net serialization interface. It supports various formats (json/binary included), and attempts to allow serializing GameObjects as asset id's that can be pulled from Resources/AssetBundles.
 
-- SPTriggers - A feature of SPEvent that UnityEvent does not contain is an interface for simple visual programming by using GameObjects as trigger nodes in a chain of commands. SPTriggers is a collection of reusable commands such as 'T_OnStart', 'I_SetValue', 'I_Destroy', and many more. We have found these tools to be very useful for creating scenarios in game. Note, various other modules contain commands specific to their module. SPAnim has a 'I_PlayAnimation', SPTween has 'I_Tween', and SPWaypoint has 'I_MoveOnPath'.
+- SPTriggers - (requires SPTween) A feature of SPEvent that UnityEvent does not contain is an interface for simple visual programming by using GameObjects as trigger nodes in a chain of commands. SPTriggers is a collection of reusable commands such as 'T_OnStart', 'I_SetValue', 'I_Destroy', and many more. We have found these tools to be very useful for creating scenarios in game. Note, various other modules contain commands specific to their module. SPAnim has a 'I_PlayAnimation', SPTween has 'I_Tween', and SPWaypoint has 'I_MoveOnPath'.
 
 - SPTween - a tween engine built on Spacepuppy
 

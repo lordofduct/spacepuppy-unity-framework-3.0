@@ -30,6 +30,7 @@ namespace com.spacepuppy.Anim.Events
         private PlayByMode _mode;
 
         [SerializeField]
+        [TriggerableTargetObject.Config(typeof(UnityEngine.Object))]
         private TriggerableTargetObject _targetAnimator;
 
         [SerializeField]

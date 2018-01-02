@@ -73,6 +73,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SPScenes", "SPScenes\SPScenes.csproj", "{3F77727E-5170-44A4-A3FA-3DF77DE6E2EB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SPProject", "SPProject\SPProject.csproj", "{3EFA3AA0-2F60-4876-93D7-9BA2E806F2DE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -163,6 +165,10 @@ Global
 		{3F77727E-5170-44A4-A3FA-3DF77DE6E2EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3F77727E-5170-44A4-A3FA-3DF77DE6E2EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3F77727E-5170-44A4-A3FA-3DF77DE6E2EB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3EFA3AA0-2F60-4876-93D7-9BA2E806F2DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3EFA3AA0-2F60-4876-93D7-9BA2E806F2DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3EFA3AA0-2F60-4876-93D7-9BA2E806F2DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3EFA3AA0-2F60-4876-93D7-9BA2E806F2DE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

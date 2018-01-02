@@ -7,10 +7,11 @@
     <ProjectGuid>{3EFA3AA0-2F60-4876-93D7-9BA2E806F2DE}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SPProject</RootNamespace>
+    <RootNamespace>com.spacepuppy</RootNamespace>
     <AssemblyName>SPProject</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -40,6 +41,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Project\ITextSource.cs" />
+    <Compile Include="Project\SceneRef.cs" />
+    <Compile Include="Project\TextDocument.cs" />
+    <Compile Include="Project\TextRef.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

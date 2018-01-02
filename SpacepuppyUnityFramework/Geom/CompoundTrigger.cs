@@ -6,7 +6,7 @@ using com.spacepuppy.Collections;
 using com.spacepuppy.Events;
 using com.spacepuppy.Utils;
 
-namespace com.spacepuppy
+namespace com.spacepuppy.Geom
 {
 
     public interface ICompoundTriggerResponder

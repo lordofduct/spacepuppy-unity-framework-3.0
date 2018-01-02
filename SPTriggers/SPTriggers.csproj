@@ -63,8 +63,11 @@
     <Compile Include="Events\i_TriggerSequence.cs" />
     <Compile Include="Events\t_Interval.cs" />
     <Compile Include="Events\t_IntervalRandom.cs" />
+    <Compile Include="Events\t_OnCollisionEnter.cs" />
     <Compile Include="Events\t_OnDisable.cs" />
     <Compile Include="Events\t_OnEnable.cs" />
+    <Compile Include="Events\t_OnEnterTrigger.cs" />
+    <Compile Include="Events\t_OnExitTrigger.cs" />
     <Compile Include="Events\t_OnStart.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -65,6 +65,7 @@
     <Compile Include="Collections\TempList.cs" />
     <Compile Include="Collections\TrackablObjectCachePool.cs" />
     <Compile Include="ColorHSV.cs" />
+    <Compile Include="Geom\CompoundTrigger.cs" />
     <Compile Include="CustomTimeSupplier.cs" />
     <Compile Include="DiscreteFloat.cs" />
     <Compile Include="Dynamic\DoubleEvaluator.cs" />

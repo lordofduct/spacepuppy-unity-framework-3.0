@@ -115,6 +115,43 @@ namespace com.spacepuppy.Tween.Accessors
             return false;
         }
 
+        public static bool TryGetMemberAccessorInfoByType(System.Type tp, string name, out CustomAccessorData data)
+        {
+            if (tp == null)
+            {
+                data = default(CustomAccessorData);
+                return false;
+            }
+            if (_targetToCustomAccessor == null) BuildAccessorDictionary();
+
+            IList<CustomAccessorData> lst;
+            if (_targetToCustomAccessor.Lists.TryGetList(name, out lst))
+            {
+                CustomAccessorData d2;
+                int cnt = lst.Count;
+                for (int i = 0; i < cnt; i++)
+                {
+                    d2 = lst[i];
+                    if (d2.TargetType.IsAssignableFrom(tp))
+                    {
+                        try
+                        {
+                            data = d2;
+                            return true;
+                        }
+                        catch
+                        {
+                            Debug.LogWarning("Failed to create Custom MemberAccessor of type '" + tp.FullName + "'.");
+                            break;
+                        }
+                    }
+                }
+            }
+
+            data = default(CustomAccessorData);
+            return false;
+        }
+
         public static string[] GetCustomAccessorIds()
         {
             if (_targetToCustomAccessor == null) BuildAccessorDictionary();

@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Events\i_SetValueInspector.cs" />
+    <Compile Include="Events\i_SetValueOnTargetInspector.cs" />
     <Compile Include="Events\i_TriggerOnEvalInspector.cs" />
     <Compile Include="Events\i_TriggerOnIfThenInspector.cs" />
     <Compile Include="Events\i_TriggerRandomEliminationInspector.cs" />

@@ -38,28 +38,50 @@
     <Reference Include="UnityEngine">
       <HintPath>..\Resources\UnityEngine.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>..\Resources\UnityEngine.UI.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Events\IAutoSequenceSignal.cs" />
+    <Compile Include="Events\i_AddComponent.cs" />
     <Compile Include="Events\i_AutoSequenceSignal.cs" />
     <Compile Include="Events\i_DebugLog.cs" />
     <Compile Include="Events\i_Destroy.cs" />
+    <Compile Include="Events\i_LookAt.cs" />
+    <Compile Include="Events\i_QuitApplication.cs" />
+    <Compile Include="Events\i_SetActiveUIElement.cs" />
+    <Compile Include="Events\i_SetParent.cs" />
     <Compile Include="Events\i_SetValue.cs" />
+    <Compile Include="Events\i_SetValueOnTarget.cs" />
+    <Compile Include="Events\i_StopAudioSource.cs" />
+    <Compile Include="Events\i_Teleport.cs" />
     <Compile Include="Events\i_Trigger.cs" />
     <Compile Include="Events\i_TriggerOnEval.cs" />
     <Compile Include="Events\i_TriggerOnIfThen.cs" />
     <Compile Include="Events\i_TriggerRandom.cs" />
     <Compile Include="Events\i_TriggerRandomElimination.cs" />
     <Compile Include="Events\i_TriggerSequence.cs" />
+    <Compile Include="Events\t_AllTriggered.cs" />
+    <Compile Include="Events\t_Interval.cs" />
+    <Compile Include="Events\t_IntervalRandom.cs" />
+    <Compile Include="Events\t_OnCollisionEnter.cs" />
     <Compile Include="Events\t_OnDisable.cs" />
     <Compile Include="Events\t_OnEnable.cs" />
+    <Compile Include="Events\t_OnEnterTrigger.cs" />
+    <Compile Include="Events\t_OnExitTrigger.cs" />
     <Compile Include="Events\t_OnStart.cs" />
+    <Compile Include="Events\t_OnUIEvent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SpacepuppyUnityFramework\SpacepuppyUnityFramework.csproj">
       <Project>{3b57db6b-ba67-46ad-b929-fdd8e6ae511e}</Project>
       <Name>SpacepuppyUnityFramework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SPTween\SPTween.csproj">
+      <Project>{614b8c0c-0833-481b-8a76-d566887306f4}</Project>
+      <Name>SPTween</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

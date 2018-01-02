@@ -2,6 +2,10 @@
 
 namespace com.spacepuppy
 {
+
+    /// <summary>
+    /// Standard constants used in Unity.
+    /// </summary>
     public class SPConstants
     {
 
@@ -23,4 +27,5 @@ namespace com.spacepuppy
         public static readonly Quaternion ROT_3DSMAX_TO_UNITY = Quaternion.LookRotation(Vector3.down, Vector3.forward);
 
     }
+
 }

@@ -3,6 +3,9 @@
 namespace com.spacepuppy
 {
 
+    /// <summary>
+    /// Serializable representation of a time period and the time supplier that period should respect.
+    /// </summary>
     [System.Serializable()]
     public struct SPTimePeriod
     {

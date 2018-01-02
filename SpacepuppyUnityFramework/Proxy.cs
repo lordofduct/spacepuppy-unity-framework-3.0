@@ -8,6 +8,9 @@ using com.spacepuppy.Utils;
 namespace com.spacepuppy
 {
 
+    /// <summary>
+    /// A serializable IProxy struct that will search the scene for an object by name/tag/type.
+    /// </summary>
     [System.Serializable]
     public struct Proxy : IProxy
     {

@@ -8,6 +8,11 @@ using com.spacepuppy.Utils;
 namespace com.spacepuppy
 {
 
+    /// <summary>
+    /// A tag filter to maske by tag.
+    /// 
+    /// Similar to LayerMask, but for tags.
+    /// </summary>
     [System.Serializable()]
     public class TagMask : ICollection<string>
     {

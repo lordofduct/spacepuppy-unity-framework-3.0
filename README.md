@@ -48,9 +48,11 @@ First open 'dobuild.release.bat' and make sure the path to MSBuild.exe matches w
 
 Run 'dobuild.release.bat'.
 
-A 'Builds' folder will be created, copy the 'SpaceuppyUnityFramework' folder in there into your project wherever you'd like (this is the same thing you would find in the downloaded builds from the github page).
+A 'Builds' folder will be created with a 'SpaceuppyUnityFramework' inside of it.
 
-Delete any module's dll's you don't want. You could also have commented out the xcopy lines for any modules you don't want in the bat file.
+Delete any module's dll's you don't want from inside the 'SpaceuppyUnityFramework' folder. You could also have commented out the xcopy lines for any modules you don't want in the bat file.
+
+Copy the 'SpaceuppyUnityFramework' folder in there into your project wherever you'd like (this is the same thing you would find in the downloaded builds from the github page).
 
 # Manual Build
 

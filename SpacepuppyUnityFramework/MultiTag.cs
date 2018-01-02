@@ -9,6 +9,9 @@ using com.spacepuppy.Utils;
 namespace com.spacepuppy
 {
 
+    /// <summary>
+    /// Allows adding more than one tag to a given GameObject.
+    /// </summary>
     [AddComponentMenu("SpacePuppy/Multi Tag")]
     [DisallowMultipleComponent()]
     public class MultiTag : SPComponent, IEnumerable<string>
@@ -281,6 +284,12 @@ namespace com.spacepuppy
 
     }
 
+    /// <summary>
+    /// Utility class for accessing MultiTag. This implements a version of CompareTag called 'HasTag' that respects the MultiTag component. 
+    /// As well as methods to add/remove tags from a GameObject while respecting MultiTag as well.
+    /// 
+    /// This utility will add MultiTag components automatically to GameObjects that need it if you attempt to add more than 1 tag to a GameObject.
+    /// </summary>
     public static class MultiTagHelper
     {
 

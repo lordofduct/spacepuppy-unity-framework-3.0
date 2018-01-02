@@ -6,6 +6,11 @@ using com.spacepuppy.Hooks;
 namespace com.spacepuppy
 {
     
+    /// <summary>
+    /// Entry Point for the engine's update loop.
+    /// 
+    /// From this you can Quit the game, Cancel the quitting of the game, hook into Update/FixedUpdate/LateUpdate, as well as Early & Tardy versions of those update loops. 
+    /// </summary>
     public class GameLoop : ServiceComponent<GameLoop>, IService
     {
 
@@ -107,8 +112,14 @@ namespace com.spacepuppy
 
         #region Properties
 
+        /// <summary>
+        /// Has the GameLoop service been initialized.
+        /// </summary>
         public static bool Initialized { get { return _instance != null; } }
 
+        /// <summary>
+        /// Hook into the GameLoop MonoBehaviour. Can be used for invoking coroutines directly on the GameLoop (not advised unless you know what you're doing).
+        /// </summary>
         public static GameLoop Hook
         {
             get
@@ -126,6 +137,9 @@ namespace com.spacepuppy
         /// </summary>
         public static UpdateSequence CurrentSequence { get { return _currentSequence; } }
 
+        /// <summary>
+        /// The current QuitState during BeforeApplicationQuit event.
+        /// </summary>
         public static QuitState QuitState { get { return _quitState; } }
 
         /// <summary>
@@ -133,22 +147,49 @@ namespace com.spacepuppy
         /// </summary>
         public static bool ApplicationClosing { get { return _quitState == QuitState.Quit; } }
 
+        /// <summary>
+        /// The first Update call that frame.
+        /// </summary>
         public static UpdatePump EarlyUpdatePump { get { return _earlyUpdatePump; } }
 
+        /// <summary>
+        /// A general Update call for that frame (timing unknown).
+        /// </summary>
         public static UpdatePump UpdatePump { get { return _updatePump; } }
 
+        /// <summary>
+        /// The last Update call that frame.
+        /// </summary>
         public static UpdatePump TardyUpdatePump { get { return _tardyUpdatePump; } }
 
+        /// <summary>
+        /// The first FixedUpdate call that fixed update frame.
+        /// </summary>
         public static UpdatePump EarlyFixedUpdatePump { get { return _earlyFixedUpdatePump; } }
 
+        /// <summary>
+        /// A general FixedUpdate call that fixed update frame.
+        /// </summary>
         public static UpdatePump FixedUpdatePump { get { return _fixedUpdatePump; } }
 
+        /// <summary>
+        /// The last FixedUpdate call that fixed update frame.
+        /// </summary>
         public static UpdatePump TardyFixedUpdatePump { get { return _tardyFixedUpdatePump; } }
 
+        /// <summary>
+        /// A general LateUpdate call for that frame.
+        /// </summary>
         public static UpdatePump LateUpdatePump { get { return _lateUpdatePump; } }
 
+        /// <summary>
+        /// Used to get back to the Update loop from an asynchronous thread.
+        /// </summary>
         public static com.spacepuppy.Async.InvokePump UpdateHandle { get { return _updateInvokeHandle; } }
 
+        /// <summary>
+        /// Used to get back to the FixedUpdate loop from an asynchronous thread.
+        /// </summary>
         public static com.spacepuppy.Async.InvokePump FixedUpdateHandle { get { return _fixedUpdateInvokeHandle; } }
 
         #endregion
@@ -189,6 +230,9 @@ namespace com.spacepuppy
             }
         }
 
+        /// <summary>
+        /// If you listen to the BeforeApplicationQuit event, you can call this from that event's callback to cancel the quit of the application.
+        /// </summary>
         public static void CancelQuit()
         {
             if (_quitState == QuitState.BeforeQuit)

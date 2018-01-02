@@ -6,6 +6,9 @@ using com.spacepuppy.Utils;
 namespace com.spacepuppy
 {
 
+    /// <summary>
+    /// Wait until a specific time in the future in a RadicalCoroutine.
+    /// </summary>
     public class WaitUntilTime : IRadicalEnumerator
     {
 

@@ -7,6 +7,8 @@ namespace com.spacepuppy.Async
 
     /// <summary>
     /// Queue actions up to be called during some other threads update pump.
+    /// 
+    /// From any thread you can call 'Invoke' or 'BeginInvoke' to register a callback that will be called the next time 'Update' is called on the InvokePump. 
     /// </summary>
     public class InvokePump : WaitHandle
     {

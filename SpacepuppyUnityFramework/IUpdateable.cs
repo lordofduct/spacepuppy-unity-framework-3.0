@@ -3,6 +3,14 @@ using System.Collections.Generic;
 
 namespace com.spacepuppy
 {
+
+    /// <summary>
+    /// Interface/contract for an object that has an 'Update' method.
+    /// 
+    /// Can be added to an UpdatePump collection to receive an Update message on some interval.
+    /// 
+    /// See GameLoop and its various Update pump's for hooking into Update/FixedUpdate/LateUpdate.
+    /// </summary>
     public interface IUpdateable
     {
 
@@ -10,6 +18,9 @@ namespace com.spacepuppy
 
     }
 
+    /// <summary>
+    /// A collection for IUpdateable objects. Call the Update method on some interval to signal IUpdateable.Update to every object in the collection.
+    /// </summary>
     public class UpdatePump
     {
 

@@ -2,6 +2,10 @@
 
 namespace com.spacepuppy
 {
+
+    /// <summary>
+    /// Wait for LateUpdate in a RadicalCoroutine.
+    /// </summary>
     public sealed class WaitForLateUpdate : IImmediatelyResumingYieldInstruction
     {
 
@@ -84,4 +88,5 @@ namespace com.spacepuppy
         #endregion
 
     }
+
 }

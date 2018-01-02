@@ -3,6 +3,10 @@
 namespace com.spacepuppy
 {
 
+    /// <summary>
+    /// An object representation of a null yield instruction. 
+    /// A null yield instruction has object identity while still informing RadicalCoroutine to wait only a single tick (just like null).
+    /// </summary>
     public class NullYieldInstruction : IProgressingYieldInstruction, IRadicalWaitHandle
     {
 

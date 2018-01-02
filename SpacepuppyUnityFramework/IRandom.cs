@@ -3,6 +3,9 @@
 namespace com.spacepuppy
 {
 
+    /// <summary>
+    /// Interface/contract for a random number generator.
+    /// </summary>
     public interface IRandom
     {
 

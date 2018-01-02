@@ -3,6 +3,9 @@
 namespace com.spacepuppy
 {
 
+    /// <summary>
+    /// A yield instruction used by RadicalCoroutine that can also have a callback manually attached to it through the 'IRadicalWaitHandle.OnComplete' method.
+    /// </summary>
     public interface IRadicalWaitHandle : IRadicalYieldInstruction
     {
 
@@ -12,6 +15,9 @@ namespace com.spacepuppy
 
     }
 
+    /// <summary>
+    /// Base implemenation of IRadicalWaitHandle.
+    /// </summary>
     public class RadicalWaitHandle : IRadicalWaitHandle, IPooledYieldInstruction
     {
 

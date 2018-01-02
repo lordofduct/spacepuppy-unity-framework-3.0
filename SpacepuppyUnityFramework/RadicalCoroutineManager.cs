@@ -7,6 +7,11 @@ using com.spacepuppy.Utils;
 namespace com.spacepuppy
 {
 
+    /// <summary>
+    /// Ignore this component.
+    /// 
+    /// This is automatically added to a GameObject when a RadicalCoroutine is ran on it and the manager is needed.
+    /// </summary>
     [DisallowMultipleComponent()]
     public sealed class RadicalCoroutineManager : MonoBehaviour
     {

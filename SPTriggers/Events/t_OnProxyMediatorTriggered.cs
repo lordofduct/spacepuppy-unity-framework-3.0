@@ -8,6 +8,11 @@ using com.spacepuppy.Utils;
 namespace com.spacepuppy.Events
 {
 
+    /// <summary>
+    /// Trigger that responds to the ProxyMediator.OnTriggered event.
+    /// 
+    /// Associate a ProxyMediator to facilitate communication between transient assets like prefab instances.
+    /// </summary>
     public class t_OnProxyMediatorTriggered : TriggerComponent
     {
 

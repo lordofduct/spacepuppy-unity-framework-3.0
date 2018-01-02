@@ -11,6 +11,9 @@ using com.spacepuppy.Utils;
 namespace com.spacepuppy
 {
 
+    /// <summary>
+    /// An IProxy that locates an object by name/tag/type in a scene or entity.
+    /// </summary>
     public class ProxyTarget : Triggerable, IDynamic, IProxy
     {
 

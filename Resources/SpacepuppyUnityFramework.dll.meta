@@ -1,0 +1,36 @@
+fileFormatVersion: 2
+guid: ad1e09537abad9a43bd8de0065fde51d
+timeCreated: 1514358691
+licenseType: Free
+PluginImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  iconMap: {}
+  executionOrder:
+    com.spacepuppy.GameLoop: -32000
+    com.spacepuppy.Hooks.EarlyExecutionUpdateEventHooks: -31900
+    com.spacepuppy.SPEntity: 31990
+    com.spacepuppy.Hooks.TardyExecutionUpdateEventHooks: 32000
+  isPreloaded: 0
+  isOverridable: 0
+  platformData:
+  - first:
+      Any: 
+    second:
+      enabled: 1
+      settings: {}
+  - first:
+      Editor: Editor
+    second:
+      enabled: 0
+      settings:
+        DefaultValueInitialized: true
+  - first:
+      Windows Store Apps: WindowsStoreApps
+    second:
+      enabled: 0
+      settings:
+        CPU: AnyCPU
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

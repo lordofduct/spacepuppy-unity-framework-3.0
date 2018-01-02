@@ -55,12 +55,14 @@
     <Compile Include="Events\i_SetValue.cs" />
     <Compile Include="Events\i_SetValueOnTarget.cs" />
     <Compile Include="Events\i_StopAudioSource.cs" />
+    <Compile Include="Events\i_Teleport.cs" />
     <Compile Include="Events\i_Trigger.cs" />
     <Compile Include="Events\i_TriggerOnEval.cs" />
     <Compile Include="Events\i_TriggerOnIfThen.cs" />
     <Compile Include="Events\i_TriggerRandom.cs" />
     <Compile Include="Events\i_TriggerRandomElimination.cs" />
     <Compile Include="Events\i_TriggerSequence.cs" />
+    <Compile Include="Events\t_AllTriggered.cs" />
     <Compile Include="Events\t_Interval.cs" />
     <Compile Include="Events\t_IntervalRandom.cs" />
     <Compile Include="Events\t_OnCollisionEnter.cs" />
@@ -69,6 +71,7 @@
     <Compile Include="Events\t_OnEnterTrigger.cs" />
     <Compile Include="Events\t_OnExitTrigger.cs" />
     <Compile Include="Events\t_OnStart.cs" />
+    <Compile Include="Events\t_OnUIEvent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

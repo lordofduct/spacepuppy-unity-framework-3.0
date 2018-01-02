@@ -26,6 +26,8 @@ xcopy /Y /S .\SPMotor\bin\Release\SPMotor.dll .\Builds\SpacepuppyUnityFramework\
 xcopy /Y /S .\SPMotor\bin\Release\SPMotor.pdb .\Builds\SpacepuppyUnityFramework\
 xcopy /Y /S .\SPPathfinding\bin\Release\SPPathfinding.dll .\Builds\SpacepuppyUnityFramework\
 xcopy /Y /S .\SPPathfinding\bin\Release\SPPathfinding.pdb .\Builds\SpacepuppyUnityFramework\
+xcopy /Y /S .\SPProject\bin\Release\SPProject.dll .\Builds\SpacepuppyUnityFramework\
+xcopy /Y /S .\SPProject\bin\Release\SPProject.pdb .\Builds\SpacepuppyUnityFramework\
 xcopy /Y /S .\SPScenes\bin\Release\SPScenes.dll .\Builds\SpacepuppyUnityFramework\
 xcopy /Y /S .\SPScenes\bin\Release\SPScenes.pdb .\Builds\SpacepuppyUnityFramework\
 xcopy /Y /S .\SPSensors\bin\Release\SPSensors.dll .\Builds\SpacepuppyUnityFramework\
@@ -54,6 +56,8 @@ xcopy /Y /S .\SPMotorEditor\bin\Release\SPMotorEditor.dll .\Builds\SpacepuppyUni
 xcopy /Y /S .\SPMotorEditor\bin\Release\SPMotorEditor.pdb .\Builds\SpacepuppyUnityFramework\Editor
 xcopy /Y /S .\SPPathfindingEditor\bin\Release\SPPathfindingEditor.dll .\Builds\SpacepuppyUnityFramework\Editor
 xcopy /Y /S .\SPPathfindingEditor\bin\Release\SPPathfindingEditor.pdb .\Builds\SpacepuppyUnityFramework\Editor
+xcopy /Y /S .\SPProjectEditor\bin\Release\SPProjectEditor.dll .\Builds\SpacepuppyUnityFramework\Editor
+xcopy /Y /S .\SPProjectEditor\bin\Release\SPProjectEditor.pdb .\Builds\SpacepuppyUnityFramework\Editor
 xcopy /Y /S .\SPScenesEditor\bin\Release\SPScenesEditor.dll .\Builds\SpacepuppyUnityFramework\Editor
 xcopy /Y /S .\SPScenesEditor\bin\Release\SPScenesEditor.pdb .\Builds\SpacepuppyUnityFramework\Editor
 xcopy /Y /S .\SPSensorsEditor\bin\Release\SPSensorsEditor.dll .\Builds\SpacepuppyUnityFramework\Editor

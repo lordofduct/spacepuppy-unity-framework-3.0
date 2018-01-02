@@ -26,6 +26,8 @@ After adding the SpaceuppyUnityFramework you can pick and choose the modules to 
 
 - SPPathfinding - currently is in early development, but is planned to house a robust pathfinding (A*) system for use in games. Currently only houses basic implementations of the algorithms as well as fundamental interface/contracts for use with AI agents.
 
+- SPProject - A collection of classes intended to make project/asset management easier.
+
 - SPScenes - an extension of SceneManager adopting the IService model.
 
 - SPSensors - attach an 'aspect' to an object, and then your AI/Player can use a 'sensor' of various shapes/types to determine if said aspect can be seen.

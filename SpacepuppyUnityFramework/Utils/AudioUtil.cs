@@ -2,7 +2,7 @@
 
 namespace com.spacepuppy.Utils
 {
-    public static class AudioUtils
+    public static class AudioUtil
     {
 
         public static void Play(this AudioSource src, AudioClip clip, AudioInterruptMode mode)

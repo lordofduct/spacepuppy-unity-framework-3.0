@@ -113,7 +113,7 @@ namespace com.spacepuppy.Sensors.Visual
         {
             if (vaspect == null) return false;
             if (!vaspect.isActiveAndEnabled) return false;
-            if (_aspectLayerMask != -1 && !vaspect.gameObject.IntersectsLayerMask(_aspectLayerMask)) return false;
+            if (_aspectLayerMask != -1 && !_aspectLayerMask.Intersects(vaspect.gameObject)) return false;
             if (!_aspectTagMask.Intersects(vaspect)) return false;
             if (!_canDetectSelf && vaspect.entityRoot == this.entityRoot) return false;
 
@@ -160,7 +160,7 @@ namespace com.spacepuppy.Sensors.Visual
 
             if (vaspect == null) return false;
             if (!vaspect.isActiveAndEnabled) return false;
-            if (_aspectLayerMask != -1 && !aspect.gameObject.IntersectsLayerMask(_aspectLayerMask)) return false;
+            if (_aspectLayerMask != -1 && !_aspectLayerMask.Intersects(aspect.gameObject)) return false;
             if (!_aspectTagMask.Intersects(vaspect)) return false;
             if (!_canDetectSelf && vaspect.entityRoot == this.entityRoot) return false;
             return this.TestVisibility(vaspect);

@@ -51,7 +51,7 @@ namespace com.spacepuppy.Serialization
                 {
                     if (object.ReferenceEquals(this, arr[i])) continue;
 
-                    data.Path = GameObjectUtil.GetPathNameRelativeTo((arr[i] as Component).transform, this.transform);
+                    data.Path = SearchUtil.GetPathNameRelativeTo((arr[i] as Component).transform, this.transform);
                     data.ComponentType = arr[i].GetType();
                     data.Pobj = arr[i];
                     info.AddValue(cnt.ToString(), data, typeof(ChildObjectData));
@@ -73,7 +73,7 @@ namespace com.spacepuppy.Serialization
                 ChildObjectData data = (ChildObjectData)info.GetValue(i.ToString(), typeof(ChildObjectData));
                 if (data != null && data.ComponentType != null)
                 {
-                    IPersistantUnityObject pobj = ComponentUtil.GetComponentFromSource(data.ComponentType, (data.Path != null) ? this.transform.Find(data.Path) : this.transform) as IPersistantUnityObject;
+                    IPersistantUnityObject pobj = ObjUtil.GetAsFromSource(data.ComponentType, (data.Path != null) ? this.transform.Find(data.Path) : this.transform) as IPersistantUnityObject;
                     if (pobj != null)
                     {
                         pobj.OnDeserialize(data.DeserializeInfo, data.DeserializeContext, assetBundle);

@@ -116,7 +116,7 @@ namespace com.spacepuppy.Sensors.Collision
         {
             var go = GameObjectUtil.GetGameObjectFromSource(obj);
             if (go == null) return false;
-            if (!go.IntersectsLayerMask(_layers)) return false;
+            if (!_layers.Intersects(go)) return false;
 
             return true;
         }

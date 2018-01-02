@@ -112,7 +112,7 @@ namespace com.spacepuppy.Sensors.Collision
             if (coll == null) return false;
             var mode = (coll.isTrigger) ? AllowedColliderMode.Trigger : AllowedColliderMode.Solid;
             if ((_allowedColliders & mode) == 0) return false;
-            if (_aspectLayerMask != -1 && !coll.gameObject.IntersectsLayerMask(_aspectLayerMask)) return false;
+            if (_aspectLayerMask != -1 && !_aspectLayerMask.Intersects(coll.gameObject)) return false;
             if (!_aspectTagMask.Intersects(coll)) return false;
 
             if (!_canDetectSelf)

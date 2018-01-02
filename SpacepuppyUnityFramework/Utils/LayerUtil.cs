@@ -80,5 +80,21 @@ namespace com.spacepuppy.Utils
             return (mask.value & (1 << c.gameObject.layer)) != 0;
         }
 
+        public static void ChangeLayer(this GameObject obj, int layer, bool recursive, params string[] ignoreNames)
+        {
+            obj.layer = layer;
+
+            if (recursive)
+            {
+                foreach (Transform child in obj.transform)
+                {
+                    if (!StringUtil.Equals(child.name, ignoreNames))
+                    {
+                        ChangeLayer(child.gameObject, layer, recursive, ignoreNames);
+                    }
+                }
+            }
+        }
+
     }
 }

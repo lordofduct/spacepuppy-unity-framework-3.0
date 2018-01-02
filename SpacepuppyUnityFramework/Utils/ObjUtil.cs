@@ -69,7 +69,7 @@ namespace com.spacepuppy.Utils
                 case SearchBy.Nothing:
                     return null;
                 case SearchBy.Tag:
-                    return GameObjectUtil.FindWithMultiTag(query);
+                    return SearchUtil.FindWithMultiTag(query);
                 case SearchBy.Name:
                     return UnityEngine.GameObject.Find(query);
                 case SearchBy.Type:
@@ -86,7 +86,7 @@ namespace com.spacepuppy.Utils
                 case SearchBy.Nothing:
                     return null;
                 case SearchBy.Tag:
-                    return ObjUtil.GetAsFromSource<T>(GameObjectUtil.FindWithMultiTag(query));
+                    return ObjUtil.GetAsFromSource<T>(SearchUtil.FindWithMultiTag(query));
                 case SearchBy.Name:
                     return ObjUtil.GetAsFromSource<T>(UnityEngine.GameObject.Find(query));
                 case SearchBy.Type:
@@ -103,12 +103,12 @@ namespace com.spacepuppy.Utils
                 case SearchBy.Nothing:
                     return ArrayUtil.Empty<UnityEngine.Object>();
                 case SearchBy.Tag:
-                    return GameObjectUtil.FindGameObjectsWithMultiTag(query);
+                    return SearchUtil.FindGameObjectsWithMultiTag(query);
                 case SearchBy.Name:
                     {
                         using (var tmp = com.spacepuppy.Collections.TempCollection.GetList<UnityEngine.GameObject>())
                         {
-                            GameObjectUtil.FindAllByName(query, tmp);
+                            SearchUtil.FindAllByName(query, tmp);
                             return tmp.ToArray();
                         }
                     }
@@ -130,7 +130,7 @@ namespace com.spacepuppy.Utils
                         using (var tmp = com.spacepuppy.Collections.TempCollection.GetList<UnityEngine.GameObject>())
                         using (var results = com.spacepuppy.Collections.TempCollection.GetList<UnityEngine.Object>())
                         {
-                            GameObjectUtil.FindGameObjectsWithMultiTag(query, tmp);
+                            SearchUtil.FindGameObjectsWithMultiTag(query, tmp);
                             var e = tmp.GetEnumerator();
                             while (e.MoveNext())
                             {
@@ -145,7 +145,7 @@ namespace com.spacepuppy.Utils
                         using (var tmp = com.spacepuppy.Collections.TempCollection.GetList<UnityEngine.GameObject>())
                         using (var results = com.spacepuppy.Collections.TempCollection.GetList<UnityEngine.Object>())
                         {
-                            GameObjectUtil.FindAllByName(query, tmp);
+                            SearchUtil.FindAllByName(query, tmp);
                             var e = tmp.GetEnumerator();
                             while (e.MoveNext())
                             {
@@ -183,7 +183,7 @@ namespace com.spacepuppy.Utils
                         using (var tmp = com.spacepuppy.Collections.TempCollection.GetList<UnityEngine.GameObject>())
                         using (var results = com.spacepuppy.Collections.TempCollection.GetList<T>())
                         {
-                            GameObjectUtil.FindGameObjectsWithMultiTag(query, tmp);
+                            SearchUtil.FindGameObjectsWithMultiTag(query, tmp);
                             var e = tmp.GetEnumerator();
                             while(e.MoveNext())
                             {
@@ -198,7 +198,7 @@ namespace com.spacepuppy.Utils
                         using (var tmp = com.spacepuppy.Collections.TempCollection.GetList<UnityEngine.GameObject>())
                         using (var results = com.spacepuppy.Collections.TempCollection.GetList<T>())
                         {
-                            GameObjectUtil.FindAllByName(query, tmp);
+                            SearchUtil.FindAllByName(query, tmp);
                             var e = tmp.GetEnumerator();
                             while (e.MoveNext())
                             {

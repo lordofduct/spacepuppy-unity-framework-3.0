@@ -310,8 +310,8 @@ namespace com.spacepuppy.Waypoints
                     var trans = GameObjectUtil.GetTransformFromSource(targ);
                     if (trans != null)
                     {
-                        var a = (i >= 0 && i < cnt) ? ComponentUtil.GetComponentFromSource<Transform>(_path.Path.ControlPoint(i)) : null;
-                        var b = (j >= 0 && j < cnt) ? ComponentUtil.GetComponentFromSource<Transform>(_path.Path.ControlPoint(j)) : null;
+                        var a = (i >= 0 && i < cnt) ? GameObjectUtil.GetTransformFromSource(_path.Path.ControlPoint(i)) : null;
+                        var b = (j >= 0 && j < cnt) ? GameObjectUtil.GetTransformFromSource(_path.Path.ControlPoint(j)) : null;
 
                         if (a != null)
                         {

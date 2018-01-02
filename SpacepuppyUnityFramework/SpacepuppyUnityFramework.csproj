@@ -150,7 +150,7 @@
     <Compile Include="TempEventArgs.cs" />
     <Compile Include="TypeReference.cs" />
     <Compile Include="Utils\ArrayUtil.cs" />
-    <Compile Include="Utils\AudioUtils.cs" />
+    <Compile Include="Utils\AudioUtil.cs" />
     <Compile Include="Utils\ColorUtil.cs" />
     <Compile Include="Utils\CompareUtil.cs" />
     <Compile Include="Utils\ComponentUtil.cs" />
@@ -167,6 +167,7 @@
     <Compile Include="Utils\PrimitiveUtil.cs" />
     <Compile Include="Utils\QuaternionUtil.cs" />
     <Compile Include="Utils\RandomUtil.cs" />
+    <Compile Include="Utils\SearchUtil.cs" />
     <Compile Include="Utils\StreamUtil.cs" />
     <Compile Include="Utils\StringUtil.cs" />
     <Compile Include="Utils\TransformUtil.cs" />

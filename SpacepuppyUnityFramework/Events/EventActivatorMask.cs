@@ -99,7 +99,7 @@ namespace com.spacepuppy.Events
 
             if (_testRoot) go = go.FindRoot();
 
-            return go.IntersectsLayerMask(_layerMask) && (_tags == null || _tags.Length == 0 || go.HasTag(_tags));
+            return _layerMask.Intersects(go) && (_tags == null || _tags.Length == 0 || go.HasTag(_tags));
         }
 
         public bool Intersects(Component comp)

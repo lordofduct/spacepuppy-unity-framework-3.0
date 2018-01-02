@@ -44,7 +44,7 @@ namespace com.spacepuppy.Serialization
 
             obj = UnityEngine.Object.Instantiate(obj);
 
-            foreach (var pobj in ComponentUtil.GetComponentsFromSource<IPersistantAsset>(obj))
+            foreach (var pobj in ObjUtil.GetAllFromSource<IPersistantAsset>(obj))
             {
                 pobj.OnDeserialize(_info, _context, _bundle);
             }

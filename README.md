@@ -26,6 +26,8 @@ After adding the SpaceuppyUnityFramework you can pick and choose the modules to 
 
 - SPPathfinding - currently is in early development, but is planned to house a robust pathfinding (A*) system for use in games. Currently only houses basic implementations of the algorithms as well as fundamental interface/contracts for use with AI agents.
 
+- SPScenes - an extension of SceneManager adopting the IService model.
+
 - SPSensors - attach an 'aspect' to an object, and then your AI/Player can use a 'sensor' of various shapes/types to determine if said aspect can be seen.
 
 - SPSerialization - a serialization library built on top of the .Net serialization interface. It supports various formats (json/binary included), and attempts to allow serializing GameObjects as asset id's that can be pulled from Resources/AssetBundles.
@@ -35,6 +37,24 @@ After adding the SpaceuppyUnityFramework you can pick and choose the modules to 
 - SPTween - a tween engine built on Spacepuppy
 
 - SPWaypoint - (requires SPTween) a waypoint library with algorithms for bezier, catmull-rom, linear, as well as a UI to set up paths in your game. This is very useful for setting up camera paths and other animated events. (warning - this is not a pathfinding system, that is in development in another module)
+
+# Quick Import
+
+Download the latest build from the github project and unzip contents into your project's Asset folder.
+
+# Building
+
+You can build via the Solution project and manually copy all the corresponding *.dll's into your project in whatever manner you'd like.
+
+Or you can use the included build script.
+
+First open 'dobuild.release.bat' and make sure the path to MSBuild.exe matches where you have it installed on your computer.
+
+Run 'dobuild.release.bat'.
+
+A 'Builds' folder will be created, copy the 'SpaceuppyUnityFramework' folder in there into your project wherever you'd like (this is the same thing you would find in the downloaded builds from the github page).
+
+Delete any module's dll's you don't want. You could also have commented out the xcopy lines for any modules you don't want in the bat file.
 
 # License
 Copyright (c) 2015, Dylan Engelman, Jupiter Lighthouse Studio

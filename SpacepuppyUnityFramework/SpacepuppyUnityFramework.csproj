@@ -98,11 +98,13 @@
     <Compile Include="Geom\GeomUtil.cs" />
     <Compile Include="Geom\IGeom.cs" />
     <Compile Include="Geom\Interval.cs" />
+    <Compile Include="Geom\IPlanarSurface.cs" />
     <Compile Include="Geom\Line.cs" />
     <Compile Include="Geom\PhysicsUtil.cs" />
     <Compile Include="Geom\RaycastInfo.cs" />
     <Compile Include="Geom\Sphere.cs" />
     <Compile Include="Geom\Trans.cs" />
+    <Compile Include="Geom\XYPlanarSurface.cs" />
     <Compile Include="Hooks\EarlyExecutionUpdateEventHooks.cs" />
     <Compile Include="Hooks\TardyExecutionUpdateEventHooks.cs" />
     <Compile Include="Hooks\UpdateEventHooks.cs" />

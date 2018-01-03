@@ -38,6 +38,8 @@ After adding the SpaceuppyUnityFramework you can pick and choose the modules to 
 
 - SPTween - a tween engine built on Spacepuppy
 
+- SPUtils - some useful utility classes. These used to be in SpacepuppyUnityFramework base dll, but was moved here to reduce the size of that dll since they aren't necessary for any module to work.
+
 - SPWaypoint - (requires SPTween) a waypoint library with algorithms for bezier, catmull-rom, linear, as well as a UI to set up paths in your game. This is very useful for setting up camera paths and other animated events. (warning - this is not a pathfinding system, that is in development in another module)
 
 # Quick Import

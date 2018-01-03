@@ -38,6 +38,8 @@ xcopy /Y /S .\SPTriggers\bin\Release\SPTriggers.dll .\Builds\SpacepuppyUnityFram
 xcopy /Y /S .\SPTriggers\bin\Release\SPTriggers.pdb .\Builds\SpacepuppyUnityFramework\
 xcopy /Y /S .\SPTween\bin\Release\SPTween.dll .\Builds\SpacepuppyUnityFramework\
 xcopy /Y /S .\SPTween\bin\Release\SPTween.pdb .\Builds\SpacepuppyUnityFramework\
+xcopy /Y /S .\SPUtils\bin\Release\SPUtils.dll .\Builds\SpacepuppyUnityFramework\
+xcopy /Y /S .\SPUtils\bin\Release\SPUtils.pdb .\Builds\SpacepuppyUnityFramework\
 xcopy /Y /S .\SPWaypoint\bin\Release\SPWaypoint.dll .\Builds\SpacepuppyUnityFramework\
 xcopy /Y /S .\SPWaypoint\bin\Release\SPWaypoint.pdb .\Builds\SpacepuppyUnityFramework\
 
@@ -68,6 +70,8 @@ xcopy /Y /S .\SPTriggersEditor\bin\Release\SPTriggersEditor.dll .\Builds\Spacepu
 xcopy /Y /S .\SPTriggersEditor\bin\Release\SPTriggersEditor.pdb .\Builds\SpacepuppyUnityFramework\Editor
 xcopy /Y /S .\SPTweenEditor\bin\Release\SPTweenEditor.dll .\Builds\SpacepuppyUnityFramework\Editor
 xcopy /Y /S .\SPTweenEditor\bin\Release\SPTweenEditor.pdb .\Builds\SpacepuppyUnityFramework\Editor
+xcopy /Y /S .\SPUtilsEditor\bin\Release\SPUtilsEditor.dll .\Builds\SpacepuppyUnityFramework\Editor
+xcopy /Y /S .\SPUtilsEditor\bin\Release\SPUtilsEditor.pdb .\Builds\SpacepuppyUnityFramework\Editor
 xcopy /Y /S .\SPWaypointEditor\bin\Release\SPWaypointEditor.dll .\Builds\SpacepuppyUnityFramework\Editor
 xcopy /Y /S .\SPWaypointEditor\bin\Release\SPWaypointEditor.pdb .\Builds\SpacepuppyUnityFramework\Editor
 xcopy /Y /S .\Resources\Shaders .\Builds\SpacepuppyUnityFramework\Editor\Shaders

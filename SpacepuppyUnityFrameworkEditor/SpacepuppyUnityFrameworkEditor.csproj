@@ -67,6 +67,7 @@
     <Compile Include="Base\ProxyPropertyDrawer.cs" />
     <Compile Include="Base\ShortUidPropertyDrawer.cs" />
     <Compile Include="Base\TagMaskPropertyDrawer.cs" />
+    <Compile Include="Base\VariantCollectionPropertyDrawer.cs" />
     <Compile Include="Commands\FindReferencesToObjectMenu.cs" />
     <Compile Include="Commands\TransformAltContextMenu.cs" />
     <Compile Include="Commands\TransformCopyMenu.cs" />

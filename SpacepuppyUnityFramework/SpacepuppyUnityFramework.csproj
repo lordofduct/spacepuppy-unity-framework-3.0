@@ -167,6 +167,7 @@
     <Compile Include="Utils\TransformUtil.cs" />
     <Compile Include="Utils\TypeUtil.cs" />
     <Compile Include="Utils\VectorUtil.cs" />
+    <Compile Include="VariantCollection.cs" />
     <Compile Include="VariantReference.cs" />
     <Compile Include="WaitForComplete.cs" />
     <Compile Include="WaitForDuration.cs" />

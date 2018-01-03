@@ -8,9 +8,7 @@ namespace com.spacepuppy.AI
 
     public static class AIUtils
     {
-
-        /*
-
+        
         public static ComplexTarget GetAsComplexTarget(this VariantCollection coll, string key)
         {
             var v = coll.GetVariant(key);
@@ -32,9 +30,7 @@ namespace com.spacepuppy.AI
                     return ComplexTarget.Null;
             }
         }
-
-        */
-
+        
     }
 
 }

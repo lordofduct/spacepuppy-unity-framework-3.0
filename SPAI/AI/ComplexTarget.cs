@@ -10,15 +10,6 @@ using com.spacepuppy.Utils;
 namespace com.spacepuppy.AI
 {
 
-    public enum ComplexTargetType
-    {
-        Null = 0,
-        Aspect = 1,
-        Transform = 2,
-        Vector2 = 3,
-        Vector3 = 4
-    }
-
     public struct ComplexTarget
     {
 

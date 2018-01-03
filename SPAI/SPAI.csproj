@@ -41,6 +41,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AI\AIUtils.cs" />
+    <Compile Include="AI\ComplexTarget.cs" />
+    <Compile Include="AI\Enums.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

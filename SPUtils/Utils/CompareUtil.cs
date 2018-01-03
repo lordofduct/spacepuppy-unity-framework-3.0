@@ -1,5 +1,6 @@
 ﻿namespace com.spacepuppy.Utils
 {
+
     public static class CompareUtil
     {
 
@@ -133,4 +134,5 @@
         }
 
     }
+
 }

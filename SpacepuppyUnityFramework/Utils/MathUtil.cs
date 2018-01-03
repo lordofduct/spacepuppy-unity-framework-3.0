@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 namespace com.spacepuppy.Utils
 {
+
     /// <summary>
     /// A port of the LoDMath static member class written in AS3 under the MIT license agreement.
     /// 
@@ -39,7 +40,7 @@ namespace com.spacepuppy.Utils
     public static class MathUtil
     {
 
-        #region "Public ReadOnly Properties"
+        #region Public ReadOnly Properties
 
         // Number pi
         public const float PI = 3.14159265358979f;
@@ -130,7 +131,7 @@ namespace com.spacepuppy.Utils
 
         #endregion
 
-        #region "Public Shared Methods"
+        #region Public Shared Methods
 
         public static bool IsReal(float f)
         {
@@ -245,7 +246,7 @@ namespace com.spacepuppy.Utils
             return value != 0 && (value & (value - 1)) == 0;
         }
 
-        #region "series"
+        #region series
 
         /// <summary>
         /// Sums a series of numeric values passed as a param array...
@@ -451,8 +452,8 @@ namespace com.spacepuppy.Utils
 
         #endregion
 
-        #region "Value interpolating and warping"
-
+        #region Value warping
+        
         /// <summary>
         /// The average of an array of values
         /// </summary>
@@ -520,48 +521,6 @@ namespace com.spacepuppy.Utils
             }
 
             return avg / values.Length;
-        }
-
-        /// <summary>
-        /// a one dimensional linear interpolation of a value.
-        /// </summary>
-        /// <param name="a">from value</param>
-        /// <param name="b">to value</param>
-        /// <param name="weight">lerp value</param>
-        /// <returns>the value lerped from a to b</returns>
-        /// <remarks></remarks>
-        public static float Interpolate(float a, float b, float weight)
-        {
-            return (b - a) * weight + a;
-        }
-
-        public static int Interpolate(int a, int b, float weight)
-        {
-            return (int)Math.Round((b - a) * weight + a);
-        }
-
-        public static float SpeedLerp(float a, float b, float speed, float dt)
-        {
-            var v = b - a;
-            var dv = speed * dt;
-            if (dv > Math.Abs(v))
-                return b;
-            else
-                return a + Math.Sign(v) * dv;
-        }
-
-        public static float AccelerativeLerp(float a, float b, float accel, float dt)
-        {
-            if (b > a)
-            {
-                a += accel * dt;
-                return (a > b) ? b : a;
-            }
-            else
-            {
-                a -= accel * dt;
-                return (a < b) ? b : a;
-            }
         }
 
         /// <summary>
@@ -1776,9 +1735,7 @@ namespace com.spacepuppy.Utils
             return RisingFactorial(n, k) / Factorial(k);
         }
         #endregion
-
-
-
+        
         #region Geometric Calculations
 
         public static float ApproxCircumOfEllipse(float a, float b)
@@ -1791,5 +1748,6 @@ namespace com.spacepuppy.Utils
         #endregion
 
     }
+
 }
 

@@ -93,6 +93,16 @@ namespace com.spacepuppy.Serialization
 
         #region IPersistantUnityObject Interface
 
+        ShortUid IPersistantUnityObject.Uid
+        {
+            get
+            {
+                if (_asset == null) return ShortUid.Zero;
+
+                return _asset.Uid;
+            }
+        }
+
         public void OnSerialize(SerializationInfo info, StreamingContext context)
         {
             if (_asset == null) return;

@@ -310,7 +310,7 @@ namespace com.spacepuppy.Events
                             case ResolveByCommand.Nothing:
                                 return GameObjectUtil.GetGameObjectFromSource((_configured) ? targ : triggerArg);
                             case ResolveByCommand.WithTag:
-                                return SearchUtil.FindWithMultiTag(_queryString);
+                                return GameObjectUtil.FindWithMultiTag(_queryString);
                             case ResolveByCommand.WithName:
                                 return GameObject.Find(_queryString);
                             case ResolveByCommand.WithType:
@@ -509,7 +509,7 @@ namespace com.spacepuppy.Events
                                 break;
                             case ResolveByCommand.WithName:
                                 {
-                                    foreach (var o in SearchUtil.FindAllByName(entity.transform, _queryString))
+                                    foreach (var o in GameObjectUtil.FindAllByName(entity.transform, _queryString))
                                     {
                                         yield return o;
                                     }
@@ -544,7 +544,7 @@ namespace com.spacepuppy.Events
                                 break;
                             case ResolveByCommand.WithTag:
                                 {
-                                    foreach (var o in SearchUtil.FindGameObjectsWithMultiTag(_queryString))
+                                    foreach (var o in GameObjectUtil.FindGameObjectsWithMultiTag(_queryString))
                                     {
                                         yield return o;
                                     }
@@ -552,7 +552,7 @@ namespace com.spacepuppy.Events
                                 break;
                             case ResolveByCommand.WithName:
                                 {
-                                    foreach (var o in SearchUtil.FindAllByName(_queryString))
+                                    foreach (var o in GameObjectUtil.FindAllByName(_queryString))
                                     {
                                         yield return o;
                                     }

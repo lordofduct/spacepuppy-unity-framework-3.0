@@ -2,6 +2,7 @@
 
 namespace com.spacepuppy.Utils
 {
+
     public static class PrefabUtil
     {
 
@@ -45,4 +46,5 @@ namespace com.spacepuppy.Utils
         }
         
     }
+
 }

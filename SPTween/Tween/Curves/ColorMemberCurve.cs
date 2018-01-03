@@ -67,7 +67,7 @@ namespace com.spacepuppy.Tween.Curves
         {
             if (this.Duration == 0f) return _end;
             t = this.Ease(t, 0f, 1f, this.Duration);
-            return ColorUtil.Lerp(_start, _end, t);
+            return Color.LerpUnclamped(_start, _end, t);
         }
 
         #endregion

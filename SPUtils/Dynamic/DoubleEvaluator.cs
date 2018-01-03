@@ -857,7 +857,7 @@ namespace com.spacepuppy.Dynamic
             var atp = a.GetType();
             if (ConvertUtil.IsNumericType(atp))
             {
-                return ConvertUtil.ToPrim(MathUtil.Interpolate(ConvertUtil.ToSingle(a), ConvertUtil.ToSingle(b), t), atp);
+                return ConvertUtil.ToPrim(UnityEngine.Mathf.LerpUnclamped(ConvertUtil.ToSingle(a), ConvertUtil.ToSingle(b), t), atp);
             }
             else if (atp == typeof(UnityEngine.Vector2))
             {

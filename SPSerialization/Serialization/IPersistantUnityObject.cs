@@ -18,6 +18,11 @@ namespace com.spacepuppy.Serialization
     public interface IPersistantUnityObject
     {
 
+        /// <summary>
+        /// A uid to identify the object on reload. This must be unique and persistent.
+        /// </summary>
+        ShortUid Uid { get; }
+
         void OnSerialize(SerializationInfo info, StreamingContext context);
 
         void OnDeserialize(SerializationInfo info, StreamingContext context, IAssetBundle assetBundle);

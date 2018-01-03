@@ -64,12 +64,10 @@
     <Compile Include="Collections\TempHashSet.cs" />
     <Compile Include="Collections\TempList.cs" />
     <Compile Include="Collections\TrackablObjectCachePool.cs" />
-    <Compile Include="ColorHSV.cs" />
     <Compile Include="Events\EventActivatorMask.cs" />
     <Compile Include="Geom\CompoundTrigger.cs" />
     <Compile Include="CustomTimeSupplier.cs" />
     <Compile Include="DiscreteFloat.cs" />
-    <Compile Include="Dynamic\DoubleEvaluator.cs" />
     <Compile Include="Dynamic\DynamicMethodInfo.cs" />
     <Compile Include="Dynamic\DynamicParameterInfo.cs" />
     <Compile Include="Dynamic\DynamicPropertyInfo.cs" />
@@ -150,9 +148,6 @@
     <Compile Include="TempEventArgs.cs" />
     <Compile Include="TypeReference.cs" />
     <Compile Include="Utils\ArrayUtil.cs" />
-    <Compile Include="Utils\AudioUtil.cs" />
-    <Compile Include="Utils\ColorUtil.cs" />
-    <Compile Include="Utils\CompareUtil.cs" />
     <Compile Include="Utils\ComponentUtil.cs" />
     <Compile Include="Utils\ConvertUtil.cs" />
     <Compile Include="Utils\CoroutineUtil.cs" />
@@ -163,12 +158,9 @@
     <Compile Include="Utils\Messaging.cs" />
     <Compile Include="Utils\MouseUtil.cs" />
     <Compile Include="Utils\ObjUtil.cs" />
-    <Compile Include="Utils\PrefabUtil.cs" />
     <Compile Include="Utils\PrimitiveUtil.cs" />
     <Compile Include="Utils\QuaternionUtil.cs" />
     <Compile Include="Utils\RandomUtil.cs" />
-    <Compile Include="Utils\SearchUtil.cs" />
-    <Compile Include="Utils\StreamUtil.cs" />
     <Compile Include="Utils\StringUtil.cs" />
     <Compile Include="Utils\TransformUtil.cs" />
     <Compile Include="Utils\TypeUtil.cs" />

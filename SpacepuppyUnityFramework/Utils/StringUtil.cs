@@ -6,6 +6,7 @@ using com.spacepuppy.Collections;
 
 namespace com.spacepuppy.Utils
 {
+
     public static class StringUtil
     {
 
@@ -572,5 +573,6 @@ namespace com.spacepuppy.Utils
         #endregion
 
     }
+
 }
 

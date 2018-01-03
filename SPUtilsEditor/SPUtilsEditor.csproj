@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{4FA4FB9B-8AD3-4D87-B895-F65F593A6867}</ProjectGuid>
+    <ProjectGuid>{B9BCE83E-5EA8-4E75-ACFD-45E7DB035234}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>com.spacepuppy</RootNamespace>
-    <AssemblyName>SPUtils</AssemblyName>
+    <RootNamespace>com.spacepuppyeditor</RootNamespace>
+    <AssemblyName>SPUtilsEditor</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -35,26 +35,29 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Xml" />
+    <Reference Include="UnityEditor">
+      <HintPath>..\Resources\UnityEditor.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine">
       <HintPath>..\Resources\UnityEngine.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ColorHSV.cs" />
-    <Compile Include="Dynamic\DoubleEvaluator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Utils\AudioUtil.cs" />
-    <Compile Include="Utils\ColorUtil.cs" />
-    <Compile Include="Utils\CompareUtil.cs" />
-    <Compile Include="Utils\DelegateUtil.cs" />
-    <Compile Include="Utils\PrefabUtil.cs" />
-    <Compile Include="Utils\Search.cs" />
-    <Compile Include="Utils\StreamUtil.cs" />
+    <Compile Include="Windows\ComponentSearchWindow.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\SpacepuppyUnityFrameworkEditor\SpacepuppyUnityFrameworkEditor.csproj">
+      <Project>{7fe0b8d6-ba29-43a6-b272-5d4f442fc4fa}</Project>
+      <Name>SpacepuppyUnityFrameworkEditor</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SpacepuppyUnityFramework\SpacepuppyUnityFramework.csproj">
       <Project>{3b57db6b-ba67-46ad-b929-fdd8e6ae511e}</Project>
       <Name>SpacepuppyUnityFramework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SPUtils\SPUtils.csproj">
+      <Project>{4fa4fb9b-8ad3-4d87-b895-f65f593a6867}</Project>
+      <Name>SPUtils</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

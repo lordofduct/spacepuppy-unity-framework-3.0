@@ -79,6 +79,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SPProjectEditor", "SPProjec
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SPUtils", "SPUtils\SPUtils.csproj", "{4FA4FB9B-8AD3-4D87-B895-F65F593A6867}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SPUtilsEditor", "SPUtilsEditor\SPUtilsEditor.csproj", "{B9BCE83E-5EA8-4E75-ACFD-45E7DB035234}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -181,6 +183,10 @@ Global
 		{4FA4FB9B-8AD3-4D87-B895-F65F593A6867}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4FA4FB9B-8AD3-4D87-B895-F65F593A6867}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4FA4FB9B-8AD3-4D87-B895-F65F593A6867}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B9BCE83E-5EA8-4E75-ACFD-45E7DB035234}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B9BCE83E-5EA8-4E75-ACFD-45E7DB035234}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B9BCE83E-5EA8-4E75-ACFD-45E7DB035234}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B9BCE83E-5EA8-4E75-ACFD-45E7DB035234}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

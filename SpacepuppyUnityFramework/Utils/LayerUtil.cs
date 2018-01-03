@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 namespace com.spacepuppy.Utils
 {
+
     public static class LayerUtil
     {
 
@@ -97,4 +98,5 @@ namespace com.spacepuppy.Utils
         }
 
     }
+
 }

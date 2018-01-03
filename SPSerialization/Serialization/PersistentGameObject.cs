@@ -1,12 +1,15 @@
-﻿using UnityEngine;
+﻿#pragma warning disable 0649 // variable declared but not used.
+
+using UnityEngine;
 using System.Collections.Generic;
+using System.Linq;
 
 using System.Runtime.Serialization;
 
+using com.spacepuppy.Collections;
 using com.spacepuppy.Geom;
 using com.spacepuppy.Project;
 using com.spacepuppy.Utils;
-using System;
 
 namespace com.spacepuppy.Serialization
 {
@@ -15,6 +18,10 @@ namespace com.spacepuppy.Serialization
     {
 
         #region Fields
+
+        [SerializeField]
+        [ShortUid.Config(AllowZero = false, ReadOnly = false)]
+        private ShortUid _uid;
 
         [SerializeField()]
         private string _assetId;
@@ -33,6 +40,8 @@ namespace com.spacepuppy.Serialization
 
         #region IPersistantUnityObject Interface
 
+        ShortUid IPersistantUnityObject.Uid { get { return _uid; } }
+
         string IPersistantAsset.AssetId { get { return _assetId; } }
 
         void IPersistantUnityObject.OnSerialize(SerializationInfo info, StreamingContext context)
@@ -40,24 +49,27 @@ namespace com.spacepuppy.Serialization
             info.AddValue("pos", this.transform.position);
             info.AddValue("rot", this.transform.rotation);
             info.AddValue("scale", this.transform.localScale);
-            
-            var arr = this.GetComponentsInChildren<IPersistantUnityObject>();
-            if(arr.Length > 0)
+
+            using (var lst = TempCollection.GetList<IPersistantUnityObject>())
             {
-                var data = new ChildObjectData();
-                int cnt = 0;
-
-                for (int i = 0; i < arr.Length; i++)
+                this.GetComponentsInChildren<IPersistantUnityObject>(true, lst);
+                if(lst.Count > 0)
                 {
-                    if (object.ReferenceEquals(this, arr[i])) continue;
+                    var data = new ChildObjectData();
+                    int cnt = 0;
 
-                    data.Path = SearchUtil.GetPathNameRelativeTo((arr[i] as Component).transform, this.transform);
-                    data.ComponentType = arr[i].GetType();
-                    data.Pobj = arr[i];
-                    info.AddValue(cnt.ToString(), data, typeof(ChildObjectData));
-                    cnt++;
+                    for (int i = 0; i < lst.Count; i++)
+                    {
+                        if (object.ReferenceEquals(this, lst[i])) continue;
+
+                        data.Uid = lst[i].Uid;
+                        data.ComponentType = lst[i].GetType();
+                        data.Pobj = lst[i];
+                        info.AddValue(cnt.ToString(), data, typeof(ChildObjectData));
+                        cnt++;
+                    }
+                    info.AddValue("count", cnt);
                 }
-                info.AddValue("count", cnt);
             }
         }
 
@@ -68,18 +80,26 @@ namespace com.spacepuppy.Serialization
             this.transform.localScale = (Vector3)info.GetValue("scale", typeof(Vector3));
 
             int cnt = info.GetInt32("count");
-            for(int i = 0; i < cnt; i++)
+            if(cnt > 0)
             {
-                ChildObjectData data = (ChildObjectData)info.GetValue(i.ToString(), typeof(ChildObjectData));
-                if (data != null && data.ComponentType != null)
+                using (var lst = TempCollection.GetList<IPersistantUnityObject>())
                 {
-                    IPersistantUnityObject pobj = ObjUtil.GetAsFromSource(data.ComponentType, (data.Path != null) ? this.transform.Find(data.Path) : this.transform) as IPersistantUnityObject;
-                    if (pobj != null)
+                    this.GetComponentsInChildren<IPersistantUnityObject>(true, lst);
+                    for (int i = 0; i < cnt; i++)
                     {
-                        pobj.OnDeserialize(data.DeserializeInfo, data.DeserializeContext, assetBundle);
+                        ChildObjectData data = (ChildObjectData)info.GetValue(i.ToString(), typeof(ChildObjectData));
+                        if (data != null && data.ComponentType != null)
+                        {
+                            IPersistantUnityObject pobj = (from o in lst where o.Uid == data.Uid select o).FirstOrDefault();
+                            if (pobj != null)
+                            {
+                                pobj.OnDeserialize(data.DeserializeInfo, data.DeserializeContext, assetBundle);
+                            }
+                        }
                     }
                 }
             }
+                
         }
 
         #endregion
@@ -91,7 +111,7 @@ namespace com.spacepuppy.Serialization
         {
 
             [System.NonSerialized()]
-            public string Path;
+            public ShortUid Uid;
             [System.NonSerialized()]
             public System.Type ComponentType;
 
@@ -111,13 +131,13 @@ namespace com.spacepuppy.Serialization
             {
                 this.DeserializeInfo = info;
                 this.DeserializeContext = context;
-                this.Path = info.GetString("sp_p");
+                this.Uid = new ShortUid(info.GetInt64("sp_uid"));
                 this.ComponentType = info.GetValue("sp_t", typeof(System.Type)) as System.Type;
             }
 
             public void GetObjectData(SerializationInfo info, StreamingContext context)
             {
-                info.AddValue("sp_p", this.Path);
+                info.AddValue("sp_uid", this.Uid.Value);
                 info.AddValue("sp_t", this.ComponentType, typeof(System.Type));
                 if (Pobj != null) Pobj.OnSerialize(info, context);
             }

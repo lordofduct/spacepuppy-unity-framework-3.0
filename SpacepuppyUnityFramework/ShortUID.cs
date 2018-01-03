@@ -91,6 +91,27 @@ namespace com.spacepuppy
 
         #endregion
 
+        #region Conversion
+
+        public static System.Guid ToGuid(ShortUid uid)
+        {
+            long val = uid.Value;
+            int low = (int)(val & uint.MaxValue);
+            short mid = (short)((val >> 32) & ushort.MaxValue);
+            short high = (short)(val >> 48);
+            return new System.Guid(low, mid, high, 0, 0, 0, 0, 0, 0, 0, 0);
+        }
+
+        public static ShortUid ToShortUid(System.Guid uid)
+        {
+            var arr = uid.ToByteArray();
+            long low = (int)(arr[3] << 24) | (int)(arr[2] << 16) | (int)(arr[1] << 8) | (int)arr[0];
+            long high = (long)((int)(arr[7] << 24) | (int)(arr[6] << 16) | (int)(arr[5] << 8) | (int)arr[4]) << 32;
+            return new ShortUid(high | low);
+        }
+
+        #endregion
+
         #region Operators
 
         /// <summary>

@@ -90,16 +90,16 @@ namespace com.spacepuppy.Tween.Curves
 
             if (!_style.HasFlag(StringTweenStyle.Jumble))
             {
-                if(!_style.HasFlag(StringTweenStyle.RightToLeft))
+                if (!_style.HasFlag(StringTweenStyle.RightToLeft))
                 {
                     //left to right, none jumble
-                    if(_start.Length == 0)
+                    if (_start.Length == 0)
                     {
-                        return _end.Substring(0, MathUtil.Interpolate(0, _end.Length, MathUtil.Clamp01(t)));
+                        return _end.Substring(0, LerpInt(0, _end.Length, MathUtil.Clamp01(t)));
                     }
-                    else if(_end.Length == 0)
+                    else if (_end.Length == 0)
                     {
-                        int ipos = MathUtil.Interpolate(0, _start.Length, MathUtil.Clamp01(t));
+                        int ipos = LerpInt(0, _start.Length, MathUtil.Clamp01(t));
                         if (ipos == 0)
                             return _start;
                         else if (ipos == _start.Length)
@@ -110,7 +110,7 @@ namespace com.spacepuppy.Tween.Curves
                     else
                     {
                         int len = Math.Max(_start.Length, _end.Length);
-                        int ipos = MathUtil.Interpolate(0, len, MathUtil.Clamp01(t));
+                        int ipos = LerpInt(0, len, MathUtil.Clamp01(t));
                         if (ipos == 0)
                             return _start;
                         else if (ipos == len)
@@ -130,7 +130,7 @@ namespace com.spacepuppy.Tween.Curves
                             }
 
                             builder.Append(_start.Substring(ipos));
-                            
+
                             return StringUtil.Release(builder);
                         }
                         else
@@ -142,13 +142,13 @@ namespace com.spacepuppy.Tween.Curves
                 else
                 {
                     //right to left, none jumble
-                    if(_end.Length == 0)
+                    if (_end.Length == 0)
                     {
-                        return _start.Substring(0, MathUtil.Interpolate(_start.Length, 0, MathUtil.Clamp01(t)));
+                        return _start.Substring(0, LerpInt(_start.Length, 0, MathUtil.Clamp01(t)));
                     }
-                    else if(_start.Length == 0)
+                    else if (_start.Length == 0)
                     {
-                        int ipos = MathUtil.Interpolate(_end.Length, 0, MathUtil.Clamp01(t));
+                        int ipos = LerpInt(_end.Length, 0, MathUtil.Clamp01(t));
                         if (ipos == 0)
                             return _end;
                         if (ipos == _end.Length)
@@ -159,7 +159,7 @@ namespace com.spacepuppy.Tween.Curves
                     else
                     {
                         int len = Math.Max(_start.Length, _end.Length);
-                        int ipos = MathUtil.Interpolate(len, 0, MathUtil.Clamp01(t));
+                        int ipos = LerpInt(len, 0, MathUtil.Clamp01(t));
                         if (ipos == 0)
                             return _end;
                         else if (ipos == len)
@@ -167,7 +167,7 @@ namespace com.spacepuppy.Tween.Curves
                         else if (ipos < _end.Length)
                         {
                             var builder = StringUtil.GetTempStringBuilder();
-                            if(ipos < _start.Length)
+                            if (ipos < _start.Length)
                             {
                                 builder.Append(_start.Substring(0, ipos));
                             }
@@ -179,7 +179,7 @@ namespace com.spacepuppy.Tween.Curves
                             }
 
                             builder.Append(_end.Substring(ipos));
-                            
+
                             return StringUtil.Release(builder);
                         }
                         else
@@ -200,19 +200,19 @@ namespace com.spacepuppy.Tween.Curves
                     float dt = MathUtil.Shear(pos);
                     int posLow = (int)Math.Floor(pos);
                     int posHigh = (int)Math.Ceiling(pos);
-                    if(posHigh == 0)
+                    if (posHigh == 0)
                     {
                         return _start;
                     }
-                    else if(posHigh == len)
+                    else if (posHigh == len)
                     {
                         return _end;
                     }
-                    else if(posHigh < _start.Length)
+                    else if (posHigh < _start.Length)
                     {
                         var builder = StringUtil.GetTempStringBuilder();
 
-                        if(posLow < _end.Length)
+                        if (posLow < _end.Length)
                         {
                             builder.Append(_end.Substring(0, posLow));
                         }
@@ -223,25 +223,25 @@ namespace com.spacepuppy.Tween.Curves
                             if (diff > 0) builder.Append(new string(' ', diff));
                         }
 
-                        if(posHigh < _end.Length)
+                        if (posHigh < _end.Length)
                         {
-                            builder.Append((char)MathUtil.Clamp(MathUtil.Interpolate((int)_start[posHigh], (int)_end[posHigh], dt), 255, 32));
+                            builder.Append((char)MathUtil.Clamp(LerpInt((int)_start[posHigh], (int)_end[posHigh], dt), 255, 32));
                         }
                         else
                         {
-                            builder.Append((char)MathUtil.Clamp(MathUtil.Interpolate((int)_start[posHigh], 32, dt), 255, 32));
+                            builder.Append((char)MathUtil.Clamp(LerpInt((int)_start[posHigh], 32, dt), 255, 32));
                         }
 
-                        if(posHigh + 1 < _start.Length) builder.Append(_start.Substring(posHigh + 1));
-                        
+                        if (posHigh + 1 < _start.Length) builder.Append(_start.Substring(posHigh + 1));
+
                         return StringUtil.Release(builder);
 
                     }
                     else
                     {
-                        if(posHigh < _end.Length)
+                        if (posHigh < _end.Length)
                         {
-                            return _end.Substring(0, posLow) + (char)MathUtil.Clamp(MathUtil.Interpolate(32, (int)_end[posHigh], dt), 255, 32);
+                            return _end.Substring(0, posLow) + (char)MathUtil.Clamp(LerpInt(32, (int)_end[posHigh], dt), 255, 32);
                         }
                         else
                         {
@@ -258,15 +258,15 @@ namespace com.spacepuppy.Tween.Curves
                     float dt = MathUtil.Shear(pos);
                     int posLow = (int)Math.Floor(pos);
                     int posHigh = (int)Math.Ceiling(pos);
-                    if(posHigh == len)
+                    if (posHigh == len)
                     {
                         return _start;
                     }
-                    else if(posHigh == 0)
+                    else if (posHigh == 0)
                     {
                         return _end;
                     }
-                    else if(posHigh < _end.Length)
+                    else if (posHigh < _end.Length)
                     {
                         var builder = StringUtil.GetTempStringBuilder();
                         if (posLow < _start.Length)
@@ -282,22 +282,22 @@ namespace com.spacepuppy.Tween.Curves
 
                         if (posHigh < _end.Length)
                         {
-                            builder.Append((char)MathUtil.Clamp(MathUtil.Interpolate((int)_start[posHigh], (int)_end[posHigh], dt), 255, 32));
+                            builder.Append((char)MathUtil.Clamp(LerpInt((int)_start[posHigh], (int)_end[posHigh], dt), 255, 32));
                         }
                         else
                         {
-                            builder.Append((char)MathUtil.Clamp(MathUtil.Interpolate((int)_start[posHigh], 32, dt), 255, 32));
+                            builder.Append((char)MathUtil.Clamp(LerpInt((int)_start[posHigh], 32, dt), 255, 32));
                         }
 
                         if (posHigh + 1 < _end.Length) builder.Append(_end.Substring(posHigh + 1));
-                        
+
                         return StringUtil.Release(builder);
                     }
                     else
                     {
-                        if(posHigh < _start.Length)
+                        if (posHigh < _start.Length)
                         {
-                            return _start.Substring(0, posLow) + (char)MathUtil.Clamp(MathUtil.Interpolate((int)_start[posHigh], 32, dt), 255, 32);
+                            return _start.Substring(0, posLow) + (char)MathUtil.Clamp(LerpInt((int)_start[posHigh], 32, dt), 255, 32);
                         }
                         else
                         {
@@ -313,7 +313,6 @@ namespace com.spacepuppy.Tween.Curves
 
         #region Methods
 
-
         /// <summary>
         /// Return the duration that should pass for the transition between 2 strings to occur at some constant speed in characters per second.
         /// </summary>
@@ -327,7 +326,12 @@ namespace com.spacepuppy.Tween.Curves
             return (float)Math.Max((start != null) ? start.Length : 0, (end != null) ? end.Length : 0) / charsPerSecond;
         }
 
-        #endregion
+        private static int LerpInt(int a, int b, float t)
+        {
+            return (int)Math.Round((b - a) * t + a);
+        }
 
+        #endregion
+        
     }
 }

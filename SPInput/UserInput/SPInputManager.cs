@@ -49,7 +49,7 @@ namespace com.spacepuppy.UserInput
 
         #endregion
 
-        #region IGameInputManager Interface
+        #region IInputManager Interface
 
         public int Count { get { return _dict.Count; } }
 
@@ -58,10 +58,6 @@ namespace com.spacepuppy.UserInput
             get
             {
                 return this.GetDevice(id);
-            }
-            set
-            {
-                this.Add(id, value);
             }
         }
 

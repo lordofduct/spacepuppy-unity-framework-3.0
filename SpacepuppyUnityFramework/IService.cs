@@ -15,7 +15,7 @@ namespace com.spacepuppy
     /// A service should implement some interface and is registered with Services as that interface. 
     /// This allows for a service to be accessed like a singleton, but implemented as an interface. 
     /// 
-    /// See IGameInputManager, ICameraManager, and ISceneManager for examples.
+    /// See IInputManager, ICameraManager, and ISceneManager for examples.
     /// </summary>
     public interface IService
     {

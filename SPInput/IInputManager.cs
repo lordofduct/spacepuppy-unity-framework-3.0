@@ -10,7 +10,7 @@ namespace com.spacepuppy
     {
 
         int Count { get; }
-        IPlayerInputDevice this[string id] { get; set; }
+        IPlayerInputDevice this[string id] { get; }
         IPlayerInputDevice Main { get; }
 
         IPlayerInputDevice GetDevice(string id);

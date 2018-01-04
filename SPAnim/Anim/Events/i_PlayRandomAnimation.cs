@@ -12,18 +12,12 @@ using com.spacepuppy.Utils;
 
 namespace com.spacepuppy.Anim.Events
 {
-    public class i_PlayAnimation : AutoTriggerable, IObservableTrigger
+
+    public class i_PlayRandomAnimation : AutoTriggerable, IObservableTrigger
     {
 
         private const string TRG_ONANIMCOMPLETE = "OnAnimComplete";
-
-        public enum PlayByMode
-        {
-            PlayAnim,
-            PlayAnimByID,
-            PlayAnimFromResource
-        }
-
+        
         #region Fields
 
         [SerializeField]
@@ -31,14 +25,7 @@ namespace com.spacepuppy.Anim.Events
         private TriggerableTargetObject _targetAnimator;
 
         [SerializeField]
-        private PlayByMode _mode;
-        [SerializeField]
-        private string _id;
-        [SerializeField]
-        private UnityEngine.Object _clip;
-
-        [SerializeField]
-        private AnimSettings _settings = AnimSettings.Default;
+        private List<PlayAnimInfo> _clips;
 
         [SerializeField]
         private QueueMode _queueMode = QueueMode.PlayNow;
@@ -63,14 +50,14 @@ namespace com.spacepuppy.Anim.Events
 
         #region Methods
 
-        private object PlayClip(object controller, UnityEngine.Object clip)
+        private object PlayClip(object controller, UnityEngine.Object clip, AnimSettings settings)
         {
             if (clip is AnimationClip)
             {
                 if (controller is SPLegacyAnimController)
                 {
                     var anim = (controller as SPLegacyAnimController).CreateAuxiliarySPAnim(clip as AnimationClip);
-                    _settings.Apply(anim);
+                    settings.Apply(anim);
                     if (_crossFadeDur > 0f)
                         anim.CrossFade(_crossFadeDur, _queueMode, _playMode);
                     else
@@ -82,7 +69,7 @@ namespace com.spacepuppy.Anim.Events
                     var animController = controller as Animation;
                     var id = "aux*" + clip.GetInstanceID();
                     var a = animController[id];
-                    if(a == null || a.clip != clip)
+                    if (a == null || a.clip != clip)
                     {
                         animController.AddClip(clip as AnimationClip, id);
                     }
@@ -92,7 +79,7 @@ namespace com.spacepuppy.Anim.Events
                         anim = animController.CrossFadeQueued(id, _crossFadeDur, _queueMode, _playMode);
                     else
                         anim = animController.PlayQueued(id, _queueMode, _playMode);
-                    _settings.Apply(anim);
+                    settings.Apply(anim);
                     return anim;
                 }
             }
@@ -107,17 +94,17 @@ namespace com.spacepuppy.Anim.Events
             return null;
         }
 
-        private object TryPlay(object controller)
+        private object TryPlay(object controller, PlayAnimInfo info)
         {
-            switch (_mode)
+            switch (info.Mode)
             {
-                case PlayByMode.PlayAnim:
-                    return PlayClip(controller, _clip);
-                case PlayByMode.PlayAnimByID:
+                case i_PlayAnimation.PlayByMode.PlayAnim:
+                    return PlayClip(controller, info.Clip, info.Settings);
+                case i_PlayAnimation.PlayByMode.PlayAnimByID:
                     {
                         if (controller is ISPAnimationSource)
                         {
-                            var anim = (controller as ISPAnimationSource).GetAnim(_id);
+                            var anim = (controller as ISPAnimationSource).GetAnim(info.Id);
                             if (anim != null)
                             {
                                 if (_crossFadeDur > 0f)
@@ -127,30 +114,30 @@ namespace com.spacepuppy.Anim.Events
                             }
                             return anim;
                         }
-                        else if(controller is ISPAnimator)
+                        else if (controller is ISPAnimator)
                         {
-                            (controller as ISPAnimator).Play(_id, _queueMode, _playMode);
+                            (controller as ISPAnimator).Play(info.Id, _queueMode, _playMode);
                             return SPAnim.Null;
                         }
-                        else if(controller is Animation)
+                        else if (controller is Animation)
                         {
-                            var clip = (controller as Animation)[_id];
-                            if(clip != null)
+                            var clip = (controller as Animation)[info.Id];
+                            if (clip != null)
                             {
                                 AnimationState anim;
                                 if (_crossFadeDur > 0f)
-                                    anim = (controller as Animation).CrossFadeQueued(_id, _crossFadeDur, _queueMode, _playMode);
+                                    anim = (controller as Animation).CrossFadeQueued(info.Id, _crossFadeDur, _queueMode, _playMode);
                                 else
-                                    anim = (controller as Animation).PlayQueued(_id, _queueMode, _playMode);
-                                _settings.Apply(anim);
+                                    anim = (controller as Animation).PlayQueued(info.Id, _queueMode, _playMode);
+                                info.Settings.Apply(anim);
                                 return anim;
                             }
                         }
 
                         return null;
                     }
-                case PlayByMode.PlayAnimFromResource:
-                    return this.PlayClip(controller, Resources.Load<UnityEngine.Object>(_id));
+                case i_PlayAnimation.PlayByMode.PlayAnimFromResource:
+                    return this.PlayClip(controller, Resources.Load<UnityEngine.Object>(info.Id), info.Settings);
                 default:
                     return null;
             }
@@ -171,7 +158,7 @@ namespace com.spacepuppy.Anim.Events
             if (ObjUtil.GetAsFromSource<Animation>(obj, out anim))
                 return anim;
 
-            if(_targetAnimator.ImplicityReducesEntireEntity)
+            if (_targetAnimator.ImplicityReducesEntireEntity)
             {
                 var go = GameObjectUtil.FindRoot(GameObjectUtil.GetGameObjectFromSource(obj));
                 if (go == null) return null;
@@ -179,15 +166,24 @@ namespace com.spacepuppy.Anim.Events
                 SPLegacyAnimController spcont;
                 if (go.FindComponent<SPLegacyAnimController>(out spcont))
                     return spcont;
-                
+
                 if (go.FindComponent<Animation>(out anim))
                     return anim;
             }
-            
+
             return null;
         }
 
 
+
+
+        public override bool CanTrigger
+        {
+            get
+            {
+                return base.CanTrigger && _clips.Count > 0;
+            }
+        }
 
         public override bool Trigger(object sender, object arg)
         {
@@ -196,7 +192,10 @@ namespace com.spacepuppy.Anim.Events
             var targ = this.ResolveTargetAnimator(arg);
             if (targ == null) return false;
 
-            var anim = this.TryPlay(targ);
+            var info = _clips.Count == 1 ? _clips[0] : _clips.PickRandom((e) => e != null ? e.Weight : 0f);
+            if (info == null) return false;
+
+            var anim = this.TryPlay(targ, info);
             if (anim == null)
             {
                 if (_triggerCompleteIfNoAnim) this.Invoke(() => { _onAnimComplete.ActivateTrigger(this, arg); }, 0.01f);
@@ -223,7 +222,7 @@ namespace com.spacepuppy.Anim.Events
 
             return false;
         }
-        
+
         #endregion
 
         #region IObservableTrigger Interface
@@ -244,5 +243,82 @@ namespace com.spacepuppy.Anim.Events
 
         #endregion
 
+        #region Special Types
+
+        [System.Serializable]
+        public class PlayAnimInfo
+        {
+
+            #region Fields
+
+            [SerializeField]
+            public float Weight;
+            [SerializeField]
+            private i_PlayAnimation.PlayByMode _mode;
+            [SerializeField]
+            private string _id;
+            [SerializeField]
+            private UnityEngine.Object _clip;
+            [SerializeField]
+            public AnimSettings Settings = AnimSettings.Default;
+
+            #endregion
+
+            #region Properties
+
+            public i_PlayAnimation.PlayByMode Mode
+            {
+                get { return _mode; }
+            }
+
+            public string Id
+            {
+                get { return _id; }
+            }
+
+            public UnityEngine.Object Clip
+            {
+                get { return _clip; }
+            }
+
+            #endregion
+
+            #region Methods
+
+            public void Configure(AnimationClip clip)
+            {
+                _mode = i_PlayAnimation.PlayByMode.PlayAnim;
+                _id = null;
+                _clip = clip;
+            }
+
+            public void Configure(IScriptableAnimationClip clip)
+            {
+                _mode = i_PlayAnimation.PlayByMode.PlayAnim;
+                _id = null;
+                _clip = clip as UnityEngine.Object;
+            }
+
+            public void Configure(string animId)
+            {
+                _mode = i_PlayAnimation.PlayByMode.PlayAnimByID;
+                _id = animId;
+                _clip = null;
+            }
+
+            public void ConfigureAsResource(string resourceId)
+            {
+                _mode = i_PlayAnimation.PlayByMode.PlayAnimFromResource;
+                _id = resourceId;
+                _clip = null;
+            }
+
+            #endregion
+
+        }
+
+        #endregion
+
     }
+
 }

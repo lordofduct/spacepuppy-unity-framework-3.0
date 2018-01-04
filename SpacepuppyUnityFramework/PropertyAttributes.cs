@@ -324,17 +324,11 @@ namespace com.spacepuppy
     public class WeightedValueCollectionAttribute : ReorderableArrayAttribute
     {
         public string WeightPropertyName = "Weight";
-        public string ValuePropertyName = "Value";
-
-        public WeightedValueCollectionAttribute()
-        {
-            
-        }
-
+        
         public WeightedValueCollectionAttribute(string weightPropName, string valuePropName)
         {
             this.WeightPropertyName = weightPropName;
-            this.ValuePropertyName = valuePropName;
+            this.ChildPropertyToDrawAsElementEntry = valuePropName;
         }
     }
 

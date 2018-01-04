@@ -32,6 +32,8 @@ namespace com.spacepuppyeditor.PropertyAttributeDrawers
         private bool _hideElementLabel = false;
         private string _childPropertyAsLabel;
         private string _childPropertyAsEntry;
+        private string _elementLabelFormatString;
+        private float _elementPadding;
         private ReorderableList.AddCallbackDelegate _addCallback;
 
         private PropertyDrawer _internalDrawer;
@@ -100,6 +102,8 @@ namespace com.spacepuppyeditor.PropertyAttributeDrawers
                 _hideElementLabel = attrib.HideElementLabel;
                 _childPropertyAsLabel = attrib.ChildPropertyToDrawAsElementLabel;
                 _childPropertyAsEntry = attrib.ChildPropertyToDrawAsElementEntry;
+                _elementLabelFormatString = attrib.ElementLabelFormatString;
+                _elementPadding = attrib.ElementPadding;
             }
 
             _label = label;
@@ -157,6 +161,18 @@ namespace com.spacepuppyeditor.PropertyAttributeDrawers
         {
             get { return _childPropertyAsEntry; }
             set { _childPropertyAsEntry = value; }
+        }
+
+        public string ElementLabelFormatString
+        {
+            get { return _elementLabelFormatString; }
+            set { _elementLabelFormatString = value; }
+        }
+
+        public float ElementPadding
+        {
+            get { return _elementPadding; }
+            set { _elementPadding = value; }
         }
 
         public ReorderableList.AddCallbackDelegate OnAddCallback
@@ -275,8 +291,8 @@ namespace com.spacepuppyeditor.PropertyAttributeDrawers
                     {
                         h = SPEditorGUI.GetDefaultPropertyHeight(pchild, label2, true) + BOTTOM_PAD + TOP_PAD;
                     }
-                    var area = new Rect(position.x, position.yMax - h, position.width, h);
-                    var drawArea = new Rect(area.x, area.y + TOP_PAD, area.width - MARGIN, area.height - TOP_PAD);
+                    var area = new Rect(position.xMin, position.yMax - h, position.width, h);
+                    var drawArea = new Rect(area.xMin, area.yMin + TOP_PAD, area.width - MARGIN, area.height - TOP_PAD);
 
                     GUI.BeginGroup(area, label2, GUI.skin.box);
                     GUI.EndGroup();
@@ -325,22 +341,35 @@ namespace com.spacepuppyeditor.PropertyAttributeDrawers
             if (element == null) return;
 
             //EditorGUI.PropertyField(area, element, GUIContent.none, false);
-            var attrib = this.attribute as ReorderableArrayAttribute;
             GUIContent label = null;
-            if (attrib != null)
+            if(_hideElementLabel)
             {
-                if (attrib.ElementLabelFormatString != null)
+                label = GUIContent.none;
+            }
+            else
+            {
+                if (!string.IsNullOrEmpty(_elementLabelFormatString))
                 {
-                    label = EditorHelper.TempContent(string.Format(attrib.ElementLabelFormatString, index));
+                    label = EditorHelper.TempContent(string.Format(_elementLabelFormatString, index));
                 }
-                if (attrib.ElementPadding > 0f)
+                else
                 {
-                    area = new Rect(area.xMin + attrib.ElementPadding, area.yMin, Mathf.Max(0f, area.width - attrib.ElementPadding), area.height);
+                    label = TempElementLabel(element, index);
+                }
+                if (_elementPadding > 0f)
+                {
+                    area = new Rect(area.xMin + _elementPadding, area.yMin, Mathf.Max(0f, area.width - _elementPadding), area.height);
                 }
             }
-            if (label == null) label = (_hideElementLabel) ? GUIContent.none : TempElementLabel(element, index);
 
-            if (_drawElementAtBottom)
+            this.DrawElement(area, element, label, index);
+
+            if (GUI.enabled) ReorderableListHelper.DrawDraggableElementDeleteContextMenu(_lst, area, index, isActive, isFocused);
+        }
+        
+        protected virtual void DrawElement(Rect area, SerializedProperty element, GUIContent label, int elementIndex)
+        {
+            if(_drawElementAtBottom)
             {
                 SerializedProperty prop = string.IsNullOrEmpty(_childPropertyAsEntry) ? null : element.FindPropertyRelative(_childPropertyAsEntry);
 
@@ -355,40 +384,33 @@ namespace com.spacepuppyeditor.PropertyAttributeDrawers
             }
             else
             {
-                this.DrawElement(area, element, label, index);
-            }
-
-            if (GUI.enabled) ReorderableListHelper.DrawDraggableElementDeleteContextMenu(_lst, area, index, isActive, isFocused);
-        }
-        
-        protected virtual void DrawElement(Rect area, SerializedProperty element, GUIContent label, int elementIndex)
-        {
-            if (_internalDrawer != null)
-            {
-                _internalDrawer.OnGUI(area, element, label);
-            }
-            else if (ElementIsFlatChildField(element))
-            {
-                //we don't draw this way if it's a built-in type from Unity
-
-                if (_hideElementLabel)
+                if (_internalDrawer != null)
                 {
-                    //no label
-                    SPEditorGUI.FlatChildPropertyField(area, element);
+                    _internalDrawer.OnGUI(area, element, label);
+                }
+                else if (ElementIsFlatChildField(element))
+                {
+                    //we don't draw this way if it's a built-in type from Unity
+
+                    if (_hideElementLabel)
+                    {
+                        //no label
+                        SPEditorGUI.FlatChildPropertyField(area, element);
+                    }
+                    else
+                    {
+                        //showing label
+                        var labelArea = new Rect(area.xMin, area.yMin, area.width, EditorGUIUtility.singleLineHeight);
+                        EditorGUI.LabelField(labelArea, label);
+                        var childArea = new Rect(area.xMin, area.yMin + EditorGUIUtility.singleLineHeight + 1f, area.width, area.height - EditorGUIUtility.singleLineHeight);
+                        SPEditorGUI.FlatChildPropertyField(childArea, element);
+                    }
                 }
                 else
                 {
-                    //showing label
-                    var labelArea = new Rect(area.xMin, area.yMin, area.width, EditorGUIUtility.singleLineHeight);
-                    EditorGUI.LabelField(labelArea, label);
-                    var childArea = new Rect(area.xMin, area.yMin + EditorGUIUtility.singleLineHeight + 1f, area.width, area.height - EditorGUIUtility.singleLineHeight);
-                    SPEditorGUI.FlatChildPropertyField(childArea, element);
+                    area = EditorGUI.PrefixLabel(area, label);
+                    SPEditorGUI.DefaultPropertyField(area, element, label, false);
                 }
-            }
-            else
-            {
-                area = EditorGUI.PrefixLabel(area, label);
-                SPEditorGUI.DefaultPropertyField(area, element, label, false);
             }
         }
 
@@ -440,7 +462,7 @@ namespace com.spacepuppyeditor.PropertyAttributeDrawers
 
         #region IArrayHandlingPropertyDrawer Interface
 
-        PropertyDrawer IArrayHandlingPropertyDrawer.InternalDrawer
+        public PropertyDrawer InternalDrawer
         {
             get
             {

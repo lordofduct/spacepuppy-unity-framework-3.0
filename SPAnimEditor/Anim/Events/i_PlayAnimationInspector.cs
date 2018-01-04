@@ -18,6 +18,7 @@ namespace com.spacepuppyeditor.Anim
     {
 
         public const string PROP_ORDER = "_order";
+        public const string PROP_ACTIVATEON = "_activateOn";
         public const string PROP_MODE = "_mode";
         public const string PROP_TARGETANIMATOR = "_targetAnimator";
         public const string PROP_ID = "_id";
@@ -32,6 +33,7 @@ namespace com.spacepuppyeditor.Anim
 
             this.DrawPropertyField(EditorHelper.PROP_SCRIPT);
             this.DrawPropertyField(PROP_ORDER);
+            this.DrawPropertyField(PROP_ACTIVATEON);
 
             this.DrawTargetAnimatorProperty();
 
@@ -77,7 +79,7 @@ namespace com.spacepuppyeditor.Anim
                     break;
             }
             
-            this.DrawDefaultInspectorExcept(EditorHelper.PROP_SCRIPT, PROP_ORDER, PROP_MODE, PROP_TARGETANIMATOR, PROP_ID, PROP_CLIP, PROP_SETTINGS);
+            this.DrawDefaultInspectorExcept(EditorHelper.PROP_SCRIPT, PROP_ORDER, PROP_ACTIVATEON, PROP_MODE, PROP_TARGETANIMATOR, PROP_ID, PROP_CLIP, PROP_SETTINGS);
 
             this.serializedObject.ApplyModifiedProperties();
         }

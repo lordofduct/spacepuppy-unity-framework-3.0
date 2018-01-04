@@ -45,7 +45,9 @@
   <ItemGroup>
     <Compile Include="Anim\AnimLayerPropertyDrawer.cs" />
     <Compile Include="Anim\Events\i_PlayAnimationInspector.cs" />
+    <Compile Include="Anim\Events\i_PlayRandomAnimationInspector.cs" />
     <Compile Include="Anim\Events\i_StopAnimationInspector.cs" />
+    <Compile Include="Anim\Events\PlayAnimInfoPropertyDrawer.cs" />
     <Compile Include="Anim\IAnimLayerInformationSupplier.cs" />
     <Compile Include="Anim\Legacy\MaskCollectionPropertyDrawer.cs" />
     <Compile Include="Anim\Legacy\SPLegacyAnimControllerInspector.cs" />

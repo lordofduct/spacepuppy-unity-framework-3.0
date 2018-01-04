@@ -17,7 +17,16 @@ namespace com.spacepuppyeditor.PropertyAttributeDrawers
 
         #region Fields
 
+        public bool ManuallyConfigured;
+        public string WeightPropertyName = "Weight";
+
         private float _totalWeight;
+
+        public string ValuePropertyName
+        {
+            get { return this.ChildPropertyAsEntry; }
+            set { this.ChildPropertyAsEntry = value; }
+        }
 
         #endregion
 
@@ -27,9 +36,8 @@ namespace com.spacepuppyeditor.PropertyAttributeDrawers
             {
                 return SPEditorGUI.GetDefaultPropertyHeight(property, label);
             }
-
-            var attrib = this.attribute as WeightedValueCollectionAttribute;
-            if (attrib == null)
+            
+            if (!this.ManuallyConfigured && !(this.attribute is WeightedValueCollectionAttribute))
             {
                 return SPEditorGUI.GetDefaultPropertyHeight(property, label);
             }
@@ -39,7 +47,14 @@ namespace com.spacepuppyeditor.PropertyAttributeDrawers
 
         protected override float GetElementHeight(SerializedProperty element, GUIContent label, bool elementIsAtBottom)
         {
-            return EditorGUIUtility.singleLineHeight;
+            if(elementIsAtBottom)
+            {
+                return base.GetElementHeight(element, label, elementIsAtBottom);
+            }
+            else
+            {
+                return EditorGUIUtility.singleLineHeight;
+            }
         }
 
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
@@ -51,17 +66,24 @@ namespace com.spacepuppyeditor.PropertyAttributeDrawers
                 return;
             }
 
-            var attrib = this.attribute as WeightedValueCollectionAttribute;
-            if(attrib == null)
+            if(!this.ManuallyConfigured)
             {
-                SPEditorGUI.DefaultPropertyField(position, property, label);
-                return;
+                var attrib = this.attribute as WeightedValueCollectionAttribute;
+                if (attrib == null)
+                {
+                    SPEditorGUI.DefaultPropertyField(position, property, label);
+                    return;
+                }
+                else
+                {
+                    this.WeightPropertyName = attrib.WeightPropertyName;
+                }
             }
 
             for(int i = 0; i < property.arraySize; i++)
             {
                 var element = property.GetArrayElementAtIndex(i);
-                var weightProp = element.FindPropertyRelative(attrib.WeightPropertyName);
+                var weightProp = element.FindPropertyRelative(this.WeightPropertyName);
                 if(weightProp != null && weightProp.propertyType == SerializedPropertyType.Float)
                 {
                     _totalWeight += weightProp.floatValue;
@@ -73,12 +95,8 @@ namespace com.spacepuppyeditor.PropertyAttributeDrawers
         
         protected override void DrawElement(Rect area, SerializedProperty element, GUIContent label, int elementIndex)
         {
-            var attrib = this.attribute as WeightedValueCollectionAttribute;
-            if (attrib == null) return;
-            
-            var weightProp = element.FindPropertyRelative(attrib.WeightPropertyName);
-            var valueProp = element.FindPropertyRelative(attrib.ValuePropertyName);
-            if (weightProp == null || valueProp == null || weightProp.propertyType != SerializedPropertyType.Float || valueProp.propertyType != SerializedPropertyType.ObjectReference)
+            var weightProp = element.FindPropertyRelative(this.WeightPropertyName);
+            if (weightProp == null || weightProp.propertyType != SerializedPropertyType.Float)
             {
                 EditorGUI.LabelField(area, EditorHelper.TempContent("Malformed DataType for WeightValueCollection"));
                 return;
@@ -114,8 +132,17 @@ namespace com.spacepuppyeditor.PropertyAttributeDrawers
 
                 valueRect = EditorGUI.PrefixLabel(labelRect, label);
             }
-            
-            EditorGUI.ObjectField(valueRect, valueProp, GUIContent.none);
+
+            this.DrawElementValue(valueRect, element, label, elementIndex);
+        }
+
+        protected virtual void DrawElementValue(Rect area, SerializedProperty element, GUIContent label, int elementIndex)
+        {
+            var valueProp = element.FindPropertyRelative(this.ValuePropertyName);
+            if (valueProp != null)
+            {
+                SPEditorGUI.PropertyField(area, valueProp, GUIContent.none);
+            }
         }
 
     }

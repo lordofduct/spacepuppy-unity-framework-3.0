@@ -36,6 +36,8 @@ xcopy /Y /S .\SPSensors\bin\Release\SPSensors.dll .\Builds\SpacepuppyUnityFramew
 xcopy /Y /S .\SPSensors\bin\Release\SPSensors.pdb .\Builds\SpacepuppyUnityFramework\
 xcopy /Y /S .\SPSerialization\bin\Release\SPSerialization.dll .\Builds\SpacepuppyUnityFramework\
 xcopy /Y /S .\SPSerialization\bin\Release\SPSerialization.pdb .\Builds\SpacepuppyUnityFramework\
+xcopy /Y /S .\SPSpawn\bin\Release\SPSpawn.dll .\Builds\SpacepuppyUnityFramework\
+xcopy /Y /S .\SPSpawn\bin\Release\SPSpawn.pdb .\Builds\SpacepuppyUnityFramework\
 xcopy /Y /S .\SPTriggers\bin\Release\SPTriggers.dll .\Builds\SpacepuppyUnityFramework\
 xcopy /Y /S .\SPTriggers\bin\Release\SPTriggers.pdb .\Builds\SpacepuppyUnityFramework\
 xcopy /Y /S .\SPTween\bin\Release\SPTween.dll .\Builds\SpacepuppyUnityFramework\
@@ -70,6 +72,8 @@ xcopy /Y /S .\SPSensorsEditor\bin\Release\SPSensorsEditor.dll .\Builds\Spacepupp
 xcopy /Y /S .\SPSensorsEditor\bin\Release\SPSensorsEditor.pdb .\Builds\SpacepuppyUnityFramework\Editor
 xcopy /Y /S .\SPSerializationEditor\bin\Release\SPSerializationEditor.dll .\Builds\SpacepuppyUnityFramework\Editor
 xcopy /Y /S .\SPSerializationEditor\bin\Release\SPSerializationEditor.pdb .\Builds\SpacepuppyUnityFramework\Editor
+xcopy /Y /S .\SPSpawnEditor\bin\Release\SPSpawnEditor.dll .\Builds\SpacepuppyUnityFramework\Editor
+xcopy /Y /S .\SPSpawnEditor\bin\Release\SPSpawnEditor.pdb .\Builds\SpacepuppyUnityFramework\Editor
 xcopy /Y /S .\SPTriggersEditor\bin\Release\SPTriggersEditor.dll .\Builds\SpacepuppyUnityFramework\Editor
 xcopy /Y /S .\SPTriggersEditor\bin\Release\SPTriggersEditor.pdb .\Builds\SpacepuppyUnityFramework\Editor
 xcopy /Y /S .\SPTweenEditor\bin\Release\SPTweenEditor.dll .\Builds\SpacepuppyUnityFramework\Editor

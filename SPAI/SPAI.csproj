@@ -43,6 +43,10 @@
     <Compile Include="AI\AIUtils.cs" />
     <Compile Include="AI\ComplexTarget.cs" />
     <Compile Include="AI\Enums.cs" />
+    <Compile Include="AI\IAIController.cs" />
+    <Compile Include="AI\LogicStateMachine\AILogicController.cs" />
+    <Compile Include="AI\LogicStateMachine\ILogic.cs" />
+    <Compile Include="AI\LogicStateMachine\ILogicState.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

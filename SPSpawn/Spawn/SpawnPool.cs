@@ -90,6 +90,10 @@ namespace com.spacepuppy.Spawn
             base.Awake();
 
             _pools.Add(this);
+            if(this.CachedName == DEFAULT_SPAWNPOOL_NAME && _defaultPool == null)
+            {
+                _defaultPool = this;
+            }
         }
 
         protected override void Start()

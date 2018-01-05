@@ -10,6 +10,10 @@ namespace com.spacepuppy.Spawn
     public class SpawnedObjectController : SPComponent, IKillableEntity
     {
 
+        public event System.EventHandler OnSpawned;
+        public event System.EventHandler OnDespawned;
+        public event System.EventHandler OnKilled;
+
         #region Fields
 
         [System.NonSerialized()]
@@ -61,6 +65,7 @@ namespace com.spacepuppy.Spawn
             {
                 _pool.Purge(this);
             }
+            if (this.OnKilled != null) this.OnKilled(this, System.EventArgs.Empty);
         }
 
         #endregion
@@ -101,6 +106,7 @@ namespace com.spacepuppy.Spawn
         {
             _isSpawned = true;
             this.gameObject.SetActive(true);
+            if (this.OnSpawned != null) this.OnSpawned(this, System.EventArgs.Empty);
         }
 
         /// <summary>
@@ -110,6 +116,7 @@ namespace com.spacepuppy.Spawn
         {
             _isSpawned = false;
             this.gameObject.SetActive(false);
+            if (this.OnDespawned != null) this.OnDespawned(this, System.EventArgs.Empty);
         }
 
         public GameObject CloneObject(bool fromPrefab = false)
@@ -157,7 +164,7 @@ namespace com.spacepuppy.Spawn
                     }
                 }
             }
-            
+            if (this.OnKilled != null) this.OnKilled(this, System.EventArgs.Empty);
         }
 
             #endregion

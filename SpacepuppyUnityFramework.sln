@@ -83,6 +83,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SPUtilsEditor", "SPUtilsEdi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SPSpawn", "SPSpawn\SPSpawn.csproj", "{74EDAA76-51A6-4B3C-BB72-DE9EB40B93C9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SPSpawnEditor", "SPSpawnEditor\SPSpawnEditor.csproj", "{70D5308A-A02E-428D-8C50-41208DE16E6E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -193,6 +195,10 @@ Global
 		{74EDAA76-51A6-4B3C-BB72-DE9EB40B93C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{74EDAA76-51A6-4B3C-BB72-DE9EB40B93C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{74EDAA76-51A6-4B3C-BB72-DE9EB40B93C9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{70D5308A-A02E-428D-8C50-41208DE16E6E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70D5308A-A02E-428D-8C50-41208DE16E6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70D5308A-A02E-428D-8C50-41208DE16E6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70D5308A-A02E-428D-8C50-41208DE16E6E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

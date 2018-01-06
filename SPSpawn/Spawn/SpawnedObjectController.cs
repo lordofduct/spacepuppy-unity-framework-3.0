@@ -119,10 +119,15 @@ namespace com.spacepuppy.Spawn
             if (this.OnDespawned != null) this.OnDespawned(this, System.EventArgs.Empty);
         }
 
+        public void Purge()
+        {
+            if (_pool != null) _pool.Purge(this);
+        }
+
         public GameObject CloneObject(bool fromPrefab = false)
         {
             if (fromPrefab && _pool != null && _pool.Contains(_prefabId))
-                return _pool.Spawn(_prefabId, this.transform.position, this.transform.rotation);
+                return _pool.SpawnByPrefabId(_prefabId, this.transform.position, this.transform.rotation);
             else
                 return _pool.Spawn(this.gameObject, this.transform.position, this.transform.rotation);
         }

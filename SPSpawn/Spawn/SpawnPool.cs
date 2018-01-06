@@ -156,6 +156,7 @@ namespace com.spacepuppy.Spawn
 
             _registeredPrefabs.Add(cache);
             _prefabToCache[cache.PrefabID] = cache;
+            cache.Load();
             return cache;
         }
 
@@ -209,7 +210,7 @@ namespace com.spacepuppy.Spawn
 
 
 
-        public GameObject Spawn(int index, Transform par = null)
+        public GameObject SpawnByIndex(int index, Transform par = null)
         {
             if (index < 0 || index >= _registeredPrefabs.Count) throw new System.IndexOutOfRangeException();
 
@@ -221,7 +222,7 @@ namespace com.spacepuppy.Spawn
             return obj.gameObject;
         }
 
-        public GameObject Spawn(int index, Vector3 position, Quaternion rotation, Transform par = null)
+        public GameObject SpawnByIndex(int index, Vector3 position, Quaternion rotation, Transform par = null)
         {
             if (index < 0 || index >= _registeredPrefabs.Count) throw new System.IndexOutOfRangeException();
 
@@ -344,6 +345,39 @@ namespace com.spacepuppy.Spawn
             }
         }
 
+        public GameObject SpawnByPrefabId(int prefabId, Transform par = null)
+        {
+            var controller = SpawnAsControllerByPrefabId(prefabId, par);
+            return (controller != null) ? controller.gameObject : null;
+        }
+
+        public GameObject SpawnByPrefabId(int prefabId, Vector3 position, Quaternion rotation, Transform par = null)
+        {
+            var controller = SpawnAsControllerByPrefabId(prefabId, position, rotation, par);
+            return (controller != null) ? controller.gameObject : null;
+        }
+
+        public SpawnedObjectController SpawnAsControllerByPrefabId(int prefabId, Transform par = null)
+        {
+            PrefabCache cache;
+            if (!_prefabToCache.TryGetValue(prefabId, out cache)) return null;
+
+            var pos = (par != null) ? par.position : Vector3.zero;
+            var rot = (par != null) ? par.rotation : Quaternion.identity;
+            var controller = cache.Spawn(pos, rot, par);
+            this.SignalSpawned(controller);
+            return controller;
+        }
+
+        public SpawnedObjectController SpawnAsControllerByPrefabId(int prefabId, Vector3 position, Quaternion rotation, Transform par = null)
+        {
+            PrefabCache cache;
+            if (!_prefabToCache.TryGetValue(prefabId, out cache)) return null;
+            var controller = cache.Spawn(position, rotation, par);
+            this.SignalSpawned(controller);
+            return controller;
+        }
+
 
 
         internal bool Despawn(SpawnedObjectController cntrl)
@@ -361,9 +395,21 @@ namespace com.spacepuppy.Spawn
             return cache.Despawn(cntrl);
         }
 
-        internal bool Purge(SpawnedObjectController cntrl)
+
+
+        public bool Purge(GameObject obj)
         {
-            if (Object.ReferenceEquals(cntrl, null)) throw new System.ArgumentNullException("cntrl");
+            if (object.ReferenceEquals(obj, null)) throw new System.ArgumentNullException("obj");
+
+            var cntrl = obj.GetComponent<SpawnedObjectController>();
+            if (cntrl == null) return false;
+
+            return this.Purge(cntrl);
+        }
+
+        public bool Purge(SpawnedObjectController cntrl)
+        {
+            if (object.ReferenceEquals(cntrl, null)) throw new System.ArgumentNullException("cntrl");
 
             PrefabCache cache;
             if (!_prefabToCache.TryGetValue(cntrl.PrefabID, out cache) || !cache.Contains(cntrl))
@@ -590,7 +636,7 @@ namespace com.spacepuppy.Spawn
 
                 for(int i = 0; i < this.CacheSize; i++)
                 {
-                    _instances.Add(this.CreateCachedInstance(i));
+                    _instances.Add(this.CreateCachedInstance());
                 }
             }
 
@@ -622,7 +668,7 @@ namespace com.spacepuppy.Spawn
                     {
                         for(int i = cnt; i < newSize; i++)
                         {
-                            _instances.Add(this.CreateCachedInstance(i));
+                            _instances.Add(this.CreateCachedInstance());
                         }
                     }
                 }
@@ -681,10 +727,10 @@ namespace com.spacepuppy.Spawn
                 return false;
             }
 
-            private SpawnedObjectController CreateCachedInstance(int index)
+            private SpawnedObjectController CreateCachedInstance()
             {
                 var obj = Object.Instantiate(this.Prefab, Vector3.zero, Quaternion.identity);
-                obj.name = _itemName + (index + 1).ToString("000");
+                obj.name = _itemName + "(CachedInstance)";
                 var cntrl = obj.AddOrGetComponent<SpawnedObjectController>();
                 cntrl.Init(_owner, this.Prefab.GetInstanceID(), _itemName);
 

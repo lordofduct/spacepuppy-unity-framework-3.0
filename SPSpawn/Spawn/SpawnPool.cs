@@ -29,13 +29,13 @@ namespace com.spacepuppy.Spawn
         
         public static SpawnPool Pool(string name)
         {
-            if (_defaultPool != null && _defaultPool.CachedName == name) return _defaultPool;
+            if (_defaultPool != null && _defaultPool.name == name) return _defaultPool;
 
             //TODO - should cache 'name' for access so this doesn't generate garbage
             var e = _pools.GetEnumerator();
             while (e.MoveNext())
             {
-                if (e.Current.CachedName == name) return e.Current;
+                if (e.Current.name == name) return e.Current;
             }
             return null;
         }
@@ -57,7 +57,7 @@ namespace com.spacepuppy.Spawn
                 if (_defaultPool != null) return true;
 
                 _defaultPool = null;
-                var point = (from p in GameObject.FindObjectsOfType<SpawnPool>() where p.CachedName == DEFAULT_SPAWNPOOL_NAME select p).FirstOrDefault();
+                var point = (from p in GameObject.FindObjectsOfType<SpawnPool>() where p.name == DEFAULT_SPAWNPOOL_NAME select p).FirstOrDefault();
                 if (!object.ReferenceEquals(point, null))
                 {
                     _defaultPool = point;
@@ -90,7 +90,7 @@ namespace com.spacepuppy.Spawn
             base.Awake();
 
             _pools.Add(this);
-            if(this.CachedName == DEFAULT_SPAWNPOOL_NAME && _defaultPool == null)
+            if(this.name == DEFAULT_SPAWNPOOL_NAME && _defaultPool == null)
             {
                 _defaultPool = this;
             }
@@ -132,20 +132,20 @@ namespace com.spacepuppy.Spawn
         #region Properties
 
         private string _cachedName;
-        public string CachedName
+        public new string name
         {
             get
             {
-                if (_cachedName == null) _cachedName = this.name;
+                if (_cachedName == null) _cachedName = this.gameObject.name;
                 return _cachedName;
             }
             set
             {
-                this.name = value;
+                this.gameObject.name = value;
                 _cachedName = value;
             }
         }
-        
+
         #endregion
 
         #region Methods

@@ -26,21 +26,13 @@ namespace com.spacepuppy.Spawn
                 return _defaultPool;
             }
         }
-        
-        public static SpawnPool Pool(string name)
-        {
-            if (_defaultPool != null && _defaultPool.name == name) return _defaultPool;
-
-            //TODO - should cache 'name' for access so this doesn't generate garbage
-            var e = _pools.GetEnumerator();
-            while (e.MoveNext())
-            {
-                if (e.Current.name == name) return e.Current;
-            }
-            return null;
-        }
 
         public static int PoolCount { get { return _pools.Count; } }
+
+        public static IEnumerable<SpawnPool> AllSpawnPools
+        {
+            get { return _pools; }
+        }
 
         public static void CreatePrimaryPool()
         {

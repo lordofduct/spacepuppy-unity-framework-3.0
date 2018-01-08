@@ -542,7 +542,7 @@ namespace com.spacepuppy.Spawn
             public int CacheSize = 0;
             [Tooltip("How much should the cache resize by if an empty/used cache is spawned from.")]
             public int ResizeBuffer = 1;
-            [Tooltip("The maximum number of instances allowed to be cached.")]
+            [Tooltip("The maximum number of instances allowed to be cached, 0 or less means infinite.")]
             public int LimitAmount = 0;
 
             [System.NonSerialized()]

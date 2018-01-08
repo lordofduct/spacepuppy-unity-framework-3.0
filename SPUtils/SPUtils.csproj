@@ -38,11 +38,21 @@
     <Reference Include="UnityEngine">
       <HintPath>..\Resources\UnityEngine.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>..\Resources\UnityEngine.UI.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ColorHSV.cs" />
     <Compile Include="Dynamic\DoubleEvaluator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Render\Events\i_SetMaterialProperty.cs" />
+    <Compile Include="Render\Events\i_TweenMaterial.cs" />
+    <Compile Include="Render\MaterialPropertyReference.cs" />
+    <Compile Include="Render\MaterialSource.cs" />
+    <Compile Include="Render\MaterialTransition.cs" />
+    <Compile Include="Render\MaterialUtil.cs" />
+    <Compile Include="Render\RenderEnums.cs" />
     <Compile Include="Utils\AudioUtil.cs" />
     <Compile Include="Utils\ColorUtil.cs" />
     <Compile Include="Utils\CompareUtil.cs" />
@@ -55,6 +65,10 @@
     <ProjectReference Include="..\SpacepuppyUnityFramework\SpacepuppyUnityFramework.csproj">
       <Project>{3b57db6b-ba67-46ad-b929-fdd8e6ae511e}</Project>
       <Name>SpacepuppyUnityFramework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SPTween\SPTween.csproj">
+      <Project>{614b8c0c-0833-481b-8a76-d566887306f4}</Project>
+      <Name>SPTween</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

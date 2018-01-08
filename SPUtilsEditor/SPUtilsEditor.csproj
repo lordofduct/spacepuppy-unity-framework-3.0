@@ -41,9 +41,15 @@
     <Reference Include="UnityEngine">
       <HintPath>..\Resources\UnityEngine.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>..\Resources\UnityEngine.UI.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Render\MaterialPropertyReferencePropertyDrawer.cs" />
+    <Compile Include="Render\MaterialSourceInspector.cs" />
+    <Compile Include="Render\MaterialTransitionPropertyDrawer.cs" />
     <Compile Include="Windows\ComponentSearchWindow.cs" />
   </ItemGroup>
   <ItemGroup>

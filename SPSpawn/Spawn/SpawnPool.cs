@@ -8,7 +8,7 @@ using com.spacepuppy.Utils;
 namespace com.spacepuppy.Spawn
 {
 
-    public class SpawnPool : SPComponent, IEnumerable<IPrefabCache>
+    public class SpawnPool : SPComponent, ICollection<IPrefabCache>
     {
         
         #region Static Multiton Interface
@@ -26,21 +26,13 @@ namespace com.spacepuppy.Spawn
                 return _defaultPool;
             }
         }
-        
-        public static SpawnPool Pool(string name)
-        {
-            if (_defaultPool != null && _defaultPool.CachedName == name) return _defaultPool;
-
-            //TODO - should cache 'name' for access so this doesn't generate garbage
-            var e = _pools.GetEnumerator();
-            while (e.MoveNext())
-            {
-                if (e.Current.CachedName == name) return e.Current;
-            }
-            return null;
-        }
 
         public static int PoolCount { get { return _pools.Count; } }
+
+        public static IEnumerable<SpawnPool> AllSpawnPools
+        {
+            get { return _pools; }
+        }
 
         public static void CreatePrimaryPool()
         {
@@ -57,7 +49,7 @@ namespace com.spacepuppy.Spawn
                 if (_defaultPool != null) return true;
 
                 _defaultPool = null;
-                var point = (from p in GameObject.FindObjectsOfType<SpawnPool>() where p.CachedName == DEFAULT_SPAWNPOOL_NAME select p).FirstOrDefault();
+                var point = (from p in GameObject.FindObjectsOfType<SpawnPool>() where p.name == DEFAULT_SPAWNPOOL_NAME select p).FirstOrDefault();
                 if (!object.ReferenceEquals(point, null))
                 {
                     _defaultPool = point;
@@ -90,6 +82,10 @@ namespace com.spacepuppy.Spawn
             base.Awake();
 
             _pools.Add(this);
+            if(this.name == DEFAULT_SPAWNPOOL_NAME && _defaultPool == null)
+            {
+                _defaultPool = this;
+            }
         }
 
         protected override void Start()
@@ -128,16 +124,16 @@ namespace com.spacepuppy.Spawn
         #region Properties
 
         private string _cachedName;
-        public string CachedName
+        public new string name
         {
             get
             {
-                if (_cachedName == null) _cachedName = this.name;
+                if (_cachedName == null) _cachedName = this.gameObject.name;
                 return _cachedName;
             }
             set
             {
-                this.name = value;
+                this.gameObject.name = value;
                 _cachedName = value;
             }
         }
@@ -160,6 +156,7 @@ namespace com.spacepuppy.Spawn
 
             _registeredPrefabs.Add(cache);
             _prefabToCache[cache.PrefabID] = cache;
+            cache.Load();
             return cache;
         }
 
@@ -191,11 +188,29 @@ namespace com.spacepuppy.Spawn
             return true;
         }
 
+        public bool Contains(int prefabId)
+        {
+            return _prefabToCache.ContainsKey(prefabId);
+        }
+
+        public bool Contains(string sname)
+        {
+            var e = _registeredPrefabs.GetEnumerator();
+            while (e.MoveNext())
+            {
+                if (e.Current.Name == sname)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
 
 
 
 
-        public GameObject Spawn(int index, Transform par = null)
+
+        public GameObject SpawnByIndex(int index, Transform par = null)
         {
             if (index < 0 || index >= _registeredPrefabs.Count) throw new System.IndexOutOfRangeException();
 
@@ -207,7 +222,7 @@ namespace com.spacepuppy.Spawn
             return obj.gameObject;
         }
 
-        public GameObject Spawn(int index, Vector3 position, Quaternion rotation, Transform par = null)
+        public GameObject SpawnByIndex(int index, Vector3 position, Quaternion rotation, Transform par = null)
         {
             if (index < 0 || index >= _registeredPrefabs.Count) throw new System.IndexOutOfRangeException();
 
@@ -330,6 +345,39 @@ namespace com.spacepuppy.Spawn
             }
         }
 
+        public GameObject SpawnByPrefabId(int prefabId, Transform par = null)
+        {
+            var controller = SpawnAsControllerByPrefabId(prefabId, par);
+            return (controller != null) ? controller.gameObject : null;
+        }
+
+        public GameObject SpawnByPrefabId(int prefabId, Vector3 position, Quaternion rotation, Transform par = null)
+        {
+            var controller = SpawnAsControllerByPrefabId(prefabId, position, rotation, par);
+            return (controller != null) ? controller.gameObject : null;
+        }
+
+        public SpawnedObjectController SpawnAsControllerByPrefabId(int prefabId, Transform par = null)
+        {
+            PrefabCache cache;
+            if (!_prefabToCache.TryGetValue(prefabId, out cache)) return null;
+
+            var pos = (par != null) ? par.position : Vector3.zero;
+            var rot = (par != null) ? par.rotation : Quaternion.identity;
+            var controller = cache.Spawn(pos, rot, par);
+            this.SignalSpawned(controller);
+            return controller;
+        }
+
+        public SpawnedObjectController SpawnAsControllerByPrefabId(int prefabId, Vector3 position, Quaternion rotation, Transform par = null)
+        {
+            PrefabCache cache;
+            if (!_prefabToCache.TryGetValue(prefabId, out cache)) return null;
+            var controller = cache.Spawn(position, rotation, par);
+            this.SignalSpawned(controller);
+            return controller;
+        }
+
 
 
         internal bool Despawn(SpawnedObjectController cntrl)
@@ -347,9 +395,21 @@ namespace com.spacepuppy.Spawn
             return cache.Despawn(cntrl);
         }
 
-        internal bool Purge(SpawnedObjectController cntrl)
+
+
+        public bool Purge(GameObject obj)
         {
-            if (Object.ReferenceEquals(cntrl, null)) throw new System.ArgumentNullException("cntrl");
+            if (object.ReferenceEquals(obj, null)) throw new System.ArgumentNullException("obj");
+
+            var cntrl = obj.GetComponent<SpawnedObjectController>();
+            if (cntrl == null) return false;
+
+            return this.Purge(cntrl);
+        }
+
+        public bool Purge(SpawnedObjectController cntrl)
+        {
+            if (object.ReferenceEquals(cntrl, null)) throw new System.ArgumentNullException("cntrl");
 
             PrefabCache cache;
             if (!_prefabToCache.TryGetValue(cntrl.PrefabID, out cache) || !cache.Contains(cntrl))
@@ -396,60 +456,71 @@ namespace com.spacepuppy.Spawn
 
         #endregion
 
-        #region IEnumerable Interface
+        #region ICollection Interface
 
-        public IEnumerator<IPrefabCache> GetEnumerator()
+        public int Count
+        {
+            get { return _registeredPrefabs.Count; }
+        }
+
+        bool ICollection<IPrefabCache>.IsReadOnly
+        {
+            get { return false; }
+        }
+
+        void ICollection<IPrefabCache>.Add(IPrefabCache item)
+        {
+            throw new System.NotSupportedException();
+        }
+
+        public bool Contains(IPrefabCache item)
+        {
+            var obj = item as PrefabCache;
+            if (item == null) return false;
+
+            return _registeredPrefabs.Contains(item);
+        }
+
+        public void Clear()
+        {
+            var e = _registeredPrefabs.GetEnumerator();
+            while (e.MoveNext())
+            {
+                e.Current.Clear();
+            }
+
+            _registeredPrefabs.Clear();
+            _prefabToCache.Clear();
+        }
+
+        bool ICollection<IPrefabCache>.Remove(IPrefabCache item)
+        {
+            return this.UnRegister(item);
+        }
+
+        void ICollection<IPrefabCache>.CopyTo(IPrefabCache[] array, int arrayIndex)
+        {
+            for (int i = 0; i < _registeredPrefabs.Count; i++)
+            {
+                if (i >= array.Length) return;
+
+                array[arrayIndex + i] = _registeredPrefabs[i];
+            }
+        }
+        
+        public Enumerator GetEnumerator()
         {
             return new Enumerator(this);
+        }
+
+        IEnumerator<IPrefabCache> IEnumerable<IPrefabCache>.GetEnumerator()
+        {
+            return this.GetEnumerator();
         }
 
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
         {
-            return new Enumerator(this);
-        }
-
-        public struct Enumerator : IEnumerator<IPrefabCache>
-        {
-
-            private List<PrefabCache>.Enumerator _e;
-
-            public Enumerator(SpawnPool pool)
-            {
-                if (pool == null) throw new System.ArgumentNullException("pool");
-
-                _e = pool._registeredPrefabs.GetEnumerator();
-            }
-
-            public IPrefabCache Current
-            {
-                get
-                {
-                    return _e.Current;
-                }
-            }
-
-            object System.Collections.IEnumerator.Current
-            {
-                get
-                {
-                    return _e.Current;
-                }
-            }
-
-            public bool MoveNext()
-            {
-                return _e.MoveNext();
-            }
-
-            public void Dispose()
-            {
-                _e.Dispose();
-            }
-
-            void System.Collections.IEnumerator.Reset()
-            {
-                //DO NOTHING
-            }
+            return this.GetEnumerator();
         }
 
         #endregion
@@ -471,7 +542,7 @@ namespace com.spacepuppy.Spawn
             public int CacheSize = 0;
             [Tooltip("How much should the cache resize by if an empty/used cache is spawned from.")]
             public int ResizeBuffer = 1;
-            [Tooltip("The maximum number of instances allowed to be cached.")]
+            [Tooltip("The maximum number of instances allowed to be cached, 0 or less means infinite.")]
             public int LimitAmount = 0;
 
             [System.NonSerialized()]
@@ -565,7 +636,7 @@ namespace com.spacepuppy.Spawn
 
                 for(int i = 0; i < this.CacheSize; i++)
                 {
-                    _instances.Add(this.CreateCachedInstance(i));
+                    _instances.Add(this.CreateCachedInstance());
                 }
             }
 
@@ -597,7 +668,7 @@ namespace com.spacepuppy.Spawn
                     {
                         for(int i = cnt; i < newSize; i++)
                         {
-                            _instances.Add(this.CreateCachedInstance(i));
+                            _instances.Add(this.CreateCachedInstance());
                         }
                     }
                 }
@@ -656,10 +727,10 @@ namespace com.spacepuppy.Spawn
                 return false;
             }
 
-            private SpawnedObjectController CreateCachedInstance(int index)
+            private SpawnedObjectController CreateCachedInstance()
             {
                 var obj = Object.Instantiate(this.Prefab, Vector3.zero, Quaternion.identity);
-                obj.name = _itemName + (index + 1).ToString("000");
+                obj.name = _itemName + "(CachedInstance)";
                 var cntrl = obj.AddOrGetComponent<SpawnedObjectController>();
                 cntrl.Init(_owner, this.Prefab.GetInstanceID(), _itemName);
 
@@ -674,6 +745,50 @@ namespace com.spacepuppy.Spawn
 
             #endregion
 
+        }
+        
+        public struct Enumerator : IEnumerator<IPrefabCache>
+        {
+
+            private List<PrefabCache>.Enumerator _e;
+
+            public Enumerator(SpawnPool pool)
+            {
+                if (pool == null) throw new System.ArgumentNullException("pool");
+
+                _e = pool._registeredPrefabs.GetEnumerator();
+            }
+
+            public IPrefabCache Current
+            {
+                get
+                {
+                    return _e.Current;
+                }
+            }
+
+            object System.Collections.IEnumerator.Current
+            {
+                get
+                {
+                    return _e.Current;
+                }
+            }
+
+            public bool MoveNext()
+            {
+                return _e.MoveNext();
+            }
+
+            public void Dispose()
+            {
+                _e.Dispose();
+            }
+
+            void System.Collections.IEnumerator.Reset()
+            {
+                //DO NOTHING
+            }
         }
 
         #endregion

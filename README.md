@@ -34,11 +34,13 @@ After adding the SpaceuppyUnityFramework you can pick and choose the modules to 
 
 - SPSerialization - a serialization library built on top of the .Net serialization interface. It supports various formats (json/binary included), and attempts to allow serializing GameObjects as asset id's that can be pulled from Resources/AssetBundles.
 
+- SPSpawn - A Spawn Pool Library
+
 - SPTriggers - (requires SPTween) A feature of SPEvent that UnityEvent does not contain is an interface for simple visual programming by using GameObjects as trigger nodes in a chain of commands. SPTriggers is a collection of reusable commands such as 'T_OnStart', 'I_SetValue', 'I_Destroy', and many more. We have found these tools to be very useful for creating scenarios in game. Note, various other modules contain commands specific to their module. SPAnim has a 'I_PlayAnimation', SPTween has 'I_Tween', and SPWaypoint has 'I_MoveOnPath'.
 
 - SPTween - a tween engine built on Spacepuppy
 
-- SPUtils - some useful utility classes. These used to be in SpacepuppyUnityFramework base dll, but was moved here to reduce the size of that dll since they aren't necessary for any module to work.
+- SPUtils - (requires SPTween) some useful utility classes. These used to be in SpacepuppyUnityFramework base dll, but was moved here to reduce the size of that dll since they aren't necessary for any module to work.
 
 - SPWaypoint - (requires SPTween) a waypoint library with algorithms for bezier, catmull-rom, linear, as well as a UI to set up paths in your game. This is very useful for setting up camera paths and other animated events. (warning - this is not a pathfinding system, that is in development in another module)
 

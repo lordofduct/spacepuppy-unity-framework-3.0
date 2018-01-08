@@ -119,10 +119,17 @@ namespace com.spacepuppy.Spawn
             if (this.OnDespawned != null) this.OnDespawned(this, System.EventArgs.Empty);
         }
 
+        public void Purge()
+        {
+            if (_pool != null) _pool.Purge(this);
+        }
+
         public GameObject CloneObject(bool fromPrefab = false)
         {
-            //TODO
-            return null;
+            if (fromPrefab && _pool != null && _pool.Contains(_prefabId))
+                return _pool.SpawnByPrefabId(_prefabId, this.transform.position, this.transform.rotation);
+            else
+                return _pool.Spawn(this.gameObject, this.transform.position, this.transform.rotation);
         }
 
         #endregion
@@ -169,6 +176,6 @@ namespace com.spacepuppy.Spawn
 
             #endregion
 
-        }
+    }
 
 }

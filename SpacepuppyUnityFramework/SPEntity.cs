@@ -59,6 +59,20 @@ namespace com.spacepuppy
 
         public bool IsAwake { get { return _isAwake; } }
 
+        public new string name
+        {
+            get
+            {
+                if (_cachedName == null) _cachedName = this.gameObject.name;
+                return _cachedName;
+            }
+            set
+            {
+                this.gameObject.name = value;
+                _cachedName = value;
+            }
+        }
+
         #endregion
 
         #region Methods

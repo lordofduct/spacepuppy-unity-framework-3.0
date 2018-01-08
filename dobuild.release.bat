@@ -16,6 +16,8 @@ mkdir .\Builds\SpacepuppyUnityFramework\Editor\Shaders\
 REM Copy Runtime dll's
 xcopy /Y /S .\SpacepuppyUnityFramework\bin\Release\SpacepuppyUnityFramework.dll .\Builds\SpacepuppyUnityFramework\
 xcopy /Y /S .\SpacepuppyUnityFramework\bin\Release\SpacepuppyUnityFramework.pdb .\Builds\SpacepuppyUnityFramework\
+xcopy /Y /S .\SPAI\bin\Release\SPAI.dll .\Builds\SpacepuppyUnityFramework\
+xcopy /Y /S .\SPAI\bin\Release\SPAI.pdb .\Builds\SpacepuppyUnityFramework\
 xcopy /Y /S .\SPAnim\bin\Release\SPAnim.dll .\Builds\SpacepuppyUnityFramework\
 xcopy /Y /S .\SPAnim\bin\Release\SPAnim.pdb .\Builds\SpacepuppyUnityFramework\
 xcopy /Y /S .\SPCamera\bin\Release\SPCamera.dll .\Builds\SpacepuppyUnityFramework\
@@ -50,6 +52,8 @@ xcopy /Y /S .\Resources\SpacepuppyUnityFramework.dll.meta .\Builds\SpacepuppyUni
 REM Copy Editor dll's
 xcopy /Y /S .\SpacepuppyUnityFrameworkEditor\bin\Release\SpacepuppyUnityFrameworkEditor.dll .\Builds\SpacepuppyUnityFramework\Editor
 xcopy /Y /S .\SpacepuppyUnityFrameworkEditor\bin\Release\SpacepuppyUnityFrameworkEditor.pdb .\Builds\SpacepuppyUnityFramework\Editor
+xcopy /Y /S .\SPAIEditor\bin\Release\SPAIEditor.dll .\Builds\SpacepuppyUnityFramework\Editor
+xcopy /Y /S .\SPAIEditor\bin\Release\SPAIEditor.pdb .\Builds\SpacepuppyUnityFramework\Editor
 xcopy /Y /S .\SPAnimEditor\bin\Release\SPAnimEditor.dll .\Builds\SpacepuppyUnityFramework\Editor
 xcopy /Y /S .\SPAnimEditor\bin\Release\SPAnimEditor.pdb .\Builds\SpacepuppyUnityFramework\Editor
 xcopy /Y /S .\SPCameraEditor\bin\Release\SPCameraEditor.dll .\Builds\SpacepuppyUnityFramework\Editor

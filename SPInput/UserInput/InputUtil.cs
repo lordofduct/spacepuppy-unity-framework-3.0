@@ -4,6 +4,7 @@ using System.Linq;
 
 namespace com.spacepuppy.UserInput
 {
+
     public static class InputUtil
     {
 
@@ -136,4 +137,5 @@ namespace com.spacepuppy.UserInput
         }
 
     }
+
 }

@@ -17,4 +17,12 @@ namespace com.spacepuppy.UserInput
         Shear = 1
     }
 
+    public enum CompositeAxlePrecedence
+    {
+        
+        Largest = 0,
+        Smallest = 1
+
+    }
+
 }

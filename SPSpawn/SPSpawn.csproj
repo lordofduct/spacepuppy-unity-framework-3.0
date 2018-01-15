@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Spawn\Events\i_Spawn.cs" />
+    <Compile Include="Spawn\Events\i_SpawnParticleEffect.cs" />
     <Compile Include="Spawn\Events\t_OnDespawned.cs" />
     <Compile Include="Spawn\Events\t_OnSpawned.cs" />
     <Compile Include="Spawn\IOnDespawnHandler.cs" />

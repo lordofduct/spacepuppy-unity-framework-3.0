@@ -9,23 +9,23 @@ using com.spacepuppy.Utils;
 namespace com.spacepuppy.Spawn.Events
 {
 
-    public class i_Spawn : AutoTriggerable, IObservableTrigger, ISpawnPoint
+    public class i_SpawnParticleEffect : AutoTriggerable, IObservableTrigger, ISpawnPoint
     {
 
         public const string TRG_ONSPAWNED = "OnSpawned";
-        
+
         #region Fields
 
         [SerializeField()]
         [Tooltip("If left empty the default SpawnPool will be used instead.")]
         private SpawnPool _spawnPool;
-        
+
         [SerializeField]
         private Transform _spawnedObjectParent;
 
         [SerializeField()]
-        [WeightedValueCollection("Weight", "Prefab")]
-        [Tooltip("Objects available for spawning. When spawn is called with no arguments a prefab is selected at random.")]
+        [WeightedValueCollection("Weight", "Prefab", DrawElementAtBottom = true)]
+        [Tooltip("ParticleEffects available for spawning. When spawn is called with no arguments a prefab is selected at random.")]
         private List<PrefabEntry> _prefabs;
 
         [SerializeField()]
@@ -45,7 +45,7 @@ namespace com.spacepuppy.Spawn.Events
         {
             get { return _prefabs; }
         }
-        
+
         public SPEvent OnSpawnedObject
         {
             get { return _onSpawnedObject; }
@@ -61,13 +61,13 @@ namespace com.spacepuppy.Spawn.Events
 
             if (_prefabs == null || _prefabs.Count == 0) return null;
 
-            if(_prefabs.Count == 1)
+            if (_prefabs.Count == 1)
             {
-                return this.Spawn(_prefabs[0].Prefab);
+                return this.Spawn(_prefabs[0]);
             }
             else
             {
-                return this.Spawn(_prefabs.PickRandom((o) => o.Weight).Prefab);
+                return this.Spawn(_prefabs.PickRandom((o) => o.Weight));
             }
         }
 
@@ -76,7 +76,7 @@ namespace com.spacepuppy.Spawn.Events
             if (!this.enabled) return null;
 
             if (_prefabs == null || index < 0 || index >= _prefabs.Count) return null;
-            return this.Spawn(_prefabs[index].Prefab);
+            return this.Spawn(_prefabs[index]);
         }
 
         public GameObject Spawn(string name)
@@ -86,17 +86,23 @@ namespace com.spacepuppy.Spawn.Events
             if (_prefabs == null) return null;
             for (int i = 0; i < _prefabs.Count; i++)
             {
-                if (_prefabs[i].Prefab != null && _prefabs[i].Prefab.name == name) return this.Spawn(_prefabs[i].Prefab);
+                if (_prefabs[i].Prefab != null && _prefabs[i].Prefab.name == name) return this.Spawn(_prefabs[i]);
             }
             return null;
         }
 
-        private GameObject Spawn(GameObject prefab)
+        private GameObject Spawn(PrefabEntry entry)
         {
-            if (prefab == null) return null;
+            if (entry.Prefab == null) return null;
 
             var pool = _spawnPool != null ? _spawnPool : SpawnPool.DefaultPool;
-            var go = pool.Spawn(prefab, this.transform.position, this.transform.rotation, _spawnedObjectParent);
+            var go = pool.Spawn(entry.Prefab.gameObject, this.transform.position, this.transform.rotation, _spawnedObjectParent);
+
+            var dur = (entry.Duration == 0f) ? entry.Prefab.main.duration : entry.Duration;
+            if (dur > 0f && dur != float.PositiveInfinity)
+            {
+                GameLoop.Hook.Invoke(go.Kill, dur);
+            }
 
             if (_onSpawnedObject != null && _onSpawnedObject.Count > 0)
                 _onSpawnedObject.ActivateTrigger(this, go);
@@ -163,7 +169,10 @@ namespace com.spacepuppy.Spawn.Events
         public struct PrefabEntry
         {
             public float Weight;
-            public GameObject Prefab;
+            public ParticleSystem Prefab;
+            [TimeUnitsSelector()]
+            [Tooltip("Delete particle effect after a duration. Leave 0 to use the 'duration' of the particle effect, or use negative value (-1) to never delete.")]
+            public float Duration;
         }
 
         #endregion

@@ -1,0 +1,8084 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1280285467, guid: e4aa97f5e7bea3a4696c61d7cd5ca932, type: 3}
+  m_Name: InputSettings_Generic_MultiPlayer
+  m_EditorClassIdentifier: 
+  _entries:
+  - Type: 2
+    Name: Joy1-Axis01
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 1
+  - Type: 2
+    Name: Joy1-Axis02
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 1
+    JoyNum: 1
+  - Type: 2
+    Name: Joy1-Axis03
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 2
+    JoyNum: 1
+  - Type: 2
+    Name: Joy1-Axis04
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 3
+    JoyNum: 1
+  - Type: 2
+    Name: Joy1-Axis05
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 4
+    JoyNum: 1
+  - Type: 2
+    Name: Joy1-Axis06
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 5
+    JoyNum: 1
+  - Type: 2
+    Name: Joy1-Axis07
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 6
+    JoyNum: 1
+  - Type: 2
+    Name: Joy1-Axis08
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 7
+    JoyNum: 1
+  - Type: 2
+    Name: Joy1-Axis09
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 8
+    JoyNum: 1
+  - Type: 2
+    Name: Joy1-Axis10
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 9
+    JoyNum: 1
+  - Type: 2
+    Name: Joy1-Axis11
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 10
+    JoyNum: 1
+  - Type: 2
+    Name: Joy1-Axis12
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 11
+    JoyNum: 1
+  - Type: 2
+    Name: Joy1-Axis13
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 12
+    JoyNum: 1
+  - Type: 2
+    Name: Joy1-Axis14
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 13
+    JoyNum: 1
+  - Type: 2
+    Name: Joy1-Axis15
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 14
+    JoyNum: 1
+  - Type: 2
+    Name: Joy1-Axis16
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 15
+    JoyNum: 1
+  - Type: 2
+    Name: Joy1-Axis17
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 16
+    JoyNum: 1
+  - Type: 2
+    Name: Joy1-Axis18
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 17
+    JoyNum: 1
+  - Type: 2
+    Name: Joy1-Axis19
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 18
+    JoyNum: 1
+  - Type: 2
+    Name: Joy1-Axis20
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 19
+    JoyNum: 1
+  - Type: 2
+    Name: Joy1-Axis21
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 20
+    JoyNum: 1
+  - Type: 2
+    Name: Joy1-Axis22
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 21
+    JoyNum: 1
+  - Type: 2
+    Name: Joy1-Axis23
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 22
+    JoyNum: 1
+  - Type: 2
+    Name: Joy1-Axis24
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 23
+    JoyNum: 1
+  - Type: 2
+    Name: Joy1-Axis25
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 24
+    JoyNum: 1
+  - Type: 2
+    Name: Joy1-Axis26
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 25
+    JoyNum: 1
+  - Type: 2
+    Name: Joy1-Axis27
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 26
+    JoyNum: 1
+  - Type: 2
+    Name: Joy1-Axis28
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 27
+    JoyNum: 1
+  - Type: 0
+    Name: Joy1-Button00
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 0
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 1
+  - Type: 0
+    Name: Joy1-Button01
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 1
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 1
+  - Type: 0
+    Name: Joy1-Button02
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 2
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 1
+  - Type: 0
+    Name: Joy1-Button03
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 3
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 1
+  - Type: 0
+    Name: Joy1-Button04
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 4
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 1
+  - Type: 0
+    Name: Joy1-Button05
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 5
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 1
+  - Type: 0
+    Name: Joy1-Button06
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 6
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 1
+  - Type: 0
+    Name: Joy1-Button07
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 7
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 1
+  - Type: 0
+    Name: Joy1-Button08
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 8
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 1
+  - Type: 0
+    Name: Joy1-Button09
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 9
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 1
+  - Type: 0
+    Name: Joy1-Button10
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 10
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 1
+  - Type: 0
+    Name: Joy1-Button11
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 11
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 1
+  - Type: 0
+    Name: Joy1-Button12
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 12
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 1
+  - Type: 0
+    Name: Joy1-Button13
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 13
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 1
+  - Type: 0
+    Name: Joy1-Button14
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 14
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 1
+  - Type: 0
+    Name: Joy1-Button15
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 15
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 1
+  - Type: 0
+    Name: Joy1-Button16
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 16
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 1
+  - Type: 0
+    Name: Joy1-Button17
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 17
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 1
+  - Type: 0
+    Name: Joy1-Button18
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 18
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 1
+  - Type: 0
+    Name: Joy1-Button19
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 19
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 1
+  - Type: 2
+    Name: Joy2-Axis01
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 2
+  - Type: 2
+    Name: Joy2-Axis02
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 1
+    JoyNum: 2
+  - Type: 2
+    Name: Joy2-Axis03
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 2
+    JoyNum: 2
+  - Type: 2
+    Name: Joy2-Axis04
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 3
+    JoyNum: 2
+  - Type: 2
+    Name: Joy2-Axis05
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 4
+    JoyNum: 2
+  - Type: 2
+    Name: Joy2-Axis06
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 5
+    JoyNum: 2
+  - Type: 2
+    Name: Joy2-Axis07
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 6
+    JoyNum: 2
+  - Type: 2
+    Name: Joy2-Axis08
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 7
+    JoyNum: 2
+  - Type: 2
+    Name: Joy2-Axis09
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 8
+    JoyNum: 2
+  - Type: 2
+    Name: Joy2-Axis10
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 9
+    JoyNum: 2
+  - Type: 2
+    Name: Joy2-Axis11
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 10
+    JoyNum: 2
+  - Type: 2
+    Name: Joy2-Axis12
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 11
+    JoyNum: 2
+  - Type: 2
+    Name: Joy2-Axis13
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 12
+    JoyNum: 2
+  - Type: 2
+    Name: Joy2-Axis14
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 13
+    JoyNum: 2
+  - Type: 2
+    Name: Joy2-Axis15
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 14
+    JoyNum: 2
+  - Type: 2
+    Name: Joy2-Axis16
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 15
+    JoyNum: 2
+  - Type: 2
+    Name: Joy2-Axis17
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 16
+    JoyNum: 2
+  - Type: 2
+    Name: Joy2-Axis18
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 17
+    JoyNum: 2
+  - Type: 2
+    Name: Joy2-Axis19
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 18
+    JoyNum: 2
+  - Type: 2
+    Name: Joy2-Axis20
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 19
+    JoyNum: 2
+  - Type: 2
+    Name: Joy2-Axis21
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 20
+    JoyNum: 2
+  - Type: 2
+    Name: Joy2-Axis22
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 21
+    JoyNum: 2
+  - Type: 2
+    Name: Joy2-Axis23
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 22
+    JoyNum: 2
+  - Type: 2
+    Name: Joy2-Axis24
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 23
+    JoyNum: 2
+  - Type: 2
+    Name: Joy2-Axis25
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 24
+    JoyNum: 2
+  - Type: 2
+    Name: Joy2-Axis26
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 25
+    JoyNum: 2
+  - Type: 2
+    Name: Joy2-Axis27
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 26
+    JoyNum: 2
+  - Type: 2
+    Name: Joy2-Axis28
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 27
+    JoyNum: 2
+  - Type: 0
+    Name: Joy2-Button00
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 0
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 2
+  - Type: 0
+    Name: Joy2-Button01
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 1
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 2
+  - Type: 0
+    Name: Joy2-Button02
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 2
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 2
+  - Type: 0
+    Name: Joy2-Button03
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 3
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 2
+  - Type: 0
+    Name: Joy2-Button04
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 4
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 2
+  - Type: 0
+    Name: Joy2-Button05
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 5
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 2
+  - Type: 0
+    Name: Joy2-Button06
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 6
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 2
+  - Type: 0
+    Name: Joy2-Button07
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 7
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 2
+  - Type: 0
+    Name: Joy2-Button08
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 8
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 2
+  - Type: 0
+    Name: Joy2-Button09
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 9
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 2
+  - Type: 0
+    Name: Joy2-Button10
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 10
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 2
+  - Type: 0
+    Name: Joy2-Button11
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 11
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 2
+  - Type: 0
+    Name: Joy2-Button12
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 12
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 2
+  - Type: 0
+    Name: Joy2-Button13
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 13
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 2
+  - Type: 0
+    Name: Joy2-Button14
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 14
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 2
+  - Type: 0
+    Name: Joy2-Button15
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 15
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 2
+  - Type: 0
+    Name: Joy2-Button16
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 16
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 2
+  - Type: 0
+    Name: Joy2-Button17
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 17
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 2
+  - Type: 0
+    Name: Joy2-Button18
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 18
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 2
+  - Type: 0
+    Name: Joy2-Button19
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 19
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 2
+  - Type: 2
+    Name: Joy3-Axis01
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 3
+  - Type: 2
+    Name: Joy3-Axis02
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 1
+    JoyNum: 3
+  - Type: 2
+    Name: Joy3-Axis03
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 2
+    JoyNum: 3
+  - Type: 2
+    Name: Joy3-Axis04
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 3
+    JoyNum: 3
+  - Type: 2
+    Name: Joy3-Axis05
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 4
+    JoyNum: 3
+  - Type: 2
+    Name: Joy3-Axis06
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 5
+    JoyNum: 3
+  - Type: 2
+    Name: Joy3-Axis07
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 6
+    JoyNum: 3
+  - Type: 2
+    Name: Joy3-Axis08
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 7
+    JoyNum: 3
+  - Type: 2
+    Name: Joy3-Axis09
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 8
+    JoyNum: 3
+  - Type: 2
+    Name: Joy3-Axis10
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 9
+    JoyNum: 3
+  - Type: 2
+    Name: Joy3-Axis11
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 10
+    JoyNum: 3
+  - Type: 2
+    Name: Joy3-Axis12
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 11
+    JoyNum: 3
+  - Type: 2
+    Name: Joy3-Axis13
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 12
+    JoyNum: 3
+  - Type: 2
+    Name: Joy3-Axis14
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 13
+    JoyNum: 3
+  - Type: 2
+    Name: Joy3-Axis15
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 14
+    JoyNum: 3
+  - Type: 2
+    Name: Joy3-Axis16
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 15
+    JoyNum: 3
+  - Type: 2
+    Name: Joy3-Axis17
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 16
+    JoyNum: 3
+  - Type: 2
+    Name: Joy3-Axis18
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 17
+    JoyNum: 3
+  - Type: 2
+    Name: Joy3-Axis19
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 18
+    JoyNum: 3
+  - Type: 2
+    Name: Joy3-Axis20
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 19
+    JoyNum: 3
+  - Type: 2
+    Name: Joy3-Axis21
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 20
+    JoyNum: 3
+  - Type: 2
+    Name: Joy3-Axis22
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 21
+    JoyNum: 3
+  - Type: 2
+    Name: Joy3-Axis23
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 22
+    JoyNum: 3
+  - Type: 2
+    Name: Joy3-Axis24
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 23
+    JoyNum: 3
+  - Type: 2
+    Name: Joy3-Axis25
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 24
+    JoyNum: 3
+  - Type: 2
+    Name: Joy3-Axis26
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 25
+    JoyNum: 3
+  - Type: 2
+    Name: Joy3-Axis27
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 26
+    JoyNum: 3
+  - Type: 2
+    Name: Joy3-Axis28
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 27
+    JoyNum: 3
+  - Type: 0
+    Name: Joy3-Button00
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 0
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 3
+  - Type: 0
+    Name: Joy3-Button01
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 1
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 3
+  - Type: 0
+    Name: Joy3-Button02
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 2
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 3
+  - Type: 0
+    Name: Joy3-Button03
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 3
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 3
+  - Type: 0
+    Name: Joy3-Button04
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 4
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 3
+  - Type: 0
+    Name: Joy3-Button05
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 5
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 3
+  - Type: 0
+    Name: Joy3-Button06
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 6
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 3
+  - Type: 0
+    Name: Joy3-Button07
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 7
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 3
+  - Type: 0
+    Name: Joy3-Button08
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 8
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 3
+  - Type: 0
+    Name: Joy3-Button09
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 9
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 3
+  - Type: 0
+    Name: Joy3-Button10
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 10
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 3
+  - Type: 0
+    Name: Joy3-Button11
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 11
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 3
+  - Type: 0
+    Name: Joy3-Button12
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 12
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 3
+  - Type: 0
+    Name: Joy3-Button13
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 13
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 3
+  - Type: 0
+    Name: Joy3-Button14
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 14
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 3
+  - Type: 0
+    Name: Joy3-Button15
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 15
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 3
+  - Type: 0
+    Name: Joy3-Button16
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 16
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 3
+  - Type: 0
+    Name: Joy3-Button17
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 17
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 3
+  - Type: 0
+    Name: Joy3-Button18
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 18
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 3
+  - Type: 0
+    Name: Joy3-Button19
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 19
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 3
+  - Type: 2
+    Name: Joy4-Axis01
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 4
+  - Type: 2
+    Name: Joy4-Axis02
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 1
+    JoyNum: 4
+  - Type: 2
+    Name: Joy4-Axis03
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 2
+    JoyNum: 4
+  - Type: 2
+    Name: Joy4-Axis04
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 3
+    JoyNum: 4
+  - Type: 2
+    Name: Joy4-Axis05
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 4
+    JoyNum: 4
+  - Type: 2
+    Name: Joy4-Axis06
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 5
+    JoyNum: 4
+  - Type: 2
+    Name: Joy4-Axis07
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 6
+    JoyNum: 4
+  - Type: 2
+    Name: Joy4-Axis08
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 7
+    JoyNum: 4
+  - Type: 2
+    Name: Joy4-Axis09
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 8
+    JoyNum: 4
+  - Type: 2
+    Name: Joy4-Axis10
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 9
+    JoyNum: 4
+  - Type: 2
+    Name: Joy4-Axis11
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 10
+    JoyNum: 4
+  - Type: 2
+    Name: Joy4-Axis12
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 11
+    JoyNum: 4
+  - Type: 2
+    Name: Joy4-Axis13
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 12
+    JoyNum: 4
+  - Type: 2
+    Name: Joy4-Axis14
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 13
+    JoyNum: 4
+  - Type: 2
+    Name: Joy4-Axis15
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 14
+    JoyNum: 4
+  - Type: 2
+    Name: Joy4-Axis16
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 15
+    JoyNum: 4
+  - Type: 2
+    Name: Joy4-Axis17
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 16
+    JoyNum: 4
+  - Type: 2
+    Name: Joy4-Axis18
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 17
+    JoyNum: 4
+  - Type: 2
+    Name: Joy4-Axis19
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 18
+    JoyNum: 4
+  - Type: 2
+    Name: Joy4-Axis20
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 19
+    JoyNum: 4
+  - Type: 2
+    Name: Joy4-Axis21
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 20
+    JoyNum: 4
+  - Type: 2
+    Name: Joy4-Axis22
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 21
+    JoyNum: 4
+  - Type: 2
+    Name: Joy4-Axis23
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 22
+    JoyNum: 4
+  - Type: 2
+    Name: Joy4-Axis24
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 23
+    JoyNum: 4
+  - Type: 2
+    Name: Joy4-Axis25
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 24
+    JoyNum: 4
+  - Type: 2
+    Name: Joy4-Axis26
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 25
+    JoyNum: 4
+  - Type: 2
+    Name: Joy4-Axis27
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 26
+    JoyNum: 4
+  - Type: 2
+    Name: Joy4-Axis28
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 27
+    JoyNum: 4
+  - Type: 0
+    Name: Joy4-Button00
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 0
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 4
+  - Type: 0
+    Name: Joy4-Button01
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 1
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 4
+  - Type: 0
+    Name: Joy4-Button02
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 2
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 4
+  - Type: 0
+    Name: Joy4-Button03
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 3
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 4
+  - Type: 0
+    Name: Joy4-Button04
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 4
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 4
+  - Type: 0
+    Name: Joy4-Button05
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 5
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 4
+  - Type: 0
+    Name: Joy4-Button06
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 6
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 4
+  - Type: 0
+    Name: Joy4-Button07
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 7
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 4
+  - Type: 0
+    Name: Joy4-Button08
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 8
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 4
+  - Type: 0
+    Name: Joy4-Button09
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 9
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 4
+  - Type: 0
+    Name: Joy4-Button10
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 10
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 4
+  - Type: 0
+    Name: Joy4-Button11
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 11
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 4
+  - Type: 0
+    Name: Joy4-Button12
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 12
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 4
+  - Type: 0
+    Name: Joy4-Button13
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 13
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 4
+  - Type: 0
+    Name: Joy4-Button14
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 14
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 4
+  - Type: 0
+    Name: Joy4-Button15
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 15
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 4
+  - Type: 0
+    Name: Joy4-Button16
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 16
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 4
+  - Type: 0
+    Name: Joy4-Button17
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 17
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 4
+  - Type: 0
+    Name: Joy4-Button18
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 18
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 4
+  - Type: 0
+    Name: Joy4-Button19
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 19
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 4
+  - Type: 2
+    Name: Joy5-Axis01
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 5
+  - Type: 2
+    Name: Joy5-Axis02
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 1
+    JoyNum: 5
+  - Type: 2
+    Name: Joy5-Axis03
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 2
+    JoyNum: 5
+  - Type: 2
+    Name: Joy5-Axis04
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 3
+    JoyNum: 5
+  - Type: 2
+    Name: Joy5-Axis05
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 4
+    JoyNum: 5
+  - Type: 2
+    Name: Joy5-Axis06
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 5
+    JoyNum: 5
+  - Type: 2
+    Name: Joy5-Axis07
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 6
+    JoyNum: 5
+  - Type: 2
+    Name: Joy5-Axis08
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 7
+    JoyNum: 5
+  - Type: 2
+    Name: Joy5-Axis09
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 8
+    JoyNum: 5
+  - Type: 2
+    Name: Joy5-Axis10
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 9
+    JoyNum: 5
+  - Type: 2
+    Name: Joy5-Axis11
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 10
+    JoyNum: 5
+  - Type: 2
+    Name: Joy5-Axis12
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 11
+    JoyNum: 5
+  - Type: 2
+    Name: Joy5-Axis13
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 12
+    JoyNum: 5
+  - Type: 2
+    Name: Joy5-Axis14
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 13
+    JoyNum: 5
+  - Type: 2
+    Name: Joy5-Axis15
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 14
+    JoyNum: 5
+  - Type: 2
+    Name: Joy5-Axis16
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 15
+    JoyNum: 5
+  - Type: 2
+    Name: Joy5-Axis17
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 16
+    JoyNum: 5
+  - Type: 2
+    Name: Joy5-Axis18
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 17
+    JoyNum: 5
+  - Type: 2
+    Name: Joy5-Axis19
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 18
+    JoyNum: 5
+  - Type: 2
+    Name: Joy5-Axis20
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 19
+    JoyNum: 5
+  - Type: 2
+    Name: Joy5-Axis21
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 20
+    JoyNum: 5
+  - Type: 2
+    Name: Joy5-Axis22
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 21
+    JoyNum: 5
+  - Type: 2
+    Name: Joy5-Axis23
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 22
+    JoyNum: 5
+  - Type: 2
+    Name: Joy5-Axis24
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 23
+    JoyNum: 5
+  - Type: 2
+    Name: Joy5-Axis25
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 24
+    JoyNum: 5
+  - Type: 2
+    Name: Joy5-Axis26
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 25
+    JoyNum: 5
+  - Type: 2
+    Name: Joy5-Axis27
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 26
+    JoyNum: 5
+  - Type: 2
+    Name: Joy5-Axis28
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 27
+    JoyNum: 5
+  - Type: 0
+    Name: Joy5-Button00
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 0
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 5
+  - Type: 0
+    Name: Joy5-Button01
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 1
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 5
+  - Type: 0
+    Name: Joy5-Button02
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 2
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 5
+  - Type: 0
+    Name: Joy5-Button03
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 3
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 5
+  - Type: 0
+    Name: Joy5-Button04
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 4
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 5
+  - Type: 0
+    Name: Joy5-Button05
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 5
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 5
+  - Type: 0
+    Name: Joy5-Button06
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 6
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 5
+  - Type: 0
+    Name: Joy5-Button07
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 7
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 5
+  - Type: 0
+    Name: Joy5-Button08
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 8
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 5
+  - Type: 0
+    Name: Joy5-Button09
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 9
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 5
+  - Type: 0
+    Name: Joy5-Button10
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 10
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 5
+  - Type: 0
+    Name: Joy5-Button11
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 11
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 5
+  - Type: 0
+    Name: Joy5-Button12
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 12
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 5
+  - Type: 0
+    Name: Joy5-Button13
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 13
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 5
+  - Type: 0
+    Name: Joy5-Button14
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 14
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 5
+  - Type: 0
+    Name: Joy5-Button15
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 15
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 5
+  - Type: 0
+    Name: Joy5-Button16
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 16
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 5
+  - Type: 0
+    Name: Joy5-Button17
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 17
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 5
+  - Type: 0
+    Name: Joy5-Button18
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 18
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 5
+  - Type: 0
+    Name: Joy5-Button19
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 19
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 5
+  - Type: 2
+    Name: Joy6-Axis01
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 6
+  - Type: 2
+    Name: Joy6-Axis02
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 1
+    JoyNum: 6
+  - Type: 2
+    Name: Joy6-Axis03
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 2
+    JoyNum: 6
+  - Type: 2
+    Name: Joy6-Axis04
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 3
+    JoyNum: 6
+  - Type: 2
+    Name: Joy6-Axis05
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 4
+    JoyNum: 6
+  - Type: 2
+    Name: Joy6-Axis06
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 5
+    JoyNum: 6
+  - Type: 2
+    Name: Joy6-Axis07
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 6
+    JoyNum: 6
+  - Type: 2
+    Name: Joy6-Axis08
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 7
+    JoyNum: 6
+  - Type: 2
+    Name: Joy6-Axis09
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 8
+    JoyNum: 6
+  - Type: 2
+    Name: Joy6-Axis10
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 9
+    JoyNum: 6
+  - Type: 2
+    Name: Joy6-Axis11
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 10
+    JoyNum: 6
+  - Type: 2
+    Name: Joy6-Axis12
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 11
+    JoyNum: 6
+  - Type: 2
+    Name: Joy6-Axis13
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 12
+    JoyNum: 6
+  - Type: 2
+    Name: Joy6-Axis14
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 13
+    JoyNum: 6
+  - Type: 2
+    Name: Joy6-Axis15
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 14
+    JoyNum: 6
+  - Type: 2
+    Name: Joy6-Axis16
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 15
+    JoyNum: 6
+  - Type: 2
+    Name: Joy6-Axis17
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 16
+    JoyNum: 6
+  - Type: 2
+    Name: Joy6-Axis18
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 17
+    JoyNum: 6
+  - Type: 2
+    Name: Joy6-Axis19
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 18
+    JoyNum: 6
+  - Type: 2
+    Name: Joy6-Axis20
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 19
+    JoyNum: 6
+  - Type: 2
+    Name: Joy6-Axis21
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 20
+    JoyNum: 6
+  - Type: 2
+    Name: Joy6-Axis22
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 21
+    JoyNum: 6
+  - Type: 2
+    Name: Joy6-Axis23
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 22
+    JoyNum: 6
+  - Type: 2
+    Name: Joy6-Axis24
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 23
+    JoyNum: 6
+  - Type: 2
+    Name: Joy6-Axis25
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 24
+    JoyNum: 6
+  - Type: 2
+    Name: Joy6-Axis26
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 25
+    JoyNum: 6
+  - Type: 2
+    Name: Joy6-Axis27
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 26
+    JoyNum: 6
+  - Type: 2
+    Name: Joy6-Axis28
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 27
+    JoyNum: 6
+  - Type: 0
+    Name: Joy6-Button00
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 0
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 6
+  - Type: 0
+    Name: Joy6-Button01
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 1
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 6
+  - Type: 0
+    Name: Joy6-Button02
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 2
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 6
+  - Type: 0
+    Name: Joy6-Button03
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 3
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 6
+  - Type: 0
+    Name: Joy6-Button04
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 4
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 6
+  - Type: 0
+    Name: Joy6-Button05
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 5
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 6
+  - Type: 0
+    Name: Joy6-Button06
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 6
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 6
+  - Type: 0
+    Name: Joy6-Button07
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 7
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 6
+  - Type: 0
+    Name: Joy6-Button08
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 8
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 6
+  - Type: 0
+    Name: Joy6-Button09
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 9
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 6
+  - Type: 0
+    Name: Joy6-Button10
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 10
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 6
+  - Type: 0
+    Name: Joy6-Button11
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 11
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 6
+  - Type: 0
+    Name: Joy6-Button12
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 12
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 6
+  - Type: 0
+    Name: Joy6-Button13
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 13
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 6
+  - Type: 0
+    Name: Joy6-Button14
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 14
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 6
+  - Type: 0
+    Name: Joy6-Button15
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 15
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 6
+  - Type: 0
+    Name: Joy6-Button16
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 16
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 6
+  - Type: 0
+    Name: Joy6-Button17
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 17
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 6
+  - Type: 0
+    Name: Joy6-Button18
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 18
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 6
+  - Type: 0
+    Name: Joy6-Button19
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 19
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 6
+  - Type: 2
+    Name: Joy7-Axis01
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 7
+  - Type: 2
+    Name: Joy7-Axis02
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 1
+    JoyNum: 7
+  - Type: 2
+    Name: Joy7-Axis03
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 2
+    JoyNum: 7
+  - Type: 2
+    Name: Joy7-Axis04
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 3
+    JoyNum: 7
+  - Type: 2
+    Name: Joy7-Axis05
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 4
+    JoyNum: 7
+  - Type: 2
+    Name: Joy7-Axis06
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 5
+    JoyNum: 7
+  - Type: 2
+    Name: Joy7-Axis07
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 6
+    JoyNum: 7
+  - Type: 2
+    Name: Joy7-Axis08
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 7
+    JoyNum: 7
+  - Type: 2
+    Name: Joy7-Axis09
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 8
+    JoyNum: 7
+  - Type: 2
+    Name: Joy7-Axis10
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 9
+    JoyNum: 7
+  - Type: 2
+    Name: Joy7-Axis11
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 10
+    JoyNum: 7
+  - Type: 2
+    Name: Joy7-Axis12
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 11
+    JoyNum: 7
+  - Type: 2
+    Name: Joy7-Axis13
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 12
+    JoyNum: 7
+  - Type: 2
+    Name: Joy7-Axis14
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 13
+    JoyNum: 7
+  - Type: 2
+    Name: Joy7-Axis15
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 14
+    JoyNum: 7
+  - Type: 2
+    Name: Joy7-Axis16
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 15
+    JoyNum: 7
+  - Type: 2
+    Name: Joy7-Axis17
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 16
+    JoyNum: 7
+  - Type: 2
+    Name: Joy7-Axis18
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 17
+    JoyNum: 7
+  - Type: 2
+    Name: Joy7-Axis19
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 18
+    JoyNum: 7
+  - Type: 2
+    Name: Joy7-Axis20
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 19
+    JoyNum: 7
+  - Type: 2
+    Name: Joy7-Axis21
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 20
+    JoyNum: 7
+  - Type: 2
+    Name: Joy7-Axis22
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 21
+    JoyNum: 7
+  - Type: 2
+    Name: Joy7-Axis23
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 22
+    JoyNum: 7
+  - Type: 2
+    Name: Joy7-Axis24
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 23
+    JoyNum: 7
+  - Type: 2
+    Name: Joy7-Axis25
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 24
+    JoyNum: 7
+  - Type: 2
+    Name: Joy7-Axis26
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 25
+    JoyNum: 7
+  - Type: 2
+    Name: Joy7-Axis27
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 26
+    JoyNum: 7
+  - Type: 2
+    Name: Joy7-Axis28
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 27
+    JoyNum: 7
+  - Type: 0
+    Name: Joy7-Button00
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 0
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 7
+  - Type: 0
+    Name: Joy7-Button01
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 1
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 7
+  - Type: 0
+    Name: Joy7-Button02
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 2
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 7
+  - Type: 0
+    Name: Joy7-Button03
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 3
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 7
+  - Type: 0
+    Name: Joy7-Button04
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 4
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 7
+  - Type: 0
+    Name: Joy7-Button05
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 5
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 7
+  - Type: 0
+    Name: Joy7-Button06
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 6
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 7
+  - Type: 0
+    Name: Joy7-Button07
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 7
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 7
+  - Type: 0
+    Name: Joy7-Button08
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 8
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 7
+  - Type: 0
+    Name: Joy7-Button09
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 9
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 7
+  - Type: 0
+    Name: Joy7-Button10
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 10
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 7
+  - Type: 0
+    Name: Joy7-Button11
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 11
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 7
+  - Type: 0
+    Name: Joy7-Button12
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 12
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 7
+  - Type: 0
+    Name: Joy7-Button13
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 13
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 7
+  - Type: 0
+    Name: Joy7-Button14
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 14
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 7
+  - Type: 0
+    Name: Joy7-Button15
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 15
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 7
+  - Type: 0
+    Name: Joy7-Button16
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 16
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 7
+  - Type: 0
+    Name: Joy7-Button17
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 17
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 7
+  - Type: 0
+    Name: Joy7-Button18
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 18
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 7
+  - Type: 0
+    Name: Joy7-Button19
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 19
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 7
+  - Type: 2
+    Name: Joy8-Axis01
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 8
+  - Type: 2
+    Name: Joy8-Axis02
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 1
+    JoyNum: 8
+  - Type: 2
+    Name: Joy8-Axis03
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 2
+    JoyNum: 8
+  - Type: 2
+    Name: Joy8-Axis04
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 3
+    JoyNum: 8
+  - Type: 2
+    Name: Joy8-Axis05
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 4
+    JoyNum: 8
+  - Type: 2
+    Name: Joy8-Axis06
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 5
+    JoyNum: 8
+  - Type: 2
+    Name: Joy8-Axis07
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 6
+    JoyNum: 8
+  - Type: 2
+    Name: Joy8-Axis08
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 7
+    JoyNum: 8
+  - Type: 2
+    Name: Joy8-Axis09
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 8
+    JoyNum: 8
+  - Type: 2
+    Name: Joy8-Axis10
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 9
+    JoyNum: 8
+  - Type: 2
+    Name: Joy8-Axis11
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 10
+    JoyNum: 8
+  - Type: 2
+    Name: Joy8-Axis12
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 11
+    JoyNum: 8
+  - Type: 2
+    Name: Joy8-Axis13
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 12
+    JoyNum: 8
+  - Type: 2
+    Name: Joy8-Axis14
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 13
+    JoyNum: 8
+  - Type: 2
+    Name: Joy8-Axis15
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 14
+    JoyNum: 8
+  - Type: 2
+    Name: Joy8-Axis16
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 15
+    JoyNum: 8
+  - Type: 2
+    Name: Joy8-Axis17
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 16
+    JoyNum: 8
+  - Type: 2
+    Name: Joy8-Axis18
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 17
+    JoyNum: 8
+  - Type: 2
+    Name: Joy8-Axis19
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 18
+    JoyNum: 8
+  - Type: 2
+    Name: Joy8-Axis20
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 19
+    JoyNum: 8
+  - Type: 2
+    Name: Joy8-Axis21
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 20
+    JoyNum: 8
+  - Type: 2
+    Name: Joy8-Axis22
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 21
+    JoyNum: 8
+  - Type: 2
+    Name: Joy8-Axis23
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 22
+    JoyNum: 8
+  - Type: 2
+    Name: Joy8-Axis24
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 23
+    JoyNum: 8
+  - Type: 2
+    Name: Joy8-Axis25
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 24
+    JoyNum: 8
+  - Type: 2
+    Name: Joy8-Axis26
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 25
+    JoyNum: 8
+  - Type: 2
+    Name: Joy8-Axis27
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 26
+    JoyNum: 8
+  - Type: 2
+    Name: Joy8-Axis28
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 27
+    JoyNum: 8
+  - Type: 0
+    Name: Joy8-Button00
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 0
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 8
+  - Type: 0
+    Name: Joy8-Button01
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 1
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 8
+  - Type: 0
+    Name: Joy8-Button02
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 2
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 8
+  - Type: 0
+    Name: Joy8-Button03
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 3
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 8
+  - Type: 0
+    Name: Joy8-Button04
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 4
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 8
+  - Type: 0
+    Name: Joy8-Button05
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 5
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 8
+  - Type: 0
+    Name: Joy8-Button06
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 6
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 8
+  - Type: 0
+    Name: Joy8-Button07
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 7
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 8
+  - Type: 0
+    Name: Joy8-Button08
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 8
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 8
+  - Type: 0
+    Name: Joy8-Button09
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 9
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 8
+  - Type: 0
+    Name: Joy8-Button10
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 10
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 8
+  - Type: 0
+    Name: Joy8-Button11
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 11
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 8
+  - Type: 0
+    Name: Joy8-Button12
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 12
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 8
+  - Type: 0
+    Name: Joy8-Button13
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 13
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 8
+  - Type: 0
+    Name: Joy8-Button14
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 14
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 8
+  - Type: 0
+    Name: Joy8-Button15
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 15
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 8
+  - Type: 0
+    Name: Joy8-Button16
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 16
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 8
+  - Type: 0
+    Name: Joy8-Button17
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 17
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 8
+  - Type: 0
+    Name: Joy8-Button18
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 18
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 8
+  - Type: 0
+    Name: Joy8-Button19
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 19
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 8
+  - Type: 2
+    Name: Joy9-Axis01
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 9
+  - Type: 2
+    Name: Joy9-Axis02
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 1
+    JoyNum: 9
+  - Type: 2
+    Name: Joy9-Axis03
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 2
+    JoyNum: 9
+  - Type: 2
+    Name: Joy9-Axis04
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 3
+    JoyNum: 9
+  - Type: 2
+    Name: Joy9-Axis05
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 4
+    JoyNum: 9
+  - Type: 2
+    Name: Joy9-Axis06
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 5
+    JoyNum: 9
+  - Type: 2
+    Name: Joy9-Axis07
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 6
+    JoyNum: 9
+  - Type: 2
+    Name: Joy9-Axis08
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 7
+    JoyNum: 9
+  - Type: 2
+    Name: Joy9-Axis09
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 8
+    JoyNum: 9
+  - Type: 2
+    Name: Joy9-Axis10
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 9
+    JoyNum: 9
+  - Type: 2
+    Name: Joy9-Axis11
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 10
+    JoyNum: 9
+  - Type: 2
+    Name: Joy9-Axis12
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 11
+    JoyNum: 9
+  - Type: 2
+    Name: Joy9-Axis13
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 12
+    JoyNum: 9
+  - Type: 2
+    Name: Joy9-Axis14
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 13
+    JoyNum: 9
+  - Type: 2
+    Name: Joy9-Axis15
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 14
+    JoyNum: 9
+  - Type: 2
+    Name: Joy9-Axis16
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 15
+    JoyNum: 9
+  - Type: 2
+    Name: Joy9-Axis17
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 16
+    JoyNum: 9
+  - Type: 2
+    Name: Joy9-Axis18
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 17
+    JoyNum: 9
+  - Type: 2
+    Name: Joy9-Axis19
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 18
+    JoyNum: 9
+  - Type: 2
+    Name: Joy9-Axis20
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 19
+    JoyNum: 9
+  - Type: 2
+    Name: Joy9-Axis21
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 20
+    JoyNum: 9
+  - Type: 2
+    Name: Joy9-Axis22
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 21
+    JoyNum: 9
+  - Type: 2
+    Name: Joy9-Axis23
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 22
+    JoyNum: 9
+  - Type: 2
+    Name: Joy9-Axis24
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 23
+    JoyNum: 9
+  - Type: 2
+    Name: Joy9-Axis25
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 24
+    JoyNum: 9
+  - Type: 2
+    Name: Joy9-Axis26
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 25
+    JoyNum: 9
+  - Type: 2
+    Name: Joy9-Axis27
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 26
+    JoyNum: 9
+  - Type: 2
+    Name: Joy9-Axis28
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 27
+    JoyNum: 9
+  - Type: 0
+    Name: Joy9-Button00
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 0
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 9
+  - Type: 0
+    Name: Joy9-Button01
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 1
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 9
+  - Type: 0
+    Name: Joy9-Button02
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 2
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 9
+  - Type: 0
+    Name: Joy9-Button03
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 3
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 9
+  - Type: 0
+    Name: Joy9-Button04
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 4
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 9
+  - Type: 0
+    Name: Joy9-Button05
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 5
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 9
+  - Type: 0
+    Name: Joy9-Button06
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 6
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 9
+  - Type: 0
+    Name: Joy9-Button07
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 7
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 9
+  - Type: 0
+    Name: Joy9-Button08
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 8
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 9
+  - Type: 0
+    Name: Joy9-Button09
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 9
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 9
+  - Type: 0
+    Name: Joy9-Button10
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 10
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 9
+  - Type: 0
+    Name: Joy9-Button11
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 11
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 9
+  - Type: 0
+    Name: Joy9-Button12
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 12
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 9
+  - Type: 0
+    Name: Joy9-Button13
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 13
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 9
+  - Type: 0
+    Name: Joy9-Button14
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 14
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 9
+  - Type: 0
+    Name: Joy9-Button15
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 15
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 9
+  - Type: 0
+    Name: Joy9-Button16
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 16
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 9
+  - Type: 0
+    Name: Joy9-Button17
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 17
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 9
+  - Type: 0
+    Name: Joy9-Button18
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 18
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 9
+  - Type: 0
+    Name: Joy9-Button19
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 19
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 9
+  - Type: 2
+    Name: Joy10-Axis01
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 10
+  - Type: 2
+    Name: Joy10-Axis02
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 1
+    JoyNum: 10
+  - Type: 2
+    Name: Joy10-Axis03
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 2
+    JoyNum: 10
+  - Type: 2
+    Name: Joy10-Axis04
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 3
+    JoyNum: 10
+  - Type: 2
+    Name: Joy10-Axis05
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 4
+    JoyNum: 10
+  - Type: 2
+    Name: Joy10-Axis06
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 5
+    JoyNum: 10
+  - Type: 2
+    Name: Joy10-Axis07
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 6
+    JoyNum: 10
+  - Type: 2
+    Name: Joy10-Axis08
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 7
+    JoyNum: 10
+  - Type: 2
+    Name: Joy10-Axis09
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 8
+    JoyNum: 10
+  - Type: 2
+    Name: Joy10-Axis10
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 9
+    JoyNum: 10
+  - Type: 2
+    Name: Joy10-Axis11
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 10
+    JoyNum: 10
+  - Type: 2
+    Name: Joy10-Axis12
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 11
+    JoyNum: 10
+  - Type: 2
+    Name: Joy10-Axis13
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 12
+    JoyNum: 10
+  - Type: 2
+    Name: Joy10-Axis14
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 13
+    JoyNum: 10
+  - Type: 2
+    Name: Joy10-Axis15
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 14
+    JoyNum: 10
+  - Type: 2
+    Name: Joy10-Axis16
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 15
+    JoyNum: 10
+  - Type: 2
+    Name: Joy10-Axis17
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 16
+    JoyNum: 10
+  - Type: 2
+    Name: Joy10-Axis18
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 17
+    JoyNum: 10
+  - Type: 2
+    Name: Joy10-Axis19
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 18
+    JoyNum: 10
+  - Type: 2
+    Name: Joy10-Axis20
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 19
+    JoyNum: 10
+  - Type: 2
+    Name: Joy10-Axis21
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 20
+    JoyNum: 10
+  - Type: 2
+    Name: Joy10-Axis22
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 21
+    JoyNum: 10
+  - Type: 2
+    Name: Joy10-Axis23
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 22
+    JoyNum: 10
+  - Type: 2
+    Name: Joy10-Axis24
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 23
+    JoyNum: 10
+  - Type: 2
+    Name: Joy10-Axis25
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 24
+    JoyNum: 10
+  - Type: 2
+    Name: Joy10-Axis26
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 25
+    JoyNum: 10
+  - Type: 2
+    Name: Joy10-Axis27
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 26
+    JoyNum: 10
+  - Type: 2
+    Name: Joy10-Axis28
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 27
+    JoyNum: 10
+  - Type: 0
+    Name: Joy10-Button00
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 0
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 10
+  - Type: 0
+    Name: Joy10-Button01
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 1
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 10
+  - Type: 0
+    Name: Joy10-Button02
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 2
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 10
+  - Type: 0
+    Name: Joy10-Button03
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 3
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 10
+  - Type: 0
+    Name: Joy10-Button04
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 4
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 10
+  - Type: 0
+    Name: Joy10-Button05
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 5
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 10
+  - Type: 0
+    Name: Joy10-Button06
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 6
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 10
+  - Type: 0
+    Name: Joy10-Button07
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 7
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 10
+  - Type: 0
+    Name: Joy10-Button08
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 8
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 10
+  - Type: 0
+    Name: Joy10-Button09
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 9
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 10
+  - Type: 0
+    Name: Joy10-Button10
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 10
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 10
+  - Type: 0
+    Name: Joy10-Button11
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 11
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 10
+  - Type: 0
+    Name: Joy10-Button12
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 12
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 10
+  - Type: 0
+    Name: Joy10-Button13
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 13
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 10
+  - Type: 0
+    Name: Joy10-Button14
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 14
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 10
+  - Type: 0
+    Name: Joy10-Button15
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 15
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 10
+  - Type: 0
+    Name: Joy10-Button16
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 16
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 10
+  - Type: 0
+    Name: Joy10-Button17
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 17
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 10
+  - Type: 0
+    Name: Joy10-Button18
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 18
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 10
+  - Type: 0
+    Name: Joy10-Button19
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 19
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 10
+  - Type: 2
+    Name: Joy11-Axis01
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 11
+  - Type: 2
+    Name: Joy11-Axis02
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 1
+    JoyNum: 11
+  - Type: 2
+    Name: Joy11-Axis03
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 2
+    JoyNum: 11
+  - Type: 2
+    Name: Joy11-Axis04
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 3
+    JoyNum: 11
+  - Type: 2
+    Name: Joy11-Axis05
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 4
+    JoyNum: 11
+  - Type: 2
+    Name: Joy11-Axis06
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 5
+    JoyNum: 11
+  - Type: 2
+    Name: Joy11-Axis07
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 6
+    JoyNum: 11
+  - Type: 2
+    Name: Joy11-Axis08
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 7
+    JoyNum: 11
+  - Type: 2
+    Name: Joy11-Axis09
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 8
+    JoyNum: 11
+  - Type: 2
+    Name: Joy11-Axis10
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 9
+    JoyNum: 11
+  - Type: 2
+    Name: Joy11-Axis11
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 10
+    JoyNum: 11
+  - Type: 2
+    Name: Joy11-Axis12
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 11
+    JoyNum: 11
+  - Type: 2
+    Name: Joy11-Axis13
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 12
+    JoyNum: 11
+  - Type: 2
+    Name: Joy11-Axis14
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 13
+    JoyNum: 11
+  - Type: 2
+    Name: Joy11-Axis15
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 14
+    JoyNum: 11
+  - Type: 2
+    Name: Joy11-Axis16
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 15
+    JoyNum: 11
+  - Type: 2
+    Name: Joy11-Axis17
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 16
+    JoyNum: 11
+  - Type: 2
+    Name: Joy11-Axis18
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 17
+    JoyNum: 11
+  - Type: 2
+    Name: Joy11-Axis19
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 18
+    JoyNum: 11
+  - Type: 2
+    Name: Joy11-Axis20
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 19
+    JoyNum: 11
+  - Type: 2
+    Name: Joy11-Axis21
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 20
+    JoyNum: 11
+  - Type: 2
+    Name: Joy11-Axis22
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 21
+    JoyNum: 11
+  - Type: 2
+    Name: Joy11-Axis23
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 22
+    JoyNum: 11
+  - Type: 2
+    Name: Joy11-Axis24
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 23
+    JoyNum: 11
+  - Type: 2
+    Name: Joy11-Axis25
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 24
+    JoyNum: 11
+  - Type: 2
+    Name: Joy11-Axis26
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 25
+    JoyNum: 11
+  - Type: 2
+    Name: Joy11-Axis27
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 26
+    JoyNum: 11
+  - Type: 2
+    Name: Joy11-Axis28
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 27
+    JoyNum: 11
+  - Type: 0
+    Name: Joy11-Button00
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 0
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 11
+  - Type: 0
+    Name: Joy11-Button01
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 1
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 11
+  - Type: 0
+    Name: Joy11-Button02
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 2
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 11
+  - Type: 0
+    Name: Joy11-Button03
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 3
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 11
+  - Type: 0
+    Name: Joy11-Button04
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 4
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 11
+  - Type: 0
+    Name: Joy11-Button05
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 5
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 11
+  - Type: 0
+    Name: Joy11-Button06
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 6
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 11
+  - Type: 0
+    Name: Joy11-Button07
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 7
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 11
+  - Type: 0
+    Name: Joy11-Button08
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 8
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 11
+  - Type: 0
+    Name: Joy11-Button09
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 9
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 11
+  - Type: 0
+    Name: Joy11-Button10
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 10
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 11
+  - Type: 0
+    Name: Joy11-Button11
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 11
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 11
+  - Type: 0
+    Name: Joy11-Button12
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 12
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 11
+  - Type: 0
+    Name: Joy11-Button13
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 13
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 11
+  - Type: 0
+    Name: Joy11-Button14
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 14
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 11
+  - Type: 0
+    Name: Joy11-Button15
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 15
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 11
+  - Type: 0
+    Name: Joy11-Button16
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 16
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 11
+  - Type: 0
+    Name: Joy11-Button17
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 17
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 11
+  - Type: 0
+    Name: Joy11-Button18
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 18
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 11
+  - Type: 0
+    Name: Joy11-Button19
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 19
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 11
+  - Type: 1
+    Name: MouseAxis1
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 0
+  - Type: 1
+    Name: MouseAxis2
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 1
+    JoyNum: 0
+  - Type: 1
+    Name: MouseAxis3
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 2
+    JoyNum: 0
+  - Type: 0
+    Name: MouseButton0
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: mouse 0
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 0
+  - Type: 0
+    Name: MouseButton1
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: mouse 1
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 0
+  - Type: 0
+    Name: MouseButton2
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: mouse 2
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 0
+  - Type: 0
+    Name: MouseButton3
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: mouse 3
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 0
+  - Type: 0
+    Name: MouseButton4
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: mouse 4
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 0
+  - Type: 0
+    Name: MouseButton5
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: mouse 5
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 0
+  - Type: 0
+    Name: MouseButton6
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: mouse 6
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 0

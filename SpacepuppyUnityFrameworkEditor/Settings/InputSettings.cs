@@ -494,7 +494,11 @@ namespace com.spacepuppyeditor.Settings
                     var obj = this.serializedObject.targetObject as InputSettings;
                     if (obj != null)
                     {
+                        Undo.RecordObject(obj, "Load Global InputSettings to InputSettings Asset");
                         obj.CopyFromGlobal(true);
+                        EditorUtility.SetDirty(obj);
+                        AssetDatabase.SaveAssets();
+                        Selection.activeObject = obj;
                         this.serializedObject.Update();
                     }
                 }
@@ -506,7 +510,7 @@ namespace com.spacepuppyeditor.Settings
         private void DrawDetailArea()
         {
             EditorGUILayout.BeginVertical("Box");
-            if (_entryList.index >= 0)
+            if (_entryList.index >= 0 && _entryList.index < _entryList.serializedProperty.arraySize)
             {
                 var element = _entryList.serializedProperty.GetArrayElementAtIndex(_entryList.index);
 

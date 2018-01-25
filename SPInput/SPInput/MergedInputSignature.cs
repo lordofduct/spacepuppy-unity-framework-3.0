@@ -4,7 +4,7 @@ using System.Linq;
 
 using com.spacepuppy.Collections;
 
-namespace com.spacepuppy.UserInput
+namespace com.spacepuppy.SPInput
 {
 
     /// <summary>
@@ -12,7 +12,7 @@ namespace com.spacepuppy.UserInput
     /// The order of precedence is in the order of the signatures in the list.
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public abstract class CompositeInputSignature<T> : BaseInputSignature where T : IInputSignature
+    public abstract class MergedInputSignature<T> : BaseInputSignature where T : IInputSignature
     {
 
         #region Fields
@@ -23,16 +23,11 @@ namespace com.spacepuppy.UserInput
 
         #region CONSTRUCTOR
 
-        public CompositeInputSignature(string id)
+        public MergedInputSignature(string id)
             : base(id)
         {
         }
-
-        public CompositeInputSignature(string id, int hash)
-            : base(id, hash)
-        {
-        }
-
+        
         #endregion
 
         #region Properties
@@ -48,7 +43,7 @@ namespace com.spacepuppy.UserInput
         public override void Update()
         {
             var e = _signatures.GetEnumerator();
-            while(e.MoveNext())
+            while (e.MoveNext())
             {
                 e.Current.Update();
             }
@@ -67,7 +62,7 @@ namespace com.spacepuppy.UserInput
 
     }
 
-    public class CompositeButtonInputSignature : CompositeInputSignature<IButtonInputSignature>, IButtonInputSignature
+    public class MergedButtonInputSignature : MergedInputSignature<IButtonInputSignature>, IButtonInputSignature
     {
 
         private ButtonState _current;
@@ -76,14 +71,16 @@ namespace com.spacepuppy.UserInput
 
         #region CONSTRUCTOR
 
-        public CompositeButtonInputSignature(string id)
+        public MergedButtonInputSignature(string id)
             : base(id)
         {
         }
 
-        public CompositeButtonInputSignature(string id, int hash)
-            : base(id, hash)
+        public MergedButtonInputSignature(string id, IButtonInputSignature a, IButtonInputSignature b)
+            : base(id)
         {
+            this.Signatures.Add(a);
+            this.Signatures.Add(b);
         }
 
         #endregion
@@ -126,9 +123,9 @@ namespace com.spacepuppy.UserInput
 
             bool down = false;
             var e = this.SignaturesSet.GetEnumerator();
-            while(e.MoveNext())
+            while (e.MoveNext())
             {
-                if(e.Current.GetCurrentState(false) >= ButtonState.Down)
+                if (e.Current.GetCurrentState(false) >= ButtonState.Down)
                 {
                     down = true;
                     break;
@@ -158,138 +155,176 @@ namespace com.spacepuppy.UserInput
         }
     }
 
-    public class CompositeAxleInputSignature : CompositeInputSignature<IAxleInputSignature>, IAxleInputSignature
+    public class MergedAxleInputSignature : MergedInputSignature<IAxleInputSignature>, IAxleInputSignature
     {
 
-        private CompositeAxlePrecedence _axlePrecedence;
+        private MergedAxlePrecedence _axlePrecedence;
 
         #region CONSTRUCTOR
 
-        public CompositeAxleInputSignature(string id)
+        public MergedAxleInputSignature(string id)
             : base(id)
         {
         }
 
-        public CompositeAxleInputSignature(string id, int hash)
-            : base(id, hash)
+        public MergedAxleInputSignature(string id, IAxleInputSignature a, IAxleInputSignature b)
+            : base(id)
         {
+            this.Signatures.Add(a);
+            this.Signatures.Add(b);
         }
 
         #endregion
 
-        public CompositeAxlePrecedence AxlePrecedence
+        public MergedAxlePrecedence AxlePrecedence
         {
             get { return _axlePrecedence; }
             set { _axlePrecedence = value; }
+        }
+
+        public float DeadZone
+        {
+            get;
+            set;
+        }
+
+        public DeadZoneCutoff Cutoff
+        {
+            get;
+            set;
         }
 
         public float CurrentState
         {
             get
             {
+                float result = 0f;
+
                 switch (_axlePrecedence)
                 {
-                    case CompositeAxlePrecedence.Largest:
+                    case MergedAxlePrecedence.Largest:
                         if (this.SignaturesSet.Count > 0)
                         {
-                            float v = 0f;
                             var e = this.SignaturesSet.GetEnumerator();
                             while (e.MoveNext())
                             {
-                                if (e.Current.CurrentState >= 0f) v = e.Current.CurrentState;
+                                if (e.Current.CurrentState >= 0f) result = e.Current.CurrentState;
                             }
-                            return v;
                         }
                         break;
-                    case CompositeAxlePrecedence.Smallest:
+                    case MergedAxlePrecedence.Smallest:
                         if (this.Signatures.Count > 0)
                         {
-                            float v = float.PositiveInfinity;
+                            result = float.PositiveInfinity;
                             var e = this.SignaturesSet.GetEnumerator();
                             while (e.MoveNext())
                             {
                                 float s = e.Current.CurrentState;
-                                if (s > 0f && s < v) v = e.Current.CurrentState;
+                                if (s > 0f && s < result) result = e.Current.CurrentState;
                             }
-                            return (float.IsPositiveInfinity(v)) ? 0f : v;
+                            if (float.IsPositiveInfinity(result)) result = 0f;
                         }
                         break;
                 }
-                return 0f;
+
+                return InputUtil.CutoffAxis(result, this.DeadZone, this.Cutoff);
             }
         }
     }
 
-    public class CompositeDualAxleInputSignature : CompositeInputSignature<IDualAxleInputSignature>, IDualAxleInputSignature
+    public class MergedDualAxleInputSignature : MergedInputSignature<IDualAxleInputSignature>, IDualAxleInputSignature
     {
 
-        private CompositeAxlePrecedence _axlePrecedence;
+        private MergedAxlePrecedence _axlePrecedence;
 
         #region CONSTRUCTOR
 
-        public CompositeDualAxleInputSignature(string id)
+        public MergedDualAxleInputSignature(string id)
             : base(id)
         {
         }
 
-        public CompositeDualAxleInputSignature(string id, int hash)
-            : base(id, hash)
+        public MergedDualAxleInputSignature(string id, IDualAxleInputSignature a, IDualAxleInputSignature b)
+            : base(id)
         {
+            this.Signatures.Add(a);
+            this.Signatures.Add(b);
         }
 
         #endregion
 
-        public CompositeAxlePrecedence AxlePrecedence
+        public MergedAxlePrecedence AxlePrecedence
         {
             get { return _axlePrecedence; }
             set { _axlePrecedence = value; }
+        }
+
+        public float DeadZone
+        {
+            get;
+            set;
+        }
+
+        public DeadZoneCutoff Cutoff
+        {
+            get;
+            set;
+        }
+
+        public float RadialDeadZone
+        {
+            get;
+            set;
+        }
+
+        public DeadZoneCutoff RadialCutoff
+        {
+            get;
+            set;
         }
 
         public Vector2 CurrentState
         {
             get
             {
+                Vector2 result = Vector2.zero;
                 switch (_axlePrecedence)
                 {
-                    case CompositeAxlePrecedence.Largest:
+                    case MergedAxlePrecedence.Largest:
                         if (this.Signatures.Count > 0)
                         {
-                            Vector2 v = Vector2.zero;
                             float mag = 0f;
                             var e = this.SignaturesSet.GetEnumerator();
-                            while(e.MoveNext())
+                            while (e.MoveNext())
                             {
-                                if(e.Current.CurrentState.sqrMagnitude > mag)
+                                if (e.Current.CurrentState.sqrMagnitude > mag)
                                 {
-                                    v = e.Current.CurrentState;
-                                    mag = v.sqrMagnitude;
+                                    result = e.Current.CurrentState;
+                                    mag = result.sqrMagnitude;
                                 }
                             }
-                            return v;
                         }
                         break;
-                    case CompositeAxlePrecedence.Smallest:
+                    case MergedAxlePrecedence.Smallest:
                         if (this.Signatures.Count > 0)
                         {
-                            Vector2 v = Vector2.zero;
                             float mag = float.PositiveInfinity;
                             var e = this.SignaturesSet.GetEnumerator();
                             while (e.MoveNext())
                             {
                                 if (e.Current.CurrentState.sqrMagnitude < mag)
                                 {
-                                    v = e.Current.CurrentState;
-                                    mag = v.sqrMagnitude;
+                                    result = e.Current.CurrentState;
+                                    mag = result.sqrMagnitude;
                                 }
                             }
-                            return v;
                         }
                         break;
                 }
-                return Vector2.zero;
+
+                return InputUtil.CutoffDualAxis(result, this.DeadZone, this.Cutoff, this.RadialDeadZone, this.RadialCutoff);
             }
         }
     }
 
 }
-

@@ -1,13 +1,13 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
 
-namespace com.spacepuppy.UserInput
+namespace com.spacepuppy.SPInput
 {
 
     public interface IInputSignature
     {
 
         string Id { get; }
-        int Hash { get; }
         float Precedence { get; set; }
 
         /// <summary>
@@ -41,11 +41,20 @@ namespace com.spacepuppy.UserInput
     {
         float CurrentState { get; }
 
+        float DeadZone { get; set; }
+        DeadZoneCutoff Cutoff { get; set; }
+
     }
 
     public interface IDualAxleInputSignature : IInputSignature
     {
         Vector2 CurrentState { get; }
+
+        float DeadZone { get; set; }
+        DeadZoneCutoff Cutoff { get; set; }
+        float RadialDeadZone { get; set; }
+        DeadZoneCutoff RadialCutoff { get; set; }
+
     }
 
     public interface ICursorInputSignature : IInputSignature
@@ -55,49 +64,26 @@ namespace com.spacepuppy.UserInput
 
     public abstract class BaseInputSignature : IInputSignature
     {
-
-        #region Static Interface
-
-        private static int _lastHash = 0;
-
-        public static int GetNextHash()
-        {
-            _lastHash++;
-            return _lastHash;
-        }
-
-        #endregion
-
-
+        
         #region Fields
 
         private string _id;
-        private int _hash;
 
         #endregion
-
+        
         #region CONSTRUCTOR
 
         public BaseInputSignature(string id)
         {
             _id = id;
-            _hash = BaseInputSignature.GetNextHash();
         }
-
-        public BaseInputSignature(string id, int hash)
-        {
-            _id = id;
-            _hash = hash;
-        }
-
+        
         #endregion
 
         #region IInputSignature Interfacce
 
         public string Id { get { return _id; } }
-
-        public int Hash { get { return _hash; } }
-
+        
         public float Precedence { get; set; }
 
         public abstract void Update();
@@ -108,16 +94,7 @@ namespace com.spacepuppy.UserInput
         }
 
         #endregion
-
-        #region HashCodeOverride
-
-        public override int GetHashCode()
-        {
-            return _hash;
-        }
-
-        #endregion
-
+        
     }
 
 }

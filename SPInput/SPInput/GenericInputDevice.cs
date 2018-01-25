@@ -1,10 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-namespace com.spacepuppy.UserInput
-{
+using com.spacepuppy.Collections;
 
-    public class GenericPlayerInputDevice : IPlayerInputDevice
+namespace com.spacepuppy.SPInput
+{
+    public class GenericInputDevice : IInputDevice
     {
 
         #region Fields
@@ -17,7 +18,7 @@ namespace com.spacepuppy.UserInput
 
         #region CONSTRUCTOR
 
-        public GenericPlayerInputDevice(string id)
+        public GenericInputDevice(string id)
         {
             _id = id;
         }
@@ -42,7 +43,7 @@ namespace com.spacepuppy.UserInput
             get { return _id.GetHashCode(); }
         }
 
-        public float Precedence
+        float IInputSignature.Precedence
         {
             get
             {
@@ -86,7 +87,7 @@ namespace com.spacepuppy.UserInput
             set { _active = value; }
         }
 
-        public ButtonState GetCurrentButtonState(string id)
+        public ButtonState GetButtonState(string id)
         {
             var sig = _signatures.GetSignature(id);
             if (sig == null) return ButtonState.None;
@@ -94,16 +95,7 @@ namespace com.spacepuppy.UserInput
 
             return (sig as IButtonInputSignature).CurrentState;
         }
-
-        public ButtonState GetCurrentButtonState(int hash)
-        {
-            var sig = _signatures.GetSignature(hash);
-            if (sig == null) return ButtonState.None;
-            if (!(sig is IButtonInputSignature)) return ButtonState.None;
-
-            return (sig as IButtonInputSignature).CurrentState;
-        }
-
+        
         public bool GetButtonPressed(string id, float duration)
         {
             var sig = _signatures.GetSignature(id);
@@ -112,17 +104,8 @@ namespace com.spacepuppy.UserInput
 
             return (sig as IButtonInputSignature).GetPressed(duration, GameLoop.CurrentSequence == UpdateSequence.FixedUpdate);
         }
-
-        public bool GetButtonPressed(int hash, float duration)
-        {
-            var sig = _signatures.GetSignature(hash);
-            if (sig == null) return false;
-            if (!(sig is IButtonInputSignature)) return false;
-
-            return (sig as IButtonInputSignature).GetPressed(duration, GameLoop.CurrentSequence == UpdateSequence.FixedUpdate);
-        }
-
-        public float GetCurrentAxleState(string id)
+        
+        public float GetAxleState(string id)
         {
             var sig = _signatures.GetSignature(id);
             if (sig == null) return 0f;
@@ -130,17 +113,8 @@ namespace com.spacepuppy.UserInput
 
             return (sig as IAxleInputSignature).CurrentState;
         }
-
-        public float GetCurrentAxleState(int hash)
-        {
-            var sig = _signatures.GetSignature(hash);
-            if (sig == null) return 0f;
-            if (!(sig is IAxleInputSignature)) return 0f;
-
-            return (sig as IAxleInputSignature).CurrentState;
-        }
-
-        public Vector2 GetCurrentDualAxleState(string id)
+        
+        public Vector2 GetDualAxleState(string id)
         {
             var sig = _signatures.GetSignature(id);
             if (sig == null) return Vector2.zero;
@@ -148,17 +122,8 @@ namespace com.spacepuppy.UserInput
 
             return (sig as IDualAxleInputSignature).CurrentState;
         }
-
-        public Vector2 GetCurrentDualAxleState(int hash)
-        {
-            var sig = _signatures.GetSignature(hash);
-            if (sig == null) return Vector2.zero;
-            if (!(sig is IDualAxleInputSignature)) return Vector2.zero;
-
-            return (sig as IDualAxleInputSignature).CurrentState;
-        }
-
-        public Vector2 GetCurrentCursorState(string id)
+        
+        public Vector2 GetCursorState(string id)
         {
             var sig = _signatures.GetSignature(id);
             if (sig == null) return Vector2.zero;
@@ -166,16 +131,7 @@ namespace com.spacepuppy.UserInput
 
             return (sig as ICursorInputSignature).CurrentState;
         }
-
-        public Vector2 GetCurrentCursorState(int hash)
-        {
-            var sig = _signatures.GetSignature(hash);
-            if (sig == null) return Vector2.zero;
-            if (!(sig is ICursorInputSignature)) return Vector2.zero;
-
-            return (sig as ICursorInputSignature).CurrentState;
-        }
-
+        
         #endregion
 
         #region HashCodeOverride
@@ -186,7 +142,6 @@ namespace com.spacepuppy.UserInput
         }
 
         #endregion
-
+        
     }
-
 }

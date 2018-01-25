@@ -1,0 +1,284 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1280285467, guid: dfa078fdcb45b1e4cb494f9c484ca733, type: 3}
+  m_Name: StandardInputSettings
+  m_EditorClassIdentifier: 
+  _entries:
+  - Type: 0
+    Name: Horizontal
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: left
+    PositiveButton: right
+    AltNegativeButton: a
+    AltPositiveButton: d
+    Gravity: 3
+    Dead: 0.001
+    Sensitivity: 3
+    Snap: 1
+    Invert: 0
+    Axis: 0
+    JoyNum: 0
+  - Type: 0
+    Name: Vertical
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: down
+    PositiveButton: up
+    AltNegativeButton: s
+    AltPositiveButton: w
+    Gravity: 3
+    Dead: 0.001
+    Sensitivity: 3
+    Snap: 1
+    Invert: 0
+    Axis: 0
+    JoyNum: 0
+  - Type: 0
+    Name: Fire1
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: left ctrl
+    AltNegativeButton: 
+    AltPositiveButton: mouse 0
+    Gravity: 1000
+    Dead: 0.001
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 0
+  - Type: 0
+    Name: Fire2
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: left alt
+    AltNegativeButton: 
+    AltPositiveButton: mouse 1
+    Gravity: 1000
+    Dead: 0.001
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 0
+  - Type: 0
+    Name: Fire3
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: left shift
+    AltNegativeButton: 
+    AltPositiveButton: mouse 2
+    Gravity: 1000
+    Dead: 0.001
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 0
+  - Type: 0
+    Name: Jump
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: space
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 1000
+    Dead: 0.001
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 0
+  - Type: 1
+    Name: Mouse X
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 0.1
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 0
+  - Type: 1
+    Name: Mouse Y
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 0.1
+    Snap: 0
+    Invert: 0
+    Axis: 1
+    JoyNum: 0
+  - Type: 1
+    Name: Mouse ScrollWheel
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0
+    Sensitivity: 0.1
+    Snap: 0
+    Invert: 0
+    Axis: 2
+    JoyNum: 0
+  - Type: 2
+    Name: Horizontal
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0.19
+    Sensitivity: 1
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 0
+  - Type: 2
+    Name: Vertical
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: 
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 0
+    Dead: 0.19
+    Sensitivity: 1
+    Snap: 0
+    Invert: 1
+    Axis: 1
+    JoyNum: 0
+  - Type: 0
+    Name: Fire1
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 0
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 1000
+    Dead: 0.001
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 0
+  - Type: 0
+    Name: Fire2
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 1
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 1000
+    Dead: 0.001
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 0
+  - Type: 0
+    Name: Fire3
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 2
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 1000
+    Dead: 0.001
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 0
+  - Type: 0
+    Name: Jump
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: joystick button 3
+    AltNegativeButton: 
+    AltPositiveButton: 
+    Gravity: 1000
+    Dead: 0.001
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 0
+  - Type: 0
+    Name: Submit
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: return
+    AltNegativeButton: 
+    AltPositiveButton: joystick button 0
+    Gravity: 1000
+    Dead: 0.001
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 0
+  - Type: 0
+    Name: Submit
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: enter
+    AltNegativeButton: 
+    AltPositiveButton: space
+    Gravity: 1000
+    Dead: 0.001
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 0
+  - Type: 0
+    Name: Cancel
+    DescriptiveName: 
+    DescriptiveNameNegative: 
+    NegativeButton: 
+    PositiveButton: escape
+    AltNegativeButton: 
+    AltPositiveButton: joystick button 1
+    Gravity: 1000
+    Dead: 0.001
+    Sensitivity: 1000
+    Snap: 0
+    Invert: 0
+    Axis: 0
+    JoyNum: 0

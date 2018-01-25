@@ -41,23 +41,47 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IInputManager.cs" />
-    <Compile Include="UserInput\CompositeInputSignature.cs" />
-    <Compile Include="UserInput\Enums.cs" />
-    <Compile Include="UserInput\Events\t_OnSimpleButtonPress.cs" />
-    <Compile Include="UserInput\GenericPlayerInputDevice.cs" />
-    <Compile Include="UserInput\SPInputManager.cs" />
-    <Compile Include="UserInput\IInputSignature.cs" />
-    <Compile Include="UserInput\InputSignatureCollection.cs" />
-    <Compile Include="UserInput\InputUtil.cs" />
-    <Compile Include="UserInput\IPlayerInputDevice.cs" />
+    <Compile Include="SPInput\CompositeInputSignature.cs" />
+    <Compile Include="SPInput\Enums.cs" />
+    <Compile Include="SPInput\Events\t_OnSimpleButtonPress.cs" />
+    <Compile Include="SPInput\GenericInputDevice.cs" />
+    <Compile Include="SPInput\IMappedInputDevice.cs" />
+    <Compile Include="SPInput\MappedInputDevice.cs" />
+    <Compile Include="SPInput\MappedInputSignatureCollection.cs" />
+    <Compile Include="SPInput\MergedInputSignature.cs" />
+    <Compile Include="SPInput\SPInputManager.cs" />
+    <Compile Include="SPInput\IInputSignature.cs" />
+    <Compile Include="SPInput\InputSignatureCollection.cs" />
+    <Compile Include="SPInput\InputUtil.cs" />
+    <Compile Include="SPInput\IInputDevice.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UserInput\Unity\UnityInputSignatures.cs" />
+    <Compile Include="SPInput\Unity\Enums.cs" />
+    <Compile Include="SPInput\Unity\IInputProfile.cs" />
+    <Compile Include="SPInput\Unity\InputProfileDescriptionAttributes.cs" />
+    <Compile Include="SPInput\Unity\InputProfileLookupTable.cs" />
+    <Compile Include="SPInput\Unity\SPInputDirect.cs" />
+    <Compile Include="SPInput\Unity\SPInputFactory.cs" />
+    <Compile Include="SPInput\Unity\UnityInputSignatures.cs" />
+    <Compile Include="SPInput\Unity\Xbox\IXboxInputProfile.cs" />
+    <Compile Include="SPInput\Unity\Xbox\Profiles\PS4LinuxProfile.cs" />
+    <Compile Include="SPInput\Unity\Xbox\Profiles\PS4MacOSBTProfile.cs" />
+    <Compile Include="SPInput\Unity\Xbox\Profiles\PS4MacOSUSBProfile.cs" />
+    <Compile Include="SPInput\Unity\Xbox\Profiles\PS4WinProfile.cs" />
+    <Compile Include="SPInput\Unity\Xbox\Profiles\Xbox360LinuxProfile.cs" />
+    <Compile Include="SPInput\Unity\Xbox\Profiles\Xbox360MacOSProfile.cs" />
+    <Compile Include="SPInput\Unity\Xbox\Profiles\Xbox360WinProfile.cs" />
+    <Compile Include="SPInput\Unity\Xbox\XboxControllerEnums.cs" />
+    <Compile Include="SPInput\Unity\Xbox\XboxInputProfile.cs" />
+    <Compile Include="SPInput\Unity\Xbox\XboxInputProfileLookupTable.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SpacepuppyUnityFramework\SpacepuppyUnityFramework.csproj">
       <Project>{3b57db6b-ba67-46ad-b929-fdd8e6ae511e}</Project>
       <Name>SpacepuppyUnityFramework</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="SPInput\Unity\Xbox\README.md" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

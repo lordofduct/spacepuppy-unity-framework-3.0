@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System;
 
-namespace com.spacepuppy.UserInput.Unity
+namespace com.spacepuppy.SPInput.Unity
 {
 
     public class ButtonInputSignature : BaseInputSignature, IButtonInputSignature
@@ -20,12 +20,6 @@ namespace com.spacepuppy.UserInput.Unity
 
         public ButtonInputSignature(string id, string unityInputId)
             : base(id)
-        {
-            this.UnityInputId = unityInputId;
-        }
-
-        public ButtonInputSignature(string id, int hash, string unityInputId)
-            : base(id, hash)
         {
             this.UnityInputId = unityInputId;
         }
@@ -106,14 +100,9 @@ namespace com.spacepuppy.UserInput.Unity
     public class AxleButtonInputSignature : BaseInputSignature, IButtonInputSignature
     {
 
-        #region Fields
+        public const float DEFAULT_BTNDEADZONE = 0.707f;
 
-        public enum AxleValueConsideration
-        {
-            Positive = 0,
-            Negative = 1,
-            Absolute = 2
-        }
+        #region Fields
 
         private ButtonState _current;
         private ButtonState _currentFixed;
@@ -123,18 +112,10 @@ namespace com.spacepuppy.UserInput.Unity
 
         #region CONSTRUCTOR
 
-        public AxleButtonInputSignature(string id, string unityInputId, AxleValueConsideration consideration = AxleValueConsideration.Positive)
+        public AxleButtonInputSignature(string id, string unityInputId, AxleValueConsideration consideration = AxleValueConsideration.Positive, float axisButtnDeadZone = DEFAULT_BTNDEADZONE)
             : base(id)
         {
-            this.AxisButtonDeadZone = 0.707f;
-            this.UnityInputId = unityInputId;
-            this.Consideration = consideration;
-        }
-
-        public AxleButtonInputSignature(string id, int hash, string unityInputId, AxleValueConsideration consideration = AxleValueConsideration.Positive)
-            : base(id, hash)
-        {
-            this.AxisButtonDeadZone = 0.5f;
+            this.AxisButtonDeadZone = axisButtnDeadZone;
             this.UnityInputId = unityInputId;
             this.Consideration = consideration;
         }
@@ -260,7 +241,7 @@ namespace com.spacepuppy.UserInput.Unity
 
         #region Fields
 
-        private float _current;
+        //private float _current;
 
         #endregion
 
@@ -272,23 +253,11 @@ namespace com.spacepuppy.UserInput.Unity
             this.UnityInputId = unityInputId;
         }
 
-        public AxleInputSignature(string id, int hash, string unityInputId)
-            : base(id, hash)
-        {
-            this.UnityInputId = unityInputId;
-        }
-
         #endregion
 
         #region Properties
 
         public string UnityInputId
-        {
-            get;
-            set;
-        }
-
-        public float DeadZone
         {
             get;
             set;
@@ -310,7 +279,23 @@ namespace com.spacepuppy.UserInput.Unity
 
         #region IAxleInputSignature Interface
 
-        public float CurrentState { get { return _current; } }
+        public float CurrentState
+        {
+            get
+            {
+                //return _current;
+
+                var v = Input.GetAxis(this.UnityInputId);
+                if (this.Invert) v *= -1;
+                return InputUtil.CutoffAxis(v, this.DeadZone, this.Cutoff);
+            }
+        }
+
+        public float DeadZone
+        {
+            get;
+            set;
+        }
 
         #endregion
 
@@ -318,9 +303,11 @@ namespace com.spacepuppy.UserInput.Unity
 
         public override void Update()
         {
+            /*
             var v = Input.GetAxis(this.UnityInputId);
             if (this.Invert) v *= -1;
             _current = InputUtil.CutoffAxis(v, this.DeadZone, this.Cutoff);
+            */
         }
 
         #endregion
@@ -335,7 +322,7 @@ namespace com.spacepuppy.UserInput.Unity
         private string _xAxisId;
         private string _yAxisId;
 
-        private Vector2 _current;
+        //private Vector2 _current;
 
         #endregion
 
@@ -343,13 +330,6 @@ namespace com.spacepuppy.UserInput.Unity
 
         public DualAxleInputSignature(string id, string xAxisId, string yAxisId)
             : base(id)
-        {
-            _xAxisId = xAxisId;
-            _yAxisId = yAxisId;
-        }
-
-        public DualAxleInputSignature(string id, int hash, string xAxisId, string yAxisId)
-            : base(id, hash)
         {
             _xAxisId = xAxisId;
             _yAxisId = yAxisId;
@@ -371,13 +351,7 @@ namespace com.spacepuppy.UserInput.Unity
             set { _yAxisId = value; }
         }
 
-        public float AxleDeadZone
-        {
-            get;
-            set;
-        }
-
-        public DeadZoneCutoff AxleCutoff
+        public DeadZoneCutoff Cutoff
         {
             get;
             set;
@@ -405,13 +379,42 @@ namespace com.spacepuppy.UserInput.Unity
             set;
         }
 
+        public bool InvertX
+        {
+            get;
+            set;
+        }
+
+        public bool InvertY
+        {
+            get;
+            set;
+        }
+
         #endregion
 
         #region IDualAxleInputSignature Interface
 
         public Vector2 CurrentState
         {
-            get { return _current; }
+            get
+            {
+                //return _current;
+                Vector2 v = new Vector2(Input.GetAxis(_xAxisId), Input.GetAxis(_yAxisId));
+                if (this.InvertX) v.x = -v.x;
+                if (this.InvertY) v.y = -v.y;
+                if (this.RadialNormalizeButtonInput && (Input.GetButton(_xAxisId) || Input.GetButton(_yAxisId)))
+                {
+                    if (v.sqrMagnitude > 1f) v.Normalize();
+                }
+                return InputUtil.CutoffDualAxis(v, this.DeadZone, this.Cutoff, this.RadialDeadZone, this.RadialCutoff);
+            }
+        }
+
+        public float DeadZone
+        {
+            get;
+            set;
         }
 
         #endregion
@@ -420,12 +423,14 @@ namespace com.spacepuppy.UserInput.Unity
 
         public override void Update()
         {
+            /*
             Vector2 v = new Vector2(Input.GetAxis(_xAxisId), Input.GetAxis(_yAxisId));
             if (this.RadialNormalizeButtonInput && (Input.GetButton(_xAxisId) || Input.GetButton(_yAxisId)))
             {
                 if (v.sqrMagnitude > 1f) v.Normalize();
             }
-            _current = InputUtil.CutoffDualAxis(v, this.AxleDeadZone, this.AxleCutoff, this.RadialDeadZone, this.RadialCutoff);
+            _current = InputUtil.CutoffDualAxis(v, this.DeadZone, this.Cutoff, this.RadialDeadZone, this.RadialCutoff);
+            */
         }
 
         #endregion
@@ -438,12 +443,6 @@ namespace com.spacepuppy.UserInput.Unity
 
         public MouseCursorInputSignature(string id)
             : base(id)
-        {
-
-        }
-
-        public MouseCursorInputSignature(string id, int hash)
-            : base(id, hash)
         {
 
         }
@@ -480,12 +479,6 @@ namespace com.spacepuppy.UserInput.Unity
 
         public MouseClickInputSignature(string id, int mouseButton)
             : base(id)
-        {
-            this.MouseButton = mouseButton;
-        }
-
-        public MouseClickInputSignature(string id, int hash, int mouseButton)
-            : base(id, hash)
         {
             this.MouseButton = mouseButton;
         }
@@ -578,12 +571,6 @@ namespace com.spacepuppy.UserInput.Unity
             this.Key = key;
         }
 
-        public KeyboardButtonInputSignature(string id, int hash, KeyCode key)
-            : base(id, hash)
-        {
-            this.Key = key;
-        }
-
         #endregion
 
         #region Properties
@@ -668,7 +655,7 @@ namespace com.spacepuppy.UserInput.Unity
 
         #region Fields
 
-        private float _state;
+        //private float _state;
 
         #endregion
 
@@ -676,13 +663,6 @@ namespace com.spacepuppy.UserInput.Unity
 
         public KeyboardAxleInputSignature(string id, KeyCode positiveKey, KeyCode negativeKey)
             : base(id)
-        {
-            this.PositiveKey = positiveKey;
-            this.NegativeKey = negativeKey;
-        }
-
-        public KeyboardAxleInputSignature(string id, int hash, KeyCode positiveKey, KeyCode negativeKey)
-            : base(id, hash)
         {
             this.PositiveKey = positiveKey;
             this.NegativeKey = negativeKey;
@@ -706,11 +686,35 @@ namespace com.spacepuppy.UserInput.Unity
 
         #endregion
 
-        #region IButtonInputSignature Interface
+        #region IAxleInputSignature Interface
 
         public float CurrentState
         {
-            get { return _state; }
+            get
+            {
+                //return _state;
+
+                if (this.DeadZone > 1f) return 0f;
+
+                if (Input.GetKey(this.PositiveKey))
+                    return Input.GetKey(this.NegativeKey) ? 0f : 1f;
+                else if (Input.GetKey(this.NegativeKey))
+                    return -1f;
+                else
+                    return 0f;
+            }
+        }
+
+        public float DeadZone
+        {
+            get;
+            set;
+        }
+
+        public DeadZoneCutoff Cutoff
+        {
+            get;
+            set;
         }
 
         #endregion
@@ -719,22 +723,30 @@ namespace com.spacepuppy.UserInput.Unity
 
         public override void Update()
         {
+            /*
             if (Input.GetKey(this.PositiveKey))
                 _state = Input.GetKey(this.NegativeKey) ? 0f : 1f;
             else if (Input.GetKey(this.NegativeKey))
                 _state = -1f;
             else
                 _state = 0f;
+
+            if (this.DeadZone > 1f) _state = 0f;
+            */
         }
 
         public override void FixedUpdate()
         {
+            /*
             if (Input.GetKey(this.PositiveKey))
                 _state = Input.GetKey(this.NegativeKey) ? 0f : 1f;
             else if (Input.GetKey(this.NegativeKey))
                 _state = -1f;
             else
                 _state = 0f;
+
+            if (this.DeadZone > 1f) _state = 0f;
+            */
         }
 
         #endregion
@@ -746,7 +758,7 @@ namespace com.spacepuppy.UserInput.Unity
 
         #region Fields
 
-        private Vector2 _state;
+        //private Vector2 _state;
 
         #endregion
 
@@ -754,15 +766,6 @@ namespace com.spacepuppy.UserInput.Unity
 
         public KeyboardDualAxleInputSignature(string id, KeyCode horizontalPositiveKey, KeyCode horizontalNegativeKey, KeyCode verticalPositiveKey, KeyCode verticalNegativeKey)
             : base(id)
-        {
-            this.HorizontalPositiveKey = horizontalPositiveKey;
-            this.HorizontalNegativeKey = horizontalNegativeKey;
-            this.VerticalPositiveKey = verticalPositiveKey;
-            this.VerticalNegativeKey = verticalNegativeKey;
-        }
-
-        public KeyboardDualAxleInputSignature(string id, int hash, KeyCode horizontalPositiveKey, KeyCode horizontalNegativeKey, KeyCode verticalPositiveKey, KeyCode verticalNegativeKey)
-            : base(id, hash)
         {
             this.HorizontalPositiveKey = horizontalPositiveKey;
             this.HorizontalNegativeKey = horizontalNegativeKey;
@@ -804,7 +807,51 @@ namespace com.spacepuppy.UserInput.Unity
 
         public Vector2 CurrentState
         {
-            get { return _state; }
+            get
+            {
+                //return _state;
+
+                Vector2 result = Vector2.zero;
+                if (Input.GetKey(this.HorizontalPositiveKey))
+                    result.x = Input.GetKey(this.HorizontalNegativeKey) ? 0f : 1f;
+                else if (Input.GetKey(this.HorizontalNegativeKey))
+                    result.x = -1f;
+                else
+                    result.x = 0f;
+
+                if (Input.GetKey(this.VerticalPositiveKey))
+                    result.y = Input.GetKey(this.VerticalNegativeKey) ? 0f : 1f;
+                else if (Input.GetKey(this.VerticalNegativeKey))
+                    result.y = -1f;
+                else
+                    result.y = 0f;
+
+                return InputUtil.CutoffDualAxis(result, this.DeadZone, this.Cutoff, this.RadialDeadZone, this.RadialCutoff);
+            }
+        }
+
+        public float DeadZone
+        {
+            get;
+            set;
+        }
+
+        public DeadZoneCutoff Cutoff
+        {
+            get;
+            set;
+        }
+
+        public float RadialDeadZone
+        {
+            get;
+            set;
+        }
+
+        public DeadZoneCutoff RadialCutoff
+        {
+            get;
+            set;
         }
 
         #endregion
@@ -813,6 +860,7 @@ namespace com.spacepuppy.UserInput.Unity
 
         public override void Update()
         {
+            /*
             if (Input.GetKey(this.HorizontalPositiveKey))
                 _state.x = Input.GetKey(this.HorizontalNegativeKey) ? 0f : 1f;
             else if (Input.GetKey(this.HorizontalNegativeKey))
@@ -826,10 +874,14 @@ namespace com.spacepuppy.UserInput.Unity
                 _state.y = -1f;
             else
                 _state.y = 0f;
+
+            _state = InputUtil.CutoffDualAxis(_state, this.DeadZone, this.Cutoff, this.RadialDeadZone, this.RadialCutoff);
+            */
         }
 
         public override void FixedUpdate()
         {
+            /*
             if (Input.GetKey(this.HorizontalPositiveKey))
                 _state.x = Input.GetKey(this.HorizontalNegativeKey) ? 0f : 1f;
             else if (Input.GetKey(this.HorizontalNegativeKey))
@@ -843,6 +895,262 @@ namespace com.spacepuppy.UserInput.Unity
                 _state.y = -1f;
             else
                 _state.y = 0f;
+
+            _state = InputUtil.CutoffDualAxis(_state, this.DeadZone, this.Cutoff, this.RadialDeadZone, this.RadialCutoff);
+            */
+        }
+
+        #endregion
+
+    }
+
+    public class EmulatedAxleInputSignature : BaseInputSignature, IAxleInputSignature
+    {
+
+        #region Fields
+
+        //private float _state;
+
+        #endregion
+
+        #region CONSTRUCTOR
+
+        public EmulatedAxleInputSignature(string id, string positiveBtn, string negativeBtn)
+            : base(id)
+        {
+            this.PositiveButton = positiveBtn;
+            this.NegativeButton = negativeBtn;
+        }
+
+        #endregion
+
+        #region Properties
+
+        public string PositiveButton
+        {
+            get;
+            set;
+        }
+
+        public string NegativeButton
+        {
+            get;
+            set;
+        }
+
+        #endregion
+
+        #region IAxleInputSignature Interface
+
+        public float CurrentState
+        {
+            get
+            {
+                //return _state;
+
+                if (this.DeadZone > 1f) return 0f;
+
+                if (this.PositiveButton != null && Input.GetButton(this.PositiveButton))
+                    return (this.NegativeButton != null && Input.GetButton(this.NegativeButton)) ? 0f : 1f;
+                else if (this.NegativeButton != null && Input.GetButton(this.NegativeButton))
+                    return -1f;
+                else
+                    return 0f;
+            }
+        }
+
+        public float DeadZone
+        {
+            get;
+            set;
+        }
+
+        public DeadZoneCutoff Cutoff
+        {
+            get;
+            set;
+        }
+
+        #endregion
+
+        #region IInputSignature Interfacce
+
+        public override void Update()
+        {
+            /*
+            if (Input.GetButton(this.PositiveButton))
+                _state = Input.GetButton(this.NegativeButton) ? 0f : 1f;
+            else if (Input.GetButton(this.NegativeButton))
+                _state = -1f;
+            else
+                _state = 0f;
+
+            if (this.DeadZone > 1f) _state = 0f;
+            */
+        }
+
+        public override void FixedUpdate()
+        {
+            /*
+            if (Input.GetButton(this.PositiveButton))
+                _state = Input.GetButton(this.NegativeButton) ? 0f : 1f;
+            else if (Input.GetButton(this.NegativeButton))
+                _state = -1f;
+            else
+                _state = 0f;
+
+            if (this.DeadZone > 1f) _state = 0f;
+            */
+        }
+
+        #endregion
+
+    }
+
+    public class EmulatedDualAxleInputSignature : BaseInputSignature, IDualAxleInputSignature
+    {
+
+        #region Fields
+
+        //private Vector2 _state;
+
+        #endregion
+
+        #region CONSTRUCTOR
+
+        public EmulatedDualAxleInputSignature(string id, string horizontalPositiveBtn, string horizontalNegativeBtn, string verticalPositiveBtn, string verticalNegativeBtn)
+            : base(id)
+        {
+            this.HorizontalPositiveButton = horizontalPositiveBtn;
+            this.HorizontalNegativeButton = horizontalNegativeBtn;
+            this.VerticalPositiveButton = verticalPositiveBtn;
+            this.VerticalNegativeButton = verticalNegativeBtn;
+        }
+
+        #endregion
+
+        #region Properties
+
+        public string HorizontalPositiveButton
+        {
+            get;
+            set;
+        }
+
+        public string HorizontalNegativeButton
+        {
+            get;
+            set;
+        }
+
+        public string VerticalPositiveButton
+        {
+            get;
+            set;
+        }
+
+        public string VerticalNegativeButton
+        {
+            get;
+            set;
+        }
+
+        #endregion
+
+        #region IDualAxleInputSignature Interface
+
+        public Vector2 CurrentState
+        {
+            get
+            {
+                //return _state;
+                Vector2 result = Vector2.zero;
+                if (this.HorizontalPositiveButton != null && Input.GetButton(this.HorizontalPositiveButton))
+                    result.x = (this.HorizontalNegativeButton != null && Input.GetButton(this.HorizontalNegativeButton)) ? 0f : 1f;
+                else if (this.HorizontalNegativeButton != null && Input.GetButton(this.HorizontalNegativeButton))
+                    result.x = -1f;
+                else
+                    result.x = 0f;
+
+                if (this.VerticalPositiveButton != null && Input.GetButton(this.VerticalPositiveButton))
+                    result.y = (this.VerticalNegativeButton != null && Input.GetButton(this.VerticalNegativeButton)) ? 0f : 1f;
+                else if (this.VerticalNegativeButton != null && Input.GetButton(this.VerticalNegativeButton))
+                    result.y = -1f;
+                else
+                    result.y = 0f;
+
+                return InputUtil.CutoffDualAxis(result, this.DeadZone, this.Cutoff, this.RadialDeadZone, this.RadialCutoff);
+            }
+        }
+
+        public float DeadZone
+        {
+            get;
+            set;
+        }
+
+        public DeadZoneCutoff Cutoff
+        {
+            get;
+            set;
+        }
+
+        public float RadialDeadZone
+        {
+            get;
+            set;
+        }
+
+        public DeadZoneCutoff RadialCutoff
+        {
+            get;
+            set;
+        }
+
+        #endregion
+
+        #region IInputSignature Interfacce
+
+        public override void Update()
+        {
+            /*
+            if (Input.GetButton(this.HorizontalPositiveButton))
+                _state.x = Input.GetButton(this.HorizontalNegativeButton) ? 0f : 1f;
+            else if (Input.GetButton(this.HorizontalNegativeButton))
+                _state.x = -1f;
+            else
+                _state.x = 0f;
+
+            if (Input.GetButton(this.VerticalPositiveButton))
+                _state.y = Input.GetButton(this.VerticalNegativeButton) ? 0f : 1f;
+            else if (Input.GetButton(this.VerticalNegativeButton))
+                _state.y = -1f;
+            else
+                _state.y = 0f;
+
+            _state = InputUtil.CutoffDualAxis(_state, this.DeadZone, this.Cutoff, this.RadialDeadZone, this.RadialCutoff);
+            */
+        }
+
+        public override void FixedUpdate()
+        {
+            /*
+            if (Input.GetButton(this.HorizontalPositiveButton))
+                _state.x = Input.GetButton(this.HorizontalNegativeButton) ? 0f : 1f;
+            else if (Input.GetButton(this.HorizontalNegativeButton))
+                _state.x = -1f;
+            else
+                _state.x = 0f;
+
+            if (Input.GetButton(this.VerticalPositiveButton))
+                _state.y = Input.GetButton(this.VerticalNegativeButton) ? 0f : 1f;
+            else if (Input.GetButton(this.VerticalNegativeButton))
+                _state.y = -1f;
+            else
+                _state.y = 0f;
+
+            _state = InputUtil.CutoffDualAxis(_state, this.DeadZone, this.Cutoff, this.RadialDeadZone, this.RadialCutoff);
+            */
         }
 
         #endregion

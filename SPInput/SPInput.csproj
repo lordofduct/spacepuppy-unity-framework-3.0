@@ -59,6 +59,7 @@
     <Compile Include="SPInput\Unity\IInputProfile.cs" />
     <Compile Include="SPInput\Unity\InputProfileDescriptionAttributes.cs" />
     <Compile Include="SPInput\Unity\InputProfileLookupTable.cs" />
+    <Compile Include="SPInput\Unity\KeyboardProfile.cs" />
     <Compile Include="SPInput\Unity\SPInputDirect.cs" />
     <Compile Include="SPInput\Unity\SPInputFactory.cs" />
     <Compile Include="SPInput\Unity\UnityInputSignatures.cs" />
@@ -71,6 +72,7 @@
     <Compile Include="SPInput\Unity\Xbox\Profiles\Xbox360MacOSProfile.cs" />
     <Compile Include="SPInput\Unity\Xbox\Profiles\Xbox360WinProfile.cs" />
     <Compile Include="SPInput\Unity\Xbox\XboxControllerEnums.cs" />
+    <Compile Include="SPInput\Unity\Xbox\XboxInputKeyboardProfile.cs" />
     <Compile Include="SPInput\Unity\Xbox\XboxInputProfile.cs" />
     <Compile Include="SPInput\Unity\Xbox\XboxInputProfileLookupTable.cs" />
   </ItemGroup>

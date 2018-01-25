@@ -124,6 +124,26 @@ namespace com.spacepuppy.SPInput.Unity.Xbox
             return _buttonTable.TryGetValue(button, out map);
         }
 
+        public bool Contains(XboxAxis axis)
+        {
+            return _axisTable.ContainsKey(axis);
+        }
+
+        public bool Contains(XboxButton button)
+        {
+            return _buttonTable.ContainsKey(button);
+        }
+
+        public bool Remove(XboxAxis axis)
+        {
+            return _axisTable.Remove(axis);
+        }
+
+        public bool Remove(XboxButton button)
+        {
+            return _buttonTable.Remove(button);
+        }
+
         #endregion
 
         #region IInputSignatureFactory Interface
@@ -133,16 +153,16 @@ namespace com.spacepuppy.SPInput.Unity.Xbox
             ButtonMapping map;
             if (!this.TryGetMapping(button, out map)) return null;
 
-            if(map.Emulated)
+            if (map.Emulated)
             {
-                if(map.Axis != SPInputAxis.Unknown)
+                if (map.Axis != SPInputAxis.Unknown)
                 {
                     return SPInputFactory.CreateAxleButtonSignature(id, map.Axis, map.Consideration, joystick, AxleButtonInputSignature.DEFAULT_BTNDEADZONE);
                 }
             }
             else
             {
-                if(map.Button != SPInputButton.Unknown)
+                if (map.Button != SPInputButton.Unknown)
                 {
                     return SPInputFactory.CreateButtonSignature(id, map.Button, joystick);
                 }
@@ -156,9 +176,9 @@ namespace com.spacepuppy.SPInput.Unity.Xbox
             AxisMapping map;
             if (!this.TryGetMapping(axis, out map)) return null;
 
-            if(map.Emulated)
+            if (map.Emulated)
             {
-                switch(consideration)
+                switch (consideration)
                 {
                     case AxleValueConsideration.Positive:
                         if (map.Positive != SPInputButton.Unknown) return SPInputFactory.CreateButtonSignature(id, map.Positive, joystick);
@@ -180,7 +200,7 @@ namespace com.spacepuppy.SPInput.Unity.Xbox
                             }
                             else if (neg != null)
                                 return neg;
-                            
+
                         }
                         break;
                 }
@@ -213,16 +233,18 @@ namespace com.spacepuppy.SPInput.Unity.Xbox
             AxisMapping map;
             if (!this.TryGetMapping(axis, out map)) return null;
 
-            if(map.Emulated)
+            //CHANGE FROM && TO || - this is to support emulating half-functioning axes, like triggers.
+            if (map.Emulated)
             {
-                if(map.Positive != SPInputButton.Unknown && map.Negative != SPInputButton.Unknown)
+                if (map.Positive != SPInputButton.Unknown || map.Negative != SPInputButton.Unknown)
                 {
                     return SPInputFactory.CreateEmulatedAxixSignature(id, map.Positive, map.Negative, joystick);
                 }
+                return SPInputFactory.CreateEmulatedAxixSignature(id, map.Positive, map.Negative, joystick);
             }
             else
             {
-                if(map.Axis != SPInputAxis.Unknown)
+                if (map.Axis != SPInputAxis.Unknown)
                 {
                     return SPInputFactory.CreateAxisSignature(id, map.Axis, joystick, map.InvertAxis);
                 }
@@ -230,7 +252,7 @@ namespace com.spacepuppy.SPInput.Unity.Xbox
 
             return null;
         }
-        
+
         public IDualAxleInputSignature CreateDualAxisSignature(string id, XboxAxis axisX, XboxAxis axisY, SPJoystick joystick = SPJoystick.All)
         {
             AxisMapping hmap;
@@ -238,13 +260,15 @@ namespace com.spacepuppy.SPInput.Unity.Xbox
             if (!this.TryGetMapping(axisX, out hmap)) return null;
             if (!this.TryGetMapping(axisY, out vmap)) return null;
 
-            if(hmap.Emulated)
+
+            //CHANGE FROM && TO || - this is to support emulating half-functioning axes, like triggers.
+            if (hmap.Emulated)
             {
-                if(vmap.Emulated)
+                if (vmap.Emulated)
                 {
-                    if (hmap.Positive != SPInputButton.Unknown && hmap.Negative != SPInputButton.Unknown)
+                    if (hmap.Positive != SPInputButton.Unknown || hmap.Negative != SPInputButton.Unknown)
                     {
-                        if(vmap.Positive != SPInputButton.Unknown && vmap.Negative != SPInputButton.Unknown)
+                        if (vmap.Positive != SPInputButton.Unknown || vmap.Negative != SPInputButton.Unknown)
                         {
                             return SPInputFactory.CreateEmulatedDualAxixSignature(id, hmap.Positive, hmap.Negative, vmap.Positive, vmap.Negative, joystick);
                         }
@@ -254,7 +278,7 @@ namespace com.spacepuppy.SPInput.Unity.Xbox
                             return new CompositeDualAxleInputSignature(id, hor, null);
                         }
                     }
-                    else if(vmap.Positive != SPInputButton.Unknown && vmap.Negative != SPInputButton.Unknown)
+                    else if (vmap.Positive != SPInputButton.Unknown || vmap.Negative != SPInputButton.Unknown)
                     {
                         var ver = SPInputFactory.CreateEmulatedAxixSignature(id, vmap.Positive, vmap.Negative, joystick);
                         return new CompositeDualAxleInputSignature(id, null, ver);
@@ -263,7 +287,7 @@ namespace com.spacepuppy.SPInput.Unity.Xbox
                 else
                 {
                     IAxleInputSignature hor = null;
-                    if (hmap.Positive != SPInputButton.Unknown && hmap.Negative != SPInputButton.Unknown)
+                    if (hmap.Positive != SPInputButton.Unknown || hmap.Negative != SPInputButton.Unknown)
                     {
                         hor = SPInputFactory.CreateEmulatedAxixSignature(id, hmap.Positive, hmap.Negative, joystick);
                     }
@@ -274,7 +298,7 @@ namespace com.spacepuppy.SPInput.Unity.Xbox
                         ver = SPInputFactory.CreateAxisSignature(id, vmap.Axis, joystick, vmap.InvertAxis);
                     }
 
-                    if(hor != null || ver != null)
+                    if (hor != null || ver != null)
                     {
                         return new CompositeDualAxleInputSignature(id, hor, ver);
                     }
@@ -282,7 +306,7 @@ namespace com.spacepuppy.SPInput.Unity.Xbox
             }
             else
             {
-                if(vmap.Emulated)
+                if (vmap.Emulated)
                 {
                     IAxleInputSignature hor = null;
                     if (hmap.Axis != SPInputAxis.Unknown)
@@ -291,7 +315,7 @@ namespace com.spacepuppy.SPInput.Unity.Xbox
                     }
 
                     IAxleInputSignature ver = null;
-                    if (vmap.Positive != SPInputButton.Unknown && vmap.Negative != SPInputButton.Unknown)
+                    if (vmap.Positive != SPInputButton.Unknown || vmap.Negative != SPInputButton.Unknown)
                     {
                         ver = SPInputFactory.CreateEmulatedAxixSignature(id, vmap.Positive, vmap.Negative, joystick);
                     }
@@ -315,7 +339,7 @@ namespace com.spacepuppy.SPInput.Unity.Xbox
                             return new CompositeDualAxleInputSignature(id, hor, null);
                         }
                     }
-                    else if(vmap.Axis != SPInputAxis.Unknown)
+                    else if (vmap.Axis != SPInputAxis.Unknown)
                     {
                         var ver = SPInputFactory.CreateAxisSignature(id, vmap.Axis, joystick, vmap.InvertAxis);
                         return new CompositeDualAxleInputSignature(id, null, ver);

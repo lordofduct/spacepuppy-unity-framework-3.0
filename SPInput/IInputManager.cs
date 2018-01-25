@@ -1,20 +1,20 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-using com.spacepuppy.UserInput;
+using com.spacepuppy.SPInput;
 
 namespace com.spacepuppy
 {
 
-    public interface IInputManager : IService, IEnumerable<IPlayerInputDevice>
+    public interface IInputManager : IService, IEnumerable<IInputDevice>
     {
 
         int Count { get; }
-        IPlayerInputDevice this[string id] { get; }
-        IPlayerInputDevice Main { get; }
+        IInputDevice this[string id] { get; }
+        IInputDevice Main { get; }
 
-        IPlayerInputDevice GetDevice(string id);
-        T GetDevice<T>(string id) where T : IPlayerInputDevice;
+        IInputDevice GetDevice(string id);
+        T GetDevice<T>(string id) where T : IInputDevice;
 
     }
 

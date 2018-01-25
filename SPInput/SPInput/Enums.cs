@@ -1,7 +1,14 @@
 ﻿using System;
 
-namespace com.spacepuppy.UserInput
+namespace com.spacepuppy.SPInput
 {
+
+    public enum AxleValueConsideration : byte
+    {
+        Positive = 0,
+        Negative = 1,
+        Absolute = 2
+    }
 
     public enum ButtonState : sbyte
     {
@@ -17,9 +24,9 @@ namespace com.spacepuppy.UserInput
         Shear = 1
     }
 
-    public enum CompositeAxlePrecedence
+    public enum MergedAxlePrecedence
     {
-        
+
         Largest = 0,
         Smallest = 1
 

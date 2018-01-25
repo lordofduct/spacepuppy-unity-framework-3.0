@@ -3,9 +3,9 @@ using UnityEditor;
 using System.Collections.Generic;
 
 using com.spacepuppy.Events;
-using com.spacepuppy.UserInput.Events;
+using com.spacepuppy.SPInput.Events;
 
-namespace com.spacepuppyeditor.UserInput.Events
+namespace com.spacepuppyeditor.SPInput.Events
 {
 
     [CustomEditor(typeof(t_OnSimpleButtonPressInspector))]

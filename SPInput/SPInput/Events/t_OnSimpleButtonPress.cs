@@ -4,7 +4,7 @@ using UnityEngine;
 
 using com.spacepuppy.Events;
 
-namespace com.spacepuppy.UserInput.Events
+namespace com.spacepuppy.SPInput.Events
 {
 
     public sealed class t_OnSimpleButtonPress : TriggerComponent
@@ -52,7 +52,7 @@ namespace com.spacepuppy.UserInput.Events
                 var input = string.IsNullOrEmpty(_deviceId) ? service.Main : service.GetDevice(_deviceId);
                 if (input == null) return;
 
-                if (input.GetCurrentButtonState(_inputId) == UserInput.ButtonState.Down)
+                if (input.GetButtonState(_inputId) == ButtonState.Down)
                 {
                     this.ActivateTrigger(null);
                 }

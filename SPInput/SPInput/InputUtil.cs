@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace com.spacepuppy.UserInput
+namespace com.spacepuppy.SPInput
 {
 
     public static class InputUtil

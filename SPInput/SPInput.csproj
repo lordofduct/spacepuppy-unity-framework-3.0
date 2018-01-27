@@ -61,7 +61,7 @@
     <Compile Include="SPInput\Unity\InputProfileDescriptionAttributes.cs" />
     <Compile Include="SPInput\Unity\InputProfileLookupTable.cs" />
     <Compile Include="SPInput\Unity\KeyboardProfile.cs" />
-    <Compile Include="SPInput\Unity\PollButtonSignatureRoutine.cs" />
+    <Compile Include="SPInput\Unity\PollingButtonSignatureRoutine.cs" />
     <Compile Include="SPInput\Unity\PollingAxisSignatureRoutine.cs" />
     <Compile Include="SPInput\Unity\SPInputDirect.cs" />
     <Compile Include="SPInput\Unity\SPInputFactory.cs" />

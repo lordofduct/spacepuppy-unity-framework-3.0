@@ -16,7 +16,7 @@ namespace com.spacepuppy.SPInput.Unity
     public class PollingButtonSignatureRoutine : IRadicalWaitHandle
     {
 
-        public delegate bool PollingCallback(PollingButtonSignatureRoutine targ, out ButtonDelegate del);
+        public delegate bool PollingCallback(PollingButtonSignatureRoutine targ, out InputToken token);
 
         private enum State
         {
@@ -55,9 +55,9 @@ namespace com.spacepuppy.SPInput.Unity
         #region Properties
 
         /// <summary>
-        /// The resulting ButtonDelegate that can be used to poll for the input.
+        /// The resulting InputToken that can be used to create an input signature.
         /// </summary>
-        public ButtonDelegate DelegateResult
+        public InputToken InputResult
         {
             get;
             set;
@@ -178,7 +178,7 @@ namespace com.spacepuppy.SPInput.Unity
 
         #region Methods
 
-        public void Start()
+        public void Start(float delay = 1f)
         {
             if (_routine != null)
             {
@@ -195,8 +195,8 @@ namespace com.spacepuppy.SPInput.Unity
             }
 
             _state = State.Running;
-            this.DelegateResult = null;
-            _routine = GameLoop.Hook.StartRadicalCoroutine(this.WorkRoutine());
+            this.InputResult = InputToken.Unknown;
+            _routine = GameLoop.Hook.StartRadicalCoroutine(this.WorkRoutine(delay));
         }
 
         public void Cancel()
@@ -207,14 +207,14 @@ namespace com.spacepuppy.SPInput.Unity
                 _routine = null;
             }
 
-            this.DelegateResult = null;
+            this.InputResult = InputToken.Unknown;
             _state = State.Cancelled;
             this.SignalOnComplete();
         }
 
         public IInputSignature CreateInputSignature(string id)
         {
-            return new DelegatedButtonInputSignature(id, this.DelegateResult);
+            return new DelegatedButtonInputSignature(id, this.InputResult.CreateButtonDelegate(this.Joystick));
         }
 
         private void SignalOnComplete()
@@ -227,8 +227,10 @@ namespace com.spacepuppy.SPInput.Unity
             }
         }
 
-        private System.Collections.IEnumerator WorkRoutine()
+        private System.Collections.IEnumerator WorkRoutine(float delay)
         {
+            yield return WaitForDuration.Seconds(delay, SPTime.Real);
+
             while (_state == State.Running)
             {
                 if (UnityEngine.Input.GetKeyDown(this.CancelKey))
@@ -244,10 +246,10 @@ namespace com.spacepuppy.SPInput.Unity
 
                 if (this.CustomPollingCallback != null)
                 {
-                    ButtonDelegate d;
-                    if (this.CustomPollingCallback(this, out d))
+                    InputToken t;
+                    if (this.CustomPollingCallback(this, out t))
                     {
-                        this.DelegateResult = d;
+                        this.InputResult = t;
                         goto Complete;
                     }
                 }
@@ -259,7 +261,7 @@ namespace com.spacepuppy.SPInput.Unity
                         SPInputId btn;
                         if (SPInputDirect.TryPollButton(out btn, this.Joystick))
                         {
-                            this.DelegateResult = SPInputFactory.CreateButtonDelegate(btn, this.Joystick);
+                            this.InputResult = InputToken.CreateButton(btn);
                             goto Complete;
                         }
                     }
@@ -272,7 +274,7 @@ namespace com.spacepuppy.SPInput.Unity
                         {
                             if ((this.PollJoyAxes && axis.IsJoyAxis()) || (this.PollMouseAxes && axis.IsMouseAxis()))
                             {
-                                this.DelegateResult = SPInputFactory.CreateAxleButtonDelegate(axis, this.AxisConsideration, this.Joystick, this.AxisPollingDeadZone);
+                                this.InputResult = InputToken.CreateAxleButton(axis, this.AxisConsideration, this.AxisPollingDeadZone);
                                 goto Complete;
                             }
                         }
@@ -284,7 +286,7 @@ namespace com.spacepuppy.SPInput.Unity
                     UnityEngine.KeyCode key;
                     if (SPInputDirect.TryPollKey(out key))
                     {
-                        this.DelegateResult = SPInputFactory.CreateButtonDelegate(key);
+                        this.InputResult = InputToken.CreateButton(key);
                         goto Complete;
                     }
                 }
@@ -369,7 +371,7 @@ namespace com.spacepuppy.SPInput.Unity
         {
             if (profiles == null || profiles.Length == 0) return null;
 
-            return (PollingButtonSignatureRoutine targ, out ButtonDelegate del) =>
+            return (PollingButtonSignatureRoutine targ, out InputToken token) =>
             {
                 if (targ.PollButtons || targ.PollJoyAxes)
                 {
@@ -380,7 +382,7 @@ namespace com.spacepuppy.SPInput.Unity
                             TInputId btn;
                             if (p.TryPollButton(out btn, targ.Joystick))
                             {
-                                del = p.CreateButtonDelegate(btn, targ.Joystick);
+                                token = p.GetMapping(btn);
                                 return true;
                             }
                         }
@@ -389,16 +391,16 @@ namespace com.spacepuppy.SPInput.Unity
                         {
                             TInputId axis;
                             float value;
-                            if (p.TryPollAxis(out axis, out value, targ.Joystick, targ.AxisPollingDeadZone) && TestConsideration(value, targ.AxisConsideration, targ.AxisPollingDeadZone))
+                            if (p.TryPollAxis(out axis, out value, targ.Joystick, targ.AxisPollingDeadZone))
                             {
-                                del = SPInputFactory.CreateAxleButtonDelegate(p.CreateAxisDelegate(axis, targ.Joystick), targ.AxisConsideration, targ.AxisPollingDeadZone);
+                                token = p.GetMapping(axis);
                                 return true;
                             }
                         }
                     }
                 }
 
-                del = null;
+                token = InputToken.Unknown;
                 return false;
             };
         }

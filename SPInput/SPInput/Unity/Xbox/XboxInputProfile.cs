@@ -123,6 +123,12 @@ namespace com.spacepuppy.SPInput.Unity.Xbox
             return _axisTable.Remove(id) | _buttonTable.Remove(id);
         }
 
+        public void Clear()
+        {
+            _axisTable.Clear();
+            _buttonTable.Clear();
+        }
+
         #endregion
 
         #region IInputSignatureFactory Interface
@@ -171,6 +177,21 @@ namespace com.spacepuppy.SPInput.Unity.Xbox
             if (_buttonTable.TryGetValue(id, out result)) return result;
 
             return InputToken.Unknown;
+        }
+
+        void IConfigurableInputProfile<XboxInputId>.SetAxisMapping(XboxInputId id, InputToken token)
+        {
+            this.RegisterAxis(id, token);
+        }
+
+        void IConfigurableInputProfile<XboxInputId>.SetButtonMapping(XboxInputId id, InputToken token)
+        {
+            this.RegisterButton(id, token);
+        }
+
+        void IConfigurableInputProfile<XboxInputId>.Reset()
+        {
+            this.Clear();
         }
 
         #endregion

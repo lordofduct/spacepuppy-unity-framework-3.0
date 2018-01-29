@@ -38,6 +38,9 @@
     <Reference Include="UnityEngine">
       <HintPath>..\Resources\UnityEngine.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>..\Resources\UnityEngine.UI.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IInputManager.cs" />
@@ -56,8 +59,10 @@
     <Compile Include="SPInput\InputUtil.cs" />
     <Compile Include="SPInput\IInputDevice.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SPInput\Unity\ConfigurableInputProfile.cs" />
     <Compile Include="SPInput\Unity\Enums.cs" />
     <Compile Include="SPInput\Unity\IInputProfile.cs" />
+    <Compile Include="SPInput\Unity\InputLayoutToken.cs" />
     <Compile Include="SPInput\Unity\InputProfileDescriptionAttributes.cs" />
     <Compile Include="SPInput\Unity\InputProfileLookupTable.cs" />
     <Compile Include="SPInput\Unity\InputToken.cs" />
@@ -66,6 +71,7 @@
     <Compile Include="SPInput\Unity\PollingAxisSignatureRoutine.cs" />
     <Compile Include="SPInput\Unity\SPInputDirect.cs" />
     <Compile Include="SPInput\Unity\SPInputFactory.cs" />
+    <Compile Include="SPInput\EventSystems\SPInputModule.cs" />
     <Compile Include="SPInput\Unity\UnityInputSignatures.cs" />
     <Compile Include="SPInput\Unity\Xbox\Profiles\PS4LinuxProfile.cs" />
     <Compile Include="SPInput\Unity\Xbox\Profiles\PS4MacOSBTProfile.cs" />

@@ -9,7 +9,13 @@ namespace com.spacepuppy.SPInput.Unity
     public enum SPInputId : byte
     {
         Unknown = 0,
+        /// <summary>
+        /// Should be X-axis
+        /// </summary>
         Axis1 = 1,
+        /// <summary>
+        /// Should be Y-axis
+        /// </summary>
         Axis2 = 2,
         Axis3 = 3,
         Axis4 = 4,

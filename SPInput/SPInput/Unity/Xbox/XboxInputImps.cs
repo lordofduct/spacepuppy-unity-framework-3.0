@@ -6,7 +6,7 @@ using System.Text;
 namespace com.spacepuppy.SPInput.Unity.Xbox
 {
 
-    public interface IXboxInputProfile : IInputProfile<XboxInputId>
+    public interface IXboxInputProfile : IConfigurableInputProfile<XboxInputId>
     {
 
     }

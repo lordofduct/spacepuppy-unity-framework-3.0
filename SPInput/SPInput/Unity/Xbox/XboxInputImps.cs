@@ -20,4 +20,19 @@ namespace com.spacepuppy.SPInput.Unity.Xbox
     {
     }
 
+    public class ConfigurableXboxInputProfile : ConfigurableInputProfile<XboxInputId>, IXboxInputProfile
+    {
+
+        public ConfigurableXboxInputProfile()
+        {
+
+        }
+
+        public ConfigurableXboxInputProfile(IInputProfile<XboxInputId> innerProfile) : base(innerProfile)
+        {
+
+        }
+
+    }
+
 }

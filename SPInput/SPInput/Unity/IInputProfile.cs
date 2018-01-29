@@ -6,17 +6,23 @@ using System.Text;
 namespace com.spacepuppy.SPInput.Unity
 {
 
-    public interface IInputProfile<TButton, TAxis> where TButton : struct, System.IConvertible where TAxis : struct, System.IConvertible
+    public interface IInputProfile<TInputId> where TInputId : struct, System.IConvertible
     {
 
-        IButtonInputSignature CreateButtonSignature(string id, TButton button, SPJoystick joystick = SPJoystick.All);
+        bool TryPollButton(out TInputId button, Joystick joystick = Joystick.All);
 
-        IButtonInputSignature CreateButtonSignature(string id, TAxis axis, AxleValueConsideration consideration = AxleValueConsideration.Positive, SPJoystick joystick = SPJoystick.All, float axleButtonDeadZone = AxleButtonInputSignature.DEFAULT_BTNDEADZONE);
+        bool TryPollAxis(out TInputId axis, out float value, Joystick joystick = Joystick.All, float deadZone = InputUtil.DEFAULT_AXLEBTNDEADZONE);
 
-        IAxleInputSignature CreateAxisSignature(string id, TAxis axis, SPJoystick joystick = SPJoystick.All);
+        bool Contains(TInputId id);
+        InputToken GetMapping(TInputId id);
 
-        IDualAxleInputSignature CreateDualAxisSignature(string id, TAxis axisX, TAxis axisY, SPJoystick joystick = SPJoystick.All);
+    }
 
+    public interface IConfigurableInputProfile<TInputId> : IInputProfile<TInputId> where TInputId : struct, System.IConvertible
+    {
+        void SetButtonMapping(TInputId id, InputToken token);
+        void SetAxisMapping(TInputId id, InputToken token);
+        void Reset();
     }
 
 }

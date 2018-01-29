@@ -38,10 +38,14 @@
     <Reference Include="UnityEngine">
       <HintPath>..\Resources\UnityEngine.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>..\Resources\UnityEngine.UI.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IInputManager.cs" />
     <Compile Include="SPInput\CompositeInputSignature.cs" />
+    <Compile Include="SPInput\DelegatedInputSignature.cs" />
     <Compile Include="SPInput\Enums.cs" />
     <Compile Include="SPInput\Events\t_OnSimpleButtonPress.cs" />
     <Compile Include="SPInput\GenericInputDevice.cs" />
@@ -55,14 +59,20 @@
     <Compile Include="SPInput\InputUtil.cs" />
     <Compile Include="SPInput\IInputDevice.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SPInput\Unity\ConfigurableInputProfile.cs" />
     <Compile Include="SPInput\Unity\Enums.cs" />
     <Compile Include="SPInput\Unity\IInputProfile.cs" />
+    <Compile Include="SPInput\Unity\InputLayoutToken.cs" />
     <Compile Include="SPInput\Unity\InputProfileDescriptionAttributes.cs" />
     <Compile Include="SPInput\Unity\InputProfileLookupTable.cs" />
+    <Compile Include="SPInput\Unity\InputToken.cs" />
+    <Compile Include="SPInput\Unity\KeyboardProfile.cs" />
+    <Compile Include="SPInput\Unity\PollingButtonSignatureRoutine.cs" />
+    <Compile Include="SPInput\Unity\PollingAxisSignatureRoutine.cs" />
     <Compile Include="SPInput\Unity\SPInputDirect.cs" />
     <Compile Include="SPInput\Unity\SPInputFactory.cs" />
+    <Compile Include="SPInput\EventSystems\SPInputModule.cs" />
     <Compile Include="SPInput\Unity\UnityInputSignatures.cs" />
-    <Compile Include="SPInput\Unity\Xbox\IXboxInputProfile.cs" />
     <Compile Include="SPInput\Unity\Xbox\Profiles\PS4LinuxProfile.cs" />
     <Compile Include="SPInput\Unity\Xbox\Profiles\PS4MacOSBTProfile.cs" />
     <Compile Include="SPInput\Unity\Xbox\Profiles\PS4MacOSUSBProfile.cs" />
@@ -71,8 +81,8 @@
     <Compile Include="SPInput\Unity\Xbox\Profiles\Xbox360MacOSProfile.cs" />
     <Compile Include="SPInput\Unity\Xbox\Profiles\Xbox360WinProfile.cs" />
     <Compile Include="SPInput\Unity\Xbox\XboxControllerEnums.cs" />
+    <Compile Include="SPInput\Unity\Xbox\XboxInputImps.cs" />
     <Compile Include="SPInput\Unity\Xbox\XboxInputProfile.cs" />
-    <Compile Include="SPInput\Unity\Xbox\XboxInputProfileLookupTable.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SpacepuppyUnityFramework\SpacepuppyUnityFramework.csproj">

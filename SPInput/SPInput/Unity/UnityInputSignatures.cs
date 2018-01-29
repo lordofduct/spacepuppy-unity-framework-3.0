@@ -99,9 +99,7 @@ namespace com.spacepuppy.SPInput.Unity
     /// </summary>
     public class AxleButtonInputSignature : BaseInputSignature, IButtonInputSignature
     {
-
-        public const float DEFAULT_BTNDEADZONE = 0.707f;
-
+        
         #region Fields
 
         private ButtonState _current;
@@ -112,7 +110,7 @@ namespace com.spacepuppy.SPInput.Unity
 
         #region CONSTRUCTOR
 
-        public AxleButtonInputSignature(string id, string unityInputId, AxleValueConsideration consideration = AxleValueConsideration.Positive, float axisButtnDeadZone = DEFAULT_BTNDEADZONE)
+        public AxleButtonInputSignature(string id, string unityInputId, AxleValueConsideration consideration = AxleValueConsideration.Positive, float axisButtnDeadZone = InputUtil.DEFAULT_AXLEBTNDEADZONE)
             : base(id)
         {
             this.AxisButtonDeadZone = axisButtnDeadZone;

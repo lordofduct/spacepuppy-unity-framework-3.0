@@ -6,11 +6,11 @@ using System.Linq;
 namespace com.spacepuppy.SPInput.Unity
 {
 
-    public class InputProfileLookupTable<T, TButton, TAxis>
-           : ICollection<InputProfileLookupTable<T, TButton, TAxis>.InputProfileLookupEntry>
-           where T : class, IInputProfile<TButton, TAxis>
-           where TButton : struct, System.IConvertible
-           where TAxis : struct, System.IConvertible
+    public class InputProfileLookupTable<T, TInputId>
+           : ICollection<InputProfileLookupTable<T, TInputId>.InputProfileLookupEntry>,
+           ISPDisposable
+           where T : class, IInputProfile<TInputId>
+           where TInputId : struct, System.IConvertible
     {
 
         #region Fields
@@ -148,6 +148,30 @@ namespace com.spacepuppy.SPInput.Unity
 
         #endregion
 
+        #region IDisposable Interface
+
+        private bool _isDisposed;
+
+        public bool IsDisposed
+        {
+            get { return _isDisposed; }
+        }
+
+        /// <summary>
+        /// Unloads all profiles and forces GC to purge them out. This should be called after a lengthy input creation process. 
+        /// Otherwise the garbage created here in may be collected further down the line and impact framerate.
+        /// </summary>
+        public void Dispose()
+        {
+            _isDisposed = true;
+            _table.Clear();
+            _table = null;
+            //force collect all those loaded profiles
+            GC.Collect();
+        }
+
+        #endregion
+
         #region Special Types
 
         public struct InputProfileLookupEntry
@@ -182,7 +206,7 @@ namespace com.spacepuppy.SPInput.Unity
 
             private List<InputProfileLookupEntry>.Enumerator _e;
 
-            public Enumerator(InputProfileLookupTable<T, TButton, TAxis> table)
+            public Enumerator(InputProfileLookupTable<T, TInputId> table)
             {
                 if (table == null) throw new System.ArgumentNullException("table");
 

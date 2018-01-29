@@ -9,6 +9,9 @@ namespace com.spacepuppy
     /// </summary>
     public interface IRadicalYieldInstruction
     {
+        /// <summary>
+        /// The instruction completed, but not necessarily successfully.
+        /// </summary>
         bool IsComplete { get; }
 
         ///// <summary>

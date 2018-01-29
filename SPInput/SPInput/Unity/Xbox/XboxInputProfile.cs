@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
-using System;
 
 namespace com.spacepuppy.SPInput.Unity.Xbox
 {
@@ -15,35 +14,19 @@ namespace com.spacepuppy.SPInput.Unity.Xbox
 
         #region Fields
 
-        private Dictionary<XboxAxis, AxisMapping> _axisTable = new Dictionary<XboxAxis, AxisMapping>();
-        private Dictionary<XboxButton, ButtonMapping> _buttonTable = new Dictionary<XboxButton, ButtonMapping>();
+        private Dictionary<XboxInputId, InputToken> _axisTable = new Dictionary<XboxInputId, InputToken>();
+        private Dictionary<XboxInputId, InputToken> _buttonTable = new Dictionary<XboxInputId, InputToken>();
 
         #endregion
 
         #region Properties
 
-        public AxisMapping this[XboxAxis axis]
-        {
-            get
-            {
-                return this.GetMapping(axis);
-            }
-        }
-
-        public ButtonMapping this[XboxButton button]
-        {
-            get
-            {
-                return this.GetMapping(button);
-            }
-        }
-
-        public Dictionary<XboxAxis, AxisMapping>.KeyCollection Axes
+        public Dictionary<XboxInputId, InputToken>.KeyCollection Axes
         {
             get { return _axisTable.Keys; }
         }
 
-        public Dictionary<XboxButton, ButtonMapping>.KeyCollection Buttons
+        public Dictionary<XboxInputId, InputToken>.KeyCollection Buttons
         {
             get { return _buttonTable.Keys; }
         }
@@ -52,331 +35,163 @@ namespace com.spacepuppy.SPInput.Unity.Xbox
 
         #region Methods
 
-        public void Register(XboxAxis axis, SPInputAxis spaxis, bool invert = false)
+        public void RegisterAxis(XboxInputId axis, InputToken token)
         {
-            _axisTable[axis] = new AxisMapping()
-            {
-                Emulated = false,
-                InvertAxis = invert,
-                Axis = spaxis,
-                Positive = SPInputButton.Unknown,
-                Negative = SPInputButton.Unknown
-            };
+            _axisTable[axis] = token;
+            _buttonTable.Remove(axis);
         }
 
-        public void Register(XboxAxis axis, SPInputButton positive, SPInputButton negative)
+        public void RegisterAxis(XboxInputId axis, AxisDelegateFactory del)
         {
-            _axisTable[axis] = new AxisMapping()
-            {
-                Emulated = true,
-                Axis = SPInputAxis.Unknown,
-                Positive = positive,
-                Negative = negative
-            };
+            _axisTable[axis] = InputToken.CreateCustom(del);
+            _buttonTable.Remove(axis);
         }
 
-        public void Register(XboxButton button, SPInputButton spbtn)
+        public void RegisterAxis(XboxInputId axis, SPInputId spaxis, bool invert = false)
         {
-            _buttonTable[button] = new ButtonMapping()
-            {
-                Emulated = false,
-                Button = spbtn,
-                Axis = SPInputAxis.Unknown
-            };
+            _axisTable[axis] = InputToken.CreateAxis(spaxis, invert);
+            _buttonTable.Remove(axis);
         }
 
-        public void Register(XboxButton button, SPInputAxis axis, AxleValueConsideration consideration)
+        public void RegisterAxis(XboxInputId axis, SPInputId positive, SPInputId negative)
         {
-            _buttonTable[button] = new ButtonMapping()
-            {
-                Emulated = true,
-                Button = SPInputButton.Unknown,
-                Axis = axis,
-                Consideration = consideration
-            };
+            _axisTable[axis] = InputToken.CreateEmulatedAxis(positive, negative);
+            _buttonTable.Remove(axis);
         }
 
-        public AxisMapping GetMapping(XboxAxis axis)
+        public void RegisterButton(XboxInputId button, InputToken token)
         {
-            AxisMapping result;
+            _buttonTable[button] = token;
+            _axisTable.Remove(button);
+        }
+
+        public void RegisterButton(XboxInputId button, ButtonDelegateFactory del)
+        {
+            _buttonTable[button] = InputToken.CreateCustom(del);
+            _axisTable.Remove(button);
+        }
+
+        public void RegisterButton(XboxInputId button, SPInputId spbtn)
+        {
+            _buttonTable[button] = InputToken.CreateButton(spbtn);
+            _axisTable.Remove(button);
+        }
+
+        public void RegisterAxleButton(XboxInputId button, SPInputId axis, AxleValueConsideration consideration, float axleButtonDeadZone = InputUtil.DEFAULT_AXLEBTNDEADZONE)
+        {
+            _buttonTable[button] = InputToken.CreateAxleButton(axis, consideration, axleButtonDeadZone);
+            _axisTable.Remove(button);
+        }
+
+
+
+        public InputToken GetAxisMapping(XboxInputId axis)
+        {
+            InputToken result;
             if (_axisTable.TryGetValue(axis, out result))
                 return result;
 
-            throw new KeyNotFoundException("A mapping for axis " + axis.ToString() + " was not found.");
+            return InputToken.Unknown;
         }
 
-        public ButtonMapping GetMapping(XboxButton button)
+        public InputToken GetButtonMapping(XboxInputId button)
         {
-            ButtonMapping result;
+            InputToken result;
             if (_buttonTable.TryGetValue(button, out result))
                 return result;
 
-            throw new KeyNotFoundException("A mapping for button " + button.ToString() + " was not found.");
+            return InputToken.Unknown;
         }
 
-        public bool TryGetMapping(XboxAxis axis, out AxisMapping map)
+        public bool TryGetAxisMapping(XboxInputId axis, out InputToken map)
         {
             return _axisTable.TryGetValue(axis, out map);
         }
 
-        public bool TryGetMapping(XboxButton button, out ButtonMapping map)
+        public bool TryGetButtonMapping(XboxInputId button, out InputToken map)
         {
             return _buttonTable.TryGetValue(button, out map);
+        }
+
+        public bool Contains(XboxInputId id)
+        {
+            return _axisTable.ContainsKey(id) || _buttonTable.ContainsKey(id);
+        }
+
+        public bool Remove(XboxInputId id)
+        {
+            return _axisTable.Remove(id) | _buttonTable.Remove(id);
+        }
+
+        public void Clear()
+        {
+            _axisTable.Clear();
+            _buttonTable.Clear();
         }
 
         #endregion
 
         #region IInputSignatureFactory Interface
 
-        public IButtonInputSignature CreateButtonSignature(string id, XboxButton button, SPJoystick joystick = SPJoystick.All)
+        public bool TryPollButton(out XboxInputId button, Joystick joystick = Joystick.All)
         {
-            ButtonMapping map;
-            if (!this.TryGetMapping(button, out map)) return null;
-
-            if(map.Emulated)
+            var e = _buttonTable.GetEnumerator();
+            while (e.MoveNext())
             {
-                if(map.Axis != SPInputAxis.Unknown)
+                var d = e.Current.Value.CreateButtonDelegate(joystick);
+                if (d != null && d())
                 {
-                    return SPInputFactory.CreateAxleButtonSignature(id, map.Axis, map.Consideration, joystick, AxleButtonInputSignature.DEFAULT_BTNDEADZONE);
-                }
-            }
-            else
-            {
-                if(map.Button != SPInputButton.Unknown)
-                {
-                    return SPInputFactory.CreateButtonSignature(id, map.Button, joystick);
+                    button = e.Current.Key;
+                    return true;
                 }
             }
 
-            return null;
+            button = default(XboxInputId);
+            return false;
         }
 
-        public IButtonInputSignature CreateButtonSignature(string id, XboxAxis axis, AxleValueConsideration consideration = AxleValueConsideration.Positive, SPJoystick joystick = SPJoystick.All, float axleButtonDeadZone = AxleButtonInputSignature.DEFAULT_BTNDEADZONE)
+        public bool TryPollAxis(out XboxInputId axis, out float value, Joystick joystick = Joystick.All, float deadZone = InputUtil.DEFAULT_AXLEBTNDEADZONE)
         {
-            AxisMapping map;
-            if (!this.TryGetMapping(axis, out map)) return null;
-
-            if(map.Emulated)
+            var e = _axisTable.GetEnumerator();
+            while (e.MoveNext())
             {
-                switch(consideration)
+                var d = e.Current.Value.CreateAxisDelegate(joystick);
+                var v = d != null ? d() : 0f;
+                if (d != null && Mathf.Abs(v) > deadZone)
                 {
-                    case AxleValueConsideration.Positive:
-                        if (map.Positive != SPInputButton.Unknown) return SPInputFactory.CreateButtonSignature(id, map.Positive, joystick);
-                        break;
-                    case AxleValueConsideration.Negative:
-                        if (map.Negative != SPInputButton.Unknown) return SPInputFactory.CreateButtonSignature(id, map.Negative, joystick);
-                        break;
-                    case AxleValueConsideration.Absolute:
-                        {
-                            var pos = (map.Positive != SPInputButton.Unknown) ? SPInputFactory.CreateButtonSignature(id, map.Positive, joystick) : null;
-                            var neg = (map.Negative != SPInputButton.Unknown) ? SPInputFactory.CreateButtonSignature(id, map.Negative, joystick) : null;
-
-                            if (pos != null)
-                            {
-                                if (neg != null)
-                                    return new MergedButtonInputSignature(id, pos, neg);
-                                else
-                                    return pos;
-                            }
-                            else if (neg != null)
-                                return neg;
-                            
-                        }
-                        break;
-                }
-            }
-            else
-            {
-                if (map.Axis != SPInputAxis.Unknown)
-                {
-                    if (map.InvertAxis)
-                    {
-                        switch (consideration)
-                        {
-                            case AxleValueConsideration.Positive:
-                                consideration = AxleValueConsideration.Negative;
-                                break;
-                            case AxleValueConsideration.Negative:
-                                consideration = AxleValueConsideration.Positive;
-                                break;
-                        }
-                    }
-                    return SPInputFactory.CreateAxleButtonSignature(id, map.Axis, consideration, joystick, axleButtonDeadZone);
+                    axis = e.Current.Key;
+                    value = v;
+                    return true;
                 }
             }
 
-            return null;
+            axis = default(XboxInputId);
+            value = 0f;
+            return false;
         }
 
-        public IAxleInputSignature CreateAxisSignature(string id, XboxAxis axis, SPJoystick joystick = SPJoystick.All)
+        public InputToken GetMapping(XboxInputId id)
         {
-            AxisMapping map;
-            if (!this.TryGetMapping(axis, out map)) return null;
+            InputToken result;
+            if (_axisTable.TryGetValue(id, out result)) return result;
+            if (_buttonTable.TryGetValue(id, out result)) return result;
 
-            if(map.Emulated)
-            {
-                if(map.Positive != SPInputButton.Unknown && map.Negative != SPInputButton.Unknown)
-                {
-                    return SPInputFactory.CreateEmulatedAxixSignature(id, map.Positive, map.Negative, joystick);
-                }
-            }
-            else
-            {
-                if(map.Axis != SPInputAxis.Unknown)
-                {
-                    return SPInputFactory.CreateAxisSignature(id, map.Axis, joystick, map.InvertAxis);
-                }
-            }
-
-            return null;
-        }
-        
-        public IDualAxleInputSignature CreateDualAxisSignature(string id, XboxAxis axisX, XboxAxis axisY, SPJoystick joystick = SPJoystick.All)
-        {
-            AxisMapping hmap;
-            AxisMapping vmap;
-            if (!this.TryGetMapping(axisX, out hmap)) return null;
-            if (!this.TryGetMapping(axisY, out vmap)) return null;
-
-            if(hmap.Emulated)
-            {
-                if(vmap.Emulated)
-                {
-                    if (hmap.Positive != SPInputButton.Unknown && hmap.Negative != SPInputButton.Unknown)
-                    {
-                        if(vmap.Positive != SPInputButton.Unknown && vmap.Negative != SPInputButton.Unknown)
-                        {
-                            return SPInputFactory.CreateEmulatedDualAxixSignature(id, hmap.Positive, hmap.Negative, vmap.Positive, vmap.Negative, joystick);
-                        }
-                        else
-                        {
-                            var hor = SPInputFactory.CreateEmulatedAxixSignature(id, hmap.Positive, hmap.Negative, joystick);
-                            return new CompositeDualAxleInputSignature(id, hor, null);
-                        }
-                    }
-                    else if(vmap.Positive != SPInputButton.Unknown && vmap.Negative != SPInputButton.Unknown)
-                    {
-                        var ver = SPInputFactory.CreateEmulatedAxixSignature(id, vmap.Positive, vmap.Negative, joystick);
-                        return new CompositeDualAxleInputSignature(id, null, ver);
-                    }
-                }
-                else
-                {
-                    IAxleInputSignature hor = null;
-                    if (hmap.Positive != SPInputButton.Unknown && hmap.Negative != SPInputButton.Unknown)
-                    {
-                        hor = SPInputFactory.CreateEmulatedAxixSignature(id, hmap.Positive, hmap.Negative, joystick);
-                    }
-
-                    IAxleInputSignature ver = null;
-                    if (vmap.Axis != SPInputAxis.Unknown)
-                    {
-                        ver = SPInputFactory.CreateAxisSignature(id, vmap.Axis, joystick, vmap.InvertAxis);
-                    }
-
-                    if(hor != null || ver != null)
-                    {
-                        return new CompositeDualAxleInputSignature(id, hor, ver);
-                    }
-                }
-            }
-            else
-            {
-                if(vmap.Emulated)
-                {
-                    IAxleInputSignature hor = null;
-                    if (hmap.Axis != SPInputAxis.Unknown)
-                    {
-                        hor = SPInputFactory.CreateAxisSignature(id, hmap.Axis, joystick, hmap.InvertAxis);
-                    }
-
-                    IAxleInputSignature ver = null;
-                    if (vmap.Positive != SPInputButton.Unknown && vmap.Negative != SPInputButton.Unknown)
-                    {
-                        ver = SPInputFactory.CreateEmulatedAxixSignature(id, vmap.Positive, vmap.Negative, joystick);
-                    }
-
-                    if (hor != null || ver != null)
-                    {
-                        return new CompositeDualAxleInputSignature(id, hor, ver);
-                    }
-                }
-                else
-                {
-                    if (hmap.Axis != SPInputAxis.Unknown)
-                    {
-                        if (vmap.Axis != SPInputAxis.Unknown)
-                        {
-                            return SPInputFactory.CreateDualAxisSignature(id, hmap.Axis, vmap.Axis, joystick, hmap.InvertAxis, vmap.InvertAxis);
-                        }
-                        else
-                        {
-                            var hor = SPInputFactory.CreateAxisSignature(id, hmap.Axis, joystick, hmap.InvertAxis);
-                            return new CompositeDualAxleInputSignature(id, hor, null);
-                        }
-                    }
-                    else if(vmap.Axis != SPInputAxis.Unknown)
-                    {
-                        var ver = SPInputFactory.CreateAxisSignature(id, vmap.Axis, joystick, vmap.InvertAxis);
-                        return new CompositeDualAxleInputSignature(id, null, ver);
-                    }
-                }
-            }
-
-            return null;
+            return InputToken.Unknown;
         }
 
-        #endregion
-
-
-
-
-        #region Special Types
-
-        [System.Runtime.InteropServices.StructLayout(System.Runtime.InteropServices.LayoutKind.Sequential, Pack = 0)]
-        public struct AxisMapping
+        void IConfigurableInputProfile<XboxInputId>.SetAxisMapping(XboxInputId id, InputToken token)
         {
-            public bool Emulated;
-            public bool InvertAxis;
-            public SPInputAxis Axis;
-            public SPInputButton Positive;
-            public SPInputButton Negative;
-
-
-            public static AxisMapping Unknown
-            {
-                get
-                {
-                    return new AxisMapping()
-                    {
-                        Axis = SPInputAxis.Unknown,
-                        Positive = SPInputButton.Unknown,
-                        Negative = SPInputButton.Unknown
-                    };
-                }
-            }
-
+            this.RegisterAxis(id, token);
         }
 
-        [System.Runtime.InteropServices.StructLayout(System.Runtime.InteropServices.LayoutKind.Sequential, Pack = 0)]
-        public struct ButtonMapping
+        void IConfigurableInputProfile<XboxInputId>.SetButtonMapping(XboxInputId id, InputToken token)
         {
-            public bool Emulated;
-            public SPInputButton Button;
-            public SPInputAxis Axis;
-            public AxleValueConsideration Consideration;
+            this.RegisterButton(id, token);
+        }
 
-            public static ButtonMapping Unknown
-            {
-                get
-                {
-                    return new ButtonMapping()
-                    {
-                        Axis = SPInputAxis.Unknown,
-                        Button = SPInputButton.Unknown
-                    };
-                }
-            }
+        void IConfigurableInputProfile<XboxInputId>.Reset()
+        {
+            this.Clear();
         }
 
         #endregion

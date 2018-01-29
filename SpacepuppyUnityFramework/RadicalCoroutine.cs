@@ -197,7 +197,7 @@ namespace com.spacepuppy
         /// <summary>
         /// Coroutine completed successfully.
         /// </summary>
-        public bool Complete { get { return _state >= RadicalCoroutineOperatingState.Completing; } }
+        public bool CompletedSuccessfully { get { return _state >= RadicalCoroutineOperatingState.Completing; } }
 
         /// <summary>
         /// Coroutine was cancelled.
@@ -205,7 +205,7 @@ namespace com.spacepuppy
         public bool Cancelled { get { return _state <= RadicalCoroutineOperatingState.Cancelling; } }
 
         /// <summary>
-        /// Coroutine is completed, but necessarily successfully (Complete/Cancelled agnostic).
+        /// Coroutine is completed, but not necessarily successfully (Complete/Cancelled agnostic).
         /// </summary>
         public bool Finished { get { return _state <= RadicalCoroutineOperatingState.Cancelling || _state >= RadicalCoroutineOperatingState.Completing; } }
 
@@ -563,7 +563,7 @@ namespace com.spacepuppy
                 }
                 return false;
             }
-            else if (this.Complete)
+            else if (this.CompletedSuccessfully)
             {
                 if (_state == RadicalCoroutineOperatingState.Completing)
                 {
@@ -620,7 +620,7 @@ namespace com.spacepuppy
                         _forcedTick = false; //make sure this is reset
                         return false;
                     }
-                    else if (this.Complete)
+                    else if (this.CompletedSuccessfully)
                     {
                         if (_state == RadicalCoroutineOperatingState.Completing)
                             this.OnFinish(false);

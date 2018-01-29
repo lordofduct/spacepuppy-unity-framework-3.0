@@ -72,7 +72,7 @@
     <Compile Include="SPInput\Unity\SPInputDirect.cs" />
     <Compile Include="SPInput\Unity\SPInputFactory.cs" />
     <Compile Include="SPInput\EventSystems\SPInputModule.cs" />
-    <Compile Include="SPInput\Unity\UnityInputSignatures.cs" />
+    <Compile Include="SPInput\Legacy\UnityInputSignatures.cs" />
     <Compile Include="SPInput\Unity\Xbox\Profiles\PS4LinuxProfile.cs" />
     <Compile Include="SPInput\Unity\Xbox\Profiles\PS4MacOSBTProfile.cs" />
     <Compile Include="SPInput\Unity\Xbox\Profiles\PS4MacOSUSBProfile.cs" />

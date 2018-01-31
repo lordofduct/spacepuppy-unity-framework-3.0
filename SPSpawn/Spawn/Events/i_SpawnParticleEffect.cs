@@ -29,7 +29,7 @@ namespace com.spacepuppy.Spawn.Events
         private List<PrefabEntry> _prefabs;
 
         [SerializeField()]
-        private SPEvent _onSpawnedObject = new SPEvent(TRG_ONSPAWNED);
+        private OnSpawnEvent _onSpawnedObject = new OnSpawnEvent();
 
         #endregion
 
@@ -46,7 +46,7 @@ namespace com.spacepuppy.Spawn.Events
             get { return _prefabs; }
         }
 
-        public SPEvent OnSpawnedObject
+        public OnSpawnEvent OnSpawnedObject
         {
             get { return _onSpawnedObject; }
         }
@@ -142,16 +142,16 @@ namespace com.spacepuppy.Spawn.Events
 
         #region IObserverableTarget Interface
 
-        SPEvent[] IObservableTrigger.GetEvents()
+        BaseSPEvent[] IObservableTrigger.GetEvents()
         {
-            return new SPEvent[] { _onSpawnedObject };
+            return new BaseSPEvent[] { _onSpawnedObject };
         }
 
         #endregion
 
         #region ISpawnPoint Interface
 
-        SPEvent ISpawnPoint.OnSpawned
+        BaseSPEvent ISpawnPoint.OnSpawned
         {
             get { return _onSpawnedObject; }
         }
@@ -164,6 +164,15 @@ namespace com.spacepuppy.Spawn.Events
         #endregion
 
         #region Special Types
+
+        [System.Serializable]
+        public class OnSpawnEvent : SPActionEvent<GameObject>
+        {
+            public OnSpawnEvent() : base(TRG_ONSPAWNED)
+            {
+
+            }
+        }
 
         [System.Serializable]
         public struct PrefabEntry

@@ -53,9 +53,9 @@ namespace com.spacepuppy.Events
 
         #region IObservableTrigger Interface
 
-        SPEvent[] IObservableTrigger.GetEvents()
+        BaseSPEvent[] IObservableTrigger.GetEvents()
         {
-            return new SPEvent[] { _trigger };
+            return new BaseSPEvent[] { _trigger };
         }
 
         #endregion

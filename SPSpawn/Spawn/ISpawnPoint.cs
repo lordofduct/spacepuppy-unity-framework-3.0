@@ -9,7 +9,7 @@ namespace com.spacepuppy.Spawn
     public interface ISpawnPoint
     {
 
-        SPEvent OnSpawned { get; }
+        BaseSPEvent OnSpawned { get; }
 
         void Spawn();
 

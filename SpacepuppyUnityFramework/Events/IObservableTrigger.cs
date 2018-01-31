@@ -5,7 +5,7 @@ namespace com.spacepuppy.Events
 
     public interface IObservableTrigger : IComponent
     {
-        SPEvent[] GetEvents();
+        BaseSPEvent[] GetEvents();
     }
 
 }

@@ -13,14 +13,13 @@ using com.spacepuppyeditor.Internal;
 namespace com.spacepuppyeditor.Base.Events
 {
 
-    [CustomPropertyDrawer(typeof(SPEvent), true)]
+    [CustomPropertyDrawer(typeof(BaseSPEvent), true)]
     public class SPEventPropertyDrawer : PropertyDrawer
     {
 
         private const float MARGIN = 2.0f;
         private const float BTN_ACTIVATE_HEIGHT = 24f;
-
-        public const string PROP_YIELDING = "_yield";
+        
         public const string PROP_TARGETS = "_targets";
         private const string PROP_WEIGHT = "_weight";
 
@@ -160,7 +159,6 @@ namespace com.spacepuppyeditor.Base.Events
                 EditorGUI.BeginProperty(position, label, property);
                 
                 position = this.DrawList(position, property);
-                position = this.DrawYieldToggle(position, property);
                 position = this.DrawAdvancedTargetSettings(position, property);
 
                 EditorGUI.EndProperty();
@@ -241,17 +239,7 @@ namespace com.spacepuppyeditor.Base.Events
 
             return position;
         }
-
-        private Rect DrawYieldToggle(Rect position, SerializedProperty property)
-        {
-            var yieldProp = property.FindPropertyRelative(PROP_YIELDING);
-            var r = new Rect(position.xMin, position.yMin, position.width, EditorGUIUtility.singleLineHeight);
-
-            yieldProp.boolValue = EditorGUI.ToggleLeft(r, EditorHelper.TempContent("Yield", "Should we yield if called from a coroutine."), yieldProp.boolValue);
-
-            return new Rect(position.xMin, r.yMax, position.width, position.yMax - r.yMax);
-        }
-
+        
         #endregion
 
         #region ReorderableList Handlers

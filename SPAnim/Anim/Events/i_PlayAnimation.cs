@@ -223,14 +223,14 @@ namespace com.spacepuppy.Anim.Events
 
             return false;
         }
-        
+
         #endregion
 
         #region IObservableTrigger Interface
 
-        SPEvent[] IObservableTrigger.GetEvents()
+        BaseSPEvent[] IObservableTrigger.GetEvents()
         {
-            return new SPEvent[] { _onAnimComplete };
+            return new BaseSPEvent[] { _onAnimComplete };
         }
 
         #endregion

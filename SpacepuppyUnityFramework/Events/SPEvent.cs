@@ -3,32 +3,40 @@ using System.Collections.Generic;
 
 using com.spacepuppy.Collections;
 using com.spacepuppy.Utils;
+using System;
 
 namespace com.spacepuppy.Events
 {
 
     [System.Serializable()]
-    public class SPEvent : ICollection<EventTriggerTarget>
+    public class BaseSPEvent : ICollection<EventTriggerTarget>
     {
 
         public const string ID_DEFAULT = "Trigger";
 
         #region Events
 
-        public event System.EventHandler<TempEventArgs> TriggerActivated;
+        protected System.EventHandler<TempEventArgs> _triggerActivated;
+        public event System.EventHandler<TempEventArgs> TriggerActivated
+        {
+            add
+            {
+                _triggerActivated += value;
+            }
+            remove
+            {
+                _triggerActivated -= value;
+            }
+        }
         protected virtual void OnTriggerActivated(object sender, object arg)
         {
-            if (TriggerActivated != null)
+            if (_triggerActivated != null)
             {
                 var e = TempEventArgs.Create(arg);
-                TriggerActivated(sender, e);
+                var d = _triggerActivated;
+                d(sender, e);
                 TempEventArgs.Release(e);
             }
-
-            //if(_owner != null)
-            //{
-            //    _owner.PostNotification<TriggerActivatedNotification>(new TriggerActivatedNotification(_owner, _id), false);
-            //}
         }
 
         #endregion
@@ -36,10 +44,7 @@ namespace com.spacepuppy.Events
         #region Fields
 
         [SerializeField()]
-        private bool _yield;
-
-        [SerializeField()]
-        private List<EventTriggerTarget> _targets = new List<EventTriggerTarget>();
+        protected readonly List<EventTriggerTarget> _targets = new List<EventTriggerTarget>();
 
         [System.NonSerialized()]
         private string _id;
@@ -48,38 +53,20 @@ namespace com.spacepuppy.Events
 
         #region CONSTRUCTOR
 
-        public SPEvent()
+        public BaseSPEvent()
         {
             _id = ID_DEFAULT;
         }
 
-        public SPEvent(string id)
+        public BaseSPEvent(string id)
         {
             _id = id;
         }
-
-        public SPEvent(bool yielding)
-        {
-            _id = ID_DEFAULT;
-            _yield = yielding;
-        }
-
-        public SPEvent(string id, bool yielding)
-        {
-            _id = id;
-            _yield = yielding;
-        }
-
+        
         #endregion
 
         #region Properties
-
-        public bool Yielding
-        {
-            get { return _yield; }
-            set { _yield = value; }
-        }
-
+        
         public string ObservableTriggerId
         {
             get { return _id; }
@@ -95,11 +82,11 @@ namespace com.spacepuppy.Events
         /// Count is total count of targets including the TriggerActivated event. 
         /// Check the count of 'Targets' for the direct targets only.
         /// </summary>
-        public int Count
+        public virtual int Count
         {
             get
             {
-                if (this.TriggerActivated != null)
+                if (_triggerActivated != null)
                     return _targets.Count + 1;
                 else
                     return _targets.Count;
@@ -117,7 +104,7 @@ namespace com.spacepuppy.Events
             return targ;
         }
 
-        public void ActivateTrigger(object sender, object arg)
+        protected void ActivateTrigger(object sender, object arg)
         {
             if (_targets.Count > 0)
             {
@@ -129,10 +116,9 @@ namespace com.spacepuppy.Events
             }
 
             this.OnTriggerActivated(sender, arg);
-
         }
 
-        public void ActivateTriggerAt(int index, object sender, object arg)
+        protected void ActivateTriggerAt(int index, object sender, object arg)
         {
             if (index >= 0 && index < _targets.Count)
             {
@@ -143,7 +129,7 @@ namespace com.spacepuppy.Events
             this.OnTriggerActivated(sender, arg);
         }
 
-        public void ActivateRandomTrigger(object sender, object arg, bool considerWeights)
+        protected void ActivateRandomTrigger(object sender, object arg, bool considerWeights)
         {
             if (_targets.Count > 0)
             {
@@ -153,7 +139,7 @@ namespace com.spacepuppy.Events
 
             this.OnTriggerActivated(sender, arg);
         }
-        
+
         #endregion
 
         #region ICollection Interface
@@ -214,27 +200,14 @@ namespace com.spacepuppy.Events
 
         #endregion
 
-
         #region Special Types
-
-        public class ConfigAttribute : System.Attribute
-        {
-            public bool Weighted;
-            public bool AlwaysExpanded;
-
-            public ConfigAttribute()
-            {
-
-            }
-
-        }
 
         public struct Enumerator : IEnumerator<EventTriggerTarget>
         {
 
             private List<EventTriggerTarget>.Enumerator _e;
 
-            public Enumerator(SPEvent t)
+            public Enumerator(BaseSPEvent t)
             {
                 _e = t._targets.GetEnumerator();
             }
@@ -264,6 +237,218 @@ namespace com.spacepuppy.Events
                 _e.Dispose();
             }
 
+        }
+
+        #endregion
+
+    }
+
+    public class SPEvent : BaseSPEvent
+    {
+        
+        #region CONSTRUCTOR
+
+        public SPEvent()
+        {
+        }
+
+        public SPEvent(string id) : base(id)
+        {
+        }
+
+        #endregion
+
+        #region Methods
+        
+        public new void ActivateTrigger(object sender, object arg)
+        {
+            base.ActivateTrigger(sender, arg);
+        }
+
+        public new void ActivateTriggerAt(int index, object sender, object arg)
+        {
+            base.ActivateTriggerAt(index, sender, arg);
+        }
+
+        public new void ActivateRandomTrigger(object sender, object arg, bool considerWeights)
+        {
+            base.ActivateRandomTrigger(sender, arg, considerWeights);
+        }
+
+        #endregion
+
+        #region Special Types
+        
+        /*
+         * This may be defined here, it is still usable on all types inheriting from BaseSPEvent. It's only here for namespace purposes to be consistent across the framework.
+         */
+        public class ConfigAttribute : System.Attribute
+        {
+            public bool Weighted;
+            public bool AlwaysExpanded;
+
+            public ConfigAttribute()
+            {
+
+            }
+
+        }
+
+        #endregion
+
+    }
+
+    [System.Serializable()]
+    public class SPEvent<T> : BaseSPEvent where T : System.EventArgs
+    {
+
+        #region Events
+
+        public new event System.EventHandler<T> TriggerActivated;
+        protected virtual void OnTriggerActivated(object sender, T e)
+        {
+            if (TriggerActivated != null)
+            {
+                var d = this.TriggerActivated;
+                d(sender, e);
+            }
+        }
+
+        #endregion
+
+        #region CONSTRUCTOR
+
+        public SPEvent()
+        {
+        }
+
+        public SPEvent(string id) : base(id)
+        {
+        }
+
+        #endregion
+
+        #region Methods
+
+        public override int Count
+        {
+            get
+            {
+                if (this.TriggerActivated != null || _triggerActivated != null)
+                    return _targets.Count + 1;
+                else
+                    return _targets.Count;
+            }
+        }
+        
+        public void ActivateTrigger(object sender, T arg)
+        {
+            base.ActivateTrigger(sender, arg);
+            this.OnTriggerActivated(sender, arg);
+        }
+
+        public void ActivateTriggerAt(int index, object sender, T arg)
+        {
+            base.ActivateTriggerAt(index, sender, arg);
+            this.OnTriggerActivated(sender, arg);
+        }
+
+        public void ActivateRandomTrigger(object sender, T arg, bool considerWeights)
+        {
+            base.ActivateRandomTrigger(sender, arg, considerWeights);
+            this.OnTriggerActivated(sender, arg);
+        }
+
+        #endregion
+        
+    }
+
+    [System.Serializable()]
+    public class SPActionEvent<T> : BaseSPEvent
+    {
+
+        #region Events
+
+        private System.Action<T> _callback;
+        private System.Action<object, T> _evCallback;
+        protected virtual void OnTriggerActivated(object sender, T arg)
+        {
+            if(_callback != null)
+            {
+                var c = _callback;
+                c(arg);
+            }
+
+            if(_evCallback != null)
+            {
+                var c = _evCallback;
+                c(sender, arg);
+            }
+        }
+
+        #endregion
+
+        #region CONSTRUCTOR
+
+        public SPActionEvent()
+        {
+        }
+
+        public SPActionEvent(string id) : base(id)
+        {
+        }
+
+        #endregion
+
+        #region Methods
+
+        public override int Count
+        {
+            get
+            {
+                if (_callback != null || _evCallback != null || _triggerActivated != null)
+                    return _targets.Count + 1;
+                else
+                    return _targets.Count;
+            }
+        }
+
+        public void AddListener(System.Action<T> callback)
+        {
+            _callback += callback;
+        }
+
+        public void AddListener(System.Action<object, T> callback)
+        {
+            _evCallback += callback;
+        }
+
+        public void RemoveListener(System.Action<T> callback)
+        {
+            _callback -= callback;
+        }
+
+        public void RemoveListener(System.Action<object, T> callback)
+        {
+            _evCallback -= callback;
+        }
+
+        public void ActivateTrigger(object sender, T arg)
+        {
+            base.ActivateTrigger(sender, arg);
+            this.OnTriggerActivated(sender, arg);
+        }
+
+        public void ActivateTriggerAt(int index, object sender, T arg)
+        {
+            base.ActivateTriggerAt(index, sender, arg);
+            this.OnTriggerActivated(sender, arg);
+        }
+
+        public void ActivateRandomTrigger(object sender, T arg, bool considerWeights)
+        {
+            base.ActivateRandomTrigger(sender, arg, considerWeights);
+            this.OnTriggerActivated(sender, arg);
         }
 
         #endregion

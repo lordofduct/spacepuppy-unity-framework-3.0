@@ -16,7 +16,7 @@ namespace com.spacepuppy.Events
 
 
         [System.NonSerialized()]
-        private SPEvent _targetTrigger;
+        private BaseSPEvent _targetTrigger;
         [System.NonSerialized()]
         private System.Action<ObservableTargetData> _callback;
 

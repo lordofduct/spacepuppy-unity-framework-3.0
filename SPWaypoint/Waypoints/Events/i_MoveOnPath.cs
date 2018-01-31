@@ -236,9 +236,9 @@ namespace com.spacepuppy.Waypoints.Events
 
         #region IObservableTrigger Interface
 
-        SPEvent[] IObservableTrigger.GetEvents()
+        BaseSPEvent[] IObservableTrigger.GetEvents()
         {
-            return new SPEvent[] { _onFinish };
+            return new BaseSPEvent[] { _onFinish };
         }
 
         #endregion

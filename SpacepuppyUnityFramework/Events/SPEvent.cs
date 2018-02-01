@@ -44,7 +44,7 @@ namespace com.spacepuppy.Events
         #region Fields
 
         [SerializeField()]
-        protected readonly List<EventTriggerTarget> _targets = new List<EventTriggerTarget>();
+        private List<EventTriggerTarget> _targets = new List<EventTriggerTarget>();
 
         [System.NonSerialized()]
         private string _id;
@@ -335,9 +335,9 @@ namespace com.spacepuppy.Events
             get
             {
                 if (this.TriggerActivated != null || _triggerActivated != null)
-                    return _targets.Count + 1;
+                    return this.Targets.Count + 1;
                 else
-                    return _targets.Count;
+                    return this.Targets.Count;
             }
         }
         
@@ -407,9 +407,9 @@ namespace com.spacepuppy.Events
             get
             {
                 if (_callback != null || _evCallback != null || _triggerActivated != null)
-                    return _targets.Count + 1;
+                    return this.Targets.Count + 1;
                 else
-                    return _targets.Count;
+                    return this.Targets.Count;
             }
         }
 

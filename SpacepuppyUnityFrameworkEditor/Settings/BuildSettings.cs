@@ -18,6 +18,9 @@ namespace com.spacepuppyeditor.Settings
         #region Fields
 
         [SerializeField]
+        public VersionInfo Version;
+
+        [SerializeField]
         private SceneAsset _bootScene;
 
         [SerializeField]
@@ -34,11 +37,11 @@ namespace com.spacepuppyeditor.Settings
         [SerializeField]
         [Tooltip("Leave blank if you want to use default settings found in the Input Settings screen.")]
         private InputSettings _inputSettings;
-        
+
         #endregion
 
         #region Properties
-
+        
         public SceneAsset BootScene
         {
             get { return _bootScene; }
@@ -85,6 +88,7 @@ namespace com.spacepuppyeditor.Settings
             OpenFolderAndRun = 3
         }
 
+        public const string PROP_VERSION = "Version";
         public const string PROP_BOOTSCENE = "_bootScene";
         public const string PROP_SCENES = "_scenes";
         public const string PROP_BUILDTARGET = "_buildTarget";
@@ -95,6 +99,8 @@ namespace com.spacepuppyeditor.Settings
         protected override void OnSPInspectorGUI()
         {
             this.serializedObject.Update();
+
+            this.DrawPropertyField(PROP_VERSION);
 
             this.DrawScenes();
 
@@ -190,6 +196,13 @@ namespace com.spacepuppyeditor.Settings
                 var settings = this.target as BuildSettings;
                 var scenes = this.GetScenePaths();
 
+                //set version
+                settings.Version.Build++;
+                EditorUtility.SetDirty(settings);
+                PlayerSettings.bundleVersion = settings.Version.ToString();
+                AssetDatabase.SaveAssets();
+
+                //get output directory
                 var dir = EditorProjectPrefs.Local.GetString("LastBuildDirectory", string.Empty);
                 string path;
                 switch(settings.BuildTarget)

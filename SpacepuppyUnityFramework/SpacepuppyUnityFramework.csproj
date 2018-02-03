@@ -169,6 +169,7 @@
     <Compile Include="Utils\VectorUtil.cs" />
     <Compile Include="VariantCollection.cs" />
     <Compile Include="VariantReference.cs" />
+    <Compile Include="VersionInfo.cs" />
     <Compile Include="WaitForComplete.cs" />
     <Compile Include="WaitForDuration.cs" />
     <Compile Include="WaitForLateUpdate.cs" />

@@ -131,16 +131,16 @@ namespace com.spacepuppy.Sensors.Visual
             return VisualAspect.Pool.Find(p);
         }
 
-        public override IEnumerable<IAspect> SenseAll(System.Func<IAspect, bool> p = null)
-        {
-            p = this.GetPredicate(p);
-            return VisualAspect.Pool.FindAll(p);
-        }
-
         public override int SenseAll(ICollection<IAspect> lst, System.Func<IAspect, bool> p = null)
         {
             p = this.GetPredicate(p);
             return VisualAspect.Pool.FindAll(lst, p);
+        }
+        
+        public override IEnumerable<IAspect> SenseAll(System.Func<IAspect, bool> p = null)
+        {
+            p = this.GetPredicate(p);
+            return VisualAspect.Pool.FindAll(p);
         }
 
         public override int SenseAll<T>(ICollection<T> lst, System.Func<T, bool> p = null)

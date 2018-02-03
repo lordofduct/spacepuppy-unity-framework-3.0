@@ -172,6 +172,67 @@ namespace com.spacepuppy.Sensors.Collision
             }
         }
 
+        public override int SenseAll(ICollection<IAspect> lst, System.Func<IAspect, bool> p = null)
+        {
+            if (lst == null) throw new System.ArgumentNullException("lst");
+            if (lst.IsReadOnly) throw new System.ArgumentException("List to fill can not be read-only.", "lst");
+
+            if (_getAll)
+            {
+                var hits = this.GetAllHits();
+                if (p == null)
+                {
+                    foreach (var h in hits)
+                    {
+                        lst.Add(ColliderAspect.GetAspect(h.collider));
+                    }
+                    return hits.Length;
+                }
+                else
+                {
+                    int cnt = 0;
+                    IAspect a;
+                    foreach (var h in hits)
+                    {
+                        a = ColliderAspect.GetAspect(h.collider);
+                        if (p(a))
+                        {
+                            lst.Add(a);
+                            cnt++;
+                        }
+                    }
+                    return cnt;
+                }
+            }
+            else if (p == null)
+            {
+                var hit = this.GetFirstHit();
+                if (hit != null)
+                {
+                    lst.Add(ColliderAspect.GetAspect(hit));
+                    return 1;
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+            else
+            {
+                var hits = this.GetAllHits();
+                var hit = (from h in hits let a = ColliderAspect.GetAspect(h.collider) as IAspect where p(a) select a).FirstOrDefault();
+                if (hit != null)
+                {
+                    lst.Add(hit);
+                    return 1;
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+        }
+        
         public override IEnumerable<IAspect> SenseAll(System.Func<IAspect, bool> p = null)
         {
             if(_getAll)
@@ -196,67 +257,6 @@ namespace com.spacepuppy.Sensors.Collision
                 var hits = this.GetAllHits();
                 var hit = (from h in hits let a = ColliderAspect.GetAspect(h.collider) as IAspect where p(a) select a).FirstOrDefault();
                 return (hit != null) ? new IAspect[] { hit } : Enumerable.Empty<IAspect>();
-            }
-        }
-
-        public override int SenseAll(ICollection<IAspect> lst, System.Func<IAspect, bool> p = null)
-        {
-            if (lst == null) throw new System.ArgumentNullException("lst");
-            if (lst.IsReadOnly) throw new System.ArgumentException("List to fill can not be read-only.", "lst");
-
-            if(_getAll)
-            {
-                var hits = this.GetAllHits();
-                if (p == null)
-                {
-                    foreach(var h in hits)
-                    {
-                        lst.Add(ColliderAspect.GetAspect(h.collider));
-                    }
-                    return hits.Length;
-                }
-                else
-                {
-                    int cnt = 0;
-                    IAspect a;
-                    foreach(var h in hits)
-                    {
-                        a = ColliderAspect.GetAspect(h.collider);
-                        if(p(a))
-                        {
-                            lst.Add(a);
-                            cnt++;
-                        }
-                    }
-                    return cnt;
-                }
-            }
-            else if(p == null)
-            {
-                var hit = this.GetFirstHit();
-                if(hit != null)
-                {
-                    lst.Add(ColliderAspect.GetAspect(hit));
-                    return 1;
-                }
-                else
-                {
-                    return 0;
-                }
-            }
-            else
-            {
-                var hits = this.GetAllHits();
-                var hit = (from h in hits let a = ColliderAspect.GetAspect(h.collider) as IAspect where p(a) select a).FirstOrDefault();
-                if (hit != null)
-                {
-                    lst.Add(hit);
-                    return 1;
-                }
-                else
-                {
-                    return 0;
-                }
             }
         }
 

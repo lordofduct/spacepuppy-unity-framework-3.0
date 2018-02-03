@@ -48,6 +48,7 @@
     <Compile Include="Sensors\IAspect.cs" />
     <Compile Include="Sensors\Sensor.cs" />
     <Compile Include="Sensors\SensorCollection.cs" />
+    <Compile Include="Sensors\SensorUtil.cs" />
     <Compile Include="Sensors\Visual\OmnispectiveSensor.cs" />
     <Compile Include="Sensors\Visual\RightCylindricalVisualSensor.cs" />
     <Compile Include="Sensors\Visual\SphericalVisualSensor.cs" />

@@ -223,28 +223,16 @@ namespace com.spacepuppy.Sensors.Collision
             }
         }
 
-        public override IEnumerable<IAspect> SenseAll(System.Func<IAspect, bool> p = null)
-        {
-            if (p == null && !_requiresLineOfSight)
-            {
-                return (from c in _intersectingColliders select ColliderAspect.GetAspect(c)).ToArray();
-            }
-            else
-            {
-                return (from c in _intersectingColliders let a = ColliderAspect.GetAspect(c) where (p == null || p(a)) && (!_requiresLineOfSight || this.IsLineOfSight(c)) select a).ToArray();
-            }
-        }
-
         public override int SenseAll(ICollection<IAspect> lst, System.Func<IAspect, bool> p = null)
         {
             if (lst == null) throw new System.ArgumentNullException("lst");
             if (lst.IsReadOnly) throw new System.ArgumentException("List to fill can not be read-only.", "lst");
             if (_intersectingColliders.Count == 0) return 0;
 
-            if(p == null && !_requiresLineOfSight)
+            if (p == null && !_requiresLineOfSight)
             {
                 var e = _intersectingColliders.GetEnumerator();
-                while(e.MoveNext())
+                while (e.MoveNext())
                 {
                     lst.Add(ColliderAspect.GetAspect(e.Current));
                 }
@@ -254,16 +242,28 @@ namespace com.spacepuppy.Sensors.Collision
             {
                 var e = _intersectingColliders.GetEnumerator();
                 int cnt = 0;
-                while(e.MoveNext())
+                while (e.MoveNext())
                 {
                     var a = ColliderAspect.GetAspect(e.Current);
-                    if((p == null || p(a)) && (!_requiresLineOfSight || this.IsLineOfSight(e.Current)))
+                    if ((p == null || p(a)) && (!_requiresLineOfSight || this.IsLineOfSight(e.Current)))
                     {
                         lst.Add(a);
                         cnt++;
                     }
                 }
                 return cnt;
+            }
+        }
+        
+        public override IEnumerable<IAspect> SenseAll(System.Func<IAspect, bool> p = null)
+        {
+            if (p == null && !_requiresLineOfSight)
+            {
+                return (from c in _intersectingColliders select ColliderAspect.GetAspect(c)).ToArray();
+            }
+            else
+            {
+                return (from c in _intersectingColliders let a = ColliderAspect.GetAspect(c) where (p == null || p(a)) && (!_requiresLineOfSight || this.IsLineOfSight(c)) select a).ToArray();
             }
         }
 
@@ -277,11 +277,11 @@ namespace com.spacepuppy.Sensors.Collision
             {
                 int cnt = 0;
                 var e = _intersectingColliders.GetEnumerator();
-                while(e.MoveNext())
+                while (e.MoveNext())
                 {
                     var a = ColliderAspect.GetAspect(e.Current);
                     var o = ObjUtil.GetAsFromSource<T>(a);
-                    if(o != null)
+                    if (o != null)
                     {
                         lst.Add(o);
                         cnt++;

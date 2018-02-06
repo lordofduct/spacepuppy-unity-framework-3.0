@@ -140,7 +140,11 @@ namespace com.spacepuppy.Sensors.Visual
         public override IEnumerable<IAspect> SenseAll(System.Func<IAspect, bool> p = null)
         {
             p = this.GetPredicate(p);
-            return VisualAspect.Pool.FindAll(p);
+            //return VisualAspect.Pool.FindAll(p);
+            foreach (var a in VisualAspect.Pool)
+            {
+                if (p(a)) yield return a;
+            }
         }
 
         public override int SenseAll<T>(ICollection<T> lst, System.Func<T, bool> p = null)

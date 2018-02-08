@@ -60,33 +60,18 @@ namespace com.spacepuppy.Sensors
         /// <returns></returns>
         public abstract bool ConcernedWith(UnityEngine.Object obj);
 
-        public abstract bool SenseAny(System.Func<IAspect, bool> p = null);
-
         public abstract bool Visible(IAspect aspect);
 
-        public abstract IAspect Sense(System.Func<IAspect, bool> p = null);
+        public abstract bool SenseAny(System.Func<IAspect, bool> predicate = null);
 
-        public abstract IEnumerable<IAspect> SenseAll(System.Func<IAspect, bool> p = null);
+        public abstract IAspect Sense(System.Func<IAspect, bool> predicate = null);
 
-        public abstract int SenseAll(ICollection<IAspect> lst, System.Func<IAspect, bool> p = null);
+        public abstract int SenseAll(ICollection<IAspect> lst, System.Func<IAspect, bool> predicate = null);
 
-        public abstract int SenseAll<T>(ICollection<T> lst, System.Func<T, bool> p = null) where T : class, IAspect;
+        public abstract IEnumerable<IAspect> SenseAll(System.Func<IAspect, bool> predicate = null);
 
-        public bool AnyVisible(IEnumerable<IAspect> aspects)
-        {
-            if (aspects == null) return false;
-
-            foreach (var aspect in aspects)
-            {
-                if (aspect != null && aspect.IsActive)
-                {
-                    if (this.Visible(aspect)) return true;
-                }
-            }
-
-            return false;
-        }
-
+        public abstract int SenseAll<T>(ICollection<T> lst, System.Func<T, bool> predicate = null) where T : class, IAspect;
+        
         #endregion
 
     }

@@ -273,12 +273,12 @@ namespace com.spacepuppy.Utils
         {
             if (arr == null) throw new System.ArgumentNullException("arr");
             if (rng == null) rng = RandomUtil.Standard;
-            
+
             int j;
             T temp;
-            for (int i = 0; i < arr.Length; i++)
+            for (int i = 0; i < arr.Length - 1; i++)
             {
-                j = rng.Next(arr.Length);
+                j = rng.Next(i, arr.Length);
                 temp = arr[j];
                 arr[j] = arr[i];
                 arr[i] = temp;
@@ -289,11 +289,11 @@ namespace com.spacepuppy.Utils
         {
             if (arr == null) throw new System.ArgumentNullException("arr");
             if (rng == null) rng = RandomUtil.Standard;
-            
+
             int width = arr.GetLength(0);
-            for (int i = 0; i < arr.Length; i++)
+            for (int i = 0; i < arr.Length - 1; i++)
             {
-                int j = rng.Next(arr.Length);
+                int j = rng.Next(i, arr.Length);
                 int ix = i % width;
                 int iy = (int)(i / width);
                 int jx = j % width;
@@ -312,9 +312,9 @@ namespace com.spacepuppy.Utils
             int j;
             object temp;
             int cnt = lst.Count;
-            for (int i = 0; i < cnt; i++)
+            for (int i = 0; i < cnt - 1; i++)
             {
-                j = rng.Next(cnt);
+                j = rng.Next(i, cnt);
                 temp = lst[j];
                 lst[j] = lst[i];
                 lst[i] = temp;
@@ -329,9 +329,9 @@ namespace com.spacepuppy.Utils
             int j;
             T temp;
             int cnt = lst.Count;
-            for (int i = 0; i < cnt; i++)
+            for (int i = 0; i < cnt - 1; i++)
             {
-                j = rng.Next(cnt);
+                j = rng.Next(i, cnt);
                 temp = lst[j];
                 lst[j] = lst[i];
                 lst[i] = temp;

@@ -6,7 +6,13 @@ using com.spacepuppy.Utils;
 
 namespace com.spacepuppy.Dynamic
 {
-    public class StateToken : IDynamic, IEnumerable<KeyValuePair<string, object>>, System.IDisposable
+
+    /// <summary>
+    /// A dynamic class for storing the state of another object in. This can be used for serializing arbitrary state information, 
+    /// or used with the tween engine for dynamically configured state animation. As well as any number of other applications you may deem fit.
+    /// </summary>
+    [System.Serializable]
+    public class StateToken : IDynamic, IEnumerable<KeyValuePair<string, object>>, System.IDisposable, System.Runtime.Serialization.ISerializable
     {
 
         private const int TEMP_STACKSIZE = 3;
@@ -295,8 +301,37 @@ namespace com.spacepuppy.Dynamic
 
         #endregion
 
-        #region Static Utils
+        #region ISerializable Interface
+
+        protected StateToken(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context)
+        {
+            var e = info.GetEnumerator();
+            while(e.MoveNext())
+            {
+                _table[e.Current.Name] = e.Current.Value;
+            }
+        }
+
+        void System.Runtime.Serialization.ISerializable.GetObjectData(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context)
+        {
+            var e = _table.GetEnumerator();
+            while(e.MoveNext())
+            {
+                try
+                {
+                    info.AddValue(e.Current.Key, e.Current.Value);
+                }
+                catch(System.Exception)
+                {
+                    //tried to add a non-serializable value
+                }
+            }
+        }
         
+        #endregion
+
+        #region Static Utils
+
         private static ObjectCachePool<StateToken> _tempTokens;
 
         public static StateToken GetTempToken()
@@ -320,4 +355,5 @@ namespace com.spacepuppy.Dynamic
         #endregion
 
     }
+
 }

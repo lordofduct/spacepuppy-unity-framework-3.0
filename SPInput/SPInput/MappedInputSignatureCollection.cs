@@ -28,56 +28,7 @@ namespace com.spacepuppy.SPInput
             _table[mapping] = item;
             _sortedList.Add(item);
         }
-
-        public void Replace(T mapping, IInputSignature item)
-        {
-            if (item == null) throw new System.ArgumentNullException("item");
-            IInputSignature old;
-            if (_table.TryGetValue(mapping, out old))
-            {
-                _table.Remove(mapping);
-                _sortedList.Remove(old);
-            }
-
-            _table[mapping] = item;
-            _sortedList.Add(item);
-        }
-
-        public IInputSignature GetSignature(T mapping)
-        {
-            IInputSignature result;
-            if (_table.TryGetValue(mapping, out result) && result != null)
-            {
-                return result;
-            }
-            return null;
-        }
-
-        public IInputSignature GetSignature(string id)
-        {
-            var e = _table.GetEnumerator();
-            while (e.MoveNext())
-            {
-                if (e.Current.Value.Id == id) return e.Current.Value;
-            }
-            return null;
-        }
-
-        public bool Contains(T mapping)
-        {
-            return _table.ContainsKey(mapping);
-        }
-
-        public bool Contains(string id)
-        {
-            var e = _table.GetEnumerator();
-            while (e.MoveNext())
-            {
-                if (e.Current.Value.Id == id) return true;
-            }
-            return false;
-        }
-
+        
         public bool Remove(T mapping)
         {
             IInputSignature sig;
@@ -90,8 +41,52 @@ namespace com.spacepuppy.SPInput
 
             return false;
         }
+        
+        public IInputSignature GetSignature(T mapping)
+        {
+            IInputSignature result;
+            if (_table.TryGetValue(mapping, out result) && result != null)
+            {
+                return result;
+            }
+            return null;
+        }
 
-        public bool Remove(string id)
+        public bool Contains(T mapping)
+        {
+            return _table.ContainsKey(mapping);
+        }
+
+        public Enumerator GetEnumerator()
+        {
+            return new Enumerator(this);
+        }
+
+        #endregion
+
+        #region IInputSignatureCollection Interface
+
+        public virtual IInputSignature GetSignature(string id)
+        {
+            var e = _table.GetEnumerator();
+            while (e.MoveNext())
+            {
+                if (e.Current.Value.Id == id) return e.Current.Value;
+            }
+            return null;
+        }
+
+        public virtual bool Contains(string id)
+        {
+            var e = _table.GetEnumerator();
+            while (e.MoveNext())
+            {
+                if (e.Current.Value.Id == id) return true;
+            }
+            return false;
+        }
+
+        public virtual bool Remove(string id)
         {
             var e = _table.GetEnumerator();
             while (e.MoveNext())
@@ -105,11 +100,6 @@ namespace com.spacepuppy.SPInput
             }
 
             return false;
-        }
-
-        public Enumerator GetEnumerator()
-        {
-            return new Enumerator(this);
         }
 
         public void Sort()

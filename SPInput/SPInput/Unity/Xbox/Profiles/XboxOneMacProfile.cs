@@ -6,17 +6,13 @@ using System.Text;
 namespace com.spacepuppy.SPInput.Unity.Xbox.Profiles
 {
 
-    /// <summary>
-    /// InputName: "UNIDENTIFIED CONTROLLER"
-    /// InputName (per InControl): "Microsoft Wireless 360 Controller", "\u00A9Microsoft Corporation Controller", "\u00A9Microsoft Corporation Xbox Original Wired Controller"
-    /// InputName (similar, per InControl): "Mad Catz, Inc. Mad Catz FPS Pro GamePad"
-    /// </summary>
-    [InputProfileDescription("Xbox 360 Controller", TargetPlatform.MacOSX, Description = "Xbox 360 Controller (MacOSX)")]
-    [InputProfileJoystickName(XboxInputProfile.GENERIC_XBOX360)]
-    public class Xbox360MacOSProfile : XboxInputProfile
+    [InputProfileDescription("Xbox One Controller", TargetPlatform.MacOSX, Description = "Xbox One Controller (OSX)")]
+    [InputProfileJoystickName(XboxInputProfile.GENERIC_XBOXONE)]
+    [InputProfileJoystickName("Microsoft Xbox One Wired Controller")]
+    public class XboxOneMacProfile : XboxInputProfile
     {
 
-        public Xbox360MacOSProfile()
+        public XboxOneMacProfile()
         {
             this.RegisterAxis(XboxInputId.LStickX, SPInputId.Axis1);
             this.RegisterAxis(XboxInputId.LStickY, SPInputId.Axis2, true);

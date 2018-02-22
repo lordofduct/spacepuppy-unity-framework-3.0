@@ -18,7 +18,7 @@ namespace com.spacepuppy.Geom
 
     }
 
-    public interface IPhysicsGeom : IGeom
+    public interface IPhysicsObject
     {
 
         bool TestOverlap(int layerMask, QueryTriggerInteraction query = QueryTriggerInteraction.UseGlobal);
@@ -26,6 +26,11 @@ namespace com.spacepuppy.Geom
         bool Cast(Vector3 direction, out RaycastHit hitinfo, float distance, int layerMask, QueryTriggerInteraction query = QueryTriggerInteraction.UseGlobal);
         int CastAll(Vector3 direction, ICollection<RaycastHit> results, float distance, int layerMask, QueryTriggerInteraction query = QueryTriggerInteraction.UseGlobal);
 
+    }
+
+    public interface IPhysicsGeom : IGeom, IPhysicsObject
+    {
+        
     }
 
 }

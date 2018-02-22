@@ -6,13 +6,12 @@ using System.Text;
 namespace com.spacepuppy.SPInput.Unity.Xbox.Profiles
 {
 
-    [InputProfileDescription("Xbox One Controller", TargetPlatform.Windows, Description = "Xbox One Controller (Windows)")]
-    [InputProfileJoystickName(XboxInputProfile.GENERIC_XBOXONE)]
-    [InputProfileJoystickName("Controller (XBOX One For Windows)")]
-    public class XboxOneWinProfile : XboxInputProfile
+    [InputProfileDescription("Logitech F510 Controller", TargetPlatform.Windows, Description = "Logitech F510 Controller (Windows)")]
+    [InputProfileJoystickName("Controller (Rumble Gamepad F510)")]
+    public class LogitechF510WinProfile : XboxInputProfile
     {
 
-        public XboxOneWinProfile()
+        public LogitechF510WinProfile()
         {
             this.RegisterAxis(XboxInputId.LStickX, SPInputId.Axis1);
             this.RegisterAxis(XboxInputId.LStickY, SPInputId.Axis2, true);
@@ -20,8 +19,9 @@ namespace com.spacepuppy.SPInput.Unity.Xbox.Profiles
             this.RegisterAxis(XboxInputId.RStickY, SPInputId.Axis5, true);
             this.RegisterAxis(XboxInputId.DPadX, SPInputId.Axis6);
             this.RegisterAxis(XboxInputId.DPadY, SPInputId.Axis7);
-            this.RegisterTrigger(XboxInputId.LTrigger, SPInputId.Axis9);
-            this.RegisterTrigger(XboxInputId.RTrigger, SPInputId.Axis10);
+            this.RegisterTrigger(XboxInputId.LTrigger, SPInputId.Axis3, AxleValueConsideration.Positive);
+            this.RegisterTrigger(XboxInputId.RTrigger, SPInputId.Axis3, AxleValueConsideration.Negative);
+
 
             this.RegisterButton(XboxInputId.A, SPInputId.Button0);
             this.RegisterButton(XboxInputId.B, SPInputId.Button1);
@@ -40,4 +40,5 @@ namespace com.spacepuppy.SPInput.Unity.Xbox.Profiles
         }
 
     }
+
 }

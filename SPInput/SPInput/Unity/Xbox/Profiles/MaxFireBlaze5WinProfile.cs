@@ -6,13 +6,12 @@ using System.Text;
 namespace com.spacepuppy.SPInput.Unity.Xbox.Profiles
 {
 
-    [InputProfileDescription("Xbox One Controller", TargetPlatform.Windows, Description = "Xbox One Controller (Windows)")]
-    [InputProfileJoystickName(XboxInputProfile.GENERIC_XBOXONE)]
-    [InputProfileJoystickName("Controller (XBOX One For Windows)")]
-    public class XboxOneWinProfile : XboxInputProfile
+    [InputProfileDescription("MOGA Pro Controller", TargetPlatform.Windows, Description = "MOGA Pro Controller (Windows)")]
+    [InputProfileJoystickName("Android Controller Gen-2(ACC)")]
+    public class MaxFireBlaze5WinProfile : XboxInputProfile
     {
 
-        public XboxOneWinProfile()
+        public MaxFireBlaze5WinProfile()
         {
             this.RegisterAxis(XboxInputId.LStickX, SPInputId.Axis1);
             this.RegisterAxis(XboxInputId.LStickY, SPInputId.Axis2, true);
@@ -22,6 +21,7 @@ namespace com.spacepuppy.SPInput.Unity.Xbox.Profiles
             this.RegisterAxis(XboxInputId.DPadY, SPInputId.Axis7);
             this.RegisterTrigger(XboxInputId.LTrigger, SPInputId.Axis9);
             this.RegisterTrigger(XboxInputId.RTrigger, SPInputId.Axis10);
+
 
             this.RegisterButton(XboxInputId.A, SPInputId.Button0);
             this.RegisterButton(XboxInputId.B, SPInputId.Button1);
@@ -40,4 +40,5 @@ namespace com.spacepuppy.SPInput.Unity.Xbox.Profiles
         }
 
     }
+
 }

@@ -395,7 +395,7 @@ namespace com.spacepuppy.Geom
 
         #region CheckGeom
 
-        public static bool CheckGeom(IPhysicsGeom geom, QueryTriggerInteraction query = QueryTriggerInteraction.UseGlobal)
+        public static bool CheckGeom(IPhysicsObject geom, QueryTriggerInteraction query = QueryTriggerInteraction.UseGlobal)
         {
             if (geom == null) throw new System.ArgumentNullException("geom");
 
@@ -415,7 +415,7 @@ namespace com.spacepuppy.Geom
             }
         }
 
-        public static bool CheckGeom(IPhysicsGeom geom, int layerMask, QueryTriggerInteraction query = QueryTriggerInteraction.UseGlobal)
+        public static bool CheckGeom(IPhysicsObject geom, int layerMask, QueryTriggerInteraction query = QueryTriggerInteraction.UseGlobal)
         {
             if (geom == null) throw new System.ArgumentNullException("geom");
 
@@ -439,7 +439,7 @@ namespace com.spacepuppy.Geom
 
         #region OverlapGeom
         
-        public static Collider[] OverlapGeom(IPhysicsGeom geom, int layerMask = Physics.AllLayers, QueryTriggerInteraction query = QueryTriggerInteraction.UseGlobal)
+        public static Collider[] OverlapGeom(IPhysicsObject geom, int layerMask = Physics.AllLayers, QueryTriggerInteraction query = QueryTriggerInteraction.UseGlobal)
         {
             if (geom == null) throw new System.ArgumentNullException("geom");
             
@@ -450,7 +450,7 @@ namespace com.spacepuppy.Geom
             }
         }
         
-        public static int OverlapGeom(IPhysicsGeom geom, IList<Collider> results, int layerMask = Physics.AllLayers, QueryTriggerInteraction query = QueryTriggerInteraction.UseGlobal)
+        public static int OverlapGeom(IPhysicsObject geom, IList<Collider> results, int layerMask = Physics.AllLayers, QueryTriggerInteraction query = QueryTriggerInteraction.UseGlobal)
         {
             if (geom == null) throw new System.ArgumentNullException("geom");
             
@@ -461,7 +461,7 @@ namespace com.spacepuppy.Geom
         
         #region Cast
 
-        public static bool Cast(IPhysicsGeom geom, Vector3 dir, QueryTriggerInteraction query = QueryTriggerInteraction.UseGlobal)
+        public static bool Cast(IPhysicsObject geom, Vector3 dir, QueryTriggerInteraction query = QueryTriggerInteraction.UseGlobal)
         {
             if (geom == null) throw new System.ArgumentNullException("geom");
 
@@ -469,7 +469,7 @@ namespace com.spacepuppy.Geom
             return geom.Cast(dir, out hit, float.PositiveInfinity, Physics.AllLayers, query);
         }
 
-        public static bool Cast(IPhysicsGeom geom, Vector3 dir, float dist, QueryTriggerInteraction query = QueryTriggerInteraction.UseGlobal)
+        public static bool Cast(IPhysicsObject geom, Vector3 dir, float dist, QueryTriggerInteraction query = QueryTriggerInteraction.UseGlobal)
         {
             if (geom == null) throw new System.ArgumentNullException("geom");
 
@@ -477,14 +477,14 @@ namespace com.spacepuppy.Geom
             return geom.Cast(dir, out hit, dist, Physics.AllLayers, query);
         }
 
-        public static bool Cast(IPhysicsGeom geom, Vector3 dir, out RaycastHit hitInfo, QueryTriggerInteraction query = QueryTriggerInteraction.UseGlobal)
+        public static bool Cast(IPhysicsObject geom, Vector3 dir, out RaycastHit hitInfo, QueryTriggerInteraction query = QueryTriggerInteraction.UseGlobal)
         {
             if (geom == null) throw new System.ArgumentNullException("geom");
 
             return geom.Cast(dir, out hitInfo, float.PositiveInfinity, Physics.AllLayers, query);
         }
 
-        public static bool Cast(IPhysicsGeom geom, Vector3 dir, float dist, int layerMask, QueryTriggerInteraction query = QueryTriggerInteraction.UseGlobal)
+        public static bool Cast(IPhysicsObject geom, Vector3 dir, float dist, int layerMask, QueryTriggerInteraction query = QueryTriggerInteraction.UseGlobal)
         {
             if (geom == null) throw new System.ArgumentNullException("geom");
 
@@ -492,14 +492,14 @@ namespace com.spacepuppy.Geom
             return geom.Cast(dir, out hit, dist, layerMask, query);
         }
 
-        public static bool Cast(IPhysicsGeom geom, Vector3 dir, out RaycastHit hitInfo, float dist, QueryTriggerInteraction query = QueryTriggerInteraction.UseGlobal)
+        public static bool Cast(IPhysicsObject geom, Vector3 dir, out RaycastHit hitInfo, float dist, QueryTriggerInteraction query = QueryTriggerInteraction.UseGlobal)
         {
             if (geom == null) throw new System.ArgumentNullException("geom");
 
             return geom.Cast(dir, out hitInfo, dist, Physics.AllLayers, query);
         }
 
-        public static bool Cast(IPhysicsGeom geom, Vector3 dir, out RaycastHit hitInfo, float dist, int layerMask, QueryTriggerInteraction query = QueryTriggerInteraction.UseGlobal)
+        public static bool Cast(IPhysicsObject geom, Vector3 dir, out RaycastHit hitInfo, float dist, int layerMask, QueryTriggerInteraction query = QueryTriggerInteraction.UseGlobal)
         {
             if (geom == null) throw new System.ArgumentNullException("geom");
 
@@ -510,7 +510,7 @@ namespace com.spacepuppy.Geom
 
         #region CastAll
 
-        public static RaycastHit[] CastAll(IPhysicsGeom geom, Vector3 dir, QueryTriggerInteraction query = QueryTriggerInteraction.UseGlobal)
+        public static RaycastHit[] CastAll(IPhysicsObject geom, Vector3 dir, QueryTriggerInteraction query = QueryTriggerInteraction.UseGlobal)
         {
             if (geom == null) throw new System.ArgumentNullException("geom");
 
@@ -523,7 +523,7 @@ namespace com.spacepuppy.Geom
             }
         }
 
-        public static RaycastHit[] CastAll(IPhysicsGeom geom, Vector3 dir, float dist, QueryTriggerInteraction query = QueryTriggerInteraction.UseGlobal)
+        public static RaycastHit[] CastAll(IPhysicsObject geom, Vector3 dir, float dist, QueryTriggerInteraction query = QueryTriggerInteraction.UseGlobal)
         {
             if (geom == null) throw new System.ArgumentNullException("geom");
 
@@ -536,7 +536,7 @@ namespace com.spacepuppy.Geom
             }
         }
 
-        public static RaycastHit[] CastAll(IPhysicsGeom geom, Vector3 dir, float dist, int layerMask, QueryTriggerInteraction query = QueryTriggerInteraction.UseGlobal)
+        public static RaycastHit[] CastAll(IPhysicsObject geom, Vector3 dir, float dist, int layerMask, QueryTriggerInteraction query = QueryTriggerInteraction.UseGlobal)
         {
             if (geom == null) throw new System.ArgumentNullException("geom");
 
@@ -549,21 +549,21 @@ namespace com.spacepuppy.Geom
             }
         }
 
-        public static int CastAll(IPhysicsGeom geom, Vector3 dir, ICollection<RaycastHit> results, QueryTriggerInteraction query = QueryTriggerInteraction.UseGlobal)
+        public static int CastAll(IPhysicsObject geom, Vector3 dir, ICollection<RaycastHit> results, QueryTriggerInteraction query = QueryTriggerInteraction.UseGlobal)
         {
             if (geom == null) throw new System.ArgumentNullException("geom");
             
             return geom.CastAll(dir, results, float.PositiveInfinity, Physics.AllLayers, query);
         }
 
-        public static int CastAll(IPhysicsGeom geom, Vector3 dir, ICollection<RaycastHit> results, float dist, QueryTriggerInteraction query = QueryTriggerInteraction.UseGlobal)
+        public static int CastAll(IPhysicsObject geom, Vector3 dir, ICollection<RaycastHit> results, float dist, QueryTriggerInteraction query = QueryTriggerInteraction.UseGlobal)
         {
             if (geom == null) throw new System.ArgumentNullException("geom");
 
             return geom.CastAll(dir, results, dist, Physics.AllLayers, query);
         }
 
-        public static int CastAll(IPhysicsGeom geom, Vector3 dir, ICollection<RaycastHit> results, float dist, int layerMask, QueryTriggerInteraction query = QueryTriggerInteraction.UseGlobal)
+        public static int CastAll(IPhysicsObject geom, Vector3 dir, ICollection<RaycastHit> results, float dist, int layerMask, QueryTriggerInteraction query = QueryTriggerInteraction.UseGlobal)
         {
             if (geom == null) throw new System.ArgumentNullException("geom");
 
@@ -574,12 +574,12 @@ namespace com.spacepuppy.Geom
 
         #region RadialCast
 
-        public static RaycastHit[] RadialCast(IPhysicsGeom geom, float dist, int detail, int layerMask, QueryTriggerInteraction query = QueryTriggerInteraction.UseGlobal)
+        public static RaycastHit[] RadialCast(IPhysicsObject geom, float dist, int detail, int layerMask, QueryTriggerInteraction query = QueryTriggerInteraction.UseGlobal)
         {
             return RadialCast(geom, dist, detail, layerMask, Vector2.right, query);
         }
 
-        public static RaycastHit[] RadialCast(IPhysicsGeom geom, float dist, int detail, int layerMask, Vector2 initialAxis, QueryTriggerInteraction query = QueryTriggerInteraction.UseGlobal)
+        public static RaycastHit[] RadialCast(IPhysicsObject geom, float dist, int detail, int layerMask, Vector2 initialAxis, QueryTriggerInteraction query = QueryTriggerInteraction.UseGlobal)
         {
             using (var lst = TempCollection.GetList<RaycastHit>())
             {
@@ -588,7 +588,7 @@ namespace com.spacepuppy.Geom
             }
         }
 
-        public static RaycastHit[] RadialCast(IPhysicsGeom geom, float dist, int detail, int layerMask, Vector3 initialAxis, Vector3 rotationalAxis, QueryTriggerInteraction query = QueryTriggerInteraction.UseGlobal)
+        public static RaycastHit[] RadialCast(IPhysicsObject geom, float dist, int detail, int layerMask, Vector3 initialAxis, Vector3 rotationalAxis, QueryTriggerInteraction query = QueryTriggerInteraction.UseGlobal)
         {
             using (var lst = TempCollection.GetList<RaycastHit>())
             {
@@ -597,12 +597,12 @@ namespace com.spacepuppy.Geom
             }
         }
 
-        public static bool RadialCast(IPhysicsGeom geom, ICollection<RaycastHit> results, float dist, int detail, int layerMask, QueryTriggerInteraction query = QueryTriggerInteraction.UseGlobal)
+        public static bool RadialCast(IPhysicsObject geom, ICollection<RaycastHit> results, float dist, int detail, int layerMask, QueryTriggerInteraction query = QueryTriggerInteraction.UseGlobal)
         {
             return RadialCast(geom, results, dist, detail, layerMask, Vector2.right, query);
         }
 
-        public static bool RadialCast(IPhysicsGeom geom, ICollection<RaycastHit> results, float dist, int detail, int layerMask, Vector2 initialAxis, QueryTriggerInteraction query = QueryTriggerInteraction.UseGlobal)
+        public static bool RadialCast(IPhysicsObject geom, ICollection<RaycastHit> results, float dist, int detail, int layerMask, Vector2 initialAxis, QueryTriggerInteraction query = QueryTriggerInteraction.UseGlobal)
         {
             if (VectorUtil.NearZeroVector(initialAxis))
                 initialAxis = Vector2.right;
@@ -619,7 +619,7 @@ namespace com.spacepuppy.Geom
             return results.Count - cnt > 0;
         }
 
-        public static bool RadialCast(IPhysicsGeom geom, ICollection<RaycastHit> results, float dist, int detail, int layerMask, Vector3 initialAxis, Vector3 rotationalAxis, QueryTriggerInteraction query = QueryTriggerInteraction.UseGlobal)
+        public static bool RadialCast(IPhysicsObject geom, ICollection<RaycastHit> results, float dist, int detail, int layerMask, Vector3 initialAxis, Vector3 rotationalAxis, QueryTriggerInteraction query = QueryTriggerInteraction.UseGlobal)
         {
             if (VectorUtil.NearZeroVector(initialAxis))
                 initialAxis = Vector2.right;
@@ -640,7 +640,7 @@ namespace com.spacepuppy.Geom
 
         #region Selective Overlap
 
-        public static bool CheckGeomAgainst(IPhysicsGeom geom, IEnumerable<Collider> colliders, int layerMask = Physics.AllLayers, QueryTriggerInteraction query = QueryTriggerInteraction.UseGlobal)
+        public static bool CheckAgainst(IPhysicsObject geom, IEnumerable<Collider> colliders, int layerMask = Physics.AllLayers, QueryTriggerInteraction query = QueryTriggerInteraction.UseGlobal)
         {
             if (geom == null) return false;
             if (colliders == null) return false;
@@ -660,7 +660,7 @@ namespace com.spacepuppy.Geom
             return false;
         }
 
-        public static bool CheckGeomIgnoring(IPhysicsGeom geom, IEnumerable<Collider> ignoredColliders, int layerMask = Physics.AllLayers, QueryTriggerInteraction query = QueryTriggerInteraction.UseGlobal)
+        public static bool CheckIgnoring(IPhysicsObject geom, IEnumerable<Collider> ignoredColliders, int layerMask = Physics.AllLayers, QueryTriggerInteraction query = QueryTriggerInteraction.UseGlobal)
         {
             if (geom == null) return false;
 
@@ -679,7 +679,7 @@ namespace com.spacepuppy.Geom
             return false;
         }
 
-        public static int OverlapGeomAgainst(IPhysicsGeom geom, ICollection<Collider> results, IEnumerable<Collider> colliders, int layerMask = Physics.AllLayers, QueryTriggerInteraction query = QueryTriggerInteraction.UseGlobal)
+        public static int OverlapAgainst(IPhysicsObject geom, ICollection<Collider> results, IEnumerable<Collider> colliders, int layerMask = Physics.AllLayers, QueryTriggerInteraction query = QueryTriggerInteraction.UseGlobal)
         {
             if (results == null) throw new System.ArgumentNullException("results");
             if (geom == null) return 0;
@@ -705,7 +705,7 @@ namespace com.spacepuppy.Geom
             return cnt;
         }
 
-        public static int OverlapGeomIgnoring(IPhysicsGeom geom, ICollection<Collider> results, IEnumerable<Collider> ignoredColliders, int layerMask = Physics.AllLayers, QueryTriggerInteraction query = QueryTriggerInteraction.UseGlobal)
+        public static int OverlapIgnoring(IPhysicsObject geom, ICollection<Collider> results, IEnumerable<Collider> ignoredColliders, int layerMask = Physics.AllLayers, QueryTriggerInteraction query = QueryTriggerInteraction.UseGlobal)
         {
             if (results == null) throw new System.ArgumentNullException("results");
             if (geom == null) return 0;

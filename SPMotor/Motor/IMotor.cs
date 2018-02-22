@@ -9,7 +9,7 @@ using com.spacepuppy.Utils;
 namespace com.spacepuppy.Motor
 {
 
-    public interface IMotor : IComponent
+    public interface IMotor : IComponent, IPhysicsObject
     {
 
         bool PrefersFixedUpdate { get; }

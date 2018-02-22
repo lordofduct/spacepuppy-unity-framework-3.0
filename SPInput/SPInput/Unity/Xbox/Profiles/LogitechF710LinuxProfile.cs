@@ -6,17 +6,12 @@ using System.Text;
 namespace com.spacepuppy.SPInput.Unity.Xbox.Profiles
 {
 
-    /// <summary>
-    /// InputName: "PS4 Controller"
-    /// InputName (per InControl): "Sony Computer Entertainment Wireless Controller"
-    /// </summary>
-    [InputProfileDescription("PS4 Controller", TargetPlatform.Linux, Description = "PS4 Controller (Linux)")]
-    [InputProfileJoystickName(XboxInputProfile.GENERIC_PS4)]
-    [InputProfileJoystickName("Sony Computer Entertainment Wireless Controller")]
-    public class PS4LinuxProfile : XboxInputProfile
+    [InputProfileDescription("Logitech F710 Controller", TargetPlatform.Linux, Description = "Logitech F710 Controller (Linux)")]
+    [InputProfileJoystickName("Logitech Gamepad F710")]
+    public class LogitechF710LinuxProfile : XboxInputProfile
     {
 
-        public PS4LinuxProfile()
+        public LogitechF710LinuxProfile()
         {
             this.RegisterAxis(XboxInputId.LStickX, SPInputId.Axis1);
             this.RegisterAxis(XboxInputId.LStickY, SPInputId.Axis2, true);
@@ -27,14 +22,15 @@ namespace com.spacepuppy.SPInput.Unity.Xbox.Profiles
             this.RegisterTrigger(XboxInputId.LTrigger, SPInputId.Axis3);
             this.RegisterTrigger(XboxInputId.RTrigger, SPInputId.Axis6);
 
-            this.RegisterButton(XboxInputId.A, SPInputId.Button0); //X
-            this.RegisterButton(XboxInputId.B, SPInputId.Button1); //O
-            this.RegisterButton(XboxInputId.X, SPInputId.Button2); //Sqr
-            this.RegisterButton(XboxInputId.Y, SPInputId.Button3); //Tri
-            this.RegisterButton(XboxInputId.LB, SPInputId.Button4); //L1
-            this.RegisterButton(XboxInputId.RB, SPInputId.Button5); //R1
-            this.RegisterButton(XboxInputId.Back, SPInputId.Button6); //Share
-            this.RegisterButton(XboxInputId.Start, SPInputId.Button7); //Options
+
+            this.RegisterButton(XboxInputId.A, SPInputId.Button0);
+            this.RegisterButton(XboxInputId.B, SPInputId.Button1); 
+            this.RegisterButton(XboxInputId.X, SPInputId.Button2); 
+            this.RegisterButton(XboxInputId.Y, SPInputId.Button3); 
+            this.RegisterButton(XboxInputId.LB, SPInputId.Button4);
+            this.RegisterButton(XboxInputId.RB, SPInputId.Button5);
+            this.RegisterButton(XboxInputId.Back, SPInputId.Button6);
+            this.RegisterButton(XboxInputId.Start, SPInputId.Button7);
             this.RegisterButton(XboxInputId.LStickPress, SPInputId.Button9);
             this.RegisterButton(XboxInputId.RStickPress, SPInputId.Button10);
             this.RegisterAxleButton(XboxInputId.DPadRight, SPInputId.Axis7, AxleValueConsideration.Positive);

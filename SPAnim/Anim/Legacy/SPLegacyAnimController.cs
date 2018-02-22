@@ -11,14 +11,7 @@ namespace com.spacepuppy.Anim.Legacy
 {
 
     /// <summary>
-    /// This is a special class that gets attached to an Animation when any special relational data needs to be associated with that object.
-    /// 
-    /// TODO LIST -
-    /// Add SPAnim disposal to this to allow auto-complete of animations.
-    /// 
-    /// Add more efficient Scaled Time Layer handling here rather than where it is.
-    /// 
-    /// Add a way to update all playing animations if 'speed' changes at runtime
+    /// This is the main entry point into controlling animations through the SP Legacy Animation system. Use this in place of the Unity Animation class (or together with).
     /// </summary>
     [DisallowMultipleComponent()]
     public class SPLegacyAnimController : SPComponent, ISPAnimationSource

@@ -4,6 +4,9 @@ using System.Collections.Generic;
 namespace com.spacepuppy.Anim.Legacy
 {
 
+    /// <summary>
+    /// It is usually more convenient to break Animation scripts into several parts for the various tasks they handle. Each script should inherit from this class as it handles a lot of boilerplate.
+    /// </summary>
     public abstract class SPLegacyAnimator : SPComponent, ISPAnimator
     {
 
@@ -11,7 +14,7 @@ namespace com.spacepuppy.Anim.Legacy
 
         [SerializeField()]
         [DefaultFromSelf(UseEntity = true)]
-        private SPLegacyAnimator _controller;
+        private SPLegacyAnimController _controller;
 
         [System.NonSerialized]
         private bool _initialized;
@@ -32,19 +35,19 @@ namespace com.spacepuppy.Anim.Legacy
             }
         }
 
-        public void Configure(SPLegacyAnimator controller)
+        public void Configure(SPLegacyAnimController controller)
         {
             if (_initialized) throw new System.InvalidOperationException("Can not change the Controller of an SPAnimator once it's been initialized.");
             _controller = controller;
         }
 
-        protected abstract void Init(SPEntity entity, SPLegacyAnimator controller);
+        protected abstract void Init(SPEntity entity, SPLegacyAnimController controller);
 
         #endregion
 
         #region Properties
 
-        public SPLegacyAnimator Controller
+        public SPLegacyAnimController Controller
         {
             get
             {

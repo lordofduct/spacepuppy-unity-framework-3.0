@@ -5,6 +5,7 @@ using System.Linq;
 using com.spacepuppy.Collections;
 using com.spacepuppy.Geom;
 using com.spacepuppy.Utils;
+using System;
 
 namespace com.spacepuppy.Motor
 {
@@ -154,8 +155,19 @@ namespace com.spacepuppy.Motor
             get { return _lastVel; }
         }
 
+        bool IMotor.PrefersFixedUpdate => throw new NotImplementedException();
 
-        
+        float IMotor.Mass { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        float IMotor.StepOffset { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        float IMotor.SkinWidth { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        bool IMotor.CollisionEnabled { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        Vector3 IMotor.Velocity { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        Vector3 IMotor.Position { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
+        Vector3 IMotor.LastPosition => throw new NotImplementedException();
+
+        Vector3 IMotor.LastVelocity => throw new NotImplementedException();
+
         public void Move(Vector3 mv)
         {
             if (object.ReferenceEquals(_controller, null)) throw new System.InvalidOperationException("CharacterMotor must be initialized with an appropriate CharacterController.");
@@ -254,6 +266,30 @@ namespace com.spacepuppy.Motor
 
         #endregion
 
+        #region IPhysicsObject Interface
+
+        public bool TestOverlap(int layerMask, QueryTriggerInteraction query)
+        {
+            return Capsule.FromCollider(_controller).TestOverlap(layerMask, query);
+        }
+
+        public int Overlap(ICollection<Collider> results, int layerMask, QueryTriggerInteraction query)
+        {
+            return Capsule.FromCollider(_controller).Overlap(results, layerMask, query);
+        }
+
+        public bool Cast(Vector3 direction, out RaycastHit hitinfo, float distance, int layerMask, QueryTriggerInteraction query)
+        {
+            return Capsule.FromCollider(_controller).Cast(direction, out hitinfo, distance, layerMask, query);
+        }
+
+        public int CastAll(Vector3 direction, ICollection<RaycastHit> results, float distance, int layerMask, QueryTriggerInteraction query)
+        {
+            return Capsule.FromCollider(_controller).CastAll(direction, results, distance, layerMask, query);
+        }
+
+        #endregion
+
         #region IUpdatable Interface
 
         void IUpdateable.Update()
@@ -263,7 +299,7 @@ namespace com.spacepuppy.Motor
             _vel = Vector3.zero;
             _talliedVel = Vector3.zero;
         }
-
+        
         #endregion
 
     }

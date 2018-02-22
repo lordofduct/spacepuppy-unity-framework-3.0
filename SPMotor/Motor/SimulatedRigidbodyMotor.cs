@@ -261,6 +261,81 @@ namespace com.spacepuppy.Motor
 
         #endregion
 
+        #region IPhysicsObject Interface
+
+        public bool TestOverlap(int layerMask, QueryTriggerInteraction query)
+        {
+            foreach(var c in _colliders)
+            {
+                if (GeomUtil.GetGeom(c).TestOverlap(layerMask, query)) return true;
+            }
+
+            return false;
+        }
+
+        public int Overlap(ICollection<Collider> results, int layerMask, QueryTriggerInteraction query)
+        {
+            if (results == null) throw new System.ArgumentNullException("results");
+
+            using (var set = TempCollection.GetSet<Collider>())
+            {
+                foreach (var c in _colliders)
+                {
+                    GeomUtil.GetGeom(c).Overlap(set, layerMask, query);
+                }
+
+                if(set.Count > 0)
+                {
+                    var e = set.GetEnumerator();
+                    while(e.MoveNext())
+                    {
+                        results.Add(e.Current);
+                    }
+                    return set.Count;
+                }
+            }
+
+            return 0;
+        }
+
+        public bool Cast(Vector3 direction, out RaycastHit hitinfo, float distance, int layerMask, QueryTriggerInteraction query)
+        {
+            foreach (var c in _colliders)
+            {
+                if (GeomUtil.GetGeom(c).Cast(direction, out hitinfo, distance, layerMask, query)) return true;
+            }
+
+            hitinfo = default(RaycastHit);
+            return false;
+        }
+
+        public int CastAll(Vector3 direction, ICollection<RaycastHit> results, float distance, int layerMask, QueryTriggerInteraction query)
+        {
+            if (results == null) throw new System.ArgumentNullException("results");
+
+            using (var set = TempCollection.GetSet<RaycastHit>())
+            {
+                foreach (var c in _colliders)
+                {
+                    GeomUtil.GetGeom(c).CastAll(direction, set, distance, layerMask, query);
+                }
+
+                if(set.Count > 0)
+                {
+                    var e = set.GetEnumerator();
+                    while(e.MoveNext())
+                    {
+                        results.Add(e.Current);
+                    }
+                    return set.Count;
+                }
+            }
+
+            return 0;
+        }
+
+        #endregion
+
         #region IUpdatable Interface
 
         void IUpdateable.Update()

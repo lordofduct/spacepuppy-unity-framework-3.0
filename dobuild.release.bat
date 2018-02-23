@@ -84,4 +84,6 @@ xcopy /Y /S .\SPWaypointEditor\bin\Release\SPWaypointEditor.dll .\Builds\Spacepu
 xcopy /Y /S .\SPWaypointEditor\bin\Release\SPWaypointEditor.pdb .\Builds\SpacepuppyUnityFramework\Editor
 xcopy /Y /S .\Resources\Shaders .\Builds\SpacepuppyUnityFramework\Editor\Shaders
 
+xcopy /Y /S .\Resources\SpacepuppyUnityFrameworkEditor.dll.meta .\Builds\SpacepuppyUnityFramework\Editor\
+
 PAUSE

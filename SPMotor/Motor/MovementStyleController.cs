@@ -145,7 +145,7 @@ namespace com.spacepuppy.Motor
                     }
 
                     _inUpdateSequence = true;
-                    if (this.BeforeUpdateMovement != null) this.UpdateMovementComplete(this, System.EventArgs.Empty);
+                    if (this.BeforeUpdateMovement != null) this.BeforeUpdateMovement(this, System.EventArgs.Empty);
                     _current.UpdateMovement();
                     if (this.UpdateMovementComplete != null) this.UpdateMovementComplete(this, System.EventArgs.Empty);
                     _inUpdateSequence = false;

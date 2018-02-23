@@ -154,20 +154,7 @@ namespace com.spacepuppy.Motor
         {
             get { return _lastVel; }
         }
-
-        bool IMotor.PrefersFixedUpdate => throw new NotImplementedException();
-
-        float IMotor.Mass { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        float IMotor.StepOffset { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        float IMotor.SkinWidth { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        bool IMotor.CollisionEnabled { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        Vector3 IMotor.Velocity { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        Vector3 IMotor.Position { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-
-        Vector3 IMotor.LastPosition => throw new NotImplementedException();
-
-        Vector3 IMotor.LastVelocity => throw new NotImplementedException();
-
+        
         public void Move(Vector3 mv)
         {
             if (object.ReferenceEquals(_controller, null)) throw new System.InvalidOperationException("CharacterMotor must be initialized with an appropriate CharacterController.");

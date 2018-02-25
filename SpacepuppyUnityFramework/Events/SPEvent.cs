@@ -243,6 +243,7 @@ namespace com.spacepuppy.Events
 
     }
 
+    [System.Serializable()]
     public class SPEvent : BaseSPEvent
     {
         

@@ -62,11 +62,23 @@ namespace com.spacepuppy.SPInput.Legacy
         {
             if (getFixedState)
             {
-                return _currentFixed == ButtonState.Released && Time.unscaledTime - _lastDown <= duration;
+                return _currentFixed == ButtonState.Released && Time.realtimeSinceStartup - _lastDown <= duration;
             }
             else
             {
-                return _current == ButtonState.Released && Time.unscaledTime - _lastDown <= duration;
+                return _current == ButtonState.Released && Time.realtimeSinceStartup - _lastDown <= duration;
+            }
+        }
+
+        public bool GetHeld(float duration, bool getFixedState)
+        {
+            if (getFixedState)
+            {
+                return _currentFixed == ButtonState.Released && Time.realtimeSinceStartup - _lastDown >= duration;
+            }
+            else
+            {
+                return _current == ButtonState.Released && Time.realtimeSinceStartup - _lastDown >= duration;
             }
         }
 
@@ -79,7 +91,7 @@ namespace com.spacepuppy.SPInput.Legacy
             //determine based on history
             _current = InputUtil.GetNextButtonState(_current, Input.GetButton(this.UnityInputId));
             if (_current == ButtonState.Down)
-                _lastDown = Time.unscaledTime;
+                _lastDown = Time.realtimeSinceStartup;
         }
 
         public override void FixedUpdate()
@@ -174,11 +186,23 @@ namespace com.spacepuppy.SPInput.Legacy
         {
             if (getFixedState)
             {
-                return _currentFixed == ButtonState.Released && Time.unscaledTime - _lastDown <= duration;
+                return _currentFixed == ButtonState.Released && Time.realtimeSinceStartup - _lastDown <= duration;
             }
             else
             {
-                return _current == ButtonState.Released && Time.unscaledTime - _lastDown <= duration;
+                return _current == ButtonState.Released && Time.realtimeSinceStartup - _lastDown <= duration;
+            }
+        }
+
+        public bool GetHeld(float duration, bool getFixedState)
+        {
+            if (getFixedState)
+            {
+                return _currentFixed == ButtonState.Released && Time.realtimeSinceStartup - _lastDown >= duration;
+            }
+            else
+            {
+                return _current == ButtonState.Released && Time.realtimeSinceStartup - _lastDown >= duration;
             }
         }
 
@@ -206,7 +230,7 @@ namespace com.spacepuppy.SPInput.Legacy
             }
 
             if (_current == ButtonState.Down)
-                _lastDown = Time.unscaledTime;
+                _lastDown = Time.realtimeSinceStartup;
         }
 
         public override void FixedUpdate()
@@ -519,11 +543,23 @@ namespace com.spacepuppy.SPInput.Legacy
         {
             if (getFixedState)
             {
-                return _currentFixed == ButtonState.Released && Time.unscaledTime - _lastDown <= duration;
+                return _currentFixed == ButtonState.Released && Time.realtimeSinceStartup - _lastDown <= duration;
             }
             else
             {
-                return _current == ButtonState.Released && Time.unscaledTime - _lastDown <= duration;
+                return _current == ButtonState.Released && Time.realtimeSinceStartup - _lastDown <= duration;
+            }
+        }
+
+        public bool GetHeld(float duration, bool getFixedState)
+        {
+            if (getFixedState)
+            {
+                return _currentFixed == ButtonState.Released && Time.realtimeSinceStartup - _lastDown >= duration;
+            }
+            else
+            {
+                return _current == ButtonState.Released && Time.realtimeSinceStartup - _lastDown >= duration;
             }
         }
 
@@ -537,7 +573,7 @@ namespace com.spacepuppy.SPInput.Legacy
             _current = InputUtil.GetNextButtonState(_current, Input.GetMouseButton(this.MouseButton));
 
             if (_current == ButtonState.Down)
-                _lastDown = Time.unscaledTime;
+                _lastDown = Time.realtimeSinceStartup;
         }
 
         public override void FixedUpdate()
@@ -607,11 +643,23 @@ namespace com.spacepuppy.SPInput.Legacy
         {
             if (getFixedState)
             {
-                return _currentFixed == ButtonState.Released && Time.unscaledTime - _lastDown <= duration;
+                return _currentFixed == ButtonState.Released && Time.realtimeSinceStartup - _lastDown <= duration;
             }
             else
             {
-                return _current == ButtonState.Released && Time.unscaledTime - _lastDown <= duration;
+                return _current == ButtonState.Released && Time.realtimeSinceStartup - _lastDown <= duration;
+            }
+        }
+
+        public bool GetHeld(float duration, bool getFixedState)
+        {
+            if (getFixedState)
+            {
+                return _currentFixed == ButtonState.Released && Time.realtimeSinceStartup - _lastDown >= duration;
+            }
+            else
+            {
+                return _current == ButtonState.Released && Time.realtimeSinceStartup - _lastDown >= duration;
             }
         }
 
@@ -636,7 +684,7 @@ namespace com.spacepuppy.SPInput.Legacy
             _current = InputUtil.GetNextButtonState(_current, Input.GetKey(this.Key));
 
             if (_current == ButtonState.Down)
-                _lastDown = Time.unscaledTime;
+                _lastDown = Time.realtimeSinceStartup;
         }
 
         public override void FixedUpdate()

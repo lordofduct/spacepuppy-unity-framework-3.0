@@ -8,7 +8,6 @@ namespace com.spacepuppy.SPInput.Unity.Xbox.Profiles
 
     /// <summary>
     /// InputName: "XInput Controller"
-    /// InputName (per InControl): "Microsoft X-Box 360 pad", "Generic X-Box pad"
     /// </summary>
     [InputProfileDescription("Xbox 360 Controller XInput", TargetPlatform.Linux, Description = "Xbox 360 Controller (Linux) - identified as an XInput controller")]
     [InputProfileJoystickName("XInput Controller")]

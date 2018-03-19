@@ -9,7 +9,7 @@ using com.spacepuppy.Utils;
 namespace com.spacepuppy.Spawn
 {
 
-    public class SpawnPointTracker : SPComponent
+    public sealed class SpawnPointTracker : SPComponent, IMStartOrEnableReceiver
     {
 
         #region Fields
@@ -32,10 +32,8 @@ namespace com.spacepuppy.Spawn
 
         #region CONSTRUCTOR
 
-        protected override void OnStartOrEnable()
+        void IMStartOrEnableReceiver.OnStartOrEnable()
         {
-            base.OnStartOrEnable();
-
             var e = _spawnPoints.GetEnumerator();
             while(e.MoveNext())
             {

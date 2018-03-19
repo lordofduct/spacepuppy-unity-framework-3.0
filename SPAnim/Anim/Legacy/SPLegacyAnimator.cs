@@ -25,14 +25,14 @@ namespace com.spacepuppy.Anim.Legacy
         
         protected override void Start()
         {
-            base.Start();
-
             var entity = SPEntity.Pool.GetFromSource<SPEntity>(this);
             if (!_initialized && entity != null && entity.IsAwake)
             {
                 _initialized = true;
                 this.Init(entity, _controller);
             }
+
+            base.Start();
         }
 
         public void Configure(SPLegacyAnimController controller)

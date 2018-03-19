@@ -10,13 +10,13 @@ namespace com.spacepuppy
     /// 
     /// All scripts that are intended to work in tandem with Spacepuppy Unity Framework should inherit from this instead of MonoBehaviour.
     /// </summary>
-    public abstract class SPComponent : MonoBehaviour, IComponent, ISPDisposable
+    public abstract class SPComponent : MonoBehaviour, IEventfulComponent, ISPDisposable
     {
 
         #region Events
 
         public event System.EventHandler OnEnabled;
-        public event System.EventHandler OnStartOrEnabled;
+        public event System.EventHandler OnStarted;
         public event System.EventHandler OnDisabled;
         public event System.EventHandler ComponentDestroyed;
 
@@ -33,6 +33,7 @@ namespace com.spacepuppy
 
         protected virtual void Awake()
         {
+            if (this is IMixin) MixinUtil.Register(this as IMixin);
             //this.SyncEntityRoot();
         }
 
@@ -40,28 +41,12 @@ namespace com.spacepuppy
         {
             _started = true;
             //this.SyncEntityRoot();
-            this.OnStartOrEnable();
-            if (this.OnStartOrEnabled != null) this.OnStartOrEnabled(this, System.EventArgs.Empty);
+            if (this.OnStarted != null) this.OnStarted(this, System.EventArgs.Empty);
         }
-
-        /// <summary>
-        /// On start or on enable if and only if start already occurred. This adjusts the order of 'OnEnable' so that it can be used in conjunction with 'OnDisable' to wire up handlers cleanly. 
-        /// OnEnable occurs BEFORE Start sometimes, and other components aren't ready yet. This remedies that.
-        /// </summary>
-        protected virtual void OnStartOrEnable()
-        {
-
-        }
-
+        
         protected virtual void OnEnable()
         {
             if (this.OnEnabled != null) this.OnEnabled(this, System.EventArgs.Empty);
-
-            if (_started)
-            {
-                this.OnStartOrEnable();
-                if (this.OnStartOrEnabled != null) this.OnStartOrEnabled(this, System.EventArgs.Empty);
-            }
         }
 
         protected virtual void OnDisable()

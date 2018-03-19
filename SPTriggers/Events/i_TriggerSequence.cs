@@ -7,7 +7,7 @@ using com.spacepuppy.Utils;
 namespace com.spacepuppy.Events
 {
 
-    public class i_TriggerSequence : AutoTriggerable
+    public sealed class i_TriggerSequence : AutoTriggerable, IMStartOrEnableReceiver
     {
 
         public enum WrapMode
@@ -51,10 +51,8 @@ namespace com.spacepuppy.Events
 
         #region CONSTRUCTOR
 
-        protected override void OnStartOrEnable()
+        void IMStartOrEnableReceiver.OnStartOrEnable()
         {
-            base.OnStartOrEnable();
-
             if (this.ActivateOn == ActivateEvent.None)
                 this.AttemptAutoStart();
         }

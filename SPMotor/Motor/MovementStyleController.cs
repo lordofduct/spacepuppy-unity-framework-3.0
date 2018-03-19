@@ -9,7 +9,7 @@ namespace com.spacepuppy.Motor
 {
 
     [RequireComponentInEntity(typeof(IMotor))]
-    public class MovementStyleController : SPComponent
+    public sealed class MovementStyleController : SPComponent, IMStartOrEnableReceiver
     {
 
         #region Events
@@ -56,10 +56,8 @@ namespace com.spacepuppy.Motor
             _styleStack = new Deque<IMovementStyle>();
         }
 
-        protected override void OnStartOrEnable()
+        void IMStartOrEnableReceiver.OnStartOrEnable()
         {
-            base.OnStartOrEnable();
-
             if (_defaultMovementStyle is IMovementStyle && _current == null && this.Contains(_defaultMovementStyle as IMovementStyle))
             {
                 this.ChangeState(_defaultMovementStyle as IMovementStyle);

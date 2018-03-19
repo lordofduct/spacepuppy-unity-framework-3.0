@@ -4,7 +4,7 @@ using com.spacepuppy.Utils;
 namespace com.spacepuppy.Events
 {
 
-    public class t_OnEnable : TriggerComponent
+    public sealed class t_OnEnable : TriggerComponent, IMStartOrEnableReceiver
     {
 
         #region Fields
@@ -27,10 +27,8 @@ namespace com.spacepuppy.Events
 
         #region Messages
 
-        protected override void OnStartOrEnable()
+        void IMStartOrEnableReceiver.OnStartOrEnable()
         {
-            base.OnStartOrEnable();
-
             if (_delay > 0f)
             {
                 this.Invoke(() =>

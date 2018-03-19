@@ -33,7 +33,7 @@ namespace com.spacepuppy
 
         protected virtual void Awake()
         {
-            if (this is IMixin) MixinUtil.Register(this as IMixin);
+            if (this is IMixin) MixinUtil.Initialize(this as IMixin);
         }
 
         protected virtual void Start()

@@ -113,6 +113,7 @@
     <Compile Include="IGameObjectSource.cs" />
     <Compile Include="IImmediatelyResumingYieldInstruction.cs" />
     <Compile Include="IKillableEntity.cs" />
+    <Compile Include="IMixin.cs" />
     <Compile Include="IPausibleYieldInstruction.cs" />
     <Compile Include="IPooledYieldInstruction.cs" />
     <Compile Include="IProgressingYieldInstruction.cs" />

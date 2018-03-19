@@ -1083,7 +1083,7 @@ namespace com.spacepuppy.Collections
 
         public bool GetFromSource(object obj, out T comp)
         {
-            if(obj is T)
+            if (obj is T)
             {
                 comp = obj as T;
                 return true;
@@ -1137,7 +1137,7 @@ namespace com.spacepuppy.Collections
 
         public bool GetFromSource<TSub>(object obj, out TSub comp) where TSub : class, T
         {
-            if(obj is TSub)
+            if (obj is TSub)
             {
                 comp = obj as TSub;
                 return true;

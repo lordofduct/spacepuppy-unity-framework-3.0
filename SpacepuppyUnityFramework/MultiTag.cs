@@ -14,7 +14,7 @@ namespace com.spacepuppy
     /// </summary>
     [AddComponentMenu("SpacePuppy/Multi Tag")]
     [DisallowMultipleComponent()]
-    public class MultiTag : SPComponent, IEnumerable<string>
+    public sealed class MultiTag : SPComponent, IEnumerable<string>, IMStartOrEnableReceiver
     {
 
         #region Multiton Interface
@@ -71,11 +71,9 @@ namespace com.spacepuppy
                 this.gameObject.tag = SPConstants.TAG_MULTITAG;
         }
 
-        protected override void OnStartOrEnable()
+        void IMStartOrEnableReceiver.OnStartOrEnable()
         {
             _pool.AddReference(this);
-
-            base.OnStartOrEnable();
         }
 
         protected override void OnDisable()

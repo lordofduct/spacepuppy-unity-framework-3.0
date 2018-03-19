@@ -46,6 +46,7 @@ namespace com.spacepuppy.Utils
             return (obj is GameObject || obj is Component || obj is IGameObjectSource);
         }
 
+        /*
         public static GameObject GetGameObjectFromSource(object obj)
         {
             if (obj == null) return null;
@@ -58,8 +59,9 @@ namespace com.spacepuppy.Utils
 
             return null;
         }
+        */
 
-        public static GameObject GetGameObjectFromSource(object obj, bool respectProxy)
+        public static GameObject GetGameObjectFromSource(object obj, bool respectProxy = false)
         {
             if (obj == null) return null;
 
@@ -79,6 +81,7 @@ namespace com.spacepuppy.Utils
             return null;
         }
 
+        /*
         public static Transform GetTransformFromSource(object obj)
         {
             if (obj == null) return null;
@@ -93,8 +96,9 @@ namespace com.spacepuppy.Utils
 
             return null;
         }
+        */
 
-        public static Transform GetTransformFromSource(object obj, bool respectProxy)
+        public static Transform GetTransformFromSource(object obj, bool respectProxy = false)
         {
             if (obj == null) return null;
 
@@ -116,9 +120,15 @@ namespace com.spacepuppy.Utils
             return null;
         }
 
-        public static GameObject GetRootFromSource(object obj)
+        public static GameObject GetRootFromSource(object obj, bool respectProxy = false)
         {
             if (obj.IsNullOrDestroyed()) return null;
+
+            if (respectProxy && obj is IProxy)
+            {
+                obj = (obj as IProxy).GetTarget();
+                if (obj == null) return null;
+            }
 
             if (obj is IComponent) obj = (obj as IComponent).component;
 
@@ -138,9 +148,15 @@ namespace com.spacepuppy.Utils
             return null;
         }
 
-        public static GameObject GetTrueRootFromSource(object obj)
+        public static GameObject GetTrueRootFromSource(object obj, bool respectProxy = false)
         {
             if (obj.IsNullOrDestroyed()) return null;
+
+            if (respectProxy && obj is IProxy)
+            {
+                obj = (obj as IProxy).GetTarget();
+                if (obj == null) return null;
+            }
 
             if (obj is IComponent) obj = (obj as IComponent).component;
 
@@ -896,10 +912,7 @@ namespace com.spacepuppy.Utils
         // ##########
 
         /// <summary>
-        /// Set the parent of some GameObject to this GameObject. The 'OnTransformHierarchyChanged' message will be broadcasted 
-        /// to child and all its children signaling it that the change occurred, unless suppressed by the suppress parameter. 
-        /// Note that changing the parent of complex hierarchies is expensive regardless of the suppress, if you're calling this 
-        /// method frequently, you probably have a design flaw in your game. Reparenting shouldn't occur that frequently.
+        /// Set the parent of some GameObject to this GameObject.
         /// </summary>
         /// <param name="obj"></param>
         /// <param name="child"></param>
@@ -912,10 +925,7 @@ namespace com.spacepuppy.Utils
         }
         
         /// <summary>
-        /// Set the parent of some GameObject to this GameObject. The 'OnTransformHierarchyChanged' message will be broadcasted 
-        /// to child and all its children signaling it that the change occurred, unless suppressed by the suppress parameter. 
-        /// Note that changing the parent of complex hierarchies is expensive regardless of the suppress, if you're calling this 
-        /// method frequently, you probably have a design flaw in your game. Reparenting shouldn't occur that frequently.
+        /// Set the parent of some GameObject to this GameObject.
         /// </summary>
         /// <param name="obj"></param>
         /// <param name="child"></param>
@@ -927,10 +937,7 @@ namespace com.spacepuppy.Utils
         }
 
         /// <summary>
-        /// Set the parent of some GameObject to this GameObject. The 'OnTransformHierarchyChanged' message will be broadcasted 
-        /// to child and all its children signaling it that the change occurred, unless suppressed by the suppress parameter. 
-        /// Note that changing the parent of complex hierarchies is expensive regardless of the suppress, if you're calling this 
-        /// method frequently, you probably have a design flaw in your game. Reparenting shouldn't occur that frequently.
+        /// Set the parent of some GameObject to this GameObject.
         /// </summary>
         /// <param name="obj"></param>
         /// <param name="child"></param>
@@ -942,14 +949,10 @@ namespace com.spacepuppy.Utils
         }
 
         /// <summary>
-        /// Set the parent of some GameObject to this GameObject. The 'OnTransformHierarchyChanged' message will be broadcasted 
-        /// to child and all its children signaling it that the change occurred, unless the new child is already a child of the GameObject. 
-        /// Note that changing the parent of complex hierarchies is expensive regardless of the suppress, if you're calling this 
-        /// method frequently, you probably have a design flaw in your game. Reparenting shouldn't occur that frequently.
+        /// Set the parent of some GameObject to this GameObject.
         /// </summary>
         /// <param name="obj"></param>
         /// <param name="child"></param>
-        /// <param name="suppressChangeHierarchyMessage">Don't send the OnTransformHierarchyChanged message.</param>
         public static void AddChild(this Transform obj, Transform child)
         {
             if (child == null) throw new System.ArgumentNullException("child");
@@ -959,8 +962,7 @@ namespace com.spacepuppy.Utils
         }
 
         /// <summary>
-        /// Sets the parent property of this GameObject to null. The 'OnTrasformHieararchyChanged' message will be 
-        /// broadcasted to it and all of its children signaling this change occurred, unless the parent is already null.
+        /// Sets the parent property of this GameObject to null.
         /// </summary>
         /// <param name="obj"></param>
         /// <param name="suppressChangeHierarchyMessage">Don't send the OnTransformHierarchyChanged message.</param>
@@ -974,8 +976,7 @@ namespace com.spacepuppy.Utils
         }
 
         /// <summary>
-        /// Sets the parent property of this GameObject to null. The 'OnTrasformHieararchyChanged' message will be 
-        /// broadcasted to it and all of its children signaling this change occurred, unless the parent is already null.
+        /// Sets the parent property of this GameObject to null.
         /// </summary>
         /// <param name="obj"></param>
         /// <param name="suppressChangeHierarchyMessage">Don't send the OnTransformHierarchyChanged message.</param>

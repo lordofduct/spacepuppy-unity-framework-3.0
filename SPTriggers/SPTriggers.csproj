@@ -66,6 +66,7 @@
     <Compile Include="Events\i_TriggerRandomElimination.cs" />
     <Compile Include="Events\i_TriggerSequence.cs" />
     <Compile Include="Events\t_AllTriggered.cs" />
+    <Compile Include="Events\t_Flicker.cs" />
     <Compile Include="Events\t_Interval.cs" />
     <Compile Include="Events\t_IntervalRandom.cs" />
     <Compile Include="Events\t_OnCollisionEnter.cs" />
@@ -75,6 +76,7 @@
     <Compile Include="Events\t_OnExitTrigger.cs" />
     <Compile Include="Events\t_OnProxyMediatorTriggered.cs" />
     <Compile Include="Events\t_OnStart.cs" />
+    <Compile Include="Events\t_OnTriggerOccupied.cs" />
     <Compile Include="Events\t_OnUIEvent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ProxyMediator.cs" />

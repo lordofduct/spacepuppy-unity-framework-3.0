@@ -41,6 +41,33 @@ namespace com.spacepuppy.Geom
 
         #endregion
 
+        #region Methods
+
+        public Vector3 MirrorPosition(Vector3 pos)
+        {
+            var pn = this.SurfaceNormal;
+            var pd = Vector3.Dot(this.transform.position, pn);
+            //var d = Vector3.Dot(pn, (pos - pn * pd));
+            var d = Vector3.Dot(pn, pos) - pd; //this way is just fewer calculations, both work
+            return pos - pn * d * 2f;
+        }
+
+        public Vector3 MirrorDirection(Vector3 v)
+        {
+            var pn = this.SurfaceNormal;
+            var pd = Vector3.Dot(v, pn);
+            return v - pn * pd * 2f;
+        }
+
+        public Quaternion GetMirrorLookRotation(Vector3 forw, Vector3 up)
+        {
+            forw = this.MirrorDirection(forw);
+            up = this.MirrorDirection(up);
+            return Quaternion.LookRotation(forw, up);
+        }
+
+        #endregion
+
         #region IPlanarSurface Interface
 
         public Vector3 GetSurfaceNormal(Vector2 location)

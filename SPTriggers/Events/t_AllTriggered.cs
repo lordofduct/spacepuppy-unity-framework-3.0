@@ -6,7 +6,7 @@ using System.Collections.Generic;
 namespace com.spacepuppy.Events
 {
 
-    public class t_AllTriggered : TriggerComponent
+    public sealed class t_AllTriggered : TriggerComponent, IMStartOrEnableReceiver
     {
 
         #region Fields
@@ -30,10 +30,8 @@ namespace com.spacepuppy.Events
 
         #region CONSTRUCTOR
 
-        protected override void OnStartOrEnable()
+        void IMStartOrEnableReceiver.OnStartOrEnable()
         {
-            base.OnStartOrEnable();
-
             _activatedTriggers.Clear();
             this.RegisterListeners();
         }

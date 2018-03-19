@@ -34,13 +34,11 @@ namespace com.spacepuppy
         protected virtual void Awake()
         {
             if (this is IMixin) MixinUtil.Register(this as IMixin);
-            //this.SyncEntityRoot();
         }
 
         protected virtual void Start()
         {
             _started = true;
-            //this.SyncEntityRoot();
             if (this.OnStarted != null) this.OnStarted(this, System.EventArgs.Empty);
         }
         
@@ -56,11 +54,7 @@ namespace com.spacepuppy
         
         protected virtual void OnDestroy()
         {
-            //InvokeUtil.CancelInvoke(this);
-            if (this.ComponentDestroyed != null)
-            {
-                this.ComponentDestroyed(this, System.EventArgs.Empty);
-            }
+            if (this.ComponentDestroyed != null) this.ComponentDestroyed(this, System.EventArgs.Empty);
         }
 
 #endregion
@@ -71,10 +65,7 @@ namespace com.spacepuppy
         /// Start has been called on this component.
         /// </summary>
         public bool started { get { return _started; } }
-
-        //OBSOLETE - unity added this in latest version of unity
-        //public bool isActiveAndEnabled { get { return this.gameObject.activeInHierarchy && this.enabled; } }
-
+        
         #endregion
 
         #region Root Methods
@@ -100,14 +91,6 @@ namespace com.spacepuppy
             _entityRoot = this.FindRoot();
         }
             
-        /// <summary>
-        /// Occurs if this gameobject or one of its parents is moved in the hierarchy using 'GameObjUtil.AddChild' or 'GameObjUtil.RemoveFromParent'
-        /// </summary>
-        protected virtual void OnTransformHierarchyChanged()
-        {
-            _entityRoot = null;
-        }
-        
         #endregion
         
 #region IComponent Interface

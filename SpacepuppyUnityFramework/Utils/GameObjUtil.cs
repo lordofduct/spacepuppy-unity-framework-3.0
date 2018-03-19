@@ -912,10 +912,7 @@ namespace com.spacepuppy.Utils
         // ##########
 
         /// <summary>
-        /// Set the parent of some GameObject to this GameObject. The 'OnTransformHierarchyChanged' message will be broadcasted 
-        /// to child and all its children signaling it that the change occurred, unless suppressed by the suppress parameter. 
-        /// Note that changing the parent of complex hierarchies is expensive regardless of the suppress, if you're calling this 
-        /// method frequently, you probably have a design flaw in your game. Reparenting shouldn't occur that frequently.
+        /// Set the parent of some GameObject to this GameObject.
         /// </summary>
         /// <param name="obj"></param>
         /// <param name="child"></param>
@@ -928,10 +925,7 @@ namespace com.spacepuppy.Utils
         }
         
         /// <summary>
-        /// Set the parent of some GameObject to this GameObject. The 'OnTransformHierarchyChanged' message will be broadcasted 
-        /// to child and all its children signaling it that the change occurred, unless suppressed by the suppress parameter. 
-        /// Note that changing the parent of complex hierarchies is expensive regardless of the suppress, if you're calling this 
-        /// method frequently, you probably have a design flaw in your game. Reparenting shouldn't occur that frequently.
+        /// Set the parent of some GameObject to this GameObject.
         /// </summary>
         /// <param name="obj"></param>
         /// <param name="child"></param>
@@ -943,10 +937,7 @@ namespace com.spacepuppy.Utils
         }
 
         /// <summary>
-        /// Set the parent of some GameObject to this GameObject. The 'OnTransformHierarchyChanged' message will be broadcasted 
-        /// to child and all its children signaling it that the change occurred, unless suppressed by the suppress parameter. 
-        /// Note that changing the parent of complex hierarchies is expensive regardless of the suppress, if you're calling this 
-        /// method frequently, you probably have a design flaw in your game. Reparenting shouldn't occur that frequently.
+        /// Set the parent of some GameObject to this GameObject.
         /// </summary>
         /// <param name="obj"></param>
         /// <param name="child"></param>
@@ -958,14 +949,10 @@ namespace com.spacepuppy.Utils
         }
 
         /// <summary>
-        /// Set the parent of some GameObject to this GameObject. The 'OnTransformHierarchyChanged' message will be broadcasted 
-        /// to child and all its children signaling it that the change occurred, unless the new child is already a child of the GameObject. 
-        /// Note that changing the parent of complex hierarchies is expensive regardless of the suppress, if you're calling this 
-        /// method frequently, you probably have a design flaw in your game. Reparenting shouldn't occur that frequently.
+        /// Set the parent of some GameObject to this GameObject.
         /// </summary>
         /// <param name="obj"></param>
         /// <param name="child"></param>
-        /// <param name="suppressChangeHierarchyMessage">Don't send the OnTransformHierarchyChanged message.</param>
         public static void AddChild(this Transform obj, Transform child)
         {
             if (child == null) throw new System.ArgumentNullException("child");
@@ -975,8 +962,7 @@ namespace com.spacepuppy.Utils
         }
 
         /// <summary>
-        /// Sets the parent property of this GameObject to null. The 'OnTrasformHieararchyChanged' message will be 
-        /// broadcasted to it and all of its children signaling this change occurred, unless the parent is already null.
+        /// Sets the parent property of this GameObject to null.
         /// </summary>
         /// <param name="obj"></param>
         /// <param name="suppressChangeHierarchyMessage">Don't send the OnTransformHierarchyChanged message.</param>
@@ -990,8 +976,7 @@ namespace com.spacepuppy.Utils
         }
 
         /// <summary>
-        /// Sets the parent property of this GameObject to null. The 'OnTrasformHieararchyChanged' message will be 
-        /// broadcasted to it and all of its children signaling this change occurred, unless the parent is already null.
+        /// Sets the parent property of this GameObject to null.
         /// </summary>
         /// <param name="obj"></param>
         /// <param name="suppressChangeHierarchyMessage">Don't send the OnTransformHierarchyChanged message.</param>

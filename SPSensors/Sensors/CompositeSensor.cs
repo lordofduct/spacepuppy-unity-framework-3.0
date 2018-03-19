@@ -10,7 +10,7 @@ using com.spacepuppy.Utils;
 namespace com.spacepuppy.Sensors
 {
 
-    public class CompositeSensor : Sensor, IEnumerable<Sensor>
+    public sealed class CompositeSensor : Sensor, IEnumerable<Sensor>, IMStartOrEnableReceiver
     {
 
         #region Fields
@@ -25,10 +25,8 @@ namespace com.spacepuppy.Sensors
 
         #region CONSTRUCTOR
 
-        protected override void OnStartOrEnable()
+        void IMStartOrEnableReceiver.OnStartOrEnable()
         {
-            base.OnStartOrEnable();
-
             this.SyncChildSensors();
         }
 

@@ -15,44 +15,8 @@ namespace com.spacepuppy.Sensors.Visual
         private static MultitonPool<IAspect> _pool = new MultitonPool<IAspect>();
 
         public static MultitonPool<IAspect> Pool { get { return _pool; } }
-
-        [System.Obsolete("Use VisualAspect.Pool instead.")]
-        public static IAspect[] GetAspects()
-        {
-            return _pool.FindAll(null);
-        }
-
-        public static bool Any(System.Func<IAspect, bool> predicate)
-        {
-            return !object.ReferenceEquals(_pool.Find(predicate), null);
-        }
-
-        [System.Obsolete("Use VisualAspect.Pool.Find instead.")]
-        public static IAspect GetAspect(System.Func<IAspect, bool> predicate)
-        {
-            return _pool.Find(predicate);
-        }
-
-        [System.Obsolete("Use VisualAspect.Pool.FindAll instead.")]
-        public static IList<IAspect> GetAspects(System.Func<IAspect, bool> predicate)
-        {
-            return _pool.FindAll(predicate);
-        }
-
-        [System.Obsolete("Use VisualAspect.Pool.FindAll instead.")]
-        public static int GetAspects(ICollection<IAspect> lst, System.Func<IAspect, bool> predicate)
-        {
-            return _pool.FindAll(lst, predicate);
-        }
-
-        [System.Obsolete("Use VisualAspect.Pool.FindAll instead.")]
-        public static int GetAspects<T>(ICollection<T> lst, System.Func<T, bool> predicate) where T : class, IAspect
-        {
-            return _pool.FindAll<T>(lst, predicate);
-        }
-
+        
         #endregion
-
         
         #region Fields
 

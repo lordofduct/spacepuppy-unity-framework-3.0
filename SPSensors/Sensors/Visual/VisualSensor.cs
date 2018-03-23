@@ -122,7 +122,7 @@ namespace com.spacepuppy.Sensors.Visual
 
         public override bool SenseAny(System.Func<IAspect, bool> p = null)
         {
-            return VisualAspect.Any(this.GetPredicate(p));
+            return VisualAspect.Pool.Any(this.GetPredicate(p));
         }
 
         public override IAspect Sense(System.Func<IAspect, bool> p = null)

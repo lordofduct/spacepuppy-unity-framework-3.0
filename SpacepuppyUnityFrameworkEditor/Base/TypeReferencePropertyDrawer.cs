@@ -137,23 +137,6 @@ namespace com.spacepuppyeditor.Base
                 }
             }
             
-
-
-            //var tpref = EditorHelper.GetTargetObjectOfProperty(property) as TypeReference;
-            //if(tpref == null)
-            //{
-            //    tpref = new TypeReference();
-            //    EditorHelper.SetTargetObjectOfProperty(property, tpref);
-            //    property.serializedObject.ApplyModifiedProperties();
-            //}
-
-            //EditorGUI.BeginChangeCheck();
-            //tpref.Type = SPEditorGUI.TypeDropDown(position, label, baseType, tpref.Type, allowAbstractTypes, allowInterfaces, defaultType, excludedTypes, style);
-            //if (EditorGUI.EndChangeCheck())
-            //    property.serializedObject.Update();
-
-
-
             var tp = GetTypeFromTypeReference(property);
             EditorGUI.BeginChangeCheck();
             tp = SPEditorGUI.TypeDropDown(position, label, baseType, tp, allowAbstractTypes, allowInterfaces, defaultType, excludedTypes, style, searchPredicate);

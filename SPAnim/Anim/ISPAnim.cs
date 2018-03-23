@@ -9,12 +9,13 @@ namespace com.spacepuppy.Anim
     /// <summary>
     /// An animation state generated from a clip. Similar to Unity AnimationState.
     /// </summary>
-    public interface ISPAnim : IRadicalWaitHandle
+    public interface ISPAnim : IRadicalWaitHandle, ISPDisposable
     {
         
         int Layer { get; set; }
         float Speed { get; set; }
         ITimeSupplier TimeSupplier { get; set; }
+        WrapMode WrapMode { get; set; }
         bool IsPlaying { get; }
         float Time { get; set; }
         float Duration { get; }

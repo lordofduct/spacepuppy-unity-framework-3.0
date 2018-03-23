@@ -399,6 +399,19 @@ namespace com.spacepuppy
 
     }
 
+    [System.AttributeUsage(System.AttributeTargets.Field, AllowMultiple = false)]
+    public class DisableIfAttribute : PropertyModifierAttribute
+    {
+        public readonly string MemberName;
+        public bool DisableIfNot;
+
+        public DisableIfAttribute(string memberName)
+        {
+            this.MemberName = memberName;
+        }
+
+    }
+
     /// <summary>
     /// While in the editor, if the value is ever null, an attempt is made to find the value on a GameObject in itself 
     /// that matches the name given.

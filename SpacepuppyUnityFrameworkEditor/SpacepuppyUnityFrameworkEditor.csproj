@@ -79,6 +79,7 @@
     <Compile Include="Components\UniqueToEntityHeaderDrawer.cs" />
     <Compile Include="Decorators\InfoboxDecorator.cs" />
     <Compile Include="Modifiers\DefaultFromSelfModifier.cs" />
+    <Compile Include="Modifiers\DisableIfModifier.cs" />
     <Compile Include="Modifiers\DisableOnPlayModifier.cs" />
     <Compile Include="Modifiers\FindInSelfModifier.cs" />
     <Compile Include="Modifiers\ForceFromSelfModifier.cs" />

@@ -7,7 +7,7 @@ using System;
 namespace com.spacepuppy.Anim.Legacy
 {
 
-    public class SPAnim : ISPAnim, IRadicalWaitHandle, System.ICloneable, ISPDisposable
+    public class SPAnim : ISPAnim, IRadicalWaitHandle, System.ICloneable
     {
 
         #region Fields
@@ -176,7 +176,8 @@ namespace com.spacepuppy.Anim.Legacy
             }
             else
             {
-                this.Play(-_speed, QueueMode.PlayNow, playMode);
+                _speed = -_speed;
+                this.Play(QueueMode.PlayNow, playMode);
             }
         }
 
@@ -240,6 +241,7 @@ namespace com.spacepuppy.Anim.Legacy
             _state = _controller.PlayQueuedInternal(_clipId, queueMode, playMode, _layer);
             _state.weight = _weight;
             _state.speed = this.RealSpeed;
+            _state.time = (_state.speed >= 0f) ? 0f : _state.length;
             _state.layer = _layer;
             _state.wrapMode = _wrapMode;
             _state.blendMode = _blendMode;
@@ -254,6 +256,7 @@ namespace com.spacepuppy.Anim.Legacy
             _state = _controller.CrossFadeQueuedInternal(_clipId, fadeLength, queueMode, playMode, _layer);
             _state.weight = _weight;
             _state.speed = this.RealSpeed;
+            _state.time = (_state.speed >= 0f) ? 0f : _state.length;
             _state.layer = _layer;
             _state.wrapMode = _wrapMode;
             _state.blendMode = _blendMode;
@@ -465,6 +468,18 @@ namespace com.spacepuppy.Anim.Legacy
                 set { }
             }
 
+            public WrapMode WrapMode
+            {
+                get
+                {
+                    return WrapMode.Default;
+                }
+                set
+                {
+                    //do nothing
+                }
+            }
+
             public bool IsPlaying
             {
                 get { return false; }
@@ -558,6 +573,20 @@ namespace com.spacepuppy.Anim.Legacy
                 {
                     return true;
                 }
+            }
+
+            #endregion
+
+            #region IDisposable Interface
+
+            public bool IsDisposed
+            {
+                get { return false; }
+            }
+
+            public void Dispose()
+            {
+                //do nothing
             }
 
             #endregion

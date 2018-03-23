@@ -51,6 +51,7 @@ namespace com.spacepuppy.Anim
         public virtual int Layer { get; set; }
         public virtual float Speed { get; set; }
         public virtual ITimeSupplier TimeSupplier { get; set; }
+        public virtual WrapMode WrapMode { get; set; }
 
         public abstract float Duration { get; }
         public abstract bool IsPlaying { get; }
@@ -112,7 +113,23 @@ namespace com.spacepuppy.Anim
             get { return false; }
         }
 
-        #endregion 
+        #endregion
+
+        #region IDisposable Interface
+
+        public bool IsDisposed
+        {
+            get;
+            private set;
+        }
+
+        public void Dispose()
+        {
+            if (_scheduler != null) _scheduler.Clear();
+            this.IsDisposed = true;
+        }
+
+        #endregion
 
     }
 

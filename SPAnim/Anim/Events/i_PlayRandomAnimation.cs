@@ -26,69 +26,56 @@ namespace com.spacepuppy.Anim.Events
 
         [SerializeField]
         private List<PlayAnimInfo> _clips;
-
-        [SerializeField]
-        private QueueMode _queueMode = QueueMode.PlayNow;
-        [SerializeField]
-        private PlayMode _playMode = PlayMode.StopSameLayer;
-        [SerializeField]
-        private float _crossFadeDur = 0f;
-
+        
         [SerializeField()]
         private SPEvent _onAnimComplete = new SPEvent(TRG_ONANIMCOMPLETE);
         [SerializeField()]
         [Tooltip("If an animation doesn't play, should we signal complete. This is useful if the animation is supposed to be chaining to another i_ that MUST run.")]
         private bool _triggerCompleteIfNoAnim = true;
-        [SerializeField()]
-        [Tooltip("If this is called as a BlockingTriggerableMechanims, should it actually block?")]
-        private bool _useAsBlockingYieldInstruction = true;
-        [SerializeField()]
-        [Tooltip("When this mechanism is called as a BlockingTriggerableMechanims, it will block the caller until complete. Set this true to allow the next step in the daisy chain to also block.")]
-        private bool _daisyChainBlockingYieldInstruction = true;
 
         #endregion
 
         #region Methods
-
-        private object PlayClip(object controller, UnityEngine.Object clip, AnimSettings settings)
+        
+        private object PlayClip(SPLegacyAnimController controller, UnityEngine.Object clip, PlayAnimInfo info)
         {
             if (clip is AnimationClip)
             {
-                if (controller is SPLegacyAnimController)
-                {
-                    var anim = (controller as SPLegacyAnimController).CreateAuxiliarySPAnim(clip as AnimationClip);
-                    settings.Apply(anim);
-                    if (_crossFadeDur > 0f)
-                        anim.CrossFade(_crossFadeDur, _queueMode, _playMode);
-                    else
-                        anim.Play(_queueMode, _playMode);
-                    return anim;
-                }
-                else if (controller is Animation)
-                {
-                    var animController = controller as Animation;
-                    var id = "aux*" + clip.GetInstanceID();
-                    var a = animController[id];
-                    if (a == null || a.clip != clip)
-                    {
-                        animController.AddClip(clip as AnimationClip, id);
-                    }
-
-                    AnimationState anim;
-                    if (_crossFadeDur > 0f)
-                        anim = animController.CrossFadeQueued(id, _crossFadeDur, _queueMode, _playMode);
-                    else
-                        anim = animController.PlayQueued(id, _queueMode, _playMode);
-                    settings.Apply(anim);
-                    return anim;
-                }
+                var anim = controller.CreateAuxiliarySPAnim(clip as AnimationClip);
+                if (info.ApplyCustomSettings) info.Settings.Apply(anim);
+                if (info.CrossFadeDur > 0f)
+                    anim.CrossFade(info.CrossFadeDur, info.QueueMode, info.PlayMode);
+                else
+                    anim.Play(info.QueueMode, info.PlayMode);
+                return anim;
             }
             else if (clip is IScriptableAnimationClip)
             {
-                if (controller is SPLegacyAnimController)
+                return controller.Play(clip as IScriptableAnimationClip);
+            }
+
+            return null;
+        }
+
+        private object PlayClip(Animation controller, UnityEngine.Object clip, PlayAnimInfo info)
+        {
+            if (clip is AnimationClip)
+            {
+                var animController = controller as Animation;
+                var id = "aux*" + clip.GetInstanceID();
+                var a = animController[id];
+                if (a == null || a.clip != clip)
                 {
-                    return (controller as SPLegacyAnimController).Play(clip as IScriptableAnimationClip);
+                    animController.AddClip(clip as AnimationClip, id);
                 }
+
+                AnimationState anim;
+                if (info.CrossFadeDur > 0f)
+                    anim = animController.CrossFadeQueued(id, info.CrossFadeDur, info.QueueMode, info.PlayMode);
+                else
+                    anim = animController.PlayQueued(id, info.QueueMode, info.PlayMode);
+                if (info.ApplyCustomSettings) info.Settings.Apply(anim);
+                return anim;
             }
 
             return null;
@@ -96,51 +83,75 @@ namespace com.spacepuppy.Anim.Events
 
         private object TryPlay(object controller, PlayAnimInfo info)
         {
-            switch (info.Mode)
+            if (controller is SPLegacyAnimController)
             {
-                case i_PlayAnimation.PlayByMode.PlayAnim:
-                    return PlayClip(controller, info.Clip, info.Settings);
-                case i_PlayAnimation.PlayByMode.PlayAnimByID:
-                    {
-                        if (controller is ISPAnimationSource)
+                switch (info.Mode)
+                {
+                    case i_PlayAnimation.PlayByMode.PlayAnim:
+                        return PlayClip(controller as SPLegacyAnimController, info.Clip, info);
+                    case i_PlayAnimation.PlayByMode.PlayAnimByID:
+                        var anim = (controller as SPLegacyAnimController).GetAnim(info.Id);
+                        if (anim != null)
                         {
-                            var anim = (controller as ISPAnimationSource).GetAnim(info.Id);
-                            if (anim != null)
-                            {
-                                if (_crossFadeDur > 0f)
-                                    anim.CrossFade(_crossFadeDur, _queueMode, _playMode);
-                                else
-                                    anim.Play(_queueMode, _playMode);
-                            }
+                            if (info.CrossFadeDur > 0f)
+                                anim.CrossFade(info.CrossFadeDur, info.QueueMode, info.PlayMode);
+                            else
+                                anim.Play(info.QueueMode, info.PlayMode);
+                            if (info.ApplyCustomSettings) info.Settings.Apply(anim);
                             return anim;
                         }
-                        else if (controller is ISPAnimator)
-                        {
-                            (controller as ISPAnimator).Play(info.Id, _queueMode, _playMode);
-                            return SPAnim.Null;
-                        }
-                        else if (controller is Animation)
-                        {
-                            var clip = (controller as Animation)[info.Id];
-                            if (clip != null)
-                            {
-                                AnimationState anim;
-                                if (_crossFadeDur > 0f)
-                                    anim = (controller as Animation).CrossFadeQueued(info.Id, _crossFadeDur, _queueMode, _playMode);
-                                else
-                                    anim = (controller as Animation).PlayQueued(info.Id, _queueMode, _playMode);
-                                info.Settings.Apply(anim);
-                                return anim;
-                            }
-                        }
-
                         return null;
-                    }
-                case i_PlayAnimation.PlayByMode.PlayAnimFromResource:
-                    return this.PlayClip(controller, Resources.Load<UnityEngine.Object>(info.Id), info.Settings);
-                default:
-                    return null;
+                    case i_PlayAnimation.PlayByMode.PlayAnimFromResource:
+                        return this.PlayClip(controller as SPLegacyAnimController, Resources.Load<UnityEngine.Object>(info.Id), info);
+                }
             }
+            else if (controller is Animation)
+            {
+                switch (info.Mode)
+                {
+                    case i_PlayAnimation.PlayByMode.PlayAnim:
+                        return PlayClip(controller as Animation, info.Clip, info);
+                    case i_PlayAnimation.PlayByMode.PlayAnimByID:
+                        var comp = controller as Animation;
+                        if (comp[info.Id] != null)
+                        {
+                            AnimationState anim;
+                            if (info.CrossFadeDur > 0f)
+                                anim = comp.CrossFadeQueued(info.Id, info.CrossFadeDur, info.QueueMode, info.PlayMode);
+                            else
+                                anim = comp.PlayQueued(info.Id, info.QueueMode, info.PlayMode);
+                            if (info.ApplyCustomSettings) info.Settings.Apply(anim);
+                            return anim;
+                        }
+                        return null;
+                    case i_PlayAnimation.PlayByMode.PlayAnimFromResource:
+                        return this.PlayClip(controller as Animation, Resources.Load<UnityEngine.Object>(info.Id), info);
+                }
+            }
+            else if (controller is ISPAnimationSource)
+            {
+                if (info.Mode == i_PlayAnimation.PlayByMode.PlayAnimByID)
+                {
+                    var anim = (controller as ISPAnimationSource).GetAnim(info.Id);
+                    if (anim != null)
+                    {
+                        if (info.CrossFadeDur > 0f)
+                            anim.CrossFade(info.CrossFadeDur, info.QueueMode, info.PlayMode);
+                        else
+                            anim.Play(info.QueueMode, info.PlayMode);
+                        if (info.ApplyCustomSettings) info.Settings.Apply(anim);
+                        return anim;
+                    }
+                    return null;
+                }
+            }
+            else if (controller is ISPAnimator)
+            {
+                if (string.IsNullOrEmpty(info.Id)) return null;
+                return com.spacepuppy.Dynamic.DynamicUtil.InvokeMethod(controller, info.Id);
+            }
+
+            return null;
         }
 
         private object ResolveTargetAnimator(object arg)
@@ -242,83 +253,7 @@ namespace com.spacepuppy.Anim.Events
         }
 
         #endregion
-
-        #region Special Types
-
-        [System.Serializable]
-        public class PlayAnimInfo
-        {
-
-            #region Fields
-
-            [SerializeField]
-            public float Weight;
-            [SerializeField]
-            private i_PlayAnimation.PlayByMode _mode;
-            [SerializeField]
-            private string _id;
-            [SerializeField]
-            private UnityEngine.Object _clip;
-            [SerializeField]
-            public AnimSettings Settings = AnimSettings.Default;
-
-            #endregion
-
-            #region Properties
-
-            public i_PlayAnimation.PlayByMode Mode
-            {
-                get { return _mode; }
-            }
-
-            public string Id
-            {
-                get { return _id; }
-            }
-
-            public UnityEngine.Object Clip
-            {
-                get { return _clip; }
-            }
-
-            #endregion
-
-            #region Methods
-
-            public void Configure(AnimationClip clip)
-            {
-                _mode = i_PlayAnimation.PlayByMode.PlayAnim;
-                _id = null;
-                _clip = clip;
-            }
-
-            public void Configure(IScriptableAnimationClip clip)
-            {
-                _mode = i_PlayAnimation.PlayByMode.PlayAnim;
-                _id = null;
-                _clip = clip as UnityEngine.Object;
-            }
-
-            public void Configure(string animId)
-            {
-                _mode = i_PlayAnimation.PlayByMode.PlayAnimByID;
-                _id = animId;
-                _clip = null;
-            }
-
-            public void ConfigureAsResource(string resourceId)
-            {
-                _mode = i_PlayAnimation.PlayByMode.PlayAnimFromResource;
-                _id = resourceId;
-                _clip = null;
-            }
-
-            #endregion
-
-        }
-
-        #endregion
-
+        
     }
 
 }

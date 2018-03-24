@@ -93,31 +93,15 @@ namespace com.spacepuppyeditor.Anim
             }
             else if (controller is ISPAnimator)
             {
-                var tp = controller.GetType();
-                var methods = (from m in tp.GetMethods(System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.NonPublic)
-                               let attrib = m.GetCustomAttributes(typeof(SPAnimatorMethodAttribute), true).FirstOrDefault()
-                               where attrib != null && m.GetParameters().Length == 0
-                               select new { attrib, m }).ToArray();
-                if (methods.Length > 0)
-                {
-                    var names = (from o in methods select o.m.Name).ToArray();
-
-                    var propId = this.serializedObject.FindProperty(PROP_ID);
-                    int index = System.Array.IndexOf(names, propId.stringValue);
-                    index = EditorGUILayout.Popup("Function", index, names);
-                    if (index < 0) index = 0;
-                    propId.stringValue = names[index];
-                }
-                else
-                {
-                    EditorGUILayout.LabelField("Function", "No functions found on animator");
-                }
+                var propId = this.serializedObject.FindProperty(PROP_ID);
+                propId.stringValue = DrawSPAnimatorFunctionPopup(EditorGUILayout.GetControlRect(), controller as ISPAnimator, propId.stringValue);
             }
             else if (controller is ISPAnimationSource)
             {
                 this.serializedObject.FindProperty(PROP_MODE).SetEnumValue<i_PlayAnimation.PlayByMode>(i_PlayAnimation.PlayByMode.PlayAnimByID);
                 this.serializedObject.FindProperty(PROP_CLIP).objectReferenceValue = null;
 
+                this.DrawPropertyField(PROP_ID);
                 this.DrawAnimSettings();
                 this.DrawPropertyField(PROP_QUEUEMODE);
                 this.DrawPropertyField(PROP_PLAYMODE);
@@ -180,6 +164,55 @@ namespace com.spacepuppyeditor.Anim
                 EditorGUI.indentLevel--;
             }
         }
+
+
+
+        public static string DrawSPAnimatorFunctionPopup(Rect position, GUIContent label, ISPAnimator controller, string functionName)
+        {
+            var tp = controller.GetType();
+            var methods = (from m in tp.GetMethods(System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.NonPublic)
+                           let attrib = m.GetCustomAttributes(typeof(SPAnimatorMethodAttribute), true).FirstOrDefault()
+                           where attrib != null && m.GetParameters().Length == 0
+                           select new { attrib, m }).ToArray();
+            if (methods.Length > 0)
+            {
+                var names = (from o in methods select o.m.Name).ToArray();
+                var guinames = (from s in names select EditorHelper.TempContent(s)).ToArray();
+
+                int index = System.Array.IndexOf(names, functionName);
+                index = EditorGUI.Popup(position, label, index, guinames);
+                if (index < 0) index = 0;
+                return names[index];
+            }
+            else
+            {
+                EditorGUI.LabelField(position, "Function", "No functions found on animator");
+                return string.Empty;
+            }
+        }
+        public static string DrawSPAnimatorFunctionPopup(Rect position, ISPAnimator controller, string functionName)
+        {
+            var tp = controller.GetType();
+            var methods = (from m in tp.GetMethods(System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.NonPublic)
+                           let attrib = m.GetCustomAttributes(typeof(SPAnimatorMethodAttribute), true).FirstOrDefault()
+                           where attrib != null && m.GetParameters().Length == 0
+                           select new { attrib, m }).ToArray();
+            if (methods.Length > 0)
+            {
+                var names = (from o in methods select o.m.Name).ToArray();
+                
+                int index = System.Array.IndexOf(names, functionName);
+                index = EditorGUI.Popup(position, "Function", index, names);
+                if (index < 0) index = 0;
+                return names[index];
+            }
+            else
+            {
+                EditorGUI.LabelField(position, "Function", "No functions found on animator");
+                return string.Empty;
+            }
+        }
+
 
     }
 

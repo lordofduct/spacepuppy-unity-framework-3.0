@@ -63,9 +63,7 @@ namespace com.spacepuppy.Anim.Legacy
         #endregion
 
         #region ISPAnimator Interface
-
-        public abstract void Play(string id, QueueMode queuMode = QueueMode.PlayNow, PlayMode playMode = PlayMode.StopSameLayer);
-
+        
         #endregion
 
     }

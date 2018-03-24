@@ -6,6 +6,7 @@ using System.Linq;
 using com.spacepuppy;
 using com.spacepuppy.Anim;
 using com.spacepuppy.Anim.Events;
+using com.spacepuppy.Anim.Legacy;
 using com.spacepuppy.Utils;
 
 using com.spacepuppyeditor.Base;
@@ -16,7 +17,7 @@ namespace com.spacepuppyeditor.Anim.Events
 {
 
     [CustomEditor(typeof(i_PlayRandomAnimation), true)]
-    public class i_PlayAnimationInspector : SPEditor
+    public class i_PlayRandomAnimationInspector : SPEditor
     {
 
         public const string PROP_ORDER = "_order";
@@ -28,9 +29,21 @@ namespace com.spacepuppyeditor.Anim.Events
         public const string PROP_CLIP_MODE = "_mode";
         public const string PROP_CLIP_ID = "_id";
         public const string PROP_CLIP_CLIP = "_clip";
-        public const string PROP_CLIP_SETTINGS = "_settings";
+        public const string PROP_CLIP_APPPLYSETTINGS = "ApplyCustomSettings";
+        public const string PROP_CLIP_SETTINGS = "Settings";
+        public const string PROP_CLIP_QUEUEMODE = "QueueMode";
+        public const string PROP_CLIP_PLAYMODE = "PlayMode";
+        public const string PROP_CLIP_CROSSFADEDUR = "CrossFadeDur";
 
-        private TriggerableTargetObjectPropertyDrawer _targetDrawer = new TriggerableTargetObjectPropertyDrawer();
+        private TriggerableTargetObjectPropertyDrawer _targetDrawer = new TriggerableTargetObjectPropertyDrawer()
+        {
+            ManuallyConfigured = true,
+            SearchChildren = false,
+            ChoiceSelector = new com.spacepuppyeditor.Components.MultiTypeComponentChoiceSelector()
+            {
+                AllowedTypes = new System.Type[] { typeof(Animation), typeof(ISPAnimationSource), typeof(ISPAnimator) }
+            }
+        };
         private WeightedValueCollectionPropertyDrawer _clipsDrawer;
 
         protected override void OnEnable()
@@ -46,6 +59,9 @@ namespace com.spacepuppyeditor.Anim.Events
                 ElementLabelFormatString = "Clip {0:00}",
                 OnAddCallback = this.OnAddCallback,
                 InternalDrawer = new PlayAnimInfoPropertyDrawer()
+                {
+                    DrawFlat = true
+                }
             };
         }
 
@@ -136,32 +152,45 @@ namespace com.spacepuppyeditor.Anim.Events
 
         private class PlayRandomAnimationWeightedPropertyDrawer : WeightedValueCollectionPropertyDrawer
         {
-
+            
             protected override void DrawElementValue(Rect area, SerializedProperty element, GUIContent label, int elementIndex)
             {
-                var modeProp = element.FindPropertyRelative(PlayAnimInfoPropertyDrawer.PROP_MODE);
-                switch(modeProp.GetEnumValue<i_PlayAnimation.PlayByMode>())
+                var controller = element.serializedObject.FindProperty(PROP_TARGETANIMATOR).FindPropertyRelative(TriggerableTargetObjectPropertyDrawer.PROP_TARGET).objectReferenceValue;
+                if (controller is Animation || controller is SPLegacyAnimController)
                 {
-                    case i_PlayAnimation.PlayByMode.PlayAnim:
-                        {
-                            var clipProp = element.FindPropertyRelative(PlayAnimInfoPropertyDrawer.PROP_CLIP);
-                            var obj = EditorGUI.ObjectField(area, GUIContent.none, clipProp.objectReferenceValue, typeof(UnityEngine.Object), true);
-                            if (obj == null || obj is AnimationClip || obj is IScriptableAnimationClip)
-                                clipProp.objectReferenceValue = obj;
-                            else if (GameObjectUtil.IsGameObjectSource(obj))
-                                clipProp.objectReferenceValue = ObjUtil.GetAsFromSource<IScriptableAnimationClip>(obj) as UnityEngine.Object;
-                        }
-                        break;
-                    default:
-                        {
-                            SPEditorGUI.PropertyField(area, element.FindPropertyRelative(PlayAnimInfoPropertyDrawer.PROP_ID), GUIContent.none);
-                        }
-                        break;
+                    var modeProp = element.FindPropertyRelative(PlayAnimInfoPropertyDrawer.PROP_MODE);
+                    switch (modeProp.GetEnumValue<i_PlayAnimation.PlayByMode>())
+                    {
+                        case i_PlayAnimation.PlayByMode.PlayAnim:
+                            {
+                                var clipProp = element.FindPropertyRelative(PlayAnimInfoPropertyDrawer.PROP_CLIP);
+                                var obj = EditorGUI.ObjectField(area, GUIContent.none, clipProp.objectReferenceValue, typeof(UnityEngine.Object), true);
+                                if (obj == null || obj is AnimationClip || obj is IScriptableAnimationClip)
+                                    clipProp.objectReferenceValue = obj;
+                                else if (GameObjectUtil.IsGameObjectSource(obj))
+                                    clipProp.objectReferenceValue = ObjUtil.GetAsFromSource<IScriptableAnimationClip>(obj) as UnityEngine.Object;
+                            }
+                            break;
+                        default:
+                            {
+                                SPEditorGUI.PropertyField(area, element.FindPropertyRelative(PlayAnimInfoPropertyDrawer.PROP_ID), GUIContent.none);
+                            }
+                            break;
+                    }
+                }
+                else if (controller is ISPAnimator)
+                {
+                    var propId = element.FindPropertyRelative(PlayAnimInfoPropertyDrawer.PROP_ID);
+                    propId.stringValue = i_PlayAnimationInspector.DrawSPAnimatorFunctionPopup(area, GUIContent.none, controller as ISPAnimator, propId.stringValue);
+                }
+                else if (controller is ISPAnimationSource)
+                {
+                    SPEditorGUI.PropertyField(area, element.FindPropertyRelative(PlayAnimInfoPropertyDrawer.PROP_ID), GUIContent.none);
                 }
             }
 
         }
-
+        
         #endregion
 
     }

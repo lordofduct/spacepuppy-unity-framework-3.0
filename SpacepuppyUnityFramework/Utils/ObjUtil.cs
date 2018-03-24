@@ -47,7 +47,10 @@ namespace com.spacepuppy.Utils
                 var tp = typeof(UnityEngine.Object);
                 var meth = tp.GetMethod("IsNativeObjectAlive", System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.NonPublic);
                 if (meth != null)
-                    _isObjectAlive = System.Delegate.CreateDelegate(typeof(System.Func<UnityEngine.Object, bool>), meth) as System.Func<UnityEngine.Object, bool>;
+                {
+                    var d = System.Delegate.CreateDelegate(typeof(System.Func<UnityEngine.Object, bool>), meth) as System.Func<UnityEngine.Object, bool>;
+                    _isObjectAlive = (a) => !object.ReferenceEquals(a, null) && d(a);
+                }
                 else
                     _isObjectAlive = (a) => a != null;
             }

@@ -578,6 +578,15 @@ namespace com.spacepuppy.Anim.Legacy
 
         #endregion
 
+        #region Static Utils
+
+        public static bool IsValid(SPAnimClip clip)
+        {
+            return clip != null && clip.Clip != null && clip.Initialized;
+        }
+
+        #endregion
+
     }
 
 }

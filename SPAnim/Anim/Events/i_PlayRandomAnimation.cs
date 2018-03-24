@@ -213,7 +213,7 @@ namespace com.spacepuppy.Anim.Events
                 }
                 else if (anim is AnimationState)
                 {
-                    GameLoop.Hook.StartCoroutine((anim as AnimationState).ScheduleLegacy(() =>
+                    GameLoop.Hook.StartCoroutine((anim as AnimationState).ScheduleLegacy((a) =>
                     {
                         _onAnimComplete.ActivateTrigger(this, arg);
                     }));

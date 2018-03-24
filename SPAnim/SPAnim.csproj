@@ -58,7 +58,6 @@
     <Compile Include="Anim\Legacy\SPLegacyAnimController.cs" />
     <Compile Include="Anim\Legacy\SPAnimClip.cs" />
     <Compile Include="Anim\Legacy\SPAnimClipCollection.cs" />
-    <Compile Include="Anim\Legacy\SPAnimUtil.cs" />
     <Compile Include="Anim\Legacy\TransformMask.cs" />
     <Compile Include="Anim\PropertyAttributes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

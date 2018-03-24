@@ -10,4 +10,9 @@ namespace com.spacepuppy.Anim
 
     }
 
+    public class SPAnimatorMethodAttribute : System.Attribute
+    {
+
+    }
+
 }

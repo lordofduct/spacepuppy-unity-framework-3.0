@@ -1,0 +1,16 @@
+##version control
+*.tfignore
+*.svn
+*.vs
+
+##build scripts
+dobuild.*
+dobuildzip.*
+
+##folders
+/Builds
+/MergedSpacepuppyUnityFramework
+*/bin/
+*/obj/
+/Templates
+*.csproj.user

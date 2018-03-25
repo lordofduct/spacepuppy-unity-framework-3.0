@@ -40,6 +40,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\SpacepuppyUnityFramework\Properties\AssemblyVersionInfo.cs">
+      <Link>Properties\AssemblyVersionInfo.cs</Link>
+    </Compile>
     <Compile Include="Project\ITextSource.cs" />
     <Compile Include="Project\QueryableAssetSet.cs" />
     <Compile Include="Project\SceneRef.cs" />

@@ -43,6 +43,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\SpacepuppyUnityFramework\Properties\AssemblyVersionInfo.cs">
+      <Link>Properties\AssemblyVersionInfo.cs</Link>
+    </Compile>
     <Compile Include="IInputManager.cs" />
     <Compile Include="SPInput\CompositeInputSignature.cs" />
     <Compile Include="SPInput\DelegatedInputSignature.cs" />

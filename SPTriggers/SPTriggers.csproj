@@ -43,6 +43,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\SpacepuppyUnityFramework\Properties\AssemblyVersionInfo.cs">
+      <Link>Properties\AssemblyVersionInfo.cs</Link>
+    </Compile>
     <Compile Include="Events\IAutoSequenceSignal.cs" />
     <Compile Include="Events\i_AddComponent.cs" />
     <Compile Include="Events\i_AutoSequenceSignal.cs" />

@@ -42,6 +42,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\SpacepuppyUnityFramework\Properties\AssemblyVersionInfo.cs">
+      <Link>Properties\AssemblyVersionInfo.cs</Link>
+    </Compile>
     <Compile Include="Dynamic\Accessors\BasicMemberAccessor.cs" />
     <Compile Include="Dynamic\Accessors\DynamicMemberAccessor.cs" />
     <Compile Include="Dynamic\Accessors\FastTransformMemberAccessor.cs" />

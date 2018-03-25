@@ -40,6 +40,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\SpacepuppyUnityFramework\Properties\AssemblyVersionInfo.cs">
+      <Link>Properties\AssemblyVersionInfo.cs</Link>
+    </Compile>
     <Compile Include="Motor\Enums.cs" />
     <Compile Include="Motor\IMotor.cs" />
     <Compile Include="Motor\CharacterMotor.cs" />

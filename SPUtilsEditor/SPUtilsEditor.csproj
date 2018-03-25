@@ -46,6 +46,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\SpacepuppyUnityFramework\Properties\AssemblyVersionInfo.cs">
+      <Link>Properties\AssemblyVersionInfo.cs</Link>
+    </Compile>
     <Compile Include="Geom\PlanarSurfaceComponentEditor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Render\MaterialPropertyReferencePropertyDrawer.cs" />

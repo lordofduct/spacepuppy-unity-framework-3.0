@@ -40,6 +40,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\SpacepuppyUnityFramework\Properties\AssemblyVersionInfo.cs">
+      <Link>Properties\AssemblyVersionInfo.cs</Link>
+    </Compile>
     <Compile Include="Cameras\SPCameraManager.cs" />
     <Compile Include="Cameras\CameraPool.cs" />
     <Compile Include="Cameras\CameraToken.cs" />

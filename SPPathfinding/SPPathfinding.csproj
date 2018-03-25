@@ -40,6 +40,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\SpacepuppyUnityFramework\Properties\AssemblyVersionInfo.cs">
+      <Link>Properties\AssemblyVersionInfo.cs</Link>
+    </Compile>
     <Compile Include="Graphs\AStarPathResolver.cs" />
     <Compile Include="Graphs\DijkstraPathResolver.cs" />
     <Compile Include="Graphs\Exceptions.cs" />

@@ -40,6 +40,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\SpacepuppyUnityFramework\Properties\AssemblyVersionInfo.cs">
+      <Link>Properties\AssemblyVersionInfo.cs</Link>
+    </Compile>
     <Compile Include="Anim\AnimEventScheduler.cs" />
     <Compile Include="Anim\AnimUtil.cs" />
     <Compile Include="Anim\Events\AnimSettings.cs" />

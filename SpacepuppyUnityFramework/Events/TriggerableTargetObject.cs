@@ -56,11 +56,19 @@ namespace com.spacepuppy.Events
             _configured = !defaultTriggerArg;
         }
 
-        public TriggerableTargetObject(bool defaultTriggerArg, FindCommand find, ResolveByCommand resolve)
+        public TriggerableTargetObject(UnityEngine.Object target)
         {
-            _configured = !defaultTriggerArg;
-            _find = find;
-            _resolveBy = resolve;
+            this.Configure(target);
+        }
+
+        public TriggerableTargetObject(UnityEngine.Object target, FindCommand find, ResolveByCommand resolveBy = ResolveByCommand.Nothing, string resolveQuery = null)
+        {
+            this.Configure(target, find, resolveBy, resolveQuery);
+        }
+
+        public TriggerableTargetObject(FindCommand find, ResolveByCommand resolveBy, string resolveQuery)
+        {
+            this.Configure(find, resolveBy, resolveQuery);
         }
 
         #endregion
@@ -112,6 +120,35 @@ namespace com.spacepuppy.Events
         #endregion
 
         #region Methods
+
+        public void Configure(UnityEngine.Object target)
+        {
+            _configured = true;
+            _target = target;
+            _find = FindCommand.Direct;
+            _resolveBy = ResolveByCommand.Nothing;
+            _queryString = null;
+        }
+
+        public void Configure(UnityEngine.Object target, FindCommand find, ResolveByCommand resolveBy = ResolveByCommand.Nothing, string resolveQuery = null)
+        {
+            _configured = true;
+            _target = target;
+            _find = find;
+            _resolveBy = resolveBy;
+            _queryString = resolveQuery;
+        }
+
+        public void Configure(FindCommand find, ResolveByCommand resolveBy, string resolveQuery)
+        {
+            _configured = false;
+            _target = null;
+            _find = find;
+            _resolveBy = resolveBy;
+            _queryString = resolveQuery;
+        }
+
+
 
         public T GetTarget<T>(object triggerArg) where T : class
         {

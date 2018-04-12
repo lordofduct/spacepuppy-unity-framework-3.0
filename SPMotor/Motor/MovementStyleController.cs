@@ -335,6 +335,7 @@ namespace com.spacepuppy.Motor
             {
                 if (this.Current == style) return style;
                 _styleStack.Push(this.Current);
+                _styleStack.Push(style);
                 _stackingState = true;
                 this.ChangeState_Imp(style, precedence, false);
                 _stackingState = false;
@@ -388,15 +389,27 @@ namespace com.spacepuppy.Motor
         public void PurgeStackedState(IMovementStyle style)
         {
             if (object.ReferenceEquals(style, null)) throw new System.ArgumentNullException("style");
-            if (_styleStack.Count == 0) return;
 
-            int index = _styleStack.IndexOf(style);
-            if (index > 0)
+            if(_styleStack.Count > 0)
             {
-                _styleStack.RemoveAt(index);
-                style.OnPurgedFromStack();
+                if(object.ReferenceEquals(_current, style))
+                {
+                    this.PopState();
+                }
+                else
+                {
+                    int index = _styleStack.IndexOf(style);
+                    if (index > 0)
+                    {
+                        _styleStack.RemoveAt(index);
+                        style.OnPurgedFromStack();
+                    }
+                }
             }
-            //we don't purge if the stack doesn't contain the style, or if it's the bottom entry... the bottom entry can only be swapped out
+            else if(object.ReferenceEquals(_current, style))
+            {
+                this.ChangeStateToNull(float.NegativeInfinity);
+            }
         }
 
         public void ChangeCurrentUnstackedState(IMovementStyle style)

@@ -6,11 +6,11 @@ using com.spacepuppy.Utils;
 namespace com.spacepuppy.Events
 {
 
-    public class t_OnExitTrigger : TriggerComponent, ICompoundTriggerResponder
+    public class t_OnExitTrigger : TriggerComponent, ICompoundTriggerExitResponder
     {
 
         #region Fields
-
+        
         [SerializeField]
         private EventActivatorMask _mask = new EventActivatorMask(-1);
         [SerializeField]
@@ -77,14 +77,8 @@ namespace com.spacepuppy.Events
 
             this.DoTestTriggerExit(other);
         }
-
-
-        void ICompoundTriggerResponder.OnCompoundTriggerEnter(Collider other)
-        {
-            //do nothing
-        }
-
-        void ICompoundTriggerResponder.OnCompoundTriggerExit(Collider other)
+        
+        void ICompoundTriggerExitResponder.OnCompoundTriggerExit(Collider other)
         {
             this.DoTestTriggerExit(other);
         }

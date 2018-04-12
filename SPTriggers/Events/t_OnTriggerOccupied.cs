@@ -9,7 +9,7 @@ using System;
 namespace com.spacepuppy.Events
 {
 
-    public class t_OnTriggerOccupied : SPComponent, ICompoundTriggerResponder, IObservableTrigger
+    public class t_OnTriggerOccupied : SPComponent, ICompoundTriggerEnterResponder, ICompoundTriggerExitResponder, IObservableTrigger
     {
 
         #region Fields
@@ -119,13 +119,13 @@ namespace com.spacepuppy.Events
             this.RemoveObject(other.gameObject);
         }
 
-        void ICompoundTriggerResponder.OnCompoundTriggerEnter(Collider other)
+        void ICompoundTriggerEnterResponder.OnCompoundTriggerEnter(Collider other)
         {
             if (other == null) return;
             this.AddObject(other.gameObject);
         }
 
-        void ICompoundTriggerResponder.OnCompoundTriggerExit(Collider other)
+        void ICompoundTriggerExitResponder.OnCompoundTriggerExit(Collider other)
         {
             if (other == null) return;
             this.RemoveObject(other.gameObject);

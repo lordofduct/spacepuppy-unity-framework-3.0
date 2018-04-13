@@ -58,6 +58,9 @@ namespace com.spacepuppy
         private static com.spacepuppy.Async.InvokePump _updateInvokeHandle;
         private static com.spacepuppy.Async.InvokePump _fixedUpdateInvokeHandle;
 
+        private static int _currentFrame;
+        private static int _currentLateFrame;
+
         #endregion
 
         #region CONSTRUCTOR
@@ -192,6 +195,22 @@ namespace com.spacepuppy
         /// </summary>
         public static com.spacepuppy.Async.InvokePump FixedUpdateHandle { get { return _fixedUpdateInvokeHandle; } }
 
+        /// <summary>
+        /// Returns true if the UpdatePump and Update event were ran.
+        /// </summary>
+        public static bool UpdateWasCalled
+        {
+            get { return _currentFrame == UnityEngine.Time.frameCount; }
+        }
+
+        /// <summary>
+        /// Returns true if the LateUpdatePump and LateUpdate event were ran.
+        /// </summary>
+        public static bool LateUpdateWasCalled
+        {
+            get { return _currentFrame == UnityEngine.Time.frameCount; }
+        }
+
         #endregion
 
         #region Methods
@@ -241,6 +260,18 @@ namespace com.spacepuppy
             }
         }
 
+        public static void RegisterNextUpdate(IUpdateable obj)
+        {
+            if (UpdateWasCalled) _updatePump.Add(obj);
+            else _updatePump.DelayedAdd(obj);
+        }
+
+        public static void RegisterNextLateUpdate(IUpdateable obj)
+        {
+            if (LateUpdateWasCalled) _lateUpdatePump.Add(obj);
+            else _lateUpdatePump.DelayedAdd(obj);
+        }
+
         /// <summary>
         /// A special static, register once, earlyupdate event hook that preceeds ALL other events. 
         /// This is used internally by some special static classes (namely SPTime) that needs extra 
@@ -281,6 +312,7 @@ namespace com.spacepuppy
         {
             _updatePump.Update();
             if (OnUpdate != null) OnUpdate(this, e);
+            _currentFrame = UnityEngine.Time.frameCount;
         }
 
         private void _tardyUpdateHook_Update(object sender, System.EventArgs e)
@@ -331,6 +363,7 @@ namespace com.spacepuppy
         {
             _lateUpdatePump.Update();
             if (OnLateUpdate != null) OnLateUpdate(this, e);
+            _currentLateFrame = UnityEngine.Time.frameCount;
         }
 
         private void _tardyUpdateHook_LateUpdate(object sender, System.EventArgs e)

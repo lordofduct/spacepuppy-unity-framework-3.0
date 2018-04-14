@@ -187,6 +187,12 @@ namespace com.spacepuppy
 
         #region Properties
 
+        public object AutoKillToken
+        {
+            get;
+            private set;
+        }
+
         public RadicalCoroutineDisableMode DisableMode { get { return _disableMode; } }
 
         /// <summary>
@@ -300,6 +306,7 @@ namespace com.spacepuppy
 
             if (_stack.CurrentOperation is IPausibleYieldInstruction) (_stack.CurrentOperation as IPausibleYieldInstruction).OnResume();
 
+            this.AutoKillToken = autoKillToken;
             _manager = manager;
             _manager.RegisterCoroutine(this, autoKillToken);
             _token = behaviour.StartCoroutine(this);
@@ -895,6 +902,16 @@ namespace com.spacepuppy
 
 
         #region Static Utils
+
+        public static void AutoKill(GameObject go, object autoKillToken)
+        {
+            if (go == null || autoKillToken == null) return;
+
+            var manager = go.GetComponent<RadicalCoroutineManager>();
+            if (manager == null) return;
+
+            manager.AutoKill(autoKillToken);
+        }
 
         /// <summary>
         /// A radical coroutine that when running will repeadtly call an action and yield null. Simulating the Update function.

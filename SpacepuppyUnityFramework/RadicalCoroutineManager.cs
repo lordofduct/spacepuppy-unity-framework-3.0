@@ -20,6 +20,7 @@ namespace com.spacepuppy
 
         private HashSet<RadicalCoroutine> _routines = new HashSet<RadicalCoroutine>();
         private Dictionary<MonoBehaviour, bool> _naiveTrackerTable;
+        private Dictionary<object, RadicalCoroutine> _autoKillTable;
 
         private System.EventHandler _onDisableHandler;
         private System.EventHandler _onEnabledHandler;
@@ -195,6 +196,25 @@ namespace com.spacepuppy
                 if (!this.enabled) this.enabled = true;
             }
 
+        }
+
+        internal void RegisterCoroutine(RadicalCoroutine routine, object autoKillToken)
+        {
+            if (autoKillToken == null) throw new System.ArgumentNullException("autoKillToken");
+
+            if (_autoKillTable == null)
+            {
+                _autoKillTable = new Dictionary<object, RadicalCoroutine>();
+            }
+            else
+            {
+                RadicalCoroutine old;
+                if (_autoKillTable.TryGetValue(autoKillToken, out old))
+                {
+                    old.Cancel(true);
+                }
+            }
+            _autoKillTable[autoKillToken] = routine;
         }
 
         /// <summary>
@@ -379,6 +399,24 @@ namespace com.spacepuppy
             return false;
         }
 
+
+
+
+        public void AutoKill(object autoKillToken)
+        {
+            if (autoKillToken == null) throw new System.ArgumentNullException("autoKillToken");
+
+            if (_autoKillTable != null)
+            {
+                RadicalCoroutine old;
+                if (_autoKillTable.TryGetValue(autoKillToken, out old))
+                {
+                    old.Cancel(true);
+                    _autoKillTable.Remove(autoKillToken);
+                }
+            }
+        }
+
         #endregion
 
         #region Special Types
@@ -394,5 +432,5 @@ namespace com.spacepuppy
         #endregion
 
     }
-    
+
 }

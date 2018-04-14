@@ -165,10 +165,44 @@ namespace com.spacepuppy.Utils
             return co;
         }
 
+
+
+
+
+        public static RadicalCoroutine StartRadicalCoroutine(this MonoBehaviour behaviour, System.Collections.IEnumerator routine, object autoKillToken, RadicalCoroutineDisableMode disableMode = RadicalCoroutineDisableMode.Default)
+        {
+            if (behaviour == null) throw new System.ArgumentNullException("behaviour");
+            if (routine == null) throw new System.ArgumentNullException("routine");
+
+            var co = new RadicalCoroutine(routine);
+            co.StartAutoKill(behaviour, autoKillToken, disableMode);
+            return co;
+        }
+
+        public static RadicalCoroutine StartRadicalCoroutine(this MonoBehaviour behaviour, System.Collections.IEnumerable routine, object autoKillToken, RadicalCoroutineDisableMode disableMode = RadicalCoroutineDisableMode.Default)
+        {
+            if (behaviour == null) throw new System.ArgumentNullException("behaviour");
+            if (routine == null) throw new System.ArgumentNullException("routine");
+
+            var co = new RadicalCoroutine(routine.GetEnumerator());
+            co.StartAutoKill(behaviour, autoKillToken, disableMode);
+            return co;
+        }
+
+        public static RadicalCoroutine StartRadicalCoroutine(this MonoBehaviour behaviour, System.Func<System.Collections.IEnumerator> method, object autoKillToken, RadicalCoroutineDisableMode disableMode = RadicalCoroutineDisableMode.Default)
+        {
+            if (behaviour == null) throw new System.ArgumentNullException("behaviour");
+            if (method == null) throw new System.ArgumentNullException("routine");
+
+            var co = new RadicalCoroutine(method());
+            co.StartAutoKill(behaviour, autoKillToken, disableMode);
+            return co;
+        }
+
         #endregion
 
         #region Invoke
-        
+
         public static Coroutine Invoke(this MonoBehaviour behaviour, System.Action method, float delay)
         {
             if (behaviour == null) throw new System.ArgumentNullException("behaviour");

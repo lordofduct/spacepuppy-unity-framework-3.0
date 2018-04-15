@@ -11,7 +11,7 @@ namespace com.spacepuppy
 
         #region Fields
 
-        private System.EventHandler _handler;
+        private System.EventHandler _signal;
 
         #endregion
 
@@ -42,14 +42,31 @@ namespace com.spacepuppy
 
         event System.EventHandler IImmediatelyResumingYieldInstruction.Signal
         {
-            add { _handler += value; }
-            remove { _handler -= value; }
+            add
+            {
+                if (_signal == null)
+                    _signal = value;
+                else if (_signal == value)
+                    return;
+                else
+                    _signal += value;
+            }
+            remove
+            {
+                if (_signal == null)
+                    return;
+                else if (_signal == value)
+                    _signal = null;
+                else
+                    _signal -= value;
+            }
         }
 
         #endregion
 
         #region Static Factory
 
+        /*
         private static WaitForLateUpdate _handle;
         private static bool _active;
         private static EventHandler _onLateUpdateCallback;
@@ -62,9 +79,9 @@ namespace com.spacepuppy
                     {
                         GameLoop.OnLateUpdate -= OnLateUpdateCallback;
                         _active = false;
-                        if (_handle != null && _handle._handler != null)
+                        if (_handle != null && _handle._signal != null)
                         {
-                            _handle._handler(_handle, EventArgs.Empty);
+                            _handle._signal(_handle, EventArgs.Empty);
                         }
                     };
                 return _onLateUpdateCallback;
@@ -84,6 +101,33 @@ namespace com.spacepuppy
 
             return _handle;
         }
+        */
+
+
+        private static WaitForLateUpdate _handle;
+        private static PumpToken _token;
+        public static WaitForLateUpdate Create()
+        {
+            if (_handle == null) _handle = new WaitForLateUpdate();
+            if (_token == null)
+            {
+                _token = new PumpToken();
+                GameLoopEntry.LateUpdatePump.Add(_token);
+            }
+            return _handle;
+        }
+
+        private class PumpToken : IUpdateable
+        {
+            void IUpdateable.Update()
+            {
+                if (_handle != null && _handle._signal != null)
+                {
+                    _handle._signal(_handle, EventArgs.Empty);
+                }
+            }
+        }
+
 
         #endregion
 

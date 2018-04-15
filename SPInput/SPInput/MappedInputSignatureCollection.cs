@@ -18,6 +18,29 @@ namespace com.spacepuppy.SPInput
 
         #endregion
 
+        #region CONSTRUCTOR
+
+        public MappedInputSignatureCollection()
+        {
+            _table = new Dictionary<T, IInputSignature>();
+        }
+
+        public MappedInputSignatureCollection(IEqualityComparer<T> comparer)
+        {
+            _table = new Dictionary<T, IInputSignature>(comparer);
+        }
+
+        #endregion
+
+        #region Properties
+
+        public IEqualityComparer<T> Comparer
+        {
+            get { return _table.Comparer; }
+        }
+
+        #endregion
+
         #region Methods
 
         public void Add(T mapping, IInputSignature item)

@@ -13,9 +13,9 @@ namespace com.spacepuppy.SPInput
         private List<IInputSignature> _sortedList = new List<IInputSignature>();
 
         #endregion
-
-        #region Methods
         
+        #region Methods
+
         public Enumerator GetEnumerator()
         {
             return new Enumerator(this);

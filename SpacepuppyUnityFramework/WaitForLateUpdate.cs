@@ -112,7 +112,7 @@ namespace com.spacepuppy
             if (_token == null)
             {
                 _token = new PumpToken();
-                GameLoopEntry.LateUpdatePump.Add(_token);
+                GameLoop.LateUpdatePump.Add(_token);
             }
             return _handle;
         }

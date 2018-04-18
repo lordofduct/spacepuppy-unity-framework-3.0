@@ -9,7 +9,7 @@ namespace com.spacepuppy
 {
 
     [System.Serializable()]
-    public class VariantCollection : IDynamic, ISerializationCallbackReceiver, ISerializable, IEnumerable<KeyValuePair<string, object>>
+    public class VariantCollection : IDynamic, IToken, ISerializationCallbackReceiver, ISerializable, IEnumerable<KeyValuePair<string, object>>
     {
 
         #region Fields
@@ -339,6 +339,10 @@ namespace com.spacepuppy
             return _table.Remove(key);
         }
 
+        #endregion
+
+        #region IToken Interface
+
         /// <summary>
         /// Iterates over members of the collection and attempts to set them to an object as if they 
         /// were property names on that object.
@@ -358,7 +362,7 @@ namespace com.spacepuppy
         /// key to the value pulled from a property on object.
         /// </summary>
         /// <param name="obj"></param>
-        public void CopyFrom(object obj)
+        public void SyncFrom(object obj)
         {
             var e = _table.GetEnumerator();
             while (e.MoveNext())
@@ -475,6 +479,11 @@ namespace com.spacepuppy
                 if (p.Name != "_table" && p.Name != "_values" && p.Name != "_keys")
                     yield return p;
             }
+        }
+
+        IEnumerable<string> IDynamic.GetMemberNames(bool includeNonPublic)
+        {
+            return _table.Keys;
         }
 
         System.Reflection.MemberInfo IDynamic.GetMember(string sMemberName, bool includeNonPublic)

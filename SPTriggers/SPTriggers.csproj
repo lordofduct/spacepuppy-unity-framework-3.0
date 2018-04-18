@@ -50,6 +50,7 @@
     <Compile Include="Events\i_AddComponent.cs" />
     <Compile Include="Events\i_AutoSequenceSignal.cs" />
     <Compile Include="Events\i_ChangeCursorProperties.cs" />
+    <Compile Include="Events\i_CopyFrom.cs" />
     <Compile Include="Events\i_DebugLog.cs" />
     <Compile Include="Events\i_Destroy.cs" />
     <Compile Include="Events\i_Enable.cs" />

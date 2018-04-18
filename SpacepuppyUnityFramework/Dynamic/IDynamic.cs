@@ -18,11 +18,12 @@ namespace com.spacepuppy.Dynamic
         object InvokeMethod(string sMemberName, params object[] args);
 
         bool HasMember(string sMemberName, bool includeNonPublic);
+        IEnumerable<string> GetMemberNames(bool includeNonPublic);
         IEnumerable<MemberInfo> GetMembers(bool includeNonPublic);
         MemberInfo GetMember(string sMemberName, bool includeNonPublic);
         
     }
-    
+
     [System.Flags()]
     public enum DynamicMemberAccess
     {
@@ -215,6 +216,34 @@ namespace com.spacepuppy.Dynamic
             else
             {
                 return GetMembersFromType(obj.GetType(), includeNonPublic, mask);
+            }
+        }
+
+        public static IEnumerable<string> GetMemberNames(object obj, bool includeNonPublic)
+        {
+            if (obj == null) return Enumerable.Empty<string>();
+
+            if (obj is IDynamic)
+            {
+                return (obj as IDynamic).GetMemberNames(includeNonPublic);
+            }
+            else
+            {
+                return GetMemberNamesFromType(obj.GetType(), includeNonPublic);
+            }
+        }
+
+        public static IEnumerable<string> GetMemberNames(object obj, bool includeNonPublic, MemberTypes mask)
+        {
+            if (obj == null) return Enumerable.Empty<string>();
+
+            if (obj is IDynamic)
+            {
+                return (from m in (obj as IDynamic).GetMembers(includeNonPublic) where (m.MemberType & mask) != 0 select m.Name);
+            }
+            else
+            {
+                return GetMemberNamesFromType(obj.GetType(), includeNonPublic, mask);
             }
         }
 
@@ -468,6 +497,13 @@ namespace com.spacepuppy.Dynamic
             return GetMembersFromType(obj.GetType(), includeNonPublic, mask);
         }
 
+        public static IEnumerable<MemberInfo> GetMemberNamesDirect(object obj, bool includeNonPublic, MemberTypes mask = MemberTypes.Field | MemberTypes.Property | MemberTypes.Method)
+        {
+            if (obj == null) return Enumerable.Empty<MemberInfo>();
+
+            return GetMembersFromType(obj.GetType(), includeNonPublic, mask);
+        }
+
 
 
 
@@ -521,6 +557,36 @@ namespace com.spacepuppy.Dynamic
                         if ((m.MemberType & mask) != 0)
                         {
                             yield return m;
+                        }
+                    }
+                    tp = tp.BaseType;
+                }
+            }
+        }
+
+        public static IEnumerable<string> GetMemberNamesFromType(System.Type tp, bool includeNonPublic, MemberTypes mask = MemberTypes.Field | MemberTypes.Property | MemberTypes.Method)
+        {
+            const BindingFlags BINDING = BindingFlags.Public | BindingFlags.Instance;
+            const BindingFlags PRIV_BINDING = BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly;
+            if (tp == null) yield break;
+
+            foreach (var m in tp.GetMembers(BINDING))
+            {
+                if ((m.MemberType & mask) != 0)
+                {
+                    yield return m.Name;
+                }
+            }
+
+            if (includeNonPublic)
+            {
+                while (tp != null)
+                {
+                    foreach (var m in tp.GetMembers(PRIV_BINDING))
+                    {
+                        if ((m.MemberType & mask) != 0)
+                        {
+                            yield return m.Name;
                         }
                     }
                     tp = tp.BaseType;
@@ -1092,7 +1158,7 @@ namespace com.spacepuppy.Dynamic
                 }
             }
             else
-                RestoreFromStateTokenDirect(obj, token);
+                CopyState(obj, token);
         }
 
         /// <summary>
@@ -1100,10 +1166,10 @@ namespace com.spacepuppy.Dynamic
         /// </summary>
         /// <param name="obj"></param>
         /// <param name="token"></param>
-        public static void RestoreFromStateTokenDirect(object obj, object token)
+        public static void CopyState(object obj, object token)
         {
-            if (token is StateToken)
-                (token as StateToken).CopyTo(obj);
+            if (token is IToken)
+                (token as IToken).CopyTo(obj);
             else if (token != null)
             {
                 foreach (var m in GetMembers(token, false, MemberTypes.Property | MemberTypes.Field))

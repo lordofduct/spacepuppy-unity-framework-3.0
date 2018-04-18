@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿#pragma warning disable 0649 // variable declared but not used.
+using UnityEngine;
 
 using com.spacepuppy.Dynamic;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ namespace com.spacepuppy
     /// <summary>
     /// A component you can stick variables into willy-nilly.
     /// </summary>
-    public class VariableStore : SPComponent, IDynamic
+    public class VariableStore : SPComponent, IDynamic, IToken
     {
 
         #region Fields
@@ -62,6 +63,11 @@ namespace com.spacepuppy
             return (_variables as IDynamic).GetMembers(includeNonPublic);
         }
 
+        IEnumerable<string> IDynamic.GetMemberNames(bool includeNonPublic)
+        {
+            return (_variables as IDynamic).GetMemberNames(includeNonPublic);
+        }
+
         object IDynamic.GetValue(string sMemberName, params object[] args)
         {
             return (_variables as IDynamic).GetValue(sMemberName, args);
@@ -85,6 +91,20 @@ namespace com.spacepuppy
         bool IDynamic.SetValue(string sMemberName, object value, params object[] index)
         {
             return (_variables as IDynamic).SetValue(sMemberName, value, index);
+        }
+
+        #endregion
+
+        #region IToken Interface
+
+        public void CopyTo(object obj)
+        {
+            _variables.CopyTo(obj);
+        }
+
+        public void SyncFrom(object obj)
+        {
+            _variables.SyncFrom(obj);
         }
 
         #endregion
@@ -95,7 +115,7 @@ namespace com.spacepuppy
     /// A ScriptableObject you can stick variables into willy-nilly.
     /// </summary>
     [CreateAssetMenu(fileName = "VariableStore", menuName = "Spacepuppy/VariableStore")]
-    public class VariableStoreAsset : ScriptableObject, IDynamic
+    public class VariableStoreAsset : ScriptableObject, IDynamic, IToken
     {
 
         #region Fields
@@ -147,6 +167,11 @@ namespace com.spacepuppy
             return (_variables as IDynamic).GetMembers(includeNonPublic);
         }
 
+        IEnumerable<string> IDynamic.GetMemberNames(bool includeNonPublic)
+        {
+            return (_variables as IDynamic).GetMemberNames(includeNonPublic);
+        }
+
         object IDynamic.GetValue(string sMemberName, params object[] args)
         {
             return (_variables as IDynamic).GetValue(sMemberName, args);
@@ -170,6 +195,20 @@ namespace com.spacepuppy
         bool IDynamic.SetValue(string sMemberName, object value, params object[] index)
         {
             return (_variables as IDynamic).SetValue(sMemberName, value, index);
+        }
+
+        #endregion
+
+        #region IToken Interface
+
+        public void CopyTo(object obj)
+        {
+            _variables.CopyTo(obj);
+        }
+
+        public void SyncFrom(object obj)
+        {
+            _variables.SyncFrom(obj);
         }
 
         #endregion

@@ -174,55 +174,6 @@ namespace com.spacepuppy.Dynamic
             }
         }
 
-        /// <summary>
-        /// Lerp the target objects values to the state of the StateToken. If the member doesn't have a current state/undefined, 
-        /// then the member is set to the current state in this StateToken.
-        /// </summary>
-        /// <param name="obj"></param>
-        /// <param name="t"></param>
-        public void LerpTo(object obj, float t)
-        {
-            var e = _table.GetEnumerator();
-            while (e.MoveNext())
-            {
-                object value;
-                if (DynamicUtil.TryGetValue(obj, e.Current.Key, out value))
-                {
-                    value = Evaluator.TryLerp(value, e.Current.Value, t);
-                    DynamicUtil.SetValue(obj, e.Current.Key, value);
-                }
-                else
-                {
-                    DynamicUtil.SetValue(obj, e.Current.Key, e.Current.Value);
-                }
-            }
-        }
-
-        public void TweenTo(com.spacepuppy.Tween.TweenHash hash, com.spacepuppy.Tween.Ease ease, float dur)
-        {
-            var e = _table.GetEnumerator();
-            while (e.MoveNext())
-            {
-                var value = e.Current.Value;
-                if (value == null) continue;
-
-                switch (VariantReference.GetVariantType(value.GetType()))
-                {
-                    case VariantType.Integer:
-                    case VariantType.Float:
-                    case VariantType.Double:
-                    case VariantType.Vector2:
-                    case VariantType.Vector3:
-                    case VariantType.Vector4:
-                    case VariantType.Quaternion:
-                    case VariantType.Color:
-                    case VariantType.Rect:
-                        hash.To(e.Current.Key, ease, value, dur);
-                        break;
-                }
-            }
-        }
-
         #endregion
 
         #region IDynamic Interface

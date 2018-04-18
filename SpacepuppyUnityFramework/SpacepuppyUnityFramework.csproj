@@ -75,6 +75,7 @@
     <Compile Include="Collections\TempHashSet.cs" />
     <Compile Include="Collections\TempList.cs" />
     <Compile Include="Collections\TrackablObjectCachePool.cs" />
+    <Compile Include="Dynamic\StateToken.cs" />
     <Compile Include="Events\EventActivatorMask.cs" />
     <Compile Include="Geom\CompoundTrigger.cs" />
     <Compile Include="CustomTimeSupplier.cs" />

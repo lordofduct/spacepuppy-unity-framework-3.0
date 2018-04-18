@@ -138,7 +138,7 @@
     <Compile Include="IService.cs" />
     <Compile Include="ISPDisposable.cs" />
     <Compile Include="ITimeSupplier.cs" />
-    <Compile Include="ITokenizable.cs" />
+    <Compile Include="Dynamic\ITokenizable.cs" />
     <Compile Include="IUpdateable.cs" />
     <Compile Include="MultiTag.cs" />
     <Compile Include="NullYieldInstruction.cs" />

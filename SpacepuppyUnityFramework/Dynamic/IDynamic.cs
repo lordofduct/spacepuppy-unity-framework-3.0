@@ -1132,7 +1132,7 @@ namespace com.spacepuppy.Dynamic
             }
             else
             {
-                var token = new StateToken();
+                var token = StateToken.GetToken();
                 token.CopyFrom(obj);
                 return token;
             }
@@ -1166,15 +1166,39 @@ namespace com.spacepuppy.Dynamic
         /// </summary>
         /// <param name="obj"></param>
         /// <param name="token"></param>
-        public static void CopyState(object obj, object token)
+        public static void CopyState(object obj, object source)
         {
-            if (token is IToken)
-                (token as IToken).CopyTo(obj);
-            else if (token != null)
+            if (obj is IToken)
+                (obj as IToken).SyncFrom(source);
+            else if (source is IToken)
+                (source as IToken).CopyTo(obj);
+            else if (source != null)
             {
-                foreach (var m in GetMembers(token, false, MemberTypes.Property | MemberTypes.Field))
+                foreach (var m in GetMembers(source, false, MemberTypes.Property | MemberTypes.Field))
                 {
-                    SetValue(obj, m.Name, GetValue(token, m));
+                    SetValue(obj, m.Name, GetValue(source, m));
+                }
+            }
+        }
+
+        /// <summary>
+        /// Sync's obj and source's state for members that overlap.
+        /// If obj is an IToken it respect's IToken.SyncFrom.
+        /// If source is an IToken it respect's IToken.CopyTo.
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <param name="token"></param>
+        public static void SyncState(object obj, object source)
+        {
+            if (obj is IToken)
+                (obj as IToken).SyncFrom(source);
+            else if (source is IToken)
+                (source as IToken).CopyTo(obj);
+            else if (source != null)
+            {
+                foreach (var m in GetMembers(source, false, MemberTypes.Property | MemberTypes.Field))
+                {
+                    SetValue(obj, m.Name, GetValue(source, m));
                 }
             }
         }

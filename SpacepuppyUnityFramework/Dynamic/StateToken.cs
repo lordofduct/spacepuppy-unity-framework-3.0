@@ -174,6 +174,30 @@ namespace com.spacepuppy.Dynamic
             }
         }
 
+        /// <summary>
+        /// Lerp the target objects values to the state of the StateToken. If the member doesn't have a current state/undefined, 
+        /// then the member is set to the current state in this StateToken.
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <param name="t"></param>
+        public void Lerp(object obj, float t)
+        {
+            var e = _table.GetEnumerator();
+            while (e.MoveNext())
+            {
+                object value;
+                if (DynamicUtil.TryGetValue(obj, e.Current.Key, out value))
+                {
+                    value = Evaluator.TryLerp(value, e.Current.Value, t);
+                    DynamicUtil.SetValue(obj, e.Current.Key, value);
+                }
+                else
+                {
+                    DynamicUtil.SetValue(obj, e.Current.Key, e.Current.Value);
+                }
+            }
+        }
+
         #endregion
 
         #region IDynamic Interface

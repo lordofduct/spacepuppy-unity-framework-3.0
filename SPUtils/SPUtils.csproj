@@ -48,6 +48,7 @@
     </Compile>
     <Compile Include="ColorHSV.cs" />
     <Compile Include="Dynamic\DoubleEvaluator.cs" />
+    <Compile Include="Dynamic\DynamicTweenExtension.cs" />
     <Compile Include="Geom\ConfigurableForce.cs" />
     <Compile Include="Geom\PlanarSurfaceComponent.cs" />
     <Compile Include="Geom\XYPlanarSurfaceAsset.cs" />
@@ -67,6 +68,7 @@
     <Compile Include="Utils\PrefabUtil.cs" />
     <Compile Include="Utils\Search.cs" />
     <Compile Include="Utils\StreamUtil.cs" />
+    <Compile Include="VariableStore.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SpacepuppyUnityFramework\SpacepuppyUnityFramework.csproj">

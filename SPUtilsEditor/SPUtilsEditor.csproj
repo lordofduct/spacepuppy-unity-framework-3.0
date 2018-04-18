@@ -49,11 +49,13 @@
     <Compile Include="..\SpacepuppyUnityFramework\Properties\AssemblyVersionInfo.cs">
       <Link>Properties\AssemblyVersionInfo.cs</Link>
     </Compile>
+    <Compile Include="Base\VariableStoreInspector.cs" />
     <Compile Include="Geom\PlanarSurfaceComponentEditor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Render\MaterialPropertyReferencePropertyDrawer.cs" />
     <Compile Include="Render\MaterialSourceInspector.cs" />
     <Compile Include="Render\MaterialTransitionPropertyDrawer.cs" />
+    <Compile Include="Render\RenderSettingsProxyInspector.cs" />
     <Compile Include="Windows\ComponentSearchWindow.cs" />
   </ItemGroup>
   <ItemGroup>

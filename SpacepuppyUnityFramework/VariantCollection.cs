@@ -366,7 +366,30 @@ namespace com.spacepuppy
                 e.Current.Value.Value = DynamicUtil.GetValue(obj, e.Current.Key);
             }
         }
-        
+        /// <summary>
+        /// Lerp the target objects values to the state of the VarianteCollection. If the member doesn't have a current state/undefined, 
+        /// then the member is set to the current state in this VariantCollection.
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <param name="t"></param>
+        public void Lerp(object obj, float t)
+        {
+            var e = _table.GetEnumerator();
+            while (e.MoveNext())
+            {
+                object value;
+                if (DynamicUtil.TryGetValue(obj, e.Current.Key, out value))
+                {
+                    value = Evaluator.TryLerp(value, e.Current.Value.Value, t);
+                    DynamicUtil.SetValue(obj, e.Current.Key, value);
+                }
+                else
+                {
+                    DynamicUtil.SetValue(obj, e.Current.Key, e.Current.Value.Value);
+                }
+            }
+        }
+
         #endregion
 
         #region IDynamic Interface

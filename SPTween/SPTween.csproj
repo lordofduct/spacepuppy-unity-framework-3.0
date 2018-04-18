@@ -54,7 +54,6 @@
     <Compile Include="Dynamic\Accessors\MemberAccessorException.cs" />
     <Compile Include="Dynamic\Accessors\MemberAccessorPool.cs" />
     <Compile Include="Dynamic\Accessors\PropertyAccessor.cs" />
-    <Compile Include="Dynamic\DynamicTweenExtension.cs" />
     <Compile Include="Dynamic\IStateModifier.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tween\Accessors\CustomTweenMemberAccessorFactory.cs" />

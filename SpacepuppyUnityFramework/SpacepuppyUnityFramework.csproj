@@ -137,6 +137,7 @@
     <Compile Include="IService.cs" />
     <Compile Include="ISPDisposable.cs" />
     <Compile Include="ITimeSupplier.cs" />
+    <Compile Include="ITokenizable.cs" />
     <Compile Include="IUpdateable.cs" />
     <Compile Include="MultiTag.cs" />
     <Compile Include="NullYieldInstruction.cs" />
@@ -160,6 +161,7 @@
     <Compile Include="RadicalCoroutine.cs" />
     <Compile Include="RadicalCoroutineManager.cs" />
     <Compile Include="RadicalEnums.cs" />
+    <Compile Include="ServiceProxy.cs" />
     <Compile Include="ShortUid.cs" />
     <Compile Include="SPComponent.cs" />
     <Compile Include="SPConstants.cs" />

@@ -59,6 +59,7 @@
     <Compile Include="Render\MaterialTransition.cs" />
     <Compile Include="Render\MaterialUtil.cs" />
     <Compile Include="Render\RenderEnums.cs" />
+    <Compile Include="Render\RenderSettingsProxy.cs" />
     <Compile Include="Utils\AudioUtil.cs" />
     <Compile Include="Utils\ColorUtil.cs" />
     <Compile Include="Utils\CompareUtil.cs" />

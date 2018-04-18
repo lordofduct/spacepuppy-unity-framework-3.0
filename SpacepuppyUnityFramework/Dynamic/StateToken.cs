@@ -143,7 +143,7 @@ namespace com.spacepuppy.Dynamic
         /// key to the value pulled from a property on object.
         /// </summary>
         /// <param name="obj"></param>
-        public void CopyFrom(object obj)
+        public void SyncFrom(object obj)
         {
             using (var lst = TempCollection.GetList<string>())
             {
@@ -158,6 +158,19 @@ namespace com.spacepuppy.Dynamic
                 {
                     _table[e2.Current] = DynamicUtil.GetValue(obj, e2.Current);
                 }
+            }
+        }
+
+        /// <summary>
+        /// Dumps the keys in this collection, and then copies keys to match the entire state of the passed in object.
+        /// </summary>
+        /// <param name="obj"></param>
+        public void CopyFrom(object obj)
+        {
+            _table.Clear();
+            foreach (var m in DynamicUtil.GetMembers(obj, false, System.Reflection.MemberTypes.Property | System.Reflection.MemberTypes.Field))
+            {
+                _table[m.Name] = DynamicUtil.GetValue(obj, m);
             }
         }
 

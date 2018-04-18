@@ -23,20 +23,27 @@ namespace com.spacepuppy.Tween.Events
         [TriggerableTargetObject.Config(typeof(UnityEngine.Object))]
         private TriggerableTargetObject _source;
 
+        [SerializeField]
+        [TriggerableTargetObject.Config(typeof(UnityEngine.Object))]
+        private TriggerableTargetObject _sourceAlt;
+
+        [SerializeField]
+        [EnumPopupExcluding((int)TweenHash.AnimMode.AnimCurve, (int)TweenHash.AnimMode.Curve)]
+        private TweenHash.AnimMode _mode;
         [SerializeField()]
         private EaseStyle _ease;
         [SerializeField()]
         public SPTimePeriod _duration;
 
         [SerializeField()]
+        [Tooltip("Leave blank for tweens to be unique to this component.")]
+        private string _tweenToken;
+
+        [SerializeField()]
         private SPEvent _onComplete;
 
         [SerializeField()]
         private SPEvent _onTick;
-
-        [SerializeField()]
-        [Tooltip("Leave blank for tweens to be unique to this component.")]
-        private string _tweenToken;
 
         #endregion
 
@@ -74,6 +81,45 @@ namespace com.spacepuppy.Tween.Events
             get { return _source; }
         }
 
+        public TriggerableTargetObject SourceAlt
+        {
+            get { return _sourceAlt; }
+        }
+
+        public TweenHash.AnimMode Mode
+        {
+            get { return _mode; }
+            set { _mode = value; }
+        }
+
+        public EaseStyle Ease
+        {
+            get { return _ease; }
+            set { _ease = value; }
+        }
+
+        public SPTimePeriod Duration
+        {
+            get { return _duration; }
+            set { _duration = value; }
+        }
+
+        public string TweenToken
+        {
+            get { return _tweenToken; }
+            set { _tweenToken = value; }
+        }
+
+        public SPEvent OnComplete
+        {
+            get { return _onComplete; }
+        }
+
+        public SPEvent OnTick
+        {
+            get { return _onTick; }
+        }
+
         #endregion
 
         #region Triggerable Interface
@@ -86,7 +132,7 @@ namespace com.spacepuppy.Tween.Events
             var source = _source.GetTarget<object>(arg);
 
             var twn = SPTween.Tween(targ)
-                             .TweenToToken(source, EaseMethods.GetEase(_ease), _duration.Seconds)
+                             .TweenWithToken(_mode, EaseMethods.GetEase(_ease), _source, _duration.Seconds, _sourceAlt)
                              .Use(_duration.TimeSupplier)
                              .SetId(targ);
             if (_onComplete.Count > 0)

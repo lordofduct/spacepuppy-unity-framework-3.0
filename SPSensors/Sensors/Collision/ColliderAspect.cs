@@ -6,7 +6,7 @@ using com.spacepuppy.Utils;
 
 namespace com.spacepuppy.Sensors.Collision
 {
-    public class ColliderAspect : SPComponent, IAspect
+    public class ColliderAspect : SPEntityComponent, IAspect
     {
 
         #region Fields

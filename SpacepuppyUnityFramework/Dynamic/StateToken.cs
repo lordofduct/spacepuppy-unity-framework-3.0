@@ -12,7 +12,7 @@ namespace com.spacepuppy.Dynamic
     /// or used with the tween engine for dynamically configured state animation. As well as any number of other applications you may deem fit.
     /// </summary>
     [System.Serializable]
-    public class StateToken : IDynamic, IEnumerable<KeyValuePair<string, object>>, System.IDisposable, System.Runtime.Serialization.ISerializable
+    public class StateToken : IStateToken, IEnumerable<KeyValuePair<string, object>>, System.IDisposable, System.Runtime.Serialization.ISerializable
     {
 
         private const int TEMP_STACKSIZE = 3;
@@ -124,6 +124,10 @@ namespace com.spacepuppy.Dynamic
             return _table.ContainsKey(skey);
         }
 
+        #endregion
+
+        #region IToken Interface
+
         /// <summary>
         /// Iterates over members of the collection and attempts to set them to an object as if they 
         /// were property names on that object.
@@ -143,7 +147,7 @@ namespace com.spacepuppy.Dynamic
         /// key to the value pulled from a property on object.
         /// </summary>
         /// <param name="obj"></param>
-        public void CopyFrom(object obj)
+        public void SyncFrom(object obj)
         {
             using (var lst = TempCollection.GetList<string>())
             {
@@ -162,12 +166,25 @@ namespace com.spacepuppy.Dynamic
         }
 
         /// <summary>
+        /// Dumps the keys in this collection, and then copies keys to match the entire state of the passed in object.
+        /// </summary>
+        /// <param name="obj"></param>
+        public void CopyFrom(object obj)
+        {
+            _table.Clear();
+            foreach (var m in DynamicUtil.GetMembers(obj, false, System.Reflection.MemberTypes.Property | System.Reflection.MemberTypes.Field))
+            {
+                _table[m.Name] = DynamicUtil.GetValue(obj, m);
+            }
+        }
+
+        /// <summary>
         /// Lerp the target objects values to the state of the StateToken. If the member doesn't have a current state/undefined, 
         /// then the member is set to the current state in this StateToken.
         /// </summary>
         /// <param name="obj"></param>
         /// <param name="t"></param>
-        public void LerpTo(object obj, float t)
+        public void Lerp(object obj, float t)
         {
             var e = _table.GetEnumerator();
             while (e.MoveNext())
@@ -185,28 +202,35 @@ namespace com.spacepuppy.Dynamic
             }
         }
 
-        public void TweenTo(com.spacepuppy.Tween.TweenHash hash, com.spacepuppy.Tween.Ease ease, float dur)
+        #endregion
+
+        #region ITokenizable Interface
+
+        public object CreateStateToken()
         {
+            var token = GetToken();
             var e = _table.GetEnumerator();
             while (e.MoveNext())
             {
-                var value = e.Current.Value;
-                if (value == null) continue;
+                token._table[e.Current.Key] = e.Current.Value;
+            }
+            return token;
+        }
 
-                switch (VariantReference.GetVariantType(value.GetType()))
+        public void RestoreFromStateToken(object token)
+        {
+            if (token is StateToken)
+            {
+                _table.Clear();
+                var e = (token as StateToken)._table.GetEnumerator();
+                while (e.MoveNext())
                 {
-                    case VariantType.Integer:
-                    case VariantType.Float:
-                    case VariantType.Double:
-                    case VariantType.Vector2:
-                    case VariantType.Vector3:
-                    case VariantType.Vector4:
-                    case VariantType.Quaternion:
-                    case VariantType.Color:
-                    case VariantType.Rect:
-                        hash.To(e.Current.Key, ease, value, dur);
-                        break;
+                    _table[e.Current.Key] = e.Current.Value;
                 }
+            }
+            else
+            {
+                DynamicUtil.CopyState(this, token);
             }
         }
 
@@ -259,6 +283,11 @@ namespace com.spacepuppy.Dynamic
             {
                 yield return new DynamicPropertyInfo(k, tp);
             }
+        }
+
+        IEnumerable<string> IDynamic.GetMemberNames(bool includeNonPublic)
+        {
+            return _table.Keys;
         }
 
         System.Reflection.MemberInfo IDynamic.GetMember(string sMemberName, bool includeNonPublic)
@@ -334,7 +363,7 @@ namespace com.spacepuppy.Dynamic
 
         private static ObjectCachePool<StateToken> _tempTokens;
 
-        public static StateToken GetTempToken()
+        public static StateToken GetToken()
         {
             StateToken t;
             if(_tempTokens != null && _tempTokens.TryGetInstance(out t))

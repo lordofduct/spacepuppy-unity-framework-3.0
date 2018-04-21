@@ -14,5 +14,5 @@ namespace com.spacepuppy.Sensors
         float Precedence { get; }
 
     }
-
+    
 }

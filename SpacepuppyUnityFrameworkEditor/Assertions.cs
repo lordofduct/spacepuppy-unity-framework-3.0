@@ -129,7 +129,7 @@ namespace com.spacepuppyeditor
             {
                 if (attrib.MustBeAttachedToRoot)
                 {
-                    if (!comp.HasTag(SPConstants.TAG_ROOT))
+                    if (!comp.HasComponent<SPEntity>())
                     {
                         if (!silent) Assert(System.String.Format("(Entity:{1}) Component type {0} must be attached to the root gameObject.", tp.Name, comp.FindRoot().name), comp);
                         return true;

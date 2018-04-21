@@ -9,7 +9,7 @@ namespace com.spacepuppy
 {
 
     [System.Serializable()]
-    public class VariantCollection : IDynamic, ISerializationCallbackReceiver, ISerializable, IEnumerable<KeyValuePair<string, object>>
+    public class VariantCollection : IStateToken, ISerializationCallbackReceiver, ISerializable, IEnumerable<KeyValuePair<string, object>>
     {
 
         #region Fields
@@ -339,6 +339,10 @@ namespace com.spacepuppy
             return _table.Remove(key);
         }
 
+        #endregion
+
+        #region IToken Interface
+
         /// <summary>
         /// Iterates over members of the collection and attempts to set them to an object as if they 
         /// were property names on that object.
@@ -358,7 +362,7 @@ namespace com.spacepuppy
         /// key to the value pulled from a property on object.
         /// </summary>
         /// <param name="obj"></param>
-        public void CopyFrom(object obj)
+        public void SyncFrom(object obj)
         {
             var e = _table.GetEnumerator();
             while (e.MoveNext())
@@ -366,7 +370,65 @@ namespace com.spacepuppy
                 e.Current.Value.Value = DynamicUtil.GetValue(obj, e.Current.Key);
             }
         }
-        
+        /// <summary>
+        /// Lerp the target objects values to the state of the VarianteCollection. If the member doesn't have a current state/undefined, 
+        /// then the member is set to the current state in this VariantCollection.
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <param name="t"></param>
+        public void Lerp(object obj, float t)
+        {
+            var e = _table.GetEnumerator();
+            while (e.MoveNext())
+            {
+                object value;
+                if (DynamicUtil.TryGetValue(obj, e.Current.Key, out value))
+                {
+                    value = Evaluator.TryLerp(value, e.Current.Value.Value, t);
+                    DynamicUtil.SetValue(obj, e.Current.Key, value);
+                }
+                else
+                {
+                    DynamicUtil.SetValue(obj, e.Current.Key, e.Current.Value.Value);
+                }
+            }
+        }
+
+        #endregion
+
+        #region ITokenizable Interface
+
+        public object CreateStateToken()
+        {
+            if (_table.Count == 0) return com.spacepuppy.Utils.ArrayUtil.Empty<KeyValuePair<string, VariantReference>>();
+            KeyValuePair<string, VariantReference>[] arr = new KeyValuePair<string, VariantReference>[_table.Count];
+            var e = _table.GetEnumerator();
+            int i = 0;
+            while (e.MoveNext())
+            {
+                arr[i] = e.Current;
+                i++;
+            }
+            return arr;
+        }
+
+        public void RestoreFromStateToken(object token)
+        {
+            if (token is KeyValuePair<string, VariantReference>[])
+            {
+                _table.Clear();
+                var arr = token as KeyValuePair<string, VariantReference>[];
+                foreach (var pair in arr)
+                {
+                    _table[pair.Key] = pair.Value;
+                }
+            }
+            else
+            {
+                DynamicUtil.CopyState(this, token);
+            }
+        }
+
         #endregion
 
         #region IDynamic Interface
@@ -452,6 +514,11 @@ namespace com.spacepuppy
                 if (p.Name != "_table" && p.Name != "_values" && p.Name != "_keys")
                     yield return p;
             }
+        }
+
+        IEnumerable<string> IDynamic.GetMemberNames(bool includeNonPublic)
+        {
+            return _table.Keys;
         }
 
         System.Reflection.MemberInfo IDynamic.GetMember(string sMemberName, bool includeNonPublic)

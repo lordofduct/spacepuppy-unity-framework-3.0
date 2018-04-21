@@ -620,12 +620,6 @@ namespace com.spacepuppy.Utils
             if (obj == null) return false;
             var root = obj.FindRoot();
 
-            //foreach (var t in root.GetAllChildrenAndSelf())
-            //{
-            //    if (t.HasComponent(tp, testIfEnabled)) return true;
-            //}
-            //return false;
-
             var c = root.GetComponentInChildren(tp);
             if (c == null) return false;
             return (testIfEnabled) ? c.IsEnabled() : true;
@@ -651,9 +645,13 @@ namespace com.spacepuppy.Utils
         {
             if (go == null) return null;
 
-            var root = go.FindRoot();
-            var tp = typeof(T);
-            return root.GetComponentInChildren(tp) as T;
+            var entity = SPEntity.Pool.GetFromSource(go);
+            if (entity != null) return entity.GetComponentInChildren<T>();
+            else
+            {
+                var root = go.FindRoot();
+                return root.GetComponentInChildren<T>();
+            }
         }
 
         /// <summary>
@@ -696,17 +694,14 @@ namespace com.spacepuppy.Utils
         public static Component FindComponent(this GameObject go, System.Type tp)
         {
             if (go == null) return null;
-            var root = go.FindRoot();
 
-            //Component c = null;
-            //foreach (var t in root.GetAllChildrenAndSelf())
-            //{
-            //    c = t.GetComponent(tp);
-            //    if (c != null) return c;
-            //}
-            //return null;
-
-            return root.GetComponentInChildren(tp);
+            var entity = SPEntity.Pool.GetFromSource(go);
+            if (entity != null) return entity.GetComponentInChildren(tp);
+            else
+            {
+                var root = go.FindRoot();
+                return root.GetComponentInChildren(tp);
+            }
         }
 
         /// <summary>
@@ -746,8 +741,7 @@ namespace com.spacepuppy.Utils
         public static T[] FindComponents<T>(this GameObject go, bool bIncludeInactive = false) where T : class
         {
             if (go == null) return ArrayUtil.Empty<T>();
-
-            var tp = typeof(T);
+            
             var root = go.FindRoot();
             return root.GetComponentsInChildren<T>(bIncludeInactive);
         }

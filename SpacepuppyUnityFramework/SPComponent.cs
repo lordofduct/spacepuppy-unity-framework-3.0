@@ -67,31 +67,6 @@ namespace com.spacepuppy
         public bool started { get { return _started; } }
         
         #endregion
-
-        #region Root Methods
-            
-        [System.NonSerialized()]
-        private GameObject _entityRoot;
-
-        public GameObject entityRoot
-        {
-            get
-            {
-                if (object.ReferenceEquals(_entityRoot, null)) _entityRoot = this.FindRoot();
-                return _entityRoot;
-            }
-        }
-
-        /// <summary>
-        /// Call this to resync the 'root' property incase the hierarchy of this object has changed. This needs to be performed since 
-        /// unity doesn't have an event/message to signal a change in hierarchy.
-        /// </summary>
-        public virtual void SyncEntityRoot()
-        {
-            _entityRoot = this.FindRoot();
-        }
-            
-        #endregion
         
 #region IComponent Interface
 
@@ -130,6 +105,67 @@ namespace com.spacepuppy
         }
 
 #endregion
+
+    }
+
+    /// <summary>
+    /// Represents a component that should always exist as a member of an entity.
+    /// 
+    /// Such a component should not change parents frequently as it would be expensive.
+    /// </summary>
+    public class SPEntityComponent : SPComponent
+    {
+
+        #region Fields
+
+        [System.NonSerialized]
+        private SPEntity _entity;
+        [System.NonSerialized]
+        private GameObject _entityRoot;
+        [System.NonSerialized]
+        private bool _synced;
+
+        #endregion
+
+        #region Properties
+
+        public SPEntity Entity
+        {
+            get
+            {
+                if (!_synced) this.SyncRoot();
+                return _entity;
+            }
+        }
+
+        public GameObject entityRoot
+        {
+            get
+            {
+                if (!_synced) this.SyncRoot();
+                return _entityRoot;
+            }
+        }
+
+        #endregion
+
+        #region Methods
+
+        protected virtual void OnTransformParentChanged()
+        {
+            _synced = false;
+            _entity = null;
+            _entityRoot = null;
+        }
+
+        protected void SyncRoot()
+        {
+            _synced = true;
+            _entity = SPEntity.Pool.GetFromSource(this);
+            _entityRoot = (_entity != null) ? _entity.gameObject : this.gameObject;
+        }
+
+        #endregion
 
     }
 

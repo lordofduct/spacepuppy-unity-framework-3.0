@@ -21,7 +21,7 @@ namespace com.spacepuppy.Sensors.Visual
         [SerializeField()]
         private LayerMask _aspectLayerMask = -1;
         [SerializeField()]
-        private TagMask _aspectTagMask;
+        private TagMask _aspectTagMask = new TagMask();
 
         [SerializeField()]
         private bool _requiresLineOfSight;

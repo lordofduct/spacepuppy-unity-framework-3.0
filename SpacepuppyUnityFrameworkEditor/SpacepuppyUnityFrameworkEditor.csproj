@@ -76,7 +76,6 @@
     <Compile Include="Commands\FindReferencesToObjectMenu.cs" />
     <Compile Include="Commands\TransformAltContextMenu.cs" />
     <Compile Include="Commands\TransformCopyMenu.cs" />
-    <Compile Include="Components\ForceRootTagHeaderDrawer.cs" />
     <Compile Include="Components\RequireComponentInEntityHeaderDrawer.cs" />
     <Compile Include="Components\RequireLayerHeaderDrawer.cs" />
     <Compile Include="Components\UniqueToEntityHeaderDrawer.cs" />

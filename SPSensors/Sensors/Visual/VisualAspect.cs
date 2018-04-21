@@ -7,7 +7,7 @@ using com.spacepuppy.Collections;
 namespace com.spacepuppy.Sensors.Visual
 {
 
-    public class VisualAspect : AbstractAspect
+    public class VisualAspect : SPEntityComponent, IAspect
     {
 
         #region Static Multiton Interface
@@ -47,8 +47,13 @@ namespace com.spacepuppy.Sensors.Visual
         #endregion
 
         #region IAspect Interface
+
+        bool IAspect.IsActive
+        {
+            get { return this.isActiveAndEnabled; }
+        }
         
-        public override float Precedence
+        public float Precedence
         {
             get { return _precedence; }
             set { _precedence = value; }

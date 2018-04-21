@@ -23,13 +23,7 @@ namespace com.spacepuppy
     {
 
     }
-
-    [System.AttributeUsage(System.AttributeTargets.Class, AllowMultiple = false, Inherited = true)]
-    public class ForceRootTagAttribute : ComponentHeaderAttribute
-    {
-
-    }
-
+    
     [System.AttributeUsage(System.AttributeTargets.Class, AllowMultiple = true, Inherited = true)]
     public class RequireComponentInEntityAttribute : ComponentHeaderAttribute
     {

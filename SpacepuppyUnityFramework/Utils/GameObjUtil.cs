@@ -10,24 +10,6 @@ namespace com.spacepuppy.Utils
     public static class GameObjectUtil
     {
         
-        public static GameObject CreateRoot(string name)
-        {
-            var go = new GameObject(name);
-            go.AddTag(SPConstants.TAG_ROOT);
-            return go;
-        }
-
-        public static GameObject CreateRoot(string name, params System.Type[] components)
-        {
-            var go = new GameObject(name);
-            go.AddTag(SPConstants.TAG_ROOT);
-            foreach (var tp in components)
-            {
-                go.AddComponent(tp);
-            }
-            return go;
-        }
-        
         #region Get*FromSource
 
         public static bool IsGameObjectSource(object obj)
@@ -136,10 +118,6 @@ namespace com.spacepuppy.Utils
                 return (obj as Transform).FindRoot();
             else if (obj is GameObject)
                 return (obj as GameObject).FindRoot();
-            else if (obj is SPComponent)
-            {
-                return (obj as SPComponent).entityRoot;
-            }
             else if (obj is Component)
                 return (obj as Component).FindRoot();
             else if (obj is IGameObjectSource)
@@ -147,39 +125,7 @@ namespace com.spacepuppy.Utils
 
             return null;
         }
-
-        public static GameObject GetTrueRootFromSource(object obj, bool respectProxy = false)
-        {
-            if (obj.IsNullOrDestroyed()) return null;
-
-            if (respectProxy && obj is IProxy)
-            {
-                obj = (obj as IProxy).GetTarget();
-                if (obj == null) return null;
-            }
-
-            if (obj is IComponent) obj = (obj as IComponent).component;
-
-            if (obj is Transform)
-                return (obj as Transform).FindTrueRoot();
-            else if (obj is GameObject)
-                return (obj as GameObject).FindTrueRoot();
-            else if (obj is SPComponent)
-            {
-                var r = (obj as SPComponent).entityRoot;
-                if (r.HasTag(SPConstants.TAG_ROOT))
-                    return r;
-                else
-                    return null;
-            }
-            else if (obj is Component)
-                return (obj as Component).FindTrueRoot();
-            else if (obj is IGameObjectSource)
-                return (obj as IGameObjectSource).gameObject.FindTrueRoot();
-
-            return null;
-        }
-
+        
         #endregion
         
         #region Kill Extension Methods
@@ -336,67 +282,7 @@ namespace com.spacepuppy.Utils
         #endregion
 
         #region Find Root
-
-        /**
-         * HasTrueRoot
-         */
-
-        /// <summary>
-        /// Returns true if 
-        /// </summary>
-        /// <param name="go"></param>
-        /// <returns></returns>
-        public static bool HasTrueRoot(this GameObject go)
-        {
-            if (go == null) return false;
-
-            var t = go.transform;
-            while (t != null)
-            {
-                if (MultiTagHelper.HasTag(t.gameObject, SPConstants.TAG_ROOT)) return true;
-            }
-
-            return false;
-        }
-
-        public static bool HasTrueRoot(this Component c)
-        {
-            if (c == null) return false;
-            return HasTrueRoot(c.gameObject);
-        }
-
-        public static bool HasTrueRoot(this GameObject go, out GameObject root)
-        {
-            root = null;
-            if (go == null) return false;
-
-            var t = go.transform;
-            while (t != null)
-            {
-                if (MultiTagHelper.HasTag(t.gameObject, SPConstants.TAG_ROOT))
-                {
-                    root = t.gameObject;
-                    return true;
-                }
-            }
-
-            return false;
-        }
-
-        public static bool HasTrueRoot(this Component c, out GameObject root)
-        {
-            if (c == null)
-            {
-                root = null;
-                return false;
-            }
-            return HasTrueRoot(c.gameObject, out root);
-        }
-
-        /**
-         * FindTrueRoot
-         */
-
+        
         /// <summary>
         /// Attempts to find a parent with a tag of 'Root', if none is found, null is returned.
         /// </summary>
@@ -406,32 +292,40 @@ namespace com.spacepuppy.Utils
         {
             if (go == null) return null;
 
-            var t = go.transform;
-            while (t != null)
+            var entity = SPEntity.Pool.GetFromSource(go);
+            if (entity != null)
+                return entity.gameObject;
+            else
             {
-                if (MultiTagHelper.HasTag(t, SPConstants.TAG_ROOT)) return t.gameObject;
-                t = t.parent;
+                //var t = go.transform;
+                //while (t != null)
+                //{
+                //    if (MultiTagHelper.HasTag(t, SPConstants.TAG_ROOT)) return t.gameObject;
+                //    t = t.parent;
+                //}
+                return null;
             }
-            return null;
         }
 
         public static GameObject FindTrueRoot(this Component c)
         {
             if (c == null) return null;
 
-            var t = c.transform;
-            while (t != null)
+            var entity = SPEntity.Pool.GetFromSource(c);
+            if (entity != null)
+                return entity.gameObject;
+            else
             {
-                if (MultiTagHelper.HasTag(t, SPConstants.TAG_ROOT)) return t.gameObject;
-                t = t.parent;
+                //var t = c.transform;
+                //while (t != null)
+                //{
+                //    if (MultiTagHelper.HasTag(t, SPConstants.TAG_ROOT)) return t.gameObject;
+                //    t = t.parent;
+                //}
+                return null;
             }
-            return null;
         }
-
-        /**
-         * FindRoot
-         */
-
+        
         /// <summary>
         /// Attempts to find a parent with a tag of 'Root', if none is found, self is returned.
         /// </summary>
@@ -441,54 +335,32 @@ namespace com.spacepuppy.Utils
         {
             if (go == null) return null;
 
-            var root = FindTrueRoot(go);
-            return (root != null) ? root : go; //we return self if no root was found...
+            var entity = SPEntity.Pool.GetFromSource(go);
+            if (entity != null)
+                return entity.gameObject;
+            else
+            {
+                //var root = FindTrueRoot(go);
+                //return (root != null) ? root : go; //we return self if no root was found...
+                return null;
+            }
         }
 
         public static GameObject FindRoot(this Component c)
         {
             if (c == null) return null;
 
-            //return FindRoot(c.gameObject);
-            var root = FindTrueRoot(c);
-            return (root != null) ? root : c.gameObject;
-        }
-
-
-        /**
-         * ReduceToRoot IEnum
-         */
-
-        public static IEnumerable<GameObject> ReduceToRoot(this IEnumerable<GameObject> e, bool bdistinct = true)
-        {
-            if (bdistinct)
-            {
-                foreach (var obj in ReduceToRoot(e, false).Distinct()) yield return obj;
-            }
+            var entity = SPEntity.Pool.GetFromSource(c);
+            if (entity != null)
+                return entity.gameObject;
             else
             {
-                foreach (var obj in e)
-                {
-                    yield return FindRoot(obj);
-                }
+                //var root = FindTrueRoot(c);
+                //return (root != null) ? root : c.gameObject;
+                return null;
             }
         }
-
-        public static IEnumerable<GameObject> ReduceToRoot(this IEnumerable<Component> e, bool bdistinct = true)
-        {
-            if (bdistinct)
-            {
-                foreach (var obj in ReduceToRoot(e, false).Distinct()) yield return obj;
-            }
-            else
-            {
-                foreach (var obj in e)
-                {
-                    yield return FindRoot(obj);
-                }
-            }
-        }
-
+        
         #endregion
 
         #region Find By Name
@@ -837,40 +709,25 @@ namespace com.spacepuppy.Utils
             }
         }
 
-        public static IEnumerable<Transform> GetParents(this GameObject go, bool stopAtRoot = false)
+        public static IEnumerable<Transform> GetParents(this GameObject go)
         {
             if (go == null) return null;
-            return GetParents(go.transform, stopAtRoot);
+            return GetParents(go.transform);
         }
 
-        public static IEnumerable<Transform> GetParents(this Component c, bool stopAtRoot = false)
+        public static IEnumerable<Transform> GetParents(this Component c)
         {
             if (c == null) return null;
-            return GetParents(c.transform, stopAtRoot);
+            return GetParents(c.transform);
         }
 
-        public static IEnumerable<Transform> GetParents(this Transform t, bool stopAtRoot = false)
+        public static IEnumerable<Transform> GetParents(this Transform t)
         {
-            if (stopAtRoot)
+            t = t.parent;
+            while (t != null)
             {
-                if (t.HasTag(SPConstants.TAG_ROOT)) yield break;
-
+                yield return t;
                 t = t.parent;
-                while (t != null)
-                {
-                    yield return t;
-                    if (t.HasTag(SPConstants.TAG_ROOT)) yield break;
-                    t = t.parent;
-                }
-            }
-            else
-            {
-                t = t.parent;
-                while (t != null)
-                {
-                    yield return t;
-                    t = t.parent;
-                }
             }
         }
 
@@ -935,7 +792,6 @@ namespace com.spacepuppy.Utils
         /// </summary>
         /// <param name="obj"></param>
         /// <param name="child"></param>
-        /// <param name="suppressChangeHierarchyMessage">Don't send the OnTransformHierarchyChanged message.</param>
         public static void AddChild(this GameObject obj, Transform child)
         {
             var p = (obj != null) ? obj.transform : null;
@@ -947,7 +803,6 @@ namespace com.spacepuppy.Utils
         /// </summary>
         /// <param name="obj"></param>
         /// <param name="child"></param>
-        /// <param name="suppressChangeHierarchyMessage">Don't send the OnTransformHierarchyChanged message.</param>
         public static void AddChild(this Transform obj, GameObject child)
         {
             var t = (child != null) ? child.transform : null;
@@ -971,7 +826,6 @@ namespace com.spacepuppy.Utils
         /// Sets the parent property of this GameObject to null.
         /// </summary>
         /// <param name="obj"></param>
-        /// <param name="suppressChangeHierarchyMessage">Don't send the OnTransformHierarchyChanged message.</param>
         public static void RemoveFromParent(this GameObject obj)
         {
             if (obj == null) throw new System.ArgumentNullException("obj");
@@ -985,7 +839,6 @@ namespace com.spacepuppy.Utils
         /// Sets the parent property of this GameObject to null.
         /// </summary>
         /// <param name="obj"></param>
-        /// <param name="suppressChangeHierarchyMessage">Don't send the OnTransformHierarchyChanged message.</param>
         public static void RemoveFromParent(this Transform obj)
         {
             if (obj == null) throw new System.ArgumentNullException("t");

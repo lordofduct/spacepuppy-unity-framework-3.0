@@ -13,6 +13,7 @@ namespace com.spacepuppy.Tween.Curves
 
         private Color _start;
         private Color _end;
+        private bool _useSlerp;
 
         #endregion
 
@@ -28,6 +29,7 @@ namespace com.spacepuppy.Tween.Curves
         {
             _start = start;
             _end = end;
+            _useSlerp = false;
         }
 
         public ColorMemberCurve(string propName, Ease ease, float dur, Color start, Color end)
@@ -35,12 +37,30 @@ namespace com.spacepuppy.Tween.Curves
         {
             _start = start;
             _end = end;
+            _useSlerp = false;
+        }
+
+        public ColorMemberCurve(string propName, float dur, Color start, Color end, bool useSlerp)
+            : base(propName, dur)
+        {
+            _start = start;
+            _end = end;
+            _useSlerp = useSlerp;
+        }
+
+        public ColorMemberCurve(string propName, Ease ease, float dur, Color start, Color end, bool useSlerp)
+            : base(propName, ease, dur)
+        {
+            _start = start;
+            _end = end;
+            _useSlerp = useSlerp;
         }
 
         protected override void ReflectiveInit(object start, object end, object option)
         {
             _start = ConvertUtil.ToColor(start);
             _end = ConvertUtil.ToColor(end);
+            _useSlerp = ConvertUtil.ToBool(option);
         }
 
         #endregion
@@ -59,6 +79,12 @@ namespace com.spacepuppy.Tween.Curves
             set { _end = value; }
         }
 
+        public bool UseSlerp
+        {
+            get { return _useSlerp; }
+            set { _useSlerp = value; }
+        }
+
         #endregion
 
         #region MemberCurve Interface
@@ -67,10 +93,16 @@ namespace com.spacepuppy.Tween.Curves
         {
             if (this.Duration == 0f) return _end;
             t = this.Ease(t, 0f, 1f, this.Duration);
-            return Color.LerpUnclamped(_start, _end, t);
+            return _useSlerp ? Slerp(_start, _end, t) : Color.LerpUnclamped(_start, _end, t);
+        }
+
+        private static Color Slerp(Color a, Color b, float t)
+        {
+            return (Color)ColorHSV.Slerp((ColorHSV)a, (ColorHSV)b, t);
         }
 
         #endregion
 
     }
+
 }

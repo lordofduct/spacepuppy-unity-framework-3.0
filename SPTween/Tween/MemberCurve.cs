@@ -10,6 +10,11 @@ using com.spacepuppy.Dynamic.Accessors;
 
 namespace com.spacepuppy.Tween
 {
+    
+    public interface ISupportRedirectToMemberCurve
+    {
+        void ConfigureAsRedirectTo(System.Type memberType, float totalDur, object current, object start, object end, object option);
+    }
 
     /// <summary>
     /// Base class for curves that reflectively access members of a target object.
@@ -58,7 +63,7 @@ namespace com.spacepuppy.Tween
         /// <param name="start"></param>
         /// <param name="end"></param>
         /// <param name="option"></param>
-        protected abstract void ReflectiveInit(object start, object end, object option);
+        protected abstract void ReflectiveInit(System.Type memberType, object start, object end, object option);
 
         #endregion
 
@@ -79,7 +84,7 @@ namespace com.spacepuppy.Tween
             get { return _dur; }
             protected set { _dur = value; }
         }
-        
+
         #endregion
 
         #region Methods
@@ -90,7 +95,7 @@ namespace com.spacepuppy.Tween
         /// <param name="t">The percentage of completion across the curve that the member is at.</param>
         /// <returns></returns>
         protected abstract object GetValueAt(float dt, float t);
-        
+
         #endregion
 
         #region ICurve Interface
@@ -102,11 +107,12 @@ namespace com.spacepuppy.Tween
 
         public override float TotalTime
         {
-            get { return  _dur; }
+            get { return _dur; }
         }
 
         public sealed override void Update(object targ, float dt, float t)
         {
+            if (t > _dur) t = _dur;
             var value = GetValueAt(dt, t);
             if (_accessor == null)
             {
@@ -158,10 +164,10 @@ namespace com.spacepuppy.Tween
             _memberTypeToCurveType = new Dictionary<System.Type, System.Type>();
 
             var priorities = new Dictionary<System.Type, int>();
-            foreach(var tp in TypeUtil.GetTypesAssignableFrom(typeof(MemberCurve)))
+            foreach (var tp in TypeUtil.GetTypesAssignableFrom(typeof(MemberCurve)))
             {
                 var attribs = tp.GetCustomAttributes(typeof(CustomMemberCurveAttribute), false).Cast<CustomMemberCurveAttribute>().ToArray();
-                foreach(var attrib in attribs)
+                foreach (var attrib in attribs)
                 {
                     if (!priorities.ContainsKey(attrib.HandledMemberType) || priorities[attrib.HandledMemberType] > attrib.priority)
                     {
@@ -180,13 +186,34 @@ namespace com.spacepuppy.Tween
             {
                 try
                 {
+                    if (ease == null) throw new System.ArgumentNullException("ease");
                     var curve = System.Activator.CreateInstance(_memberTypeToCurveType[memberType], true) as MemberCurve;
                     curve._dur = dur;
-                    curve.Ease = ease;
+                    curve._ease = ease;
                     curve._accessor = accessor;
-                    if (curve is NumericMemberCurve && ConvertUtil.IsNumericType(memberType)) (curve as NumericMemberCurve).NumericType = System.Type.GetTypeCode(memberType);
-                    curve.ReflectiveInit(start, end, option);
+                    curve.ReflectiveInit(memberType, start, end, option);
                     return curve;
+                }
+                catch (System.Exception ex)
+                {
+                    throw new System.InvalidOperationException("Failed to create a MemberCurve for the desired MemberInfo.", ex);
+                }
+            }
+            else
+            {
+                throw new System.ArgumentException("MemberInfo is for a member type that is not supported.", "info");
+            }
+        }
+
+        private static MemberCurve CreateUnitializedCurve(System.Type memberType, IMemberAccessor accessor)
+        {
+            if (_memberTypeToCurveType == null) BuildCurveTypeDictionary();
+
+            if (_memberTypeToCurveType.ContainsKey(memberType))
+            {
+                try
+                {
+                    return System.Activator.CreateInstance(_memberTypeToCurveType[memberType], true) as MemberCurve;
                 }
                 catch (System.Exception ex)
                 {
@@ -265,13 +292,40 @@ namespace com.spacepuppy.Tween
             var accessor = MemberCurve.GetAccessor(target, propName, out memberType);
 
             var current = accessor.Get(target);
-            dur = MathUtil.PercentageOffMinMax(ConvertUtil.ToSingle(current), end, start) * dur;
+            dur = (1f - MathUtil.PercentageOffMinMax(ConvertUtil.ToSingle(current), end, start)) * dur;
 
             return MemberCurve.Create(memberType, accessor, ease, dur, current, ConvertUtil.ToPrim(end, memberType), option);
+        }
+
+        public static MemberCurve CreateRedirectTo(object target, string propName, Ease ease, object start, object end, float dur, object option = null)
+        {
+            if (target == null) throw new System.ArgumentNullException("target");
+            if (ease == null) throw new System.ArgumentNullException("ease");
+
+            System.Type memberType;
+            var accessor = MemberCurve.GetAccessor(target, propName, out memberType);
+
+            var curve = CreateUnitializedCurve(memberType, accessor);
+            curve._ease = ease;
+            curve._accessor = accessor;
+            if (curve is ISupportRedirectToMemberCurve)
+            {
+                (curve as ISupportRedirectToMemberCurve).ConfigureAsRedirectTo(memberType, dur, accessor.Get(target), start, end, option);
+            }
+            else
+            {
+                //try to coerce
+                curve._dur = dur;
+                var current = accessor.Get(target);
+                dur = (1f - MathUtil.PercentageOffMinMax(ConvertUtil.ToSingle(current), ConvertUtil.ToSingle(end), ConvertUtil.ToSingle(start))) * dur;
+                return MemberCurve.Create(memberType, accessor, ease, dur, current, ConvertUtil.ToPrim(end, memberType), option);
+            }
+
+            return curve;
         }
 
         #endregion
 
     }
-
+    
 }

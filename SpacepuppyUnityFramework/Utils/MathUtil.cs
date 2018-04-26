@@ -176,7 +176,7 @@ namespace com.spacepuppy.Utils
         /// <remarks></remarks>
         public static float Truncate(float value)
         {
-            return Convert.ToSingle(Math.Truncate(value));
+            return (float)Math.Truncate(value);
         }
 
         /// <summary>
@@ -198,34 +198,23 @@ namespace com.spacepuppy.Utils
         /// <param name="min"></param>
         /// <returns></returns>
         /// <remarks></remarks>
-        public static bool InRange(float value, float max, float min)
+        public static bool InRange(float value, float max, float min = 0f)
         {
-            return (value >= min && value <= max);
+            if (max < min) return (value >= max && value <= min);
+            else return (value >= min && value <= max);
+
         }
 
-        public static bool InRange(float value, float max)
+        public static bool InRange(int value, int max, int min = 0)
         {
-            return InRange(value, max, 0);
+            if (max < min) return (value >= max && value <= min);
+            else return (value >= min && value <= max);
         }
 
-        public static bool InRange(int value, int max, int min)
+        public static bool InRangeExclusive(float value, float max, float min = 0f)
         {
-            return (value >= min && value <= max);
-        }
-
-        public static bool InRange(int value, int max)
-        {
-            return InRange(value, max, 0);
-        }
-
-        public static bool InRangeExclusive(float value, float max, float min)
-        {
-            return (value > min && value < max);
-        }
-
-        public static bool InRangeExclusive(float value, float max)
-        {
-            return InRangeExclusive(value, max, 0);
+            if (max < min) return (value > max && value < min);
+            else return (value > min && value < max);
         }
 
         /// <summary>
@@ -1316,29 +1305,34 @@ namespace com.spacepuppy.Utils
         /// <returns></returns>
         public static float NormalizeAngleToAnother(float dep, float ind, bool useRadians)
         {
-            if(useRadians)
+            float div = useRadians ? TWO_PI : 360f;
+            float v = (dep - ind) / div;
+            return dep - (float)Math.Floor(v) * div;
+        }
+
+        public static float NormalizeAngleToRange(float value, float start, float end, bool useRadians)
+        {
+            float div = useRadians ? TWO_PI : 360f;
+            float d = (end - start) / div;
+            float v = (value - start) / div;
+            if (!MathUtil.InRange(v, d))
             {
-                if(dep < ind)
+                if (Math.Abs(d) > 1.0)
                 {
-                    while (dep < ind) dep += MathUtil.TWO_PI;
+                    //the start->end range is larger than 360, so just land inside it
+                    v = (float)Math.Round((double)v, System.MidpointRounding.AwayFromZero);
+                    value -= v * div;
                 }
-                else if(dep - ind > MathUtil.TWO_PI)
+                else
                 {
-                    while(dep - ind > MathUtil.TWO_PI) dep -= MathUtil.TWO_PI;
+                    //the start->end range is smaller than 360
+                    //so lets land as close as we can to the bounds of the range on either end
+                    v = (float)Math.Truncate((double)v);
+                    value -= v * div;
+                    if (Math.Abs(value - end) > 180.0) value -= Math.Sign(value - end) * div;
                 }
             }
-            else
-            {
-                if (dep < ind)
-                {
-                    while (dep < ind) dep += 360f;
-                }
-                else if (dep - ind > 360f)
-                {
-                    while (dep - ind > MathUtil.TWO_PI) dep -= 360f;
-                }
-            }
-            return dep;
+            return value;
         }
 
         /// <summary>

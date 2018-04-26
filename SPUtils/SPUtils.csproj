@@ -46,7 +46,6 @@
     <Compile Include="..\SpacepuppyUnityFramework\Properties\AssemblyVersionInfo.cs">
       <Link>Properties\AssemblyVersionInfo.cs</Link>
     </Compile>
-    <Compile Include="ColorHSV.cs" />
     <Compile Include="Dynamic\DoubleEvaluator.cs" />
     <Compile Include="Geom\ConfigurableForce.cs" />
     <Compile Include="Geom\PlanarSurfaceComponent.cs" />

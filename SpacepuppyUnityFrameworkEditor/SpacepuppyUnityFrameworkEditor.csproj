@@ -139,6 +139,7 @@
     <Compile Include="PrefabHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PropertyAttributeDrawers\UnitVectorPropertyDrawer.cs" />
+    <Compile Include="PropertyAttributeDrawers\VectorInspectorPropertyDrawer.cs" />
     <Compile Include="PropertyAttributeDrawers\WeightedValueCollectionPropertyDrawer.cs" />
     <Compile Include="ReorderableListHelper.cs" />
     <Compile Include="ScriptableObjectHelper.cs" />

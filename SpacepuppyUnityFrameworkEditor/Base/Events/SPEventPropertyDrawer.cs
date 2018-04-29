@@ -91,7 +91,7 @@ namespace com.spacepuppyeditor.Base.Events
             }
         }
 
-        public System.Action<GUIContent, int> CustomizeEntryLabel
+        public System.Action<Rect, SerializedProperty, int> OnDrawCustomizedEntryLabel
         {
             get;
             set;
@@ -263,9 +263,6 @@ namespace com.spacepuppyeditor.Base.Events
             EditorGUI.BeginProperty(area, GUIContent.none, targProp);
 
             Rect trigRect;
-            var actInfo = EventTriggerTargetPropertyDrawer.GetTriggerActivationInfo(element);
-            GUIContent labelContent = EditorHelper.TempContent(index.ToString("00: ") + actInfo.ActivationTypeDisplayName);
-            if (this.CustomizeEntryLabel != null) this.CustomizeEntryLabel(labelContent, index);
             if (_drawWeight && area.width > FULLWEIGHT_WIDTH)
             {
                 var top = area.yMin + MARGIN;
@@ -277,7 +274,10 @@ namespace com.spacepuppyeditor.Base.Events
                 var weightProp = element.FindPropertyRelative(PROP_WEIGHT);
                 float weight = weightProp.floatValue;
 
-                EditorGUI.LabelField(labelRect, labelContent);
+                if (this.OnDrawCustomizedEntryLabel != null)
+                    this.OnDrawCustomizedEntryLabel(labelRect, element, index);
+                else
+                    DrawDefaultListElementLabel(labelRect, element, index);
                 weightProp.floatValue = EditorGUI.FloatField(weightRect, weight);
                 float p = (_totalWeight > 0f) ? (100f * weight / _totalWeight) : ((index == 0) ? 100f : 0f);
                 EditorGUI.LabelField(percRect, string.Format("{0:0.#}%", p));
@@ -286,20 +286,25 @@ namespace com.spacepuppyeditor.Base.Events
             {
                 //Draw Triggerable - this is the simple case to make a clean designer set up for newbs
                 var top = area.yMin + MARGIN;
-                var labelRect = new Rect(area.xMin, top, area.width, EditorGUIUtility.singleLineHeight);
+                var labelRect = new Rect(area.xMin, top, EditorGUIUtility.labelWidth, EditorGUIUtility.singleLineHeight);
+                trigRect = new Rect(area.xMin + EditorGUIUtility.labelWidth, top, area.width - EditorGUIUtility.labelWidth, EditorGUIUtility.singleLineHeight);
 
-                trigRect = EditorGUI.PrefixLabel(labelRect, labelContent);
+                if (this.OnDrawCustomizedEntryLabel != null)
+                    this.OnDrawCustomizedEntryLabel(labelRect, element, index);
+                else
+                    DrawDefaultListElementLabel(labelRect, element, index);
             }
 
             //Draw Triggerable - this is the simple case to make a clean designer set up for newbs
             EditorGUI.BeginChangeCheck();
             var targObj = EventTriggerTargetPropertyDrawer.TargetObjectField(trigRect, GUIContent.none, targProp.objectReferenceValue);
-            if(EditorGUI.EndChangeCheck())
+            if (EditorGUI.EndChangeCheck())
             {
+                var actInfo = EventTriggerTargetPropertyDrawer.GetTriggerActivationInfo(element);
                 targProp.objectReferenceValue = EventTriggerTargetPropertyDrawer.IsValidTriggerTarget(targObj, actInfo.ActivationType) ? targObj : null;
             }
             EditorGUI.EndProperty();
-            
+
             ReorderableListHelper.DrawDraggableElementDeleteContextMenu(_targetList, area, index, isActive, isFocused);
         }
 
@@ -317,6 +322,18 @@ namespace com.spacepuppyeditor.Base.Events
                 obj.Weight = 1f;
                 lst.serializedProperty.serializedObject.Update();
             }
+        }
+
+        #endregion
+
+        #region Static Utils
+
+        public static void DrawDefaultListElementLabel(Rect area, SerializedProperty property, int index)
+        {
+            var r0 = new Rect(area.xMin, area.yMin, Mathf.Min(25f, area.width), EditorGUIUtility.singleLineHeight);
+            var r1 = new Rect(r0.xMax, area.yMin, Mathf.Max(0f, area.width - r0.width), EditorGUIUtility.singleLineHeight);
+            EditorGUI.LabelField(r0, index.ToString("00:"));
+            EventTriggerTargetPropertyDrawer.DrawTriggerActivationTypeDropdown(r1, property, false);
         }
 
         #endregion

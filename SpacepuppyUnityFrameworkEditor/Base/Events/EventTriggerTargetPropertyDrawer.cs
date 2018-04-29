@@ -74,7 +74,7 @@ namespace com.spacepuppyeditor.Base.Events
 
             //Draw ActivationType Popup
             var r0 = new Rect(position.xMin, position.yMin, position.width, EditorGUIUtility.singleLineHeight);
-            var act = this.DrawTriggerActivationTypeDropdown(r0, property);
+            var act = EventTriggerTargetPropertyDrawer.DrawTriggerActivationTypeDropdown(r0, property, true);
 
             //Draw Advanced
             var area = new Rect(position.xMin, r0.yMax, position.width, position.height - r0.height);
@@ -104,7 +104,7 @@ namespace com.spacepuppyeditor.Base.Events
         }
 
 
-        private TriggerActivationType DrawTriggerActivationTypeDropdown(Rect area, SerializedProperty property)
+        public static TriggerActivationType DrawTriggerActivationTypeDropdown(Rect area, SerializedProperty property, bool drawLabel)
         {
             var actProp = property.FindPropertyRelative(EventTriggerTargetPropertyDrawer.PROP_ACTIVATIONTYPE);
             //EditorGUI.PropertyField(area, actProp);
@@ -112,8 +112,13 @@ namespace com.spacepuppyeditor.Base.Events
             var actInfo = GetTriggerActivationInfo(property);
             int index = System.Array.IndexOf(_triggerActivationTypeDisplayNames, actInfo.ActivationTypeDisplayName);
             EditorGUI.BeginChangeCheck();
-            index = EditorGUI.Popup(area, actInfo.ActivationTypeProperty.displayName, index, _triggerActivationTypeDisplayNames);
-            if(EditorGUI.EndChangeCheck())
+
+            if (drawLabel)
+                index = EditorGUI.Popup(area, actInfo.ActivationTypeProperty.displayName, index, _triggerActivationTypeDisplayNames);
+            else
+                index = EditorGUI.Popup(area, index, _triggerActivationTypeDisplayNames);
+
+            if (EditorGUI.EndChangeCheck())
             {
                 if (index <= 3)
                 {

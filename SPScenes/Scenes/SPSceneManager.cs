@@ -126,7 +126,20 @@ namespace com.spacepuppy.Scenes
         {
             return SceneManager.GetActiveScene();
         }
-        
+
+        public bool SceneExists(string sceneName, bool excludeInactive = false)
+        {
+            if (excludeInactive)
+            {
+                var sc = SceneManager.GetSceneByName(sceneName);
+                return sc.IsValid();
+            }
+            else
+            {
+                return SceneUtility.GetBuildIndexByScenePath(sceneName) >= 0;
+            }
+        }
+
         #endregion
 
         #region EventHandlers

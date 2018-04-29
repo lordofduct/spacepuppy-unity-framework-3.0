@@ -19,6 +19,14 @@ namespace com.spacepuppy
 
         AsyncOperation UnloadScene(Scene scene);
         Scene GetActiveScene();
+
+        /// <summary>
+        /// Test if a scene by the name exists.
+        /// </summary>
+        /// <param name="excludeInactive">False to test if the scene exists as a loadable scene, True if to test if the scene exists and is actively loaded.</param>
+        /// <returns></returns>
+        bool SceneExists(string sceneName, bool excludeInactive = false);
+
     }
 
 }

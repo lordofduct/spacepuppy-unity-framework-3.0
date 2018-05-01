@@ -20,6 +20,10 @@ namespace com.spacepuppy.Scenes.Events
         [SerializeField]
         private LoadSceneBehaviour _behaviour;
 
+        [SerializeField]
+        [Tooltip("A token used to persist data across scenes.")]
+        VariantReference _persistentToken;
+
         #endregion
 
         #region Methods
@@ -30,6 +34,7 @@ namespace com.spacepuppy.Scenes.Events
             if (string.IsNullOrEmpty(_sceneName)) return false;
 
             var nm = _sceneName;
+            LoadSceneWaitHandle handle;
             if (nm.StartsWith("#"))
             {
                 nm = nm.Substring(1);
@@ -39,27 +44,16 @@ namespace com.spacepuppy.Scenes.Events
                 if (index < 0 || index >= SceneManager.sceneCountInBuildSettings)
                     return false;
 
-                var manager = Services.Get<ISceneManager>();
-                if (manager != null)
-                {
-                    manager.LoadScene(index, _mode, _behaviour);
-                }
-                else
-                {
-                    SceneManagerUtils.LoadScene(index, _mode, _behaviour);
-                }
+                handle = SceneManagerUtils.LoadScene(index, _mode, _behaviour);
             }
             else
             {
-                var manager = Services.Get<ISceneManager>();
-                if (manager != null)
-                {
-                    manager.LoadScene(_sceneName, _mode, _behaviour);
-                }
-                else
-                {
-                    SceneManagerUtils.LoadScene(_sceneName, _mode, _behaviour);
-                }
+                handle = SceneManagerUtils.LoadScene(_sceneName, _mode, _behaviour);
+            }
+
+            if (handle != null)
+            {
+                handle.PersistentToken = com.spacepuppy.Utils.ObjUtil.ReduceIfProxy(_persistentToken.Value);
             }
 
             return true;

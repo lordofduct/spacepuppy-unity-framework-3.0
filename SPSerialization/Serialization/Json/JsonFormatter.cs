@@ -119,8 +119,9 @@ namespace com.spacepuppy.Serialization.Json
             if (this.SurrogateSelector != null && (surrogate = this.SurrogateSelector.GetSurrogate(tp, this.Context, out selector)) != null)
             {
                 var si = new SerializationInfo(tp, this.Converter);
-                if (tp.IsPrimitive)
-                    surrogate.GetObjectData(graph, si, this.Context);
+                //if (tp.IsPrimitive)
+                //    surrogate.GetObjectData(graph, si, this.Context);
+                surrogate.GetObjectData(graph, si, this.Context);
 
                 this.WriteFromSerializationInfo(si);
             }
@@ -177,10 +178,23 @@ namespace com.spacepuppy.Serialization.Json
                     break;
                 case TypeCode.Object:
                     var tp = value.GetType();
-                    if (tp.IsArray || (tp.IsGenericType && tp.GetGenericTypeDefinition() == typeof(List<>)))
+                    if (tp.IsArray)
                     {
                         _writer.WriteStartArray();
                         _writer.WriteValue(tp.FullName);
+
+                        var arr = value as System.Collections.IList;
+                        for (int i = 0; i < arr.Count; i++)
+                        {
+                            this.WriteValue(arr[i]);
+                        }
+
+                        _writer.WriteEndArray();
+                    }
+                    else if (tp.IsGenericType && tp.GetGenericTypeDefinition() == typeof(List<>))
+                    {
+                        _writer.WriteStartArray();
+                        _writer.WriteValue(TypeUtil.GetElementTypeOfListType(tp).FullName + "<>");
 
                         var arr = value as System.Collections.IList;
                         for (int i = 0; i < arr.Count; i++)
@@ -357,15 +371,31 @@ namespace com.spacepuppy.Serialization.Json
                                     _reader.Read();
                                     if (_reader.NodeType != JsonNodeType.String) throw new SerializationException("Failed to deserialize due to malformed json: array must begin with a @type string. (" + nm + ")");
 
-                                    System.Type arrayType;
+                                    System.Type arrayType = null;
                                     try
                                     {
                                         var stp = _reader.Value as string;
-                                        bool isArray = (stp != null && stp.EndsWith("[]"));
-                                        if (isArray) stp = stp.Substring(0, stp.Length - 2);
-                                        arrayType = Type.GetType(stp);
-                                        if (arrayType == null) arrayType = TypeUtil.FindType(stp, true);
-                                        if (arrayType != null && isArray) arrayType = arrayType.MakeArrayType();
+                                        //bool isArray = (stp != null && stp.EndsWith("[]"));
+                                        //if (isArray) stp = stp.Substring(0, stp.Length - 2);
+                                        //arrayType = Type.GetType(stp);
+                                        //if (arrayType == null) arrayType = TypeUtil.FindType(stp, true);
+                                        //if (arrayType != null && isArray) arrayType = arrayType.MakeArrayType();
+                                        if (string.IsNullOrEmpty(stp))
+                                        {
+                                            arrayType = null;
+                                        }
+                                        else if (stp.EndsWith("[]"))
+                                        {
+                                            arrayType = Type.GetType(stp.Substring(0, stp.Length - 2));
+                                            if (arrayType == null) arrayType = TypeUtil.FindType(stp, true);
+                                            if (arrayType != null) arrayType = arrayType.MakeArrayType();
+                                        }
+                                        else if (stp.EndsWith("<>"))
+                                        {
+                                            arrayType = Type.GetType(stp.Substring(0, stp.Length - 2));
+                                            if (arrayType == null) arrayType = TypeUtil.FindType(stp, true);
+                                            if (arrayType != null) arrayType = typeof(List<>).MakeGenericType(arrayType);
+                                        }
                                     }
                                     catch (System.Exception)
                                     {
@@ -432,15 +462,31 @@ namespace com.spacepuppy.Serialization.Json
                             _reader.Read();
                             if (_reader.NodeType != JsonNodeType.String) throw new SerializationException("Failed to deserialize due to malformed json: array must begin with a @type string. (" + nm + ")");
 
-                            System.Type arrayType;
+                            System.Type arrayType = null;
                             try
                             {
                                 var stp = _reader.Value as string;
-                                bool isArray = (stp != null && stp.EndsWith("[]"));
-                                if (isArray) stp = stp.Substring(0, stp.Length - 2);
-                                arrayType = Type.GetType(stp);
-                                if (arrayType == null) arrayType = TypeUtil.FindType(stp, true);
-                                if (arrayType != null && isArray) arrayType = arrayType.MakeArrayType();
+                                //bool isArray = (stp != null && stp.EndsWith("[]"));
+                                //if (isArray) stp = stp.Substring(0, stp.Length - 2);
+                                //arrayType = Type.GetType(stp);
+                                //if (arrayType == null) arrayType = TypeUtil.FindType(stp, true);
+                                //if (arrayType != null && isArray) arrayType = arrayType.MakeArrayType();
+                                if (string.IsNullOrEmpty(stp))
+                                {
+                                    arrayType = null;
+                                }
+                                else if (stp.EndsWith("[]"))
+                                {
+                                    arrayType = Type.GetType(stp.Substring(0, stp.Length - 2));
+                                    if (arrayType == null) arrayType = TypeUtil.FindType(stp, true);
+                                    if (arrayType != null) arrayType = arrayType.MakeArrayType();
+                                }
+                                else if (stp.EndsWith("<>"))
+                                {
+                                    arrayType = Type.GetType(stp.Substring(0, stp.Length - 2));
+                                    if (arrayType == null) arrayType = TypeUtil.FindType(stp, true);
+                                    if (arrayType != null) arrayType = typeof(List<>).MakeGenericType(arrayType);
+                                }
                             }
                             catch (System.Exception)
                             {
@@ -493,15 +539,31 @@ namespace com.spacepuppy.Serialization.Json
                             _reader.Read();
                             if (_reader.NodeType != JsonNodeType.String) throw new SerializationException("Failed to deserialize due to malformed json: array must begin with a @type string. (" + nm + ")");
 
-                            System.Type arrayType;
+                            System.Type arrayType = null;
                             try
                             {
                                 var stp = _reader.Value as string;
-                                bool isArray = (stp != null && stp.EndsWith("[]"));
-                                if (isArray) stp = stp.Substring(0, stp.Length - 2);
-                                arrayType = Type.GetType(stp);
-                                if (arrayType == null) arrayType = TypeUtil.FindType(stp, true);
-                                if (arrayType != null && isArray) arrayType = arrayType.MakeArrayType();
+                                //bool isArray = (stp != null && stp.EndsWith("[]"));
+                                //if (isArray) stp = stp.Substring(0, stp.Length - 2);
+                                //arrayType = Type.GetType(stp);
+                                //if (arrayType == null) arrayType = TypeUtil.FindType(stp, true);
+                                //if (arrayType != null && isArray) arrayType = arrayType.MakeArrayType();
+                                if (string.IsNullOrEmpty(stp))
+                                {
+                                    arrayType = null;
+                                }
+                                else if (stp.EndsWith("[]"))
+                                {
+                                    arrayType = Type.GetType(stp.Substring(0, stp.Length - 2));
+                                    if (arrayType == null) arrayType = TypeUtil.FindType(stp, true);
+                                    if (arrayType != null) arrayType = arrayType.MakeArrayType();
+                                }
+                                else if (stp.EndsWith("<>"))
+                                {
+                                    arrayType = Type.GetType(stp.Substring(0, stp.Length - 2));
+                                    if (arrayType == null) arrayType = TypeUtil.FindType(stp, true);
+                                    if (arrayType != null) arrayType = typeof(List<>).MakeGenericType(arrayType);
+                                }
                             }
                             catch (System.Exception)
                             {

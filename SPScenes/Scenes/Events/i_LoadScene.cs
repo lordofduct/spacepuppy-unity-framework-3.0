@@ -14,7 +14,7 @@ namespace com.spacepuppy.Scenes.Events
 
         [SerializeField]
         [Tooltip("Prefix with # to load by index.")]
-        private string _sceneName;
+        private SceneRef _scene;
         [SerializeField]
         private LoadSceneMode _mode;
         [SerializeField]
@@ -26,14 +26,41 @@ namespace com.spacepuppy.Scenes.Events
 
         #endregion
 
+        #region Properties
+
+        public SceneRef Scene
+        {
+            get { return _scene; }
+            set { _scene = value; }
+        }
+
+        public LoadSceneMode Mode
+        {
+            get { return _mode; }
+            set { _mode = value; }
+        }
+
+        public LoadSceneBehaviour Behaviour
+        {
+            get { return _behaviour; }
+            set { _behaviour = value; }
+        }
+
+        public object PersistentToken
+        {
+            get { return _persistentToken; }
+        }
+
+        #endregion
+
         #region Methods
 
         public override bool Trigger(object sender, object arg)
         {
             if (!this.CanTrigger) return false;
-            if (string.IsNullOrEmpty(_sceneName)) return false;
+            if (string.IsNullOrEmpty(_scene.SceneName)) return false;
 
-            var nm = _sceneName;
+            var nm = _scene.SceneName;
             LoadSceneWaitHandle handle;
             if (nm.StartsWith("#"))
             {
@@ -48,7 +75,7 @@ namespace com.spacepuppy.Scenes.Events
             }
             else
             {
-                handle = SceneManagerUtils.LoadScene(_sceneName, _mode, _behaviour);
+                handle = SceneManagerUtils.LoadScene(nm, _mode, _behaviour);
             }
 
             if (handle != null)

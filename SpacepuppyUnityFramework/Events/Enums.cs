@@ -9,7 +9,8 @@ namespace com.spacepuppy.Events
         None = 0,
         OnStart = 1,
         OnEnable = 2,
-        OnStartAndEnable = 3
+        OnStartAndEnable = 3,
+        Awake = 4
     }
 
     public enum TriggerActivationType

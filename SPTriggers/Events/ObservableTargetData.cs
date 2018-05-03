@@ -23,9 +23,7 @@ namespace com.spacepuppy.Events
         private bool _initialized;
         [System.NonSerialized()]
         private BaseSPEvent _targetEvent;
-
-        [System.NonSerialized]
-        private System.Action<ObservableTargetData, object> _callback;
+        
         [System.NonSerialized]
         private EventTriggerTarget[] _hijackCache;
 

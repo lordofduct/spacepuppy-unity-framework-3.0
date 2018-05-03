@@ -14,6 +14,7 @@ namespace com.spacepuppyeditor.Internal
     {
 
         private Dictionary<int, IPropertyHandler> _table = new Dictionary<int, IPropertyHandler>();
+        private Dictionary<int, object> _states = new Dictionary<int, object>();
 
         public IPropertyHandler GetHandler(SerializedProperty property)
         {
@@ -90,6 +91,6 @@ namespace com.spacepuppyeditor.Internal
 
             return num;
         }
-
+        
     }
 }

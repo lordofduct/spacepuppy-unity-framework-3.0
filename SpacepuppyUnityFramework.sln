@@ -85,6 +85,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SPSpawn", "SPSpawn\SPSpawn.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SPSpawnEditor", "SPSpawnEditor\SPSpawnEditor.csproj", "{70D5308A-A02E-428D-8C50-41208DE16E6E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SPScenesEditor", "SPScenesEditor\SPScenesEditor.csproj", "{A8267310-CA39-4D9B-9A6A-A29B7D4DD970}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -199,6 +201,10 @@ Global
 		{70D5308A-A02E-428D-8C50-41208DE16E6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{70D5308A-A02E-428D-8C50-41208DE16E6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{70D5308A-A02E-428D-8C50-41208DE16E6E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A8267310-CA39-4D9B-9A6A-A29B7D4DD970}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A8267310-CA39-4D9B-9A6A-A29B7D4DD970}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A8267310-CA39-4D9B-9A6A-A29B7D4DD970}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A8267310-CA39-4D9B-9A6A-A29B7D4DD970}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -207,5 +213,8 @@ Global
 		{FE2936A3-0EBD-4C1D-8585-1349EB4F9103} = {1FED7579-7ACD-4268-86E1-CB052F4A1651}
 		{400D4A19-46B2-4A26-8851-3C2FC1B3EB6E} = {1FED7579-7ACD-4268-86E1-CB052F4A1651}
 		{EE58E400-BD96-454B-AA27-BAFB7C0F49F0} = {400D4A19-46B2-4A26-8851-3C2FC1B3EB6E}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {EBFDC472-DBD5-48D7-835D-D831840E00F7}
 	EndGlobalSection
 EndGlobal

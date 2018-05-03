@@ -4,14 +4,13 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{21A1F01A-7F94-4074-A794-8C265D9ECCA1}</ProjectGuid>
+    <ProjectGuid>{A8267310-CA39-4D9B-9A6A-A29B7D4DD970}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>com.spacepuppyeditor</RootNamespace>
-    <AssemblyName>SPProjectEditor</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <RootNamespace>SPScenesEditor</RootNamespace>
+    <AssemblyName>SPScenesEditor</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -34,6 +33,7 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Xml" />
     <Reference Include="UnityEditor">
       <HintPath>..\Resources\UnityEditor.dll</HintPath>
@@ -43,12 +43,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\SpacepuppyUnityFramework\Properties\AssemblyVersionInfo.cs">
-      <Link>Properties\AssemblyVersionInfo.cs</Link>
-    </Compile>
-    <Compile Include="Project\TextRefPropertyDrawer.cs" />
-    <Compile Include="Project\WeightedTextDocumentInspector.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Scenes\SceneRefPropertyDrawer.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SpacepuppyUnityFrameworkEditor\SpacepuppyUnityFrameworkEditor.csproj">
@@ -59,9 +55,9 @@
       <Project>{3b57db6b-ba67-46ad-b929-fdd8e6ae511e}</Project>
       <Name>SpacepuppyUnityFramework</Name>
     </ProjectReference>
-    <ProjectReference Include="..\SPProject\SPProject.csproj">
-      <Project>{3efa3aa0-2f60-4876-93d7-9ba2e806f2de}</Project>
-      <Name>SPProject</Name>
+    <ProjectReference Include="..\SPScenes\SPScenes.csproj">
+      <Project>{3f77727e-5170-44a4-a3fa-3df77de6e2eb}</Project>
+      <Name>SPScenes</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

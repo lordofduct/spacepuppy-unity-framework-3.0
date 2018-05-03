@@ -32,11 +32,21 @@ namespace com.spacepuppy.Events
 
         #region CONSTRUCTOR
 
+        protected override void Awake()
+        {
+            base.Awake();
+
+            if ((_activateOn & ActivateEvent.Awake) != 0)
+            {
+                this.ActivateTrigger(null);
+            }
+        }
+
         protected override void Start()
         {
             base.Start();
 
-            if (_activateOn.HasFlag(ActivateEvent.OnStart) || _activateOn.HasFlag(ActivateEvent.OnEnable))
+            if ((_activateOn & ActivateEvent.OnStart) != 0 || (_activateOn & ActivateEvent.OnEnable) != 0)
             {
                 this.ActivateTrigger(null);
             }
@@ -46,9 +56,9 @@ namespace com.spacepuppy.Events
         {
             base.OnEnable();
 
-            if (_activateOn.HasFlag(ActivateEvent.OnStart) && !this.started) return;
+            if ((_activateOn & ActivateEvent.OnStart) != 0 && !this.started) return;
 
-            if (_activateOn.HasFlag(ActivateEvent.OnEnable))
+            if ((_activateOn & ActivateEvent.OnEnable) != 0)
             {
                 this.ActivateTrigger(null);
             }

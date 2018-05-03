@@ -162,7 +162,6 @@ namespace com.spacepuppy.Events
             {
                 int i = this.CurrentIndexNormalized;
                 if (i < 0 || i >= _trigger.Targets.Count) yield break;
-                _currentIndex++;
                 
                 var go = GameObjectUtil.GetGameObjectFromSource(_trigger.Targets[i].Target);
                 if (go != null && go.GetComponentInChildren<IAutoSequenceSignal>(out signal))
@@ -176,6 +175,8 @@ namespace com.spacepuppy.Events
                     _trigger.ActivateTriggerAt(i, this, null);
                     yield return null;
                 }
+
+                _currentIndex++;
             }
         }
 

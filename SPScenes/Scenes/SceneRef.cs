@@ -4,11 +4,11 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace com.spacepuppy.Project
+namespace com.spacepuppy.Scenes
 {
 
     [System.Serializable]
-    public class SceneRef
+    public struct SceneRef
     {
 
         #region Fields
@@ -18,6 +18,16 @@ namespace com.spacepuppy.Project
 
         [SerializeField]
         private string _sceneName;
+
+        #endregion
+
+        #region CONSTRUCTOR
+
+        public SceneRef(string sceneName)
+        {
+            _sceneAsset = null;
+            _sceneName = sceneName;
+        }
 
         #endregion
 
@@ -31,6 +41,14 @@ namespace com.spacepuppy.Project
         public string SceneName
         {
             get { return _sceneName; }
+            set
+            {
+                if (!string.Equals(_sceneName, value))
+                {
+                    _sceneAsset = null;
+                    _sceneName = value;
+                }
+            }
         }
 
         #endregion
@@ -41,6 +59,11 @@ namespace com.spacepuppy.Project
         {
             if (sceneRef == null) return null;
             return sceneRef._sceneName;
+        }
+
+        public static implicit operator SceneRef(string sceneName)
+        {
+            return new SceneRef(sceneName);
         }
 
         #endregion

@@ -94,7 +94,6 @@
     <Compile Include="Events\EventTriggerTarget.cs" />
     <Compile Include="Events\IObservableTrigger.cs" />
     <Compile Include="Events\ITriggerable.cs" />
-    <Compile Include="Events\ObservableTargetData.cs" />
     <Compile Include="Events\SPEvent.cs" />
     <Compile Include="Events\Trigger.cs" />
     <Compile Include="Events\Triggerable.cs" />

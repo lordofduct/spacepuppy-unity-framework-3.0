@@ -46,6 +46,7 @@
     <Compile Include="..\SpacepuppyUnityFramework\Properties\AssemblyVersionInfo.cs">
       <Link>Properties\AssemblyVersionInfo.cs</Link>
     </Compile>
+    <Compile Include="Events\HijackTriggerEvents.cs" />
     <Compile Include="Events\IAutoSequenceSignal.cs" />
     <Compile Include="Events\i_AddComponent.cs" />
     <Compile Include="Events\i_AutoSequenceSignal.cs" />
@@ -69,6 +70,7 @@
     <Compile Include="Events\i_TriggerRandom.cs" />
     <Compile Include="Events\i_TriggerRandomElimination.cs" />
     <Compile Include="Events\i_TriggerSequence.cs" />
+    <Compile Include="Events\ObservableTargetData.cs" />
     <Compile Include="Events\t_AllTriggered.cs" />
     <Compile Include="Events\t_Flicker.cs" />
     <Compile Include="Events\t_Interval.cs" />

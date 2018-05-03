@@ -62,7 +62,6 @@
     <Compile Include="Base\DiscreteFloatPropertyDrawer.cs" />
     <Compile Include="Base\Events\EventTriggerTargetPropertyDrawer.cs" />
     <Compile Include="Base\Events\ITriggerableMechanismAddonDrawer.cs" />
-    <Compile Include="Base\Events\ObservableTargetDataPropertyDrawer.cs" />
     <Compile Include="Base\Events\TriggerableTargetObjectPropertyDrawer.cs" />
     <Compile Include="Base\Events\SPEventPropertyDrawer.cs" />
     <Compile Include="Base\Geom\IntervalInspector.cs" />

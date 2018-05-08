@@ -142,9 +142,11 @@
     <Compile Include="PropertyAttributeDrawers\WeightedValueCollectionPropertyDrawer.cs" />
     <Compile Include="ReorderableListHelper.cs" />
     <Compile Include="ScriptableObjectHelper.cs" />
-    <Compile Include="Settings\BaseSettings.cs" />
+    <Compile Include="Settings\ModelSettingsImportProcessor.cs" />
+    <Compile Include="Settings\SpacepuppySettingsWindow.cs" />
     <Compile Include="Settings\BuildSettings.cs" />
     <Compile Include="Settings\InputSettings.cs" />
+    <Compile Include="SpacepuppySettings.cs" />
     <Compile Include="SPEditor.cs" />
     <Compile Include="SPEditorAddonDrawer.cs" />
     <Compile Include="SPEditorGUI.cs" />

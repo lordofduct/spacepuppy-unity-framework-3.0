@@ -104,6 +104,25 @@ namespace com.spacepuppyeditor.PropertyAttributeDrawers
                 _childPropertyAsEntry = attrib.ChildPropertyToDrawAsElementEntry;
                 _elementLabelFormatString = attrib.ElementLabelFormatString;
                 _elementPadding = attrib.ElementPadding;
+                if (!string.IsNullOrEmpty(attrib.OnAddCallback))
+                {
+                    _addCallback = (lst) =>
+                    {
+                        lst.serializedProperty.arraySize++;
+                        lst.index = lst.serializedProperty.arraySize - 1;
+                        lst.serializedProperty.serializedObject.ApplyModifiedProperties();
+
+                        var prop = lst.serializedProperty.GetArrayElementAtIndex(lst.index);
+                        var obj = EditorHelper.GetTargetObjectOfProperty(prop);
+                        obj = com.spacepuppy.Dynamic.DynamicUtil.InvokeMethod(lst.serializedProperty.serializedObject.targetObject, attrib.OnAddCallback, obj);
+                        EditorHelper.SetTargetObjectOfProperty(prop, obj);
+                        lst.serializedProperty.serializedObject.Update();
+                    };
+                }
+                else
+                {
+                    _addCallback = null;
+                }
             }
 
             _label = label;

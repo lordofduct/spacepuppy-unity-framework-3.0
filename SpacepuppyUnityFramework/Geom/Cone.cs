@@ -3,34 +3,27 @@ using System.Collections.Generic;
 
 namespace com.spacepuppy.Geom
 {
-    public struct Cylinder : IGeom
+
+    public struct Cone : IGeom
     {
 
         #region Fields
 
         private Vector3 _start;
         private Vector3 _end;
-        private float _rad;
+        private float _startRad;
+        private float _endRad;
 
         #endregion
 
         #region CONSTRUCTOR
 
-        public Cylinder(Vector3 start, Vector3 end, float radius)
+        public Cone(Vector3 start, Vector3 end, float startRadius, float endRadius)
         {
             _start = start;
             _end = end;
-            _rad = radius;
-        }
-
-        public Cylinder(Vector3 center, Vector3 up, float height, float radius)
-        {
-            var h = (height - (radius * 2.0f)) / 2.0f;
-            var change = up.normalized * h;
-
-            _start = center - change;
-            _end = center + change;
-            _rad = radius;
+            _startRad = startRadius;
+            _endRad = endRadius;
         }
 
         #endregion
@@ -49,10 +42,16 @@ namespace com.spacepuppy.Geom
             set { _end = value; }
         }
 
-        public float Radius
+        public float StartRadius
         {
-            get { return _rad; }
-            set { _rad = value; }
+            get { return _startRad; }
+            set { _startRad = value; }
+        }
+
+        public float EndRadius
+        {
+            get { return _endRad; }
+            set { _endRad = value; }
         }
 
         public float Height
@@ -101,8 +100,6 @@ namespace com.spacepuppy.Geom
 
         #endregion
 
-
-
         #region IGeom Interface
 
         public void Move(Vector3 mv)
@@ -143,29 +140,16 @@ namespace com.spacepuppy.Geom
 
         public bool Contains(Vector3 pos)
         {
-            var rail = _end - _start;
-            var rod = pos - _start;
-            var dot = Vector3.Dot(rod, rail);
-            var sqrRailLength = rail.sqrMagnitude;
-
-            if (dot < 0f || dot > sqrRailLength)
-            {
-                return false;
-            }
-            else
-            {
-                if (rod.sqrMagnitude - dot * dot / sqrRailLength > _rad * _rad)
-                    return false;
-                else
-                    return true;
-            }
+            return ContainsPoint(_start, _end, _startRad, _endRad, pos);
         }
 
         #endregion
 
+
+
         #region Static Utils
 
-        public static bool ContainsPoint(Vector3 start, Vector3 end, float radius, Vector3 pnt)
+        public static bool ContainsPoint(Vector3 start, Vector3 end, float startRadius, float endRadius, Vector3 pnt)
         {
             var rail = end - start;
             var rod = pnt - start;
@@ -178,6 +162,12 @@ namespace com.spacepuppy.Geom
             }
             else
             {
+                float radius;
+                if (sqrRailLength < 0.0001f)
+                    radius = Mathf.Max(startRadius, endRadius);
+                else
+                    radius = startRadius + (endRadius - startRadius) * dot / sqrRailLength;
+
                 if (rod.sqrMagnitude - dot * dot / sqrRailLength > radius * radius)
                     return false;
                 else
@@ -185,27 +175,8 @@ namespace com.spacepuppy.Geom
             }
         }
 
-        public static bool ContainsPoint(Vector3 start, Vector3 end, float radius, float innerRadius, Vector3 pnt)
-        {
-            var rail = end - start;
-            var rod = pnt - start;
-            var dot = Vector3.Dot(rod, rail);
-            var sqrRailLength = rail.sqrMagnitude;
-
-            if (dot < 0f || dot > sqrRailLength)
-            {
-                return false;
-            }
-            else
-            {
-                float radialDistSqr = rod.sqrMagnitude - dot * dot / sqrRailLength;
-                if (radialDistSqr > radius * radius || radialDistSqr < innerRadius * innerRadius)
-                    return false;
-                else
-                    return true;
-            }
-        }
-
         #endregion
+
     }
+
 }

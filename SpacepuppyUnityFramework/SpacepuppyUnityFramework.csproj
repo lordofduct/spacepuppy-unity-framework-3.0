@@ -105,6 +105,7 @@
     <Compile Include="Geom\AxisInterval.cs" />
     <Compile Include="Geom\Box.cs" />
     <Compile Include="Geom\Capsule.cs" />
+    <Compile Include="Geom\Cone.cs" />
     <Compile Include="Geom\Cylinder.cs" />
     <Compile Include="Geom\Enums.cs" />
     <Compile Include="Geom\GeomUtil.cs" />

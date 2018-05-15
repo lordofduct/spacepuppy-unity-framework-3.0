@@ -259,28 +259,7 @@ namespace com.spacepuppy.Utils
         }
 
         #endregion
-
-        #region CompareName
-
-        public static bool CompareName(this GameObject go, string name)
-        {
-            if (go == null) return false;
-
-            return go.name == name;
-        }
-
-        public static bool CompareName(this Component c, string name)
-        {
-            if (c == null) return false;
-
-            if (c is SPEntity)
-                return (c as SPEntity).CompareName(name);
-            else
-                return c.name == name;
-        }
         
-        #endregion
-
         #region Find Root
         
         /// <summary>

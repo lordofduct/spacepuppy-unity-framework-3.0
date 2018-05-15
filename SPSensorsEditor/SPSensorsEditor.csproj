@@ -47,6 +47,7 @@
       <Link>Properties\AssemblyVersionInfo.cs</Link>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Sensors\SensorRenderUtil.cs" />
     <Compile Include="Sensors\Visual\RightCylindricalVisualSensorInspector.cs" />
     <Compile Include="Sensors\Visual\SphericalVisionVisualSensorInspector.cs" />
     <Compile Include="Sensors\Visual\TunnelVisionVisualSensorInspector.cs" />

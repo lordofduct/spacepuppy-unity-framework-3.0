@@ -66,7 +66,7 @@ namespace com.spacepuppy.Utils
         #endregion
 
         #region Find Methods
-
+        
         public static UnityEngine.Object Find(SearchBy search, string query)
         {
             switch(search)

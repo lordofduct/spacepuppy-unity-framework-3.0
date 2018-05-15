@@ -86,7 +86,7 @@ namespace com.spacepuppy.Spawn.Events
             if (_prefabs == null) return null;
             for (int i = 0; i < _prefabs.Count; i++)
             {
-                if (_prefabs[i].Prefab != null && _prefabs[i].Prefab.name == name) return this.Spawn(_prefabs[i]);
+                if (_prefabs[i].Prefab != null && _prefabs[i].Prefab.CompareName(name)) return this.Spawn(_prefabs[i]);
             }
             return null;
         }

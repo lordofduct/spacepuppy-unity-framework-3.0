@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 
+using com.spacepuppy.Utils;
+
 namespace com.spacepuppy.Sensors
 {
 
@@ -34,7 +36,7 @@ namespace com.spacepuppy.Sensors
 
         public Sensor GetSensor(string name)
         {
-            return (from s in _lst where s.name == name select s).FirstOrDefault();
+            return (from s in _lst where s.CompareName(name) select s).FirstOrDefault();
         }
 
         public IAspect Sense()
@@ -89,7 +91,7 @@ namespace com.spacepuppy.Sensors
 
         public IEnumerable<IAspect> SenseAll(string sensorName)
         {
-            return (from s in _lst where s.name == sensorName from a in s.SenseAll() select a).Distinct();
+            return (from s in _lst where s.CompareName(sensorName) from a in s.SenseAll() select a).Distinct();
         }
 
         public IEnumerable<IAspect> SenseAll(params string[] sensorNames)

@@ -72,6 +72,7 @@
     <Compile Include="Collections\PrimeHelper.cs" />
     <Compile Include="Collections\ReusableStringReader.cs" />
     <Compile Include="Collections\TempCollection.cs" />
+    <Compile Include="Collections\TempDictionary.cs" />
     <Compile Include="Collections\TempHashSet.cs" />
     <Compile Include="Collections\TempList.cs" />
     <Compile Include="Collections\TrackablObjectCachePool.cs" />
@@ -127,6 +128,7 @@
     <Compile Include="IImmediatelyResumingYieldInstruction.cs" />
     <Compile Include="IKillableEntity.cs" />
     <Compile Include="IMixin.cs" />
+    <Compile Include="INameable.cs" />
     <Compile Include="IPausibleYieldInstruction.cs" />
     <Compile Include="IPooledYieldInstruction.cs" />
     <Compile Include="IProgressingYieldInstruction.cs" />
@@ -184,6 +186,7 @@
     <Compile Include="Utils\MathUtil.cs" />
     <Compile Include="Utils\Messaging.cs" />
     <Compile Include="Utils\MouseUtil.cs" />
+    <Compile Include="Utils\NameCache.cs" />
     <Compile Include="Utils\ObjUtil.cs" />
     <Compile Include="Utils\PrimitiveUtil.cs" />
     <Compile Include="Utils\QuaternionUtil.cs" />

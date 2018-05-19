@@ -35,7 +35,7 @@ namespace com.spacepuppy.Events
             {
                 float cache = targ.volume;
                 SPTween.Tween(targ)
-                       .To("volume", 0f, _fadeOutDur)
+                       .To("volume", _fadeOutDur, 0f)
                        .OnFinish((s, e) =>
                        {
                            targ.Stop();

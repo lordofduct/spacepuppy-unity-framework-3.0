@@ -40,9 +40,13 @@ namespace com.spacepuppy
 
         #region CONSTRUCTOR
 
-        protected override void Awake()
+        public SPEntity()
         {
             _nameCache = new NameCache.UnityObjectNameCache(this);
+        }
+
+        protected override void Awake()
+        {
             this.AddTag(SPConstants.TAG_ROOT);
             Pool.AddReference(this);
 

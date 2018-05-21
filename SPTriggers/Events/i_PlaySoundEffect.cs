@@ -133,7 +133,7 @@ namespace com.spacepuppy.Events
             {
                 if (this._delay > 0)
                 {
-                    this.Invoke(() =>
+                    this.InvokeGuaranteed(() =>
                     {
                         if (src != null)
                         {

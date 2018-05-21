@@ -219,6 +219,14 @@ namespace com.spacepuppy.Utils
             return StartRadicalCoroutine(behaviour, RadicalInvokeRedirect(method, delay, -1f, time), disableMode);
         }
 
+        public static IRadicalWaitHandle InvokeGuaranteed(this MonoBehaviour behaviour, System.Action method, float delay, ITimeSupplier time = null)
+        {
+            if (method == null) throw new System.ArgumentNullException("method");
+            //return StartRadicalCoroutine(GameLoop.Hook, RadicalInvokeRedirect(method, delay, -1f, time));
+
+            return InvokeHandle.Begin(GameLoop.UpdatePump, method, delay, time);
+        }
+
         public static RadicalCoroutine InvokeRepeating(this MonoBehaviour behaviour, System.Action method, float delay, float repeatRate, ITimeSupplier time = null, RadicalCoroutineDisableMode disableMode = RadicalCoroutineDisableMode.CancelOnDisable)
         {
             if (behaviour == null) throw new System.ArgumentNullException("behaviour");
@@ -258,7 +266,11 @@ namespace com.spacepuppy.Utils
 
         internal static System.Collections.IEnumerator RadicalInvokeRedirect(System.Action method, float delay, float repeatRate = -1f, ITimeSupplier time = null)
         {
-            yield return WaitForDuration.Seconds(delay, time);
+            if (delay < SPConstants.MIN_FRAME_DELTA)
+                yield return null;
+            else if (delay > 0f)
+                yield return WaitForDuration.Seconds(delay, time);
+
             if (repeatRate < 0f)
             {
                 method();

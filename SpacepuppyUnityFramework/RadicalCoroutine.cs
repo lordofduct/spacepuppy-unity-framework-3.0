@@ -1284,7 +1284,7 @@ namespace com.spacepuppy
 
         }
 
-        internal class EnumWrapper : IRadicalYieldInstruction, IRadicalEnumerator, IPooledYieldInstruction
+        private class EnumWrapper : IRadicalYieldInstruction, IRadicalEnumerator, IPooledYieldInstruction
         {
 
             private static com.spacepuppy.Collections.ObjectCachePool<EnumWrapper> _pool = new com.spacepuppy.Collections.ObjectCachePool<EnumWrapper>(-1, () => new EnumWrapper());
@@ -1320,6 +1320,7 @@ namespace com.spacepuppy
                 else
                 {
                     yieldObject = null;
+                    if (_e is System.IDisposable) (_e as System.IDisposable).Dispose();
                     _e = null;
                     return false;
                 }
@@ -1426,8 +1427,8 @@ namespace com.spacepuppy
 
                 if (old != null)
                 {
-                    if (old is IPooledYieldInstruction) (old as IPooledYieldInstruction).Dispose();
                     if (old is IImmediatelyResumingYieldInstruction) (old as IImmediatelyResumingYieldInstruction).Signal -= _owner.OnImmediatelyResumingYieldInstructionSignaled;
+                    if (old is IPooledYieldInstruction) (old as IPooledYieldInstruction).Dispose();
                 }
 
                 return _currentOperation;
@@ -1437,9 +1438,8 @@ namespace com.spacepuppy
             {
                 if (_currentOperation != null)
                 {
-                    if (_currentOperation is IPooledYieldInstruction) (_currentOperation as IPooledYieldInstruction).Dispose();
                     if (_currentOperation is IImmediatelyResumingYieldInstruction) (_currentOperation as IImmediatelyResumingYieldInstruction).Signal -= _owner.OnImmediatelyResumingYieldInstructionSignaled;
-                    if (_currentOperation is System.IDisposable) (_currentOperation as System.IDisposable).Dispose();
+                    if (_currentOperation is IPooledYieldInstruction) (_currentOperation as IPooledYieldInstruction).Dispose();
                 }
 
                 if (_stack != null && _stack.Count > 0)
@@ -1447,9 +1447,8 @@ namespace com.spacepuppy
                     var e = _stack.GetEnumerator();
                     while (e.MoveNext())
                     {
-                        if (e.Current is IPooledYieldInstruction) (e.Current as IPooledYieldInstruction).Dispose();
                         if (e.Current is IImmediatelyResumingYieldInstruction) (e.Current as IImmediatelyResumingYieldInstruction).Signal -= _owner.OnImmediatelyResumingYieldInstructionSignaled;
-                        if (e.Current is System.IDisposable) (e.Current as System.IDisposable).Dispose();
+                        if (e.Current is IPooledYieldInstruction) (e.Current as IPooledYieldInstruction).Dispose();
                     }
                     _stack.Clear();
                 }
@@ -1480,8 +1479,8 @@ namespace com.spacepuppy
                 var old = _stack.Pop();
                 if (old != null)
                 {
-                    if (old is IPooledYieldInstruction) (old as IPooledYieldInstruction).Dispose();
                     if (old is IImmediatelyResumingYieldInstruction) (old as IImmediatelyResumingYieldInstruction).Signal -= _owner.OnImmediatelyResumingYieldInstructionSignaled;
+                    if (old is IPooledYieldInstruction) (old as IPooledYieldInstruction).Dispose();
                 }
                 return old;
             }
@@ -1493,8 +1492,8 @@ namespace com.spacepuppy
                     var e = _stack.GetEnumerator();
                     while (e.MoveNext())
                     {
-                        if (e.Current is IPooledYieldInstruction) (e.Current as IPooledYieldInstruction).Dispose();
                         if (e.Current is IImmediatelyResumingYieldInstruction) (e.Current as IImmediatelyResumingYieldInstruction).Signal -= _owner.OnImmediatelyResumingYieldInstructionSignaled;
+                        if (e.Current is IPooledYieldInstruction) (e.Current as IPooledYieldInstruction).Dispose();
                     }
                     _stack.Clear();
                 }

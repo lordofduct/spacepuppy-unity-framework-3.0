@@ -65,7 +65,7 @@ namespace com.spacepuppy.Events
 
                 _coolingDown = true;
                 //use global incase this gets disabled
-                GameLoop.Hook.Invoke(() =>
+                this.InvokeGuaranteed(() =>
                 {
                     _coolingDown = false;
                 }, _cooldownInterval);

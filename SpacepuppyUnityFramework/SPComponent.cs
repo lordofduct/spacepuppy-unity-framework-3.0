@@ -22,14 +22,14 @@ namespace com.spacepuppy
 
         #endregion
 
-#region Fields
+        #region Fields
         
         [System.NonSerialized()]
         private bool _started = false;
 
-#endregion
+        #endregion
 
-#region CONSTRUCTOR
+        #region CONSTRUCTOR
 
         protected virtual void Awake()
         {
@@ -57,18 +57,32 @@ namespace com.spacepuppy
             if (this.ComponentDestroyed != null) this.ComponentDestroyed(this, System.EventArgs.Empty);
         }
 
-#endregion
+        #endregion
 
-#region Properties
+        #region Properties
 
         /// <summary>
         /// Start has been called on this component.
         /// </summary>
         public bool started { get { return _started; } }
-        
+
         #endregion
-        
-#region IComponent Interface
+
+        #region Methods
+
+        public new void StopAllCoroutines()
+        {
+            RadicalCoroutineManager manager = this.GetComponent<RadicalCoroutineManager>();
+            if (manager != null)
+            {
+                manager.PurgeCoroutines(this);
+            }
+            base.StopAllCoroutines();
+        }
+
+        #endregion
+
+        #region IComponent Interface
 
         bool IComponent.enabled
         {
@@ -89,7 +103,7 @@ namespace com.spacepuppy
 
 #endregion
 
-#region ISPDisposable Interface
+        #region ISPDisposable Interface
     
         bool ISPDisposable.IsDisposed
         {
@@ -104,7 +118,7 @@ namespace com.spacepuppy
             ObjUtil.SmartDestroy(this);
         }
 
-#endregion
+        #endregion
 
     }
 

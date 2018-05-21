@@ -31,7 +31,7 @@ namespace com.spacepuppy.Events
         {
             if (_delay > 0f)
             {
-                this.Invoke(() =>
+                this.InvokeGuaranteed(() =>
                 {
                     this.ActivateTrigger(this);
                 }, _delay);

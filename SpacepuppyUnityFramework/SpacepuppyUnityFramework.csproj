@@ -182,6 +182,7 @@
     <Compile Include="Utils\CoroutineUtil.cs" />
     <Compile Include="Utils\EnumUtil.cs" />
     <Compile Include="Utils\GameObjUtil.cs" />
+    <Compile Include="Utils\InvokeHandle.cs" />
     <Compile Include="Utils\LayerUtil.cs" />
     <Compile Include="Utils\MathUtil.cs" />
     <Compile Include="Utils\Messaging.cs" />

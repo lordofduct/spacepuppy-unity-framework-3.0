@@ -19,12 +19,12 @@ namespace com.spacepuppyeditor.Base.Project
 
         static TagDataInspector()
         {
-            EditorApplication.playmodeStateChanged -= Touch;
-            EditorApplication.playmodeStateChanged += Touch;
-            EditorCoroutine.Invoke(Touch, 0f);
+            EditorApplication.playModeStateChanged -= Touch;
+            EditorApplication.playModeStateChanged += Touch;
+            EditorCoroutine.Invoke(() => Touch(PlayModeStateChange.EnteredEditMode), 0f);
         }
 
-        public static void Touch()
+        public static void Touch(PlayModeStateChange e)
         {
             var asset = TagData.Asset;
             if (asset == null) return;

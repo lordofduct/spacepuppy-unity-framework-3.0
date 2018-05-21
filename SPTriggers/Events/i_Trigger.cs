@@ -7,17 +7,11 @@ using com.spacepuppy.Utils;
 namespace com.spacepuppy.Events
 {
 
-    public class i_Trigger : SPComponent, ITriggerable, IObservableTrigger
+    public class i_Trigger : AutoTriggerable, IObservableTrigger
     {
 
         #region Fields
-
-        [SerializeField()]
-        private int _order;
-
-        [SerializeField()]
-        private ActivateEvent _activateOn = ActivateEvent.None;
-
+        
         [SerializeField()]
         private SPEvent _trigger;
 
@@ -31,50 +25,12 @@ namespace com.spacepuppy.Events
         #endregion
 
         #region CONSTRUCTOR
-
-        protected override void Awake()
-        {
-            base.Awake();
-
-            if ((_activateOn & ActivateEvent.Awake) != 0)
-            {
-                this.ActivateTrigger(null);
-            }
-        }
-
-        protected override void Start()
-        {
-            base.Start();
-
-            if ((_activateOn & ActivateEvent.OnStart) != 0 || (_activateOn & ActivateEvent.OnEnable) != 0)
-            {
-                this.ActivateTrigger(null);
-            }
-        }
-
-        protected override void OnEnable()
-        {
-            base.OnEnable();
-
-            if ((_activateOn & ActivateEvent.OnStart) != 0 && !this.started) return;
-
-            if ((_activateOn & ActivateEvent.OnEnable) != 0)
-            {
-                this.ActivateTrigger(null);
-            }
-        }
-
+        
         #endregion
 
         #region Properties
-
-        public ActivateEvent ActivateOn
-        {
-            get { return _activateOn; }
-            set { _activateOn = value; }
-        }
-
-        public SPEvent Trigger
+        
+        public SPEvent TriggerEvent
         {
             get
             {
@@ -109,23 +65,8 @@ namespace com.spacepuppy.Events
         #endregion
 
         #region ITriggerableMechanism Interface
-
-        public int Order
-        {
-            get { return _order; }
-        }
-
-        public bool CanTrigger
-        {
-            get { return this.isActiveAndEnabled; }
-        }
-
-        public void ActivateTrigger()
-        {
-            this.ActivateTrigger(null);
-        }
-
-        public bool ActivateTrigger(object arg)
+        
+        public override bool Trigger(object sender, object arg)
         {
             if (!this.CanTrigger) return false;
 
@@ -142,11 +83,6 @@ namespace com.spacepuppy.Events
             }
 
             return true;
-        }
-
-        bool ITriggerable.Trigger(object sender, object arg)
-        {
-            return this.ActivateTrigger(arg);
         }
 
         #endregion

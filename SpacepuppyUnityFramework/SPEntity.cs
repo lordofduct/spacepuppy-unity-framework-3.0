@@ -10,9 +10,6 @@ namespace com.spacepuppy
 
     /// <summary>
     /// Place on the root of a GameObject hierarchy, or a prefab, to signify that it is a complete entity.
-    /// 
-    /// If this class is derived from, make sure to set its execution order to the last executed script! 
-    /// Failure to do so will result in IEntityAwakeHandler receivers to be messaged out of order.
     /// </summary>
     [DisallowMultipleComponent()]
     public class SPEntity : SPComponent, INameable
@@ -54,7 +51,15 @@ namespace com.spacepuppy
 
             _isAwake = true;
 
-            Messaging.Broadcast<IEntityAwakeHandler>(this.gameObject, (h) => h.OnEntityAwake(this));
+            //Messaging.Broadcast<IEntityAwakeHandler>(this.gameObject, (h) => h.OnEntityAwake(this), true, true);
+            var token = Messaging.CreateBroadcastToken<IEntityAwakeHandler>(this.gameObject, true, true);
+            if (token != null && token.Count > 0)
+            {
+                com.spacepuppy.Hooks.EarlyStartHook.Invoke(this.gameObject, () =>
+                {
+                    token.Invoke((h) => h.OnEntityAwake(this));
+                });
+            }
         }
         
         protected override void OnDestroy()

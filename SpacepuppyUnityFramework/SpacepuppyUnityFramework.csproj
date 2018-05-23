@@ -120,6 +120,7 @@
     <Compile Include="Geom\Trans.cs" />
     <Compile Include="Geom\XYPlanarSurface.cs" />
     <Compile Include="Hooks\EarlyExecutionUpdateEventHooks.cs" />
+    <Compile Include="Hooks\EarlyStartHook.cs" />
     <Compile Include="Hooks\TardyExecutionUpdateEventHooks.cs" />
     <Compile Include="Hooks\UpdateEventHooks.cs" />
     <Compile Include="IComponent.cs" />

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using com.spacepuppy.Utils;
 
 namespace com.spacepuppy.Collections
 {
@@ -14,7 +15,7 @@ namespace com.spacepuppy.Collections
 
         #region Fields
         
-        private Bag<T> _inactive;
+        private HashSet<T> _inactive;
 
         private int _cacheSize;
         private Func<T> _constructorDelegate;
@@ -28,21 +29,24 @@ namespace com.spacepuppy.Collections
         public ObjectCachePool(int cacheSize)
         {
             _cacheSize = cacheSize;
-            _inactive = (_cacheSize <= 0) ? new Bag<T>() : new Bag<T>(_cacheSize);
+            //_inactive = (_cacheSize <= 0) ? new Bag<T>() : new Bag<T>(_cacheSize);
+            _inactive = new HashSet<T>();
             _constructorDelegate = this.SimpleConstructor;
         }
 
         public ObjectCachePool(int cacheSize, Func<T> constructorDelegate)
         {
             _cacheSize = cacheSize;
-            _inactive = (_cacheSize <= 0) ? new Bag<T>() : new Bag<T>(_cacheSize);
+            //_inactive = (_cacheSize <= 0) ? new Bag<T>() : new Bag<T>(_cacheSize);
+            _inactive = new HashSet<T>();
             _constructorDelegate = (constructorDelegate != null) ? constructorDelegate : this.SimpleConstructor;
         }
 
         public ObjectCachePool(int cacheSize, Func<T> constructorDelegate, Action<T> resetObjectDelegate)
         {
             _cacheSize = cacheSize;
-            _inactive = (_cacheSize <= 0) ? new Bag<T>() : new Bag<T>(_cacheSize);
+            //_inactive = (_cacheSize <= 0) ? new Bag<T>() : new Bag<T>(_cacheSize);
+            _inactive = new HashSet<T>();
             _constructorDelegate = (constructorDelegate != null) ? constructorDelegate : this.SimpleConstructor;
             _resetObjectDelegate = resetObjectDelegate;
         }
@@ -50,7 +54,8 @@ namespace com.spacepuppy.Collections
         public ObjectCachePool(int cacheSize, Func<T> constructorDelegate, Action<T> resetObjectDelegate, bool resetOnGet)
         {
             _cacheSize = cacheSize;
-            _inactive = (_cacheSize <= 0) ? new Bag<T>() : new Bag<T>(_cacheSize);
+            //_inactive = (_cacheSize <= 0) ? new Bag<T>() : new Bag<T>(_cacheSize);
+            _inactive = new HashSet<T>();
             _constructorDelegate = (constructorDelegate != null) ? constructorDelegate : this.SimpleConstructor;
             _resetObjectDelegate = resetObjectDelegate;
             _resetOnGet = resetOnGet;
@@ -144,7 +149,7 @@ namespace com.spacepuppy.Collections
             {
                 if(_inactive.Count < cacheSize)
                 {
-                    _inactive.Push(obj);
+                    _inactive.Add(obj);
                     return true;
                 }
             }

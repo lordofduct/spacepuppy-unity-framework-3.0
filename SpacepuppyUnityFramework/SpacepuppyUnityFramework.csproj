@@ -149,6 +149,7 @@
     <Compile Include="Project\CustomTimeLayersData.cs" />
     <Compile Include="Project\GameSettings.cs" />
     <Compile Include="Project\IAssetBundle.cs" />
+    <Compile Include="Project\SerializableInterfaceRef.cs" />
     <Compile Include="Project\TagData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Content Include="Properties\AssemblyVersionInfo.tt">

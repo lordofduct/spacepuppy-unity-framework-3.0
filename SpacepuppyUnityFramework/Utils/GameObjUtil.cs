@@ -447,6 +447,45 @@ namespace com.spacepuppy.Utils
             return null;
         }
 
+
+
+        public static string GetPathNameRelativeTo(this GameObject go, Transform parent)
+        {
+            if (go == null) return null;
+            return GetPathNameRelativeTo(go.transform, parent);
+        }
+
+        public static string GetPathNameRelativeTo(this Transform t, Transform parent)
+        {
+            if (t == null) return null;
+            if (parent != null && !t.IsChildOf(parent)) return null;
+
+            var bldr = StringUtil.GetTempStringBuilder();
+            bldr.Append(t.name);
+            t = t.parent;
+            while (t != parent)
+            {
+                bldr.Insert(0, '/');
+                bldr.Insert(0, t.name);
+                t = t.parent;
+            }
+            return StringUtil.Release(bldr);
+        }
+
+        public static string GetFullPathName(this Transform t)
+        {
+            var bldr = StringUtil.GetTempStringBuilder();
+            bldr.Append(t.name);
+            t = t.parent;
+            while (t != null)
+            {
+                bldr.Insert(0, @"\");
+                bldr.Insert(0, t.name);
+                t = t.parent;
+            }
+            return StringUtil.Release(bldr);
+        }
+
         #endregion
 
         #region Find By Tags

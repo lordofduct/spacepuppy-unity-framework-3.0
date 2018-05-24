@@ -31,7 +31,7 @@ namespace com.spacepuppy.Anim.Legacy
         public const string PROP_BLENDMODE = "_blendMode";
         public const string PROP_TIMESUPPLIER = "_timeSupplier";
         public const string PROP_SCALEDDURATION = "ScaledDuration";
-        public const string PROP_MASKS = "_masks";
+        public const string PROP_MASK = "_mask";
 
         #region Fields
         
@@ -55,7 +55,7 @@ namespace com.spacepuppy.Anim.Legacy
 
 
         [SerializeField()]
-        private MaskCollection _masks;
+        private SPAnimMaskSerializedRef _mask;
 
         [System.NonSerialized()]
         private string _id;
@@ -95,8 +95,8 @@ namespace com.spacepuppy.Anim.Legacy
         {
             _name = name;
             _clip = null;
-            _masks = new MaskCollection();
             _timeSupplier = new SPTime();
+            _mask = new SPAnimMaskSerializedRef();
             //_firstFrame = 0;
             //_lastFrame = -1;
         }
@@ -105,8 +105,8 @@ namespace com.spacepuppy.Anim.Legacy
         {
             _name = name;
             _clip = clip;
-            _masks = new MaskCollection();
             _timeSupplier = new SPTime();
+            _mask = new SPAnimMaskSerializedRef();
             //_firstFrame = 0;
             //_lastFrame = -1;
         }
@@ -115,8 +115,8 @@ namespace com.spacepuppy.Anim.Legacy
         {
             _name = name;
             _clip = clip;
-            _masks = new MaskCollection();
             _timeSupplier = new SPTime(timeSupplier);
+            _mask = new SPAnimMaskSerializedRef();
             //_firstFrame = 0;
             //_lastFrame = -1;
         }
@@ -153,7 +153,6 @@ namespace com.spacepuppy.Anim.Legacy
                 _state.layer = _layer;
                 _state.wrapMode = _wrapMode;
                 _state.blendMode = _blendMode;
-                _masks.SetState(_state);
             }
         }
 
@@ -261,9 +260,10 @@ namespace com.spacepuppy.Anim.Legacy
             }
         }
 
-        public MaskCollection Masks
+        public ISPAnimationMask Mask
         {
-            get { return _masks; }
+            get { return _mask.Value; }
+            set { _mask.Value = value; }
         }
 
         //***SEE NOTES IN CLASS DESCRIPTION
@@ -371,7 +371,7 @@ namespace com.spacepuppy.Anim.Legacy
                 a.Layer = _layer;
                 a.WrapMode = _wrapMode;
                 a.BlendMode = _blendMode;
-                if (_masks.Count > 0) a.Masks.Copy(_masks);
+                a.Mask = _mask.Value;
                 if (_timeSupplier.IsCustom) a.TimeSupplier = _timeSupplier.TimeSupplier as ITimeSupplier;
                 return a;
             }
@@ -541,7 +541,7 @@ namespace com.spacepuppy.Anim.Legacy
             }
             _controller = null;
             _state = null;
-            _masks.SetState(null);
+            _mask.Value = null;
         }
 
         #endregion

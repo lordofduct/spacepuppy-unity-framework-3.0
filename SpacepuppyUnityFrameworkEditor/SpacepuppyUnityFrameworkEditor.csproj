@@ -66,6 +66,7 @@
     <Compile Include="Base\Events\SPEventPropertyDrawer.cs" />
     <Compile Include="Base\Geom\IntervalInspector.cs" />
     <Compile Include="Base\Project\CustomTimeLayersDataInspector.cs" />
+    <Compile Include="Base\Project\SerializableInterfaceRefPropertyDrawer.cs" />
     <Compile Include="Base\Project\TagDataInspector.cs" />
     <Compile Include="Base\ProxyPropertyDrawer.cs" />
     <Compile Include="Base\ShortUidPropertyDrawer.cs" />

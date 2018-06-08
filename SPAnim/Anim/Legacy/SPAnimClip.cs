@@ -19,6 +19,13 @@ namespace com.spacepuppy.Anim.Legacy
     /// 
     /// Furthermore, in regards of scaled time layers. When calling to play an animation 'directly' on this clip, it will only respect the timescale of the 'normal' time. The value exists solely 
     /// for when calling 'PlayQueued', as this is the preferred way of playing animations.
+    /// 
+    /// About the Mask!
+    /// If you plan to modify the Mask associated with this, make sure to set the Mask property null THEN make the changes THEN set the Mask property back to the updated mask.
+    /// This has to occur because there is no way for us to 'clear' all masks from an AnimationState. So instead when you set Mask to null we call Redact on the mask removing the known transforms.
+    /// We can thank Unity for this ass backwards way of doing things.
+    /// 
+    /// Honestly, you shouldn't be changing masks at runtime that are already assigned to an animation. Create a new mask if you really need to.
     /// </remarks>
     [System.Serializable()]
     public class SPAnimClip : ISPDisposable
@@ -153,6 +160,7 @@ namespace com.spacepuppy.Anim.Legacy
                 _state.layer = _layer;
                 _state.wrapMode = _wrapMode;
                 _state.blendMode = _blendMode;
+                if (this.Mask != null) this.Mask.Apply(_controller, _state);
             }
         }
 
@@ -237,6 +245,7 @@ namespace com.spacepuppy.Anim.Legacy
         public ITimeSupplier TimeSupplier
         {
             get { return _timeSupplier.TimeSupplier; }
+            set { _timeSupplier.TimeSupplier = value; }
         }
 
         /// <summary>
@@ -262,8 +271,25 @@ namespace com.spacepuppy.Anim.Legacy
 
         public ISPAnimationMask Mask
         {
-            get { return _mask.Value; }
-            set { _mask.Value = value; }
+            get
+            {
+                return _mask.Value;
+            }
+            set
+            {
+                if (_mask.Value == value) return;
+
+                if (_controller != null && _mask.Value != null)
+                {
+                    _mask.Value.Redact(_controller, _state);
+                    if (value != null) value.Apply(_controller, _state);
+                    _mask.Value = value;
+                }
+                else
+                {
+                    _mask.Value = value;
+                }
+            }
         }
 
         //***SEE NOTES IN CLASS DESCRIPTION

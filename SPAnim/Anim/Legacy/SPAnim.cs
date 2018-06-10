@@ -20,7 +20,7 @@ namespace com.spacepuppy.Anim.Legacy
         private int _layer;
         private WrapMode _wrapMode;
         private AnimationBlendMode _blendMode = AnimationBlendMode.Blend;
-        private MaskCollection _masks = new MaskCollection();
+        private ISPAnimationMask _mask;
         private ITimeSupplier _timeSupplier;
 
         private AnimationState _state;
@@ -98,7 +98,11 @@ namespace com.spacepuppy.Anim.Legacy
             }
         }
 
-        public MaskCollection Masks { get { return _masks; } }
+        public ISPAnimationMask Mask
+        {
+            get { return _mask; }
+            set { _mask = value; }
+        }
 
         public ITimeSupplier TimeSupplier
         {
@@ -245,7 +249,7 @@ namespace com.spacepuppy.Anim.Legacy
             _state.layer = _layer;
             _state.wrapMode = _wrapMode;
             _state.blendMode = _blendMode;
-            _masks.Apply(_state);
+            if (_mask != null) _mask.Apply(_controller, _state);
             this.RegisterTimeScaleChangedEvent();
         }
         
@@ -260,7 +264,7 @@ namespace com.spacepuppy.Anim.Legacy
             _state.layer = _layer;
             _state.wrapMode = _wrapMode;
             _state.blendMode = _blendMode;
-            _masks.Apply(_state);
+            if (_mask != null) _mask.Apply(_controller, _state);
             this.RegisterTimeScaleChangedEvent();
         }
 
@@ -359,7 +363,7 @@ namespace com.spacepuppy.Anim.Legacy
             a._layer = _layer;
             a._wrapMode = _wrapMode;
             a._blendMode = _blendMode;
-            if (_masks.Count > 0) a._masks.Copy(_masks);
+            a._mask = _mask;
             a._timeSupplier = _timeSupplier;
             return a;
         }
@@ -397,7 +401,7 @@ namespace com.spacepuppy.Anim.Legacy
             _layer = 0;
             _wrapMode = UnityEngine.WrapMode.Default;
             _blendMode = AnimationBlendMode.Blend;
-            _masks.Clear();
+            _mask = null;
             this.UnregisterTimeScaleChangedEvent();
             _timeSupplier = null;
 

@@ -56,6 +56,7 @@
     <Compile Include="SPInput\MappedInputDevice.cs" />
     <Compile Include="SPInput\MappedInputSignatureCollection.cs" />
     <Compile Include="SPInput\MergedInputSignature.cs" />
+    <Compile Include="SPInput\RepeatingButtonInputSignature.cs" />
     <Compile Include="SPInput\SPInputManager.cs" />
     <Compile Include="SPInput\IInputSignature.cs" />
     <Compile Include="SPInput\InputSignatureCollection.cs" />

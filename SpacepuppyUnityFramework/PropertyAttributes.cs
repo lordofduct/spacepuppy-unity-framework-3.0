@@ -62,12 +62,20 @@ namespace com.spacepuppy
 
     }
 
+    [System.AttributeUsage(System.AttributeTargets.Class, AllowMultiple = false, Inherited = false)]
+    public class ConstantlyRepaintEditorAttribute : System.Attribute
+    {
+        public bool RuntimeOnly;
+    }
+
     #endregion
 
     #region Property Drawer Attributes
 
     public class DisplayFlatAttribute : SPPropertyAttribute
     {
+
+        public bool CanShrinkAndExpand;
 
     }
 
@@ -241,6 +249,20 @@ namespace com.spacepuppy
         /// If DrawElementAtBottom is true, this child element can be displayed as the modifiable entry in the reorderable list.
         /// </summary>
         public string ChildPropertyToDrawAsElementEntry;
+
+        /// <summary>
+        /// A method on the serialized object that is called when a new entry is added to the list/array. Should accept the list member type 
+        /// as a parameter, and then also return it (used for updating).
+        /// 
+        /// Like:
+        /// object OnObjectAddedToList(object obj)
+        /// </summary>
+        public string OnAddCallback;
+
+        /// <summary>
+        /// If the array/list accepts UnityEngine.Objects, this will allow the dragging of objects onto the inspector to auto add without needing to click the + button.
+        /// </summary>
+        public bool AllowDragAndDrop = true;
 
         public ReorderableArrayAttribute()
         {

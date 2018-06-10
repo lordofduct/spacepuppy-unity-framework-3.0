@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 using com.spacepuppy;
+using com.spacepuppy.Collections;
 using com.spacepuppy.Events;
 using com.spacepuppy.Utils;
 
@@ -207,6 +208,30 @@ namespace com.spacepuppyeditor.Base.Events
                 property.serializedObject.ApplyModifiedProperties();
             if (_targetList.index >= _targetList.count) _targetList.index = -1;
 
+            var ev = Event.current;
+            if (ev != null)
+            {
+                switch (ev.type)
+                {
+                    case EventType.DragUpdated:
+                    case EventType.DragPerform:
+                        {
+                            if (listRect.Contains(ev.mousePosition))
+                            {
+                                var refs = (from o in DragAndDrop.objectReferences let go = GameObjectUtil.GetGameObjectFromSource(o, false) select go);
+                                DragAndDrop.visualMode = refs.Any() ? DragAndDropVisualMode.Link : DragAndDropVisualMode.Rejected;
+
+                                if (ev.type == EventType.DragPerform && refs.Any())
+                                {
+                                    ev.Use();
+                                    AddObjectsToTrigger(property, refs.ToArray());
+                                }
+                            }
+                        }
+                        break;
+                }
+            }
+
             return new Rect(position.xMin, listRect.yMax, position.width, position.height - listRect.height);
         }
 
@@ -336,6 +361,48 @@ namespace com.spacepuppyeditor.Base.Events
             EventTriggerTargetPropertyDrawer.DrawTriggerActivationTypeDropdown(r1, property, false);
         }
 
+        /// <summary>
+        /// Adds targets to a Trigger/SPEvent.
+        /// 
+        /// This method applies changes to the SerializedProperty. Only call if you expect this behaviour.
+        /// </summary>
+        /// <param name="triggerProperty"></param>
+        /// <param name="objs"></param>
+        public static void AddObjectsToTrigger(SerializedProperty eventProperty, GameObject[] objs)
+        {
+            if (eventProperty == null) throw new System.ArgumentNullException("eventProperty");
+
+            try
+            {
+                eventProperty.serializedObject.ApplyModifiedProperties();
+                var trigger = EditorHelper.GetTargetObjectOfProperty(eventProperty) as BaseSPEvent;
+                if (trigger == null) return;
+
+                using (var set = TempCollection.GetList<GameObject>())
+                {
+                    for (int i = 0; i < trigger.Targets.Count; i++)
+                    {
+                        var go = GameObjectUtil.GetGameObjectFromSource(trigger.Targets[i].Target);
+                        if (go != null) set.Add(go);
+                    }
+
+                    foreach (var go in objs)
+                    {
+                        if (set.Contains(go)) continue;
+                        set.Add(go);
+
+                        var targ = trigger.AddNew();
+                        targ.ConfigureTriggerAll(go);
+                        targ.Weight = 1f;
+                    }
+                }
+                eventProperty.serializedObject.Update();
+            }
+            catch (System.Exception ex)
+            {
+                Debug.LogException(ex);
+            }
+        }
         #endregion
 
     }

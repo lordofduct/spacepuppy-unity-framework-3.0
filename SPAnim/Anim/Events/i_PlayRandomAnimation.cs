@@ -209,7 +209,7 @@ namespace com.spacepuppy.Anim.Events
             var anim = this.TryPlay(targ, info);
             if (anim == null)
             {
-                if (_triggerCompleteIfNoAnim) this.Invoke(() => { _onAnimComplete.ActivateTrigger(this, arg); }, 0.01f);
+                if (_triggerCompleteIfNoAnim) this.Invoke(() => { _onAnimComplete.ActivateTrigger(this, arg); }, 0f);
                 return false;
             }
 

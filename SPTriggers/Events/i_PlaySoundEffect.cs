@@ -133,11 +133,11 @@ namespace com.spacepuppy.Events
             {
                 if (this._delay > 0)
                 {
-                    this.Invoke(() =>
+                    this.InvokeGuaranteed(() =>
                     {
                         if (src != null)
                         {
-                            _completeRoutine = this.InvokeRadical(this.OnAudioCompleteHandler, clip.length);
+                            _completeRoutine = this.Invoke(this.OnAudioCompleteHandler, clip.length);
                             //src.Play();
                             src.PlayOneShot(clip);
                         }
@@ -145,7 +145,7 @@ namespace com.spacepuppy.Events
                 }
                 else
                 {
-                    _completeRoutine = this.InvokeRadical(this.OnAudioCompleteHandler, clip.length);
+                    _completeRoutine = this.Invoke(this.OnAudioCompleteHandler, clip.length);
                     //src.Play();
                     src.PlayOneShot(clip);
                 }

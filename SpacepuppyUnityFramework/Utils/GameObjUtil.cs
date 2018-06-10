@@ -259,28 +259,7 @@ namespace com.spacepuppy.Utils
         }
 
         #endregion
-
-        #region CompareName
-
-        public static bool CompareName(this GameObject go, string name)
-        {
-            if (go == null) return false;
-
-            return go.name == name;
-        }
-
-        public static bool CompareName(this Component c, string name)
-        {
-            if (c == null) return false;
-
-            if (c is SPEntity)
-                return (c as SPEntity).CompareName(name);
-            else
-                return c.name == name;
-        }
         
-        #endregion
-
         #region Find Root
         
         /// <summary>
@@ -466,6 +445,45 @@ namespace com.spacepuppy.Utils
                 p = p.parent;
             }
             return null;
+        }
+
+
+
+        public static string GetPathNameRelativeTo(this GameObject go, Transform parent)
+        {
+            if (go == null) return null;
+            return GetPathNameRelativeTo(go.transform, parent);
+        }
+
+        public static string GetPathNameRelativeTo(this Transform t, Transform parent)
+        {
+            if (t == null) return null;
+            if (parent != null && !t.IsChildOf(parent)) return null;
+
+            var bldr = StringUtil.GetTempStringBuilder();
+            bldr.Append(t.name);
+            t = t.parent;
+            while (t != parent)
+            {
+                bldr.Insert(0, '/');
+                bldr.Insert(0, t.name);
+                t = t.parent;
+            }
+            return StringUtil.Release(bldr);
+        }
+
+        public static string GetFullPathName(this Transform t)
+        {
+            var bldr = StringUtil.GetTempStringBuilder();
+            bldr.Append(t.name);
+            t = t.parent;
+            while (t != null)
+            {
+                bldr.Insert(0, @"\");
+                bldr.Insert(0, t.name);
+                t = t.parent;
+            }
+            return StringUtil.Release(bldr);
         }
 
         #endregion

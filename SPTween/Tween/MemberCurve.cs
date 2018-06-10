@@ -169,7 +169,7 @@ namespace com.spacepuppy.Tween
                 var attribs = tp.GetCustomAttributes(typeof(CustomMemberCurveAttribute), false).Cast<CustomMemberCurveAttribute>().ToArray();
                 foreach (var attrib in attribs)
                 {
-                    if (!priorities.ContainsKey(attrib.HandledMemberType) || priorities[attrib.HandledMemberType] > attrib.priority)
+                    if (!priorities.ContainsKey(attrib.HandledMemberType) || priorities[attrib.HandledMemberType] < attrib.priority)
                     {
                         priorities[attrib.HandledMemberType] = attrib.priority;
                         _memberTypeToCurveType[attrib.HandledMemberType] = tp;

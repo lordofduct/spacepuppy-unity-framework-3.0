@@ -18,7 +18,6 @@ namespace com.spacepuppyeditor.Anim.Legacy
     {
         private const string PROP_NAME = "_name";
         private const string PROP_CLIP = "_clip";
-        private const string PROP_ANIMSTATE_MASKS = "_masks._masks";
         private static string[] FULL_DETAIL_PROPS = new string[] {SPAnimClip.PROP_WEIGHT,
                                                             SPAnimClip.PROP_SPEED,
                                                             "ScaledDuration",
@@ -26,9 +25,8 @@ namespace com.spacepuppyeditor.Anim.Legacy
                                                             SPAnimClip.PROP_WRAPMODE,
                                                             SPAnimClip.PROP_BLENDMODE,
                                                             SPAnimClip.PROP_TIMESUPPLIER,
-                                                            SPAnimClip.PROP_MASKS};
+                                                            SPAnimClip.PROP_MASK};
 
-        private SPReorderableList _maskList;
         private bool _nameIsReadOnly;
         private string[] _detailProps;
 
@@ -38,17 +36,6 @@ namespace com.spacepuppyeditor.Anim.Legacy
 
         private void Init(SerializedProperty property, bool searchForAttribs)
         {
-            if(_maskList == null)
-            {
-                _maskList = new SPReorderableList(property.serializedObject, property.FindPropertyRelative(PROP_ANIMSTATE_MASKS), true, true, true, true);
-                _maskList.drawHeaderCallback = this._maskList_DrawHeader;
-                _maskList.drawElementCallback = this._maskList_DrawElement;
-            }
-            else
-            {
-                _maskList.serializedProperty = property.FindPropertyRelative(PROP_ANIMSTATE_MASKS);
-            }
-
             _detailProps = FULL_DETAIL_PROPS;
             if (searchForAttribs && this.fieldInfo != null)
             {
@@ -64,22 +51,13 @@ namespace com.spacepuppyeditor.Anim.Legacy
                 }
 
                 var configAttrib = this.fieldInfo.GetCustomAttributes(typeof(SPAnimClip.ConfigAttribute), false).FirstOrDefault() as SPAnimClip.ConfigAttribute;
-                if(configAttrib != null)
+                if (configAttrib != null)
                 {
                     if (configAttrib.HideDetailRegion)
                         _detailProps = null;
-                    else if(configAttrib.VisibleProps != null && configAttrib.VisibleProps.Length > 0)
+                    else if (configAttrib.VisibleProps != null && configAttrib.VisibleProps.Length > 0)
                         _detailProps = configAttrib.VisibleProps;
                 }
-            }
-        }
-
-        public void Reset()
-        {
-            if(_maskList != null)
-            {
-                _maskList.serializedProperty = null;
-                _maskList.index = -1;
             }
         }
 
@@ -95,10 +73,6 @@ namespace com.spacepuppyeditor.Anim.Legacy
             if (this.HideAllDetails) return 0f;
 
             float h = _detailProps.Length * EditorGUIUtility.singleLineHeight;
-            if(_detailProps.Contains(SPAnimClip.PROP_MASKS))
-            {
-                h += _maskList.GetHeight() + 2f - EditorGUIUtility.singleLineHeight; //we remove one line because it was included in the multiply
-            }
             return h;
         }
 
@@ -118,7 +92,7 @@ namespace com.spacepuppyeditor.Anim.Legacy
         public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
         {
             this.Init(property, true);
-            
+
             if (!this.HideAllDetails && property.isExpanded)
             {
                 return this.GetDetailHeight() + EditorGUIUtility.singleLineHeight;
@@ -132,7 +106,7 @@ namespace com.spacepuppyeditor.Anim.Legacy
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
             this.Init(property, true);
-            
+
             //var cache = SPGUI.DisableIfPlaying();
 
             if (this.HideAllDetails)
@@ -154,7 +128,7 @@ namespace com.spacepuppyeditor.Anim.Legacy
                     this.DrawDetails(detailRect, property);
                 }
             }
-            
+
             //cache.Reset();
         }
 
@@ -190,9 +164,9 @@ namespace com.spacepuppyeditor.Anim.Legacy
             //EditorGUI.BeginProperty(clipRect, clipLabel, clipProp);
             //clipProp.objectReferenceValue = EditorGUI.ObjectField(clipRect, clipProp.objectReferenceValue, typeof(AnimationClip), false);
             var obj = clipProp.objectReferenceValue;
-            if(GameObjectUtil.IsGameObjectSource(obj))
+            if (GameObjectUtil.IsGameObjectSource(obj))
             {
-                if (_selectComponentDrawer == null) 
+                if (_selectComponentDrawer == null)
                 {
                     _selectComponentDrawer = new SelectableComponentPropertyDrawer();
                     _selectComponentDrawer.RestrictionType = typeof(IScriptableAnimationClip);
@@ -216,7 +190,7 @@ namespace com.spacepuppyeditor.Anim.Legacy
 
             if (Application.isPlaying && !property.hasMultipleDifferentValues && property.serializedObject.targetObject is SPLegacyAnimController)
             {
-                if(GUI.Button(new Rect(area.xMin, area.yMin, 20f, EditorGUIUtility.singleLineHeight),">"))
+                if (GUI.Button(new Rect(area.xMin, area.yMin, 20f, EditorGUIUtility.singleLineHeight), ">"))
                 {
                     var targ = property.serializedObject.targetObject as SPLegacyAnimController;
                     targ.Play(nameProp.stringValue);
@@ -233,7 +207,7 @@ namespace com.spacepuppyeditor.Anim.Legacy
             for (int i = 0; i < _detailProps.Length; i++)
             {
                 //var r = new Rect(position.xMin, yMin + i * EditorGUIUtility.singleLineHeight, position.width, EditorGUIUtility.singleLineHeight);
-                switch(_detailProps[i])
+                switch (_detailProps[i])
                 {
                     case SPAnimClip.PROP_WRAPMODE:
                         {
@@ -251,7 +225,7 @@ namespace com.spacepuppyeditor.Anim.Legacy
 
                             var label = EditorHelper.TempContent("Scaled Duration", "The duration of the clip with the speed applied. Modifying this alters the 'speed' property.");
                             var clip = property.FindPropertyRelative(PROP_CLIP).objectReferenceValue as AnimationClip;
-                            if(clip == null)
+                            if (clip == null)
                             {
                                 EditorGUI.FloatField(r, label, 0f);
                                 continue;
@@ -260,24 +234,11 @@ namespace com.spacepuppyeditor.Anim.Legacy
                             var speedProp = property.FindPropertyRelative(SPAnimClip.PROP_SPEED);
                             float dur = (speedProp.floatValue == 0f) ? float.PositiveInfinity : Mathf.Abs(clip.length / speedProp.floatValue);
                             EditorGUI.BeginChangeCheck();
-                            
+
                             dur = EditorGUI.FloatField(r, label, dur);
-                            
+
                             if (EditorGUI.EndChangeCheck())
                                 speedProp.floatValue = (dur <= 0f) ? 0f : clip.length / dur;
-                        }
-                        break;
-                    case SPAnimClip.PROP_MASKS:
-                        {
-                            //draw masks
-                            var masksProp = property.FindPropertyRelative(PROP_ANIMSTATE_MASKS);
-                            //var r = new Rect(position.xMin + 4f, yMin + _detailProps.Length * EditorGUIUtility.singleLineHeight, position.width - 8f, _maskList.GetHeight());
-                            var r = new Rect(position.xMin + 4f, position.yMin, position.width - 8f, _maskList.GetHeight());
-                            position = new Rect(position.xMin, r.yMax, position.width, Mathf.Max(position.height - r.height, 0f));
-
-                            _maskList.serializedProperty = masksProp;
-                            //_maskList.DoList(EditorGUI.IndentedRect(r));
-                            _maskList.DoList(r);
                         }
                         break;
                     default:
@@ -296,45 +257,6 @@ namespace com.spacepuppyeditor.Anim.Legacy
 
         #endregion
 
-        #region Masks ReorderableList Handlers
-
-        private void _maskList_DrawHeader(Rect area)
-        {
-            EditorGUI.LabelField(area, "Masks");
-        }
-
-        private void _maskList_DrawElement(Rect area, int index, bool isActive, bool isFocused)
-        {
-            var element = _maskList.serializedProperty.GetArrayElementAtIndex(index);
-            if (element == null) return;
-            
-            const float RECURS_WIDTH_MAX = 110f;
-            const float RECURS_TOGGLE_WIDTH = 30f;
-
-            var recursWidth = Mathf.Min(area.width * 0.4f, RECURS_WIDTH_MAX);
-            var recursLabelWidth = Mathf.Max(0f, recursWidth - RECURS_TOGGLE_WIDTH);
-            var recursToggleWidth = recursWidth - recursLabelWidth;
-
-            //DRAW TRANSFORM
-            var transProp = element.FindPropertyRelative("Transform");
-            var transRect = new Rect(area.xMin, area.yMin, area.width - recursWidth, EditorGUIUtility.singleLineHeight);
-            EditorGUI.PropertyField(transRect, transProp, GUIContent.none);
-
-            //DRAW RECURSIVE TOGGLE
-            var recursProp = element.FindPropertyRelative("Recursive");
-            var recursTotalRect = new Rect(transRect.xMax, area.yMin, recursWidth, EditorGUIUtility.singleLineHeight);
-            var recursLabelRect = new Rect(recursTotalRect.xMin, recursTotalRect.yMin, recursLabelWidth, recursTotalRect.height);
-            var recursToggleRect = new Rect(recursLabelRect.xMax, recursTotalRect.yMin, recursToggleWidth, recursTotalRect.height);
-            var recursLabel = new GUIContent("Recurses");
-            EditorGUI.BeginProperty(recursTotalRect, recursLabel, recursProp);
-            EditorGUI.LabelField(recursLabelRect, recursLabel);
-            recursProp.boolValue = EditorGUI.Toggle(recursToggleRect, recursProp.boolValue);
-            EditorGUI.EndProperty();
-            
-            if (GUI.enabled) ReorderableListHelper.DrawDraggableElementDeleteContextMenu(_maskList, area, index, isActive, isFocused);
-        }
-
-        #endregion
-
     }
+
 }

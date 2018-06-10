@@ -18,12 +18,11 @@ namespace com.spacepuppyeditor.Anim.Legacy
 
         //SPAnimationState._masks is a MaskCollection wich has a list inside it called _masks
         private const string PROP_ANIMSTATES = "_serializedStates";
-        private const string PROP_ANIMSTATE_MASKS = "_masks._masks";
 
         private static GUIStyle _nameLabelGUIStyle = new GUIStyle("Label")
-                                                         {
-                                                             alignment = TextAnchor.MiddleRight
-                                                         };
+        {
+            alignment = TextAnchor.MiddleRight
+        };
 
         #region Fields
 
@@ -51,20 +50,20 @@ namespace com.spacepuppyeditor.Anim.Legacy
             _isStaticColl = false;
             _hideDetailRegion = false;
 
-            _animList = CachedReorderableList.GetListDrawer(property.FindPropertyRelative(PROP_ANIMSTATES), _animList_DrawHeader, _animList_DrawElement, _animList_OnAdded, null, _animList_OnSelect);
+            _animList = CachedReorderableList.GetListDrawer(property.FindPropertyRelative(PROP_ANIMSTATES), _animList_DrawHeader, _animList_DrawElement, _animList_OnAdded);
             if (_animList.index >= _animList.count) _animList.index = -1;
 
-            if(searchForAttribs && this.fieldInfo != null)
+            if (searchForAttribs && this.fieldInfo != null)
             {
                 //config
                 var configAttrib = this.fieldInfo.GetCustomAttributes(typeof(SPAnimClipCollection.ConfigAttribute), false).FirstOrDefault() as SPAnimClipCollection.ConfigAttribute;
-                if(configAttrib != null)
+                if (configAttrib != null)
                 {
                     _hideDetailRegion = configAttrib.HideDetailRegion;
                     _defaultLayer = configAttrib.DefaultLayer;
                     _entryPrefix = configAttrib.Prefix;
-                    if(!string.IsNullOrEmpty(configAttrib.Hash))
-                        _currentLabel.text= string.Format("{0} - ({1})", _currentLabel.text, configAttrib.Hash);
+                    if (!string.IsNullOrEmpty(configAttrib.Hash))
+                        _currentLabel.text = string.Format("{0} - ({1})", _currentLabel.text, configAttrib.Hash);
                 }
                 else
                 {
@@ -90,12 +89,12 @@ namespace com.spacepuppyeditor.Anim.Legacy
                             var stateProp = statesProp.GetArrayElementAtIndex(i);
                             stateProp.FindPropertyRelative("_name").stringValue = staticCollAttrib.Names[i];
                             stateProp.FindPropertyRelative("_clip").objectReferenceValue = null;
-                            stateProp.FindPropertyRelative("_weight").floatValue = 1f;
-                            stateProp.FindPropertyRelative("_speed").floatValue = 1f;
-                            stateProp.FindPropertyRelative("_layer").intValue = _defaultLayer;
-                            stateProp.FindPropertyRelative("_wrapMode").intValue = 0;
-                            stateProp.FindPropertyRelative("_blendMode").intValue = 0;
-                            stateProp.FindPropertyRelative(PROP_ANIMSTATE_MASKS).arraySize = 0;
+                            stateProp.FindPropertyRelative(SPAnimClip.PROP_WEIGHT).floatValue = 1f;
+                            stateProp.FindPropertyRelative(SPAnimClip.PROP_SPEED).floatValue = 1f;
+                            stateProp.FindPropertyRelative(SPAnimClip.PROP_LAYER).intValue = _defaultLayer;
+                            stateProp.FindPropertyRelative(SPAnimClip.PROP_WRAPMODE).intValue = 0;
+                            stateProp.FindPropertyRelative(SPAnimClip.PROP_BLENDMODE).intValue = 0;
+                            stateProp.FindPropertyRelative(SPAnimClip.PROP_MASK).objectReferenceValue = null;
                         }
                     }
                     for (int i = 0; i < statesProp.arraySize; i++)
@@ -216,7 +215,7 @@ namespace com.spacepuppyeditor.Anim.Legacy
                         //failed to draw details because poorly selected nonsense
                     }
                 }
-                
+
                 //cache.Reset();
             }
         }
@@ -255,17 +254,12 @@ namespace com.spacepuppyeditor.Anim.Legacy
 
             stateProp.FindPropertyRelative("_name").stringValue = prefix + cnt.ToString("00");
             stateProp.FindPropertyRelative("_clip").objectReferenceValue = null;
-            stateProp.FindPropertyRelative("_weight").floatValue = 1f;
-            stateProp.FindPropertyRelative("_speed").floatValue = 1f;
-            stateProp.FindPropertyRelative("_layer").intValue = _defaultLayer;
-            stateProp.FindPropertyRelative("_wrapMode").intValue = 0;
-            stateProp.FindPropertyRelative("_blendMode").intValue = 0;
-            stateProp.FindPropertyRelative(PROP_ANIMSTATE_MASKS).arraySize = 0;
-        }
-
-        private void _animList_OnSelect(ReorderableList lst)
-        {
-            _clipDrawer.Reset();
+            stateProp.FindPropertyRelative(SPAnimClip.PROP_WEIGHT).floatValue = 1f;
+            stateProp.FindPropertyRelative(SPAnimClip.PROP_SPEED).floatValue = 1f;
+            stateProp.FindPropertyRelative(SPAnimClip.PROP_LAYER).intValue = _defaultLayer;
+            stateProp.FindPropertyRelative(SPAnimClip.PROP_WRAPMODE).intValue = 0;
+            stateProp.FindPropertyRelative(SPAnimClip.PROP_BLENDMODE).intValue = 0;
+            stateProp.FindPropertyRelative(SPAnimClip.PROP_MASK).objectReferenceValue = null;
         }
 
         #endregion

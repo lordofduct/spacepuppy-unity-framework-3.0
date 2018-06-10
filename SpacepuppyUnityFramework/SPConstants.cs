@@ -8,6 +8,10 @@ namespace com.spacepuppy
     /// </summary>
     public class SPConstants
     {
+        /// <summary>
+        /// A hard minimum delta time to consider waiting one frame. Used in places like Invoke to determine if a WaitForSeconds/WaitForDuration should be used.
+        /// </summary>
+        public const float MIN_FRAME_DELTA = 0.01f;
 
         public const int LAYER_DEFAULT = 0;
         public const int LAYER_WATER = 4;

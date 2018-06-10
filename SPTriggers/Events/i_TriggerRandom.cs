@@ -59,12 +59,12 @@ namespace com.spacepuppy.Events
         {
             if (!this.CanTrigger) return false;
 
-            if (this._delay > 0f)
+            if (_delay > 0f)
             {
-                this.Invoke(() =>
+                this.InvokeGuaranteed(() =>
                 {
                     this.DoTriggerNext(arg);
-                }, this._delay);
+                }, _delay);
             }
             else
             {

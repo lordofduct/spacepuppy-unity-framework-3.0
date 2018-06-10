@@ -16,8 +16,24 @@ namespace com.spacepuppyeditor.Base.Project
     {
 
         #region Static Interface
-        
-        
+
+        static TagDataInspector()
+        {
+            EditorApplication.playModeStateChanged -= Touch;
+            EditorApplication.playModeStateChanged += Touch;
+            EditorCoroutine.Invoke(() => Touch(PlayModeStateChange.EnteredEditMode), 0f);
+        }
+
+        public static void Touch(PlayModeStateChange e)
+        {
+            var asset = TagData.Asset;
+            if (asset == null) return;
+
+            if (TagData.Tags != null && TagData.Tags.Except(UnityEditorInternal.InternalEditorUtility.tags).Count() > 0)
+            {
+                SPMenu.SyncTagData(TagData.Asset);
+            }
+        }
 
         #endregion
 

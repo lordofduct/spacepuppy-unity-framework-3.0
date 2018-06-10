@@ -10,12 +10,9 @@ namespace com.spacepuppy
 
     /// <summary>
     /// Place on the root of a GameObject hierarchy, or a prefab, to signify that it is a complete entity.
-    /// 
-    /// If this class is derived from, make sure to set its execution order to the last executed script! 
-    /// Failure to do so will result in IEntityAwakeHandler receivers to be messaged out of order.
     /// </summary>
     [DisallowMultipleComponent()]
-    public class SPEntity : SPComponent
+    public class SPEntity : SPComponent, INameable
     {
 
         #region Multiton Interface
@@ -40,6 +37,11 @@ namespace com.spacepuppy
 
         #region CONSTRUCTOR
 
+        public SPEntity()
+        {
+            _nameCache = new NameCache.UnityObjectNameCache(this);
+        }
+
         protected override void Awake()
         {
             this.AddTag(SPConstants.TAG_ROOT);
@@ -49,7 +51,15 @@ namespace com.spacepuppy
 
             _isAwake = true;
 
-            Messaging.Broadcast<IEntityAwakeHandler>(this.gameObject, (h) => h.OnEntityAwake(this));
+            //Messaging.Broadcast<IEntityAwakeHandler>(this.gameObject, (h) => h.OnEntityAwake(this), true, true);
+            var token = Messaging.CreateBroadcastToken<IEntityAwakeHandler>(this.gameObject, true, true);
+            if (token != null && token.Count > 0)
+            {
+                com.spacepuppy.Hooks.EarlyStartHook.Invoke(this.gameObject, () =>
+                {
+                    token.Invoke((h) => h.OnEntityAwake(this));
+                });
+            }
         }
         
         protected override void OnDestroy()
@@ -64,33 +74,29 @@ namespace com.spacepuppy
         #region Properties
 
         public bool IsAwake { get { return _isAwake; } }
-
-        public new string name
-        {
-            get
-            {
-                if (_cachedName == null) _cachedName = this.gameObject.name;
-                return _cachedName;
-            }
-            set
-            {
-                this.gameObject.name = value;
-                _cachedName = value;
-            }
-        }
-
+        
         #endregion
 
-        #region Methods
+        #region INameable Interface
 
-        private string _cachedName;
-        public bool CompareName(string value)
+        private NameCache.UnityObjectNameCache _nameCache;
+        public new string name
         {
-            if (_cachedName == null)
-            {
-                _cachedName = this.gameObject.name;
-            }
-            return _cachedName == value;
+            get { return _nameCache.Name; }
+            set { _nameCache.Name = value; }
+        }
+        string INameable.Name
+        {
+            get { return _nameCache.Name; }
+            set { _nameCache.Name = value; }
+        }
+        public bool CompareName(string nm)
+        {
+            return _nameCache.CompareName(nm);
+        }
+        void INameable.SetDirty()
+        {
+            _nameCache.SetDirty();
         }
 
         #endregion

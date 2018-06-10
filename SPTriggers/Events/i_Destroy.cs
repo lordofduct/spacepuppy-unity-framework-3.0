@@ -44,7 +44,7 @@ namespace com.spacepuppy.Events
 
             if (_delay > 0f)
             {
-                this.Invoke(() =>
+                this.InvokeGuaranteed(() =>
                 {
                     ObjUtil.SmartDestroy(targ);
                 }, _delay);

@@ -66,6 +66,7 @@
     <Compile Include="Base\Events\SPEventPropertyDrawer.cs" />
     <Compile Include="Base\Geom\IntervalInspector.cs" />
     <Compile Include="Base\Project\CustomTimeLayersDataInspector.cs" />
+    <Compile Include="Base\Project\SerializableInterfaceRefPropertyDrawer.cs" />
     <Compile Include="Base\Project\TagDataInspector.cs" />
     <Compile Include="Base\ProxyPropertyDrawer.cs" />
     <Compile Include="Base\ShortUidPropertyDrawer.cs" />
@@ -73,6 +74,7 @@
     <Compile Include="Base\VariantCollectionPropertyDrawer.cs" />
     <Compile Include="Base\VersionInfoPropertyDrawer.cs" />
     <Compile Include="Commands\FindReferencesToObjectMenu.cs" />
+    <Compile Include="Commands\ScreenshotUtil.cs" />
     <Compile Include="Commands\TransformAltContextMenu.cs" />
     <Compile Include="Commands\TransformCopyMenu.cs" />
     <Compile Include="Components\RequireComponentInEntityHeaderDrawer.cs" />
@@ -142,9 +144,11 @@
     <Compile Include="PropertyAttributeDrawers\WeightedValueCollectionPropertyDrawer.cs" />
     <Compile Include="ReorderableListHelper.cs" />
     <Compile Include="ScriptableObjectHelper.cs" />
-    <Compile Include="Settings\BaseSettings.cs" />
+    <Compile Include="Settings\ModelSettingsImportProcessor.cs" />
+    <Compile Include="Settings\SpacepuppySettingsWindow.cs" />
     <Compile Include="Settings\BuildSettings.cs" />
     <Compile Include="Settings\InputSettings.cs" />
+    <Compile Include="SpacepuppySettings.cs" />
     <Compile Include="SPEditor.cs" />
     <Compile Include="SPEditorAddonDrawer.cs" />
     <Compile Include="SPEditorGUI.cs" />

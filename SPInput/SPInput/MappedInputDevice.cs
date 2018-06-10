@@ -107,39 +107,23 @@ namespace com.spacepuppy.SPInput
             return _signatures.Contains(id);
         }
 
-        public ButtonState GetButtonState(string id)
+        IInputSignature IInputDevice.GetSignature(string id)
+        {
+            return _signatures.GetSignature(id);
+        }
+
+        public ButtonState GetButtonState(string id, bool consume = false)
         {
             if (!_active) return ButtonState.None;
 
             var sig = _signatures.GetSignature(id);
-            if (sig == null) return ButtonState.None;
             if (!(sig is IButtonInputSignature)) return ButtonState.None;
 
-            return (sig as IButtonInputSignature).CurrentState;
+            var result = (sig as IButtonInputSignature).CurrentState;
+            if (consume) (sig as IButtonInputSignature).Consume();
+            return result;
         }
-
-        public bool GetButtonPressed(string id, float duration)
-        {
-            if (!_active) return false;
-
-            var sig = _signatures.GetSignature(id);
-            if (sig == null) return false;
-            if (!(sig is IButtonInputSignature)) return false;
-
-            return (sig as IButtonInputSignature).GetPressed(duration, GameLoop.CurrentSequence == UpdateSequence.FixedUpdate);
-        }
-
-        public bool GetButtonHeld(string id, float duration)
-        {
-            if (!_active) return false;
-
-            var sig = _signatures.GetSignature(id);
-            if (sig == null) return false;
-            if (!(sig is IButtonInputSignature)) return false;
-
-            return (sig as IButtonInputSignature).GetHeld(duration, GameLoop.CurrentSequence == UpdateSequence.FixedUpdate);
-        }
-
+        
         public float GetAxleState(string id)
         {
             if (!_active) return 0f;
@@ -177,39 +161,23 @@ namespace com.spacepuppy.SPInput
 
         #region IMappedInputDevice Interface
 
-        public ButtonState GetButtonState(T mapping)
+        IInputSignature IMappedInputDevice<T>.GetSignature(T mapping)
+        {
+            return _signatures.GetSignature(mapping);
+        }
+
+        public ButtonState GetButtonState(T mapping, bool consume = false)
         {
             if (!_active) return ButtonState.None;
 
             var sig = _signatures.GetSignature(mapping);
-            if (sig == null) return ButtonState.None;
             if (!(sig is IButtonInputSignature)) return ButtonState.None;
 
-            return (sig as IButtonInputSignature).CurrentState;
+            var result = (sig as IButtonInputSignature).CurrentState;
+            if (consume) (sig as IButtonInputSignature).Consume();
+            return result;
         }
-
-        public bool GetButtonPressed(T mapping, float duration)
-        {
-            if (!_active) return false;
-
-            var sig = _signatures.GetSignature(mapping);
-            if (sig == null) return false;
-            if (!(sig is IButtonInputSignature)) return false;
-
-            return (sig as IButtonInputSignature).GetPressed(duration, GameLoop.CurrentSequence == UpdateSequence.FixedUpdate);
-        }
-
-        public bool GetButtonHeld(T mapping, float duration)
-        {
-            if (!_active) return false;
-
-            var sig = _signatures.GetSignature(mapping);
-            if (sig == null) return false;
-            if (!(sig is IButtonInputSignature)) return false;
-
-            return (sig as IButtonInputSignature).GetHeld(duration, GameLoop.CurrentSequence == UpdateSequence.FixedUpdate);
-        }
-
+        
         public float GetAxleState(T mapping)
         {
             if (!_active) return 0f;

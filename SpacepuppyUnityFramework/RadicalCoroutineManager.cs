@@ -29,7 +29,7 @@ namespace com.spacepuppy
         #endregion
 
         #region CONSTRUCTOR
-        
+
         private void Awake()
         {
             _onDisableHandler = this.OnComponentDisabled;
@@ -52,7 +52,7 @@ namespace com.spacepuppy
 
         private void Update()
         {
-            if(_naiveTrackerTable == null || _naiveTrackerTable.Count == 0)
+            if (_naiveTrackerTable == null || _naiveTrackerTable.Count == 0)
             {
                 this.enabled = false;
                 return;
@@ -112,7 +112,7 @@ namespace com.spacepuppy
         public IEnumerable<RadicalCoroutine> GetAllCoroutines()
         {
             var e = _routines.GetEnumerator();
-            while(e.MoveNext())
+            while (e.MoveNext())
             {
                 yield return e.Current;
             }
@@ -125,7 +125,7 @@ namespace com.spacepuppy
             var e = _routines.GetEnumerator();
             while (e.MoveNext())
             {
-                if(e.Current.Operator == behaviour) yield return e.Current;
+                if (e.Current.Owner == behaviour) yield return e.Current;
             }
         }
 
@@ -136,25 +136,25 @@ namespace com.spacepuppy
                 var e = _routines.GetEnumerator();
                 while (e.MoveNext())
                 {
-                    if (e.Current.Operator == component) lst.Add(e.Current);
+                    if (e.Current.Owner == component) lst.Add(e.Current);
                 }
 
-                if(lst.Count > 0)
+                if (lst.Count > 0)
                 {
-                    for(int i = 0; i < lst.Count; i++)
+                    for (int i = 0; i < lst.Count; i++)
                     {
-                        lst[i].Cancel(true);
+                        lst[i].ManagerCancel();
                         _routines.Remove(lst[i]);
                     }
                 }
-                if(component is SPComponent)
+                if (component is SPComponent)
                 {
                     var spc = component as SPComponent;
                     spc.OnDisabled -= _onDisableHandler;
                     spc.OnEnabled -= _onEnabledHandler;
                     spc.ComponentDestroyed -= _onDestroyHandler;
                 }
-                else if(_naiveTrackerTable != null)
+                else if (_naiveTrackerTable != null)
                 {
                     _naiveTrackerTable.Remove(component);
                 }
@@ -173,7 +173,7 @@ namespace com.spacepuppy
             //if (_routines.Contains(routine)) throw new System.InvalidOperationException("Attempted to register a routine that is already operating.");
             if (_routines.Contains(routine)) return;
 
-            var component = routine.Operator;
+            var component = routine.Owner;
             if (component == null) throw new System.InvalidOperationException("Attempted to register a routine with a null component.");
 
             if (component is SPComponent)
@@ -211,7 +211,7 @@ namespace com.spacepuppy
                 RadicalCoroutine old;
                 if (_autoKillTable.TryGetValue(autoKillToken, out old))
                 {
-                    old.Cancel(true);
+                    old.ManagerCancel();
                 }
             }
             _autoKillTable[autoKillToken] = routine;
@@ -225,10 +225,10 @@ namespace com.spacepuppy
         {
             _routines.Remove(routine);
 
-            if(_naiveTrackerTable != null)
+            if (_naiveTrackerTable != null)
             {
-                var comp = routine.Operator;
-                if(_naiveTrackerTable.ContainsKey(comp) && !this.GetComponentIsCurrentlyManaged(comp))
+                var comp = routine.Owner;
+                if (_naiveTrackerTable.ContainsKey(comp) && !this.GetComponentIsCurrentlyManaged(comp))
                 {
                     _naiveTrackerTable.Remove(comp);
                 }
@@ -243,7 +243,7 @@ namespace com.spacepuppy
                 }
             }
         }
-        
+
         private void OnComponentEnabled(object sender, System.EventArgs e)
         {
             var component = sender as MonoBehaviour;
@@ -269,12 +269,12 @@ namespace com.spacepuppy
         private void DealWithEnable(MonoBehaviour component)
         {
             using (var todestroy = TempCollection.GetList<RadicalCoroutine>())
-            using(var toresume = TempCollection.GetList<RadicalCoroutine>())
+            using (var toresume = TempCollection.GetList<RadicalCoroutine>())
             {
                 var e = _routines.GetEnumerator();
                 while (e.MoveNext())
                 {
-                    if (e.Current.Operator == component)
+                    if (e.Current.Owner == component)
                     {
                         switch (e.Current.OperatingState)
                         {
@@ -284,7 +284,7 @@ namespace com.spacepuppy
                                 continue;
                             case RadicalCoroutineOperatingState.Inactive:
                             case RadicalCoroutineOperatingState.Paused:
-                                if (e.Current.DisableMode.HasFlag(RadicalCoroutineDisableMode.Resumes))
+                                if ((e.Current.DisableMode & RadicalCoroutineDisableMode.Resumes) != 0)
                                 {
                                     toresume.Add(e.Current);
                                 }
@@ -313,9 +313,9 @@ namespace com.spacepuppy
 
                 if (toresume.Count > 0)
                 {
-                    for(int i = 0; i < toresume.Count; i++)
+                    for (int i = 0; i < toresume.Count; i++)
                     {
-                        toresume[i].Resume(component);
+                        toresume[i].Resume();
                     }
                 }
             }
@@ -328,38 +328,32 @@ namespace com.spacepuppy
                 var e = _routines.GetEnumerator();
                 while (e.MoveNext())
                 {
-                    if (e.Current.Operator == component) lst.Add(e.Current);
+                    if (e.Current.Owner == component) lst.Add(e.Current);
                 }
 
                 if (lst.Count > 0)
                 {
                     RadicalCoroutine routine;
-                    if (this.gameObject.activeInHierarchy)
+                    if (ObjUtil.IsObjectAlive(this) && this.gameObject.activeInHierarchy)
                     {
                         for (int i = 0; i < lst.Count; i++)
                         {
                             routine = lst[i];
-                            if (routine.DisableMode.HasFlag(RadicalCoroutineDisableMode.CancelOnDisable))
+                            if ((routine.DisableMode & RadicalCoroutineDisableMode.CancelOnDisable) != 0)
                             {
-                                routine.Cancel(true);
-                                _routines.Remove(lst[i]);
-                                lst.RemoveAt(i);
-                                i--;
+                                routine.ManagerCancel();
+                                _routines.Remove(routine);
                             }
-                            else if(routine.DisableMode.HasFlag(RadicalCoroutineDisableMode.StopOnDisable))
+                            else if ((routine.DisableMode & RadicalCoroutineDisableMode.StopOnDisable) != 0)
                             {
-                                routine.Stop(true);
-                                if (routine.Finished)
+                                if (!routine.Finished && (routine.DisableMode & RadicalCoroutineDisableMode.Resumes) != 0)
                                 {
-                                    _routines.Remove(lst[i]);
-                                    lst.RemoveAt(i);
-                                    i--;
+                                    routine.Pause();
                                 }
-                                else if (!routine.DisableMode.HasFlag(RadicalCoroutineDisableMode.Resumes))
+                                else
                                 {
-                                    _routines.Remove(lst[i]);
-                                    lst.RemoveAt(i);
-                                    i--;
+                                    routine.Stop();
+                                    _routines.Remove(routine);
                                 }
                             }
                         }
@@ -369,41 +363,35 @@ namespace com.spacepuppy
                         for (int i = 0; i < lst.Count; i++)
                         {
                             routine = lst[i];
-                            if (routine.DisableMode.HasFlag(RadicalCoroutineDisableMode.StopOnDeactivate))
+                            if ((routine.DisableMode & RadicalCoroutineDisableMode.StopOnDeactivate) != 0)
                             {
-                                routine.Stop(true);
-                                if (routine.Finished)
+                                if (!routine.Finished && (routine.DisableMode & RadicalCoroutineDisableMode.Resumes) != 0)
                                 {
-                                    _routines.Remove(lst[i]);
-                                    lst.RemoveAt(i);
-                                    i--;
+                                    routine.Pause();
                                 }
-                                else if (!routine.DisableMode.HasFlag(RadicalCoroutineDisableMode.Resumes))
+                                else
                                 {
-                                    _routines.Remove(lst[i]);
-                                    lst.RemoveAt(i);
-                                    i--;
+                                    routine.Stop();
+                                    _routines.Remove(routine);
                                 }
                             }
                             else
                             {
-                                routine.Cancel(true);
-                                _routines.Remove(lst[i]);
-                                lst.RemoveAt(i);
-                                i--;
+                                routine.ManagerCancel();
+                                _routines.Remove(routine);
                             }
                         }
                     }
                 }
             }
         }
-        
+
         private bool GetComponentIsCurrentlyManaged(MonoBehaviour component)
         {
             var e = _routines.GetEnumerator();
-            while(e.MoveNext())
+            while (e.MoveNext())
             {
-                if (e.Current.Operator == component) return true;
+                if (e.Current.Owner == component) return true;
             }
             return false;
         }
@@ -420,7 +408,7 @@ namespace com.spacepuppy
                 RadicalCoroutine old;
                 if (_autoKillTable.TryGetValue(autoKillToken, out old))
                 {
-                    old.Cancel(true);
+                    old.ManagerCancel();
                     _autoKillTable.Remove(autoKillToken);
                 }
             }

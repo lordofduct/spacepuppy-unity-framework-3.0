@@ -194,45 +194,7 @@ namespace com.spacepuppy.Utils
         }
 
         #endregion
-
-        #region Paths
-
-        public static string GetPathNameRelativeTo(this GameObject go, Transform parent)
-        {
-            if (go == null) return null;
-            return GetPathNameRelativeTo(go.transform, parent);
-        }
-
-        public static string GetPathNameRelativeTo(this Transform t, Transform parent)
-        {
-            if (t == null) return null;
-            if (t == parent) return null;
-
-            var bldr = StringUtil.GetTempStringBuilder();
-            bldr.Append(t.name);
-            t = t.parent;
-            while (t != null && t != parent)
-            {
-                bldr.Insert(0, '/');
-                bldr.Insert(0, t.name);
-            }
-            return StringUtil.Release(bldr);
-        }
-
-        public static string GetFullPathName(this Transform t)
-        {
-            var builder = StringUtil.GetTempStringBuilder();
-            while (t.parent != null)
-            {
-                t = t.parent;
-                builder.Insert(0, @"\");
-                builder.Insert(0, t.name);
-            }
-            return StringUtil.Release(builder);
-        }
-
-        #endregion
-
+        
         #region Find By Layer
 
         public static IEnumerable<GameObject> FindGameObjectOnLayer(int mask)

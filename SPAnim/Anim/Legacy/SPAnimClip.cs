@@ -28,7 +28,7 @@ namespace com.spacepuppy.Anim.Legacy
     /// Honestly, you shouldn't be changing masks at runtime that are already assigned to an animation. Create a new mask if you really need to.
     /// </remarks>
     [System.Serializable()]
-    public class SPAnimClip : ISPDisposable
+    public class SPAnimClip : ISPDisposable, IAnimatable
     {
 
         public const string PROP_WEIGHT = "_weight";
@@ -328,7 +328,7 @@ namespace com.spacepuppy.Anim.Legacy
                     if (_clip is AnimationClip)
                         return (_clip as AnimationClip).length;
                     else if (_clip is IScriptableAnimationClip)
-                        return (_clip as IScriptableAnimationClip).Length;
+                        return (_clip as IScriptableAnimationClip).Duration;
                 }
 
                 return 0f;
@@ -381,8 +381,9 @@ namespace com.spacepuppy.Anim.Legacy
         public ISPAnim CreateAnimatableState()
         {
             if (_controller == null) throw new System.InvalidOperationException("This clip has not been initialized.");
-            
-            if(_clip is AnimationClip)
+            if (_controller.ControllerMask != null && !_controller.ControllerMask.CanPlay(this)) return null;
+
+            if (_clip is AnimationClip)
             {
                 if (_state == null)
                 {
@@ -418,8 +419,9 @@ namespace com.spacepuppy.Anim.Legacy
         public void PlayDirectly(PlayMode mode = PlayMode.StopSameLayer)
         {
             if (_controller == null) return;
+            if (_controller.ControllerMask != null && !_controller.ControllerMask.CanPlay(this)) return;
 
-            if(_clip is AnimationClip)
+            if (_clip is AnimationClip)
             {
                 if (_state == null)
                 {
@@ -463,6 +465,7 @@ namespace com.spacepuppy.Anim.Legacy
         public void CrossFadeDirectly(float fadeLength, PlayMode mode = PlayMode.StopSameLayer)
         {
             if (_controller == null) return;
+            if (_controller.ControllerMask != null && !_controller.ControllerMask.CanPlay(this)) return;
 
             if (_clip is AnimationClip)
             {
@@ -514,6 +517,7 @@ namespace com.spacepuppy.Anim.Legacy
                 //throw new System.InvalidOperationException("This clip was unexpectedly destroyed, make sure the animation hasn't been destroyed, or another clip was added with the same name.");
                 return;
             }
+            if (_controller.ControllerMask != null && !_controller.ControllerMask.CanPlay(this)) return;
             _controller.animation.Rewind(_id);
         }
 

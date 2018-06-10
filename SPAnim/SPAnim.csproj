@@ -45,7 +45,7 @@
     </Compile>
     <Compile Include="Anim\AnimEventScheduler.cs" />
     <Compile Include="Anim\AnimUtil.cs" />
-    <Compile Include="Anim\Events\AnimSettings.cs" />
+    <Compile Include="Anim\AnimSettings.cs" />
     <Compile Include="Anim\Events\i_PlayAnimation.cs" />
     <Compile Include="Anim\Events\i_PlayRandomAnimation.cs" />
     <Compile Include="Anim\Events\i_StopAnimation.cs" />
@@ -56,6 +56,7 @@
     <Compile Include="Anim\ISPAnimator.cs" />
     <Compile Include="Anim\Legacy\AnimationEventCallback.cs" />
     <Compile Include="Anim\Legacy\Exceptions.cs" />
+    <Compile Include="Anim\Legacy\IAnimControllerMask.cs" />
     <Compile Include="Anim\Legacy\ISPAnimationMask.cs" />
     <Compile Include="Anim\Legacy\SPAnim.cs" />
     <Compile Include="Anim\Legacy\SPLegacyAnimator.cs" />

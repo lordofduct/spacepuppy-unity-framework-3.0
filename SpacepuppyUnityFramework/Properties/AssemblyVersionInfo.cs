@@ -6,4 +6,4 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyVersion("3.0.1.18161")]
+[assembly: AssemblyVersion("3.0.1.18171")]

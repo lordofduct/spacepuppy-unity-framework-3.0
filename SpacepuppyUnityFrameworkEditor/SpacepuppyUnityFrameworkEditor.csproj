@@ -157,6 +157,7 @@
     <Compile Include="SPGUI.cs" />
     <Compile Include="SPMenu.cs" />
     <Compile Include="Windows\AdvancedInputManagerWindow.cs" />
+    <Compile Include="Windows\ScreenshotRecorderWindow.cs" />
     <Compile Include="Windows\TypeSelectionDropDownWindow.cs" />
   </ItemGroup>
   <ItemGroup>

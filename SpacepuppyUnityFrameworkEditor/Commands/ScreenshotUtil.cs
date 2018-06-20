@@ -134,6 +134,21 @@ namespace com.spacepuppyeditor.Commands
             }
         }
 
+        public static string GetExtension(ImageFormat format)
+        {
+            switch (format)
+            {
+                case ImageFormat.PNG:
+                    return ".png";
+                case ImageFormat.Jpeg:
+                    return ".jpg";
+                case ImageFormat.TGA:
+                    return ".tga";
+                default:
+                    return string.Empty;
+            }
+        }
+
 
     }
 

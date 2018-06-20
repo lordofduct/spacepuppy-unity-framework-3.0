@@ -115,6 +115,8 @@ namespace com.spacepuppyeditor.Windows
                     fn = string.Format("Image{0}{1}", _frameCount, ScreenshotUtil.GetExtension(_format));
 
                 ScreenshotUtil.TakeScreenshot(System.IO.Path.Combine(_filePath, fn), _format);
+                _status = "Recorded " + fn;
+                this.Repaint();
             }
         }
 

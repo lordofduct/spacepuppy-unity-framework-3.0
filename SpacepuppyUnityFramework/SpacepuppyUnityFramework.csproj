@@ -79,6 +79,7 @@
     <Compile Include="ColorHSV.cs" />
     <Compile Include="Dynamic\StateToken.cs" />
     <Compile Include="Events\EventActivatorMask.cs" />
+    <Compile Include="Events\EventTriggerEvaluator.cs" />
     <Compile Include="Geom\CompoundTrigger.cs" />
     <Compile Include="CustomTimeSupplier.cs" />
     <Compile Include="DiscreteFloat.cs" />

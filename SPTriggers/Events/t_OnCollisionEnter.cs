@@ -13,7 +13,7 @@ namespace com.spacepuppy.Events
         #region Fields
 
         [SerializeField]
-        private EventActivatorMask _mask = new EventActivatorMask(-1);
+        private EventActivatorMaskRef _mask;
         [SerializeField]
         private float _cooldownInterval = 1.0f;
         [SerializeField]
@@ -26,10 +26,10 @@ namespace com.spacepuppy.Events
 
         #region Properties
 
-        public EventActivatorMask Mask
+        public IEventActivatorMask Mask
         {
-            get { return _mask; }
-            set { _mask = value; }
+            get { return _mask.Value; }
+            set { _mask.Value = value; }
         }
 
         public float CooldownInterval
@@ -52,7 +52,7 @@ namespace com.spacepuppy.Events
         {
             if (_coolingDown) return;
 
-            if (_mask.Intersects(c.collider))
+            if (_mask.Value == null || _mask.Value.Intersects(c.collider))
             {
                 if (_includeColliderAsTriggerArg)
                 {

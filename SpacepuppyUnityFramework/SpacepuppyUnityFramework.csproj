@@ -78,7 +78,6 @@
     <Compile Include="Collections\TrackablObjectCachePool.cs" />
     <Compile Include="ColorHSV.cs" />
     <Compile Include="Dynamic\StateToken.cs" />
-    <Compile Include="Events\EventActivatorMask.cs" />
     <Compile Include="Events\EventTriggerEvaluator.cs" />
     <Compile Include="Geom\CompoundTrigger.cs" />
     <Compile Include="CustomTimeSupplier.cs" />
@@ -126,6 +125,7 @@
     <Compile Include="Hooks\UpdateEventHooks.cs" />
     <Compile Include="IComponent.cs" />
     <Compile Include="IEntityAwakeHandler.cs" />
+    <Compile Include="IEventActivatorMask.cs" />
     <Compile Include="IGameObjectSource.cs" />
     <Compile Include="IImmediatelyResumingYieldInstruction.cs" />
     <Compile Include="IKillableEntity.cs" />
@@ -150,6 +150,7 @@
     <Compile Include="Project\CustomTimeLayersData.cs" />
     <Compile Include="Project\GameSettings.cs" />
     <Compile Include="Project\IAssetBundle.cs" />
+    <Compile Include="Project\PrefabToken.cs" />
     <Compile Include="Project\SerializableInterfaceRef.cs" />
     <Compile Include="Project\TagData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

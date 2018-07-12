@@ -86,6 +86,7 @@
     <Compile Include="Tween\Delegates.cs" />
     <Compile Include="Tween\Easing.cs" />
     <Compile Include="Tween\Enums.cs" />
+    <Compile Include="Tween\Events\i_KillTween.cs" />
     <Compile Include="Tween\Events\i_TweenState.cs" />
     <Compile Include="Tween\Events\i_TweenValue.cs" />
     <Compile Include="Tween\ITweenHash.cs" />

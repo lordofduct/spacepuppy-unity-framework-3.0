@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using com.spacepuppy.Dynamic;
+using com.spacepuppy.Project;
 using com.spacepuppy.Utils;
 
 namespace com.spacepuppy.Events
@@ -38,14 +39,35 @@ namespace com.spacepuppy.Events
 
         #region Methods
 
+        private ITriggerable[] GetCache(GameObject go)
+        {
+            //we don't trigger inactive GameObjects unless they are prefabs
+
+            EventTriggerCache cache;
+            if (go.activeInHierarchy)
+            {
+                cache = go.AddOrGetComponent<EventTriggerCache>();
+                return cache.Targets ?? cache.RefreshCache();
+            }
+            else if (go.HasComponent<PrefabToken>())
+            {
+                cache = go.GetComponent<EventTriggerCache>();
+                if (cache != null) return cache.Targets ?? cache.RefreshCache();
+
+                return go.GetComponents<ITriggerable>();
+            }
+            else
+            {
+                return ArrayUtil.Empty<ITriggerable>();
+            }
+        }
+
         public void GetAllTriggersOnTarget(object target, List<ITriggerable> outputColl)
         {
             var go = GameObjectUtil.GetGameObjectFromSource(target);
             if (go != null)
             {
-                var cache = go.AddOrGetComponent<EventTriggerCache>();
-                var arr = cache.Targets ?? cache.RefreshCache();
-                outputColl.AddRange(arr);
+                outputColl.AddRange(this.GetCache(go));
             }
             else if (target is ITriggerable)
                 outputColl.Add(target as ITriggerable);
@@ -56,8 +78,7 @@ namespace com.spacepuppy.Events
             var go = GameObjectUtil.GetGameObjectFromSource(target);
             if (go != null)
             {
-                var cache = go.AddOrGetComponent<EventTriggerCache>();
-                var arr = cache.Targets ?? cache.RefreshCache();
+                var arr = this.GetCache(go);
 
                 foreach (var t in arr)
                 {

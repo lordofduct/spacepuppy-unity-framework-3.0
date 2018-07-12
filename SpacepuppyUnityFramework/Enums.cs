@@ -125,4 +125,11 @@ namespace com.spacepuppy
         Rect = 15
     }
 
+    public enum DisableMode
+    {
+        None,
+        DisableComponent,
+        DisableGameObject
+    }
+
 }

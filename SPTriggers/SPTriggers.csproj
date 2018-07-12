@@ -84,6 +84,7 @@
     <Compile Include="Events\t_OnStart.cs" />
     <Compile Include="Events\t_OnTriggerOccupied.cs" />
     <Compile Include="Events\t_OnUIEvent.cs" />
+    <Compile Include="Events\t_Timer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ProxyMediator.cs" />
   </ItemGroup>

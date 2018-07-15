@@ -73,7 +73,7 @@ namespace com.spacepuppy
                 {
                     try
                     {
-                        return Evaluator.EvalValue(_string, _unityObjectReference);
+                        return Evaluator.EvalValue(_string, ObjUtil.ReduceIfProxy(_unityObjectReference));
                     }
                     catch
                     {
@@ -210,7 +210,7 @@ namespace com.spacepuppy
                     case RefMode.Eval:
                         try
                         {
-                            return Evaluator.EvalString(_string, _unityObjectReference);
+                            return Evaluator.EvalString(_string, ObjUtil.ReduceIfProxy(_unityObjectReference));
                         }
                         catch
                         {
@@ -271,7 +271,7 @@ namespace com.spacepuppy
                     case RefMode.Eval:
                         try
                         {
-                            return Evaluator.EvalBool(_string, _unityObjectReference);
+                            return Evaluator.EvalBool(_string, ObjUtil.ReduceIfProxy(_unityObjectReference));
                         }
                         catch
                         {
@@ -337,7 +337,7 @@ namespace com.spacepuppy
                     case RefMode.Eval:
                         try
                         {
-                            return (int)Evaluator.EvalNumber(_string, _unityObjectReference);
+                            return (int)Evaluator.EvalNumber(_string, ObjUtil.ReduceIfProxy(_unityObjectReference));
                         }
                         catch
                         {
@@ -402,7 +402,7 @@ namespace com.spacepuppy
                     case RefMode.Eval:
                         try
                         {
-                            return Evaluator.EvalNumber(_string, _unityObjectReference);
+                            return Evaluator.EvalNumber(_string, ObjUtil.ReduceIfProxy(_unityObjectReference));
                         }
                         catch
                         {
@@ -467,7 +467,7 @@ namespace com.spacepuppy
                     case RefMode.Eval:
                         try
                         {
-                            return (double)Evaluator.EvalNumber(_string, _unityObjectReference);
+                            return (double)Evaluator.EvalNumber(_string, ObjUtil.ReduceIfProxy(_unityObjectReference));
                         }
                         catch
                         {
@@ -532,7 +532,7 @@ namespace com.spacepuppy
                     case RefMode.Eval:
                         try
                         {
-                            return Evaluator.EvalVector2(_string, _unityObjectReference);
+                            return Evaluator.EvalVector2(_string, ObjUtil.ReduceIfProxy(_unityObjectReference));
                         }
                         catch
                         {
@@ -597,7 +597,7 @@ namespace com.spacepuppy
                     case RefMode.Eval:
                         try
                         {
-                            return Evaluator.EvalVector3(_string, _unityObjectReference);
+                            return Evaluator.EvalVector3(_string, ObjUtil.ReduceIfProxy(_unityObjectReference));
                         }
                         catch
                         {
@@ -662,7 +662,7 @@ namespace com.spacepuppy
                     case RefMode.Eval:
                         try
                         {
-                            return Evaluator.EvalVector4(_string, _unityObjectReference);
+                            return Evaluator.EvalVector4(_string, ObjUtil.ReduceIfProxy(_unityObjectReference));
                         }
                         catch
                         {
@@ -706,7 +706,7 @@ namespace com.spacepuppy
                     case RefMode.Eval:
                         try
                         {
-                            return Evaluator.EvalQuaternion(_string, _unityObjectReference);
+                            return Evaluator.EvalQuaternion(_string, ObjUtil.ReduceIfProxy(_unityObjectReference));
                         }
                         catch
                         {
@@ -774,7 +774,7 @@ namespace com.spacepuppy
                     case RefMode.Eval:
                         try
                         {
-                            return Evaluator.EvalColor(_string, _unityObjectReference);
+                            return Evaluator.EvalColor(_string, ObjUtil.ReduceIfProxy(_unityObjectReference));
                         }
                         catch
                         {
@@ -984,7 +984,7 @@ namespace com.spacepuppy
                     case RefMode.Eval:
                         try
                         {
-                            return (int)Evaluator.EvalNumber(_string, _unityObjectReference);
+                            return (int)Evaluator.EvalNumber(_string, ObjUtil.ReduceIfProxy(_unityObjectReference));
                         }
                         catch
                         {
@@ -1058,7 +1058,7 @@ namespace com.spacepuppy
                     case RefMode.Eval:
                         try
                         {
-                            return Evaluator.EvalRect(_string, _unityObjectReference);
+                            return Evaluator.EvalRect(_string, ObjUtil.ReduceIfProxy(_unityObjectReference));
                         }
                         catch
                         {
@@ -1136,7 +1136,7 @@ namespace com.spacepuppy
         {
             if (_mode != RefMode.Property) return;
             
-            DynamicUtil.SetValue(_unityObjectReference, _string, value);
+            DynamicUtil.SetValue(ObjUtil.ReduceIfProxy(_unityObjectReference), _string, value);
         }
 
         public void SetToProperty(UnityEngine.Object obj, string property)
@@ -1182,7 +1182,7 @@ namespace com.spacepuppy
         private object EvaluateProperty()
         {
             if (_unityObjectReference == null) return null;
-            return DynamicUtil.GetValue(_unityObjectReference, _string);
+            return DynamicUtil.GetValue(ObjUtil.ReduceIfProxy(_unityObjectReference), _string);
         }
 
         #endregion

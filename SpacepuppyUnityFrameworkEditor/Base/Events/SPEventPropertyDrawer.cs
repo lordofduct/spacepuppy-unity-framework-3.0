@@ -218,13 +218,13 @@ namespace com.spacepuppyeditor.Base.Events
                         {
                             if (listRect.Contains(ev.mousePosition))
                             {
-                                var refs = (from o in DragAndDrop.objectReferences let go = GameObjectUtil.GetGameObjectFromSource(o, false) select go);
-                                DragAndDrop.visualMode = refs.Any() ? DragAndDropVisualMode.Link : DragAndDropVisualMode.Rejected;
+                                var refs = DragAndDrop.objectReferences;
+                                DragAndDrop.visualMode = refs.Length > 0 ? DragAndDropVisualMode.Link : DragAndDropVisualMode.Rejected;
 
-                                if (ev.type == EventType.DragPerform && refs.Any())
+                                if (ev.type == EventType.DragPerform && refs.Length > 0)
                                 {
                                     ev.Use();
-                                    AddObjectsToTrigger(property, refs.ToArray());
+                                    AddObjectsToTrigger(property, refs);
                                 }
                             }
                         }
@@ -326,7 +326,7 @@ namespace com.spacepuppyeditor.Base.Events
             if (EditorGUI.EndChangeCheck())
             {
                 var actInfo = EventTriggerTargetPropertyDrawer.GetTriggerActivationInfo(element);
-                targProp.objectReferenceValue = EventTriggerTargetPropertyDrawer.IsValidTriggerTarget(targObj, actInfo.ActivationType) ? targObj : null;
+                targProp.objectReferenceValue = EventTriggerTarget.IsValidTriggerTarget(targObj, actInfo.ActivationType) ? targObj : null;
             }
             EditorGUI.EndProperty();
 
@@ -368,41 +368,45 @@ namespace com.spacepuppyeditor.Base.Events
         /// </summary>
         /// <param name="triggerProperty"></param>
         /// <param name="objs"></param>
-        public static void AddObjectsToTrigger(SerializedProperty eventProperty, GameObject[] objs)
+        public static void AddObjectsToTrigger(SerializedProperty triggerProperty, UnityEngine.Object[] objs)
         {
-            if (eventProperty == null) throw new System.ArgumentNullException("eventProperty");
+            if (triggerProperty == null) throw new System.ArgumentNullException("triggerProperty");
 
             try
             {
-                eventProperty.serializedObject.ApplyModifiedProperties();
-                var trigger = EditorHelper.GetTargetObjectOfProperty(eventProperty) as BaseSPEvent;
+                triggerProperty.serializedObject.ApplyModifiedProperties();
+                var trigger = EditorHelper.GetTargetObjectOfProperty(triggerProperty) as BaseSPEvent;
                 if (trigger == null) return;
 
-                using (var set = TempCollection.GetList<GameObject>())
+                using (var set = TempCollection.GetSet<UnityEngine.Object>())
                 {
                     for (int i = 0; i < trigger.Targets.Count; i++)
                     {
-                        var go = GameObjectUtil.GetGameObjectFromSource(trigger.Targets[i].Target);
-                        if (go != null) set.Add(go);
+                        set.Add(trigger.Targets[i].Target);
                     }
 
-                    foreach (var go in objs)
+                    foreach (var obj in objs)
                     {
-                        if (set.Contains(go)) continue;
-                        set.Add(go);
+                        if (set.Contains(obj)) continue;
+                        set.Add(obj);
 
                         var targ = trigger.AddNew();
-                        targ.ConfigureTriggerAll(go);
+                        if (EventTriggerTarget.IsValidTriggerTarget(obj, TriggerActivationType.TriggerAllOnTarget))
+                            targ.ConfigureTriggerAll(obj);
+                        else
+                            targ.ConfigureCallMethod(obj, "");
                         targ.Weight = 1f;
                     }
                 }
-                eventProperty.serializedObject.Update();
+
+                triggerProperty.serializedObject.Update();
             }
             catch (System.Exception ex)
             {
                 Debug.LogException(ex);
             }
         }
+
         #endregion
 
     }

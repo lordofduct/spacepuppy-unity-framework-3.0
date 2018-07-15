@@ -31,7 +31,7 @@ namespace com.spacepuppy.Events
         private SPEvent _onComplete;
 
         [System.NonSerialized]
-        private double _tally;
+        private float _tally;
 
         #endregion
 
@@ -58,7 +58,7 @@ namespace com.spacepuppy.Events
         {
             get
             {
-                return this.isActiveAndEnabled && !double.IsNaN(_tally);
+                return this.isActiveAndEnabled && !float.IsNaN(_tally);
             }
         }
 
@@ -66,8 +66,14 @@ namespace com.spacepuppy.Events
         {
             get
             {
-                return this.isActiveAndEnabled && !double.IsNaN(_tally) && !GameLoop.UpdatePump.Contains(this);
+                return this.isActiveAndEnabled && !float.IsNaN(_tally) && !GameLoop.UpdatePump.Contains(this);
             }
+        }
+
+        [ShowNonSerializedProperty("Current Time")]
+        public float Tally
+        {
+            get { return _tally; }
         }
 
         #endregion
@@ -90,7 +96,7 @@ namespace com.spacepuppy.Events
 
         void IUpdateable.Update()
         {
-            if (double.IsNaN(_tally))
+            if (float.IsNaN(_tally))
             {
                 this.Stop(false);
                 return;
@@ -106,7 +112,7 @@ namespace com.spacepuppy.Events
 
         public void Restart()
         {
-            _tally = 0d;
+            _tally = 0f;
             GameLoop.UpdatePump.Add(this);
         }
 
@@ -130,7 +136,7 @@ namespace com.spacepuppy.Events
 
         public void Stop(bool fireEvent)
         {
-            _tally = double.NaN;
+            _tally = float.NaN;
             GameLoop.UpdatePump.Remove(this);
             if (fireEvent)
             {

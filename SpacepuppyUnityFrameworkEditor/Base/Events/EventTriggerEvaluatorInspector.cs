@@ -37,19 +37,35 @@ namespace com.spacepuppyeditor.Base.Events
         #endregion
 
         #region Methods
-        
-        private static void SignalTriggered(GameObject go)
-        {
-            if (go == null) return;
 
-            int id = go.GetInstanceID();
-            _triggered[id] = COOLDOWN_TRIGGERED;
-        }
-
-        private static void SignalTriggered(ITriggerable mech)
+        private static void SignalTriggered(object obj)
         {
-            if (mech == null) return;
-            SignalTriggered(GameObjectUtil.GetGameObjectFromSource(mech));
+            if (obj is IProxy)
+            {
+                var proxy = obj as IProxy;
+                obj = proxy.GetTarget();
+
+                // // SHOULD WE DRAW THE PROXY TOO???
+                //if(GameObjectUtil.IsGameObjectSource(proxy))
+                //{
+                //    var go = GameObjectUtil.GetGameObjectFromSource(proxy);
+                //    if(go != null)
+                //    {
+                //        int id = go.GetInstanceID();
+                //        _triggered[id] = COOLDOWN_TRIGGERED;
+                //    }
+                //}
+            }
+
+            if (GameObjectUtil.IsGameObjectSource(obj))
+            {
+                var go = GameObjectUtil.GetGameObjectFromSource(obj);
+                if (go != null)
+                {
+                    int id = go.GetInstanceID();
+                    _triggered[id] = COOLDOWN_TRIGGERED;
+                }
+            }
         }
 
 
@@ -108,6 +124,7 @@ namespace com.spacepuppyeditor.Base.Events
                 }
                 else
                 {
+                    if (target is IProxy) target = (target as IProxy).GetTarget();
                     var go = GameObjectUtil.GetGameObjectFromSource(target);
                     if (go != null)
                     {
@@ -123,25 +140,13 @@ namespace com.spacepuppyeditor.Base.Events
             {
                 if (Application.isPlaying)
                 {
-                    SignalTriggered(GameObjectUtil.GetGameObjectFromSource(target));
+                    SignalTriggered(target);
                     EventTriggerEvaluator.Default.TriggerAllOnTarget(target, sender, arg);
                     return;
                 }
 
                 using (var lst = com.spacepuppy.Collections.TempCollection.GetList<ITriggerable>())
                 {
-                    /*
-                     * OLD
-                     * 
-                    var go = GameObjectUtil.GetGameObjectFromSource(target);
-                    if (go != null)
-                    {
-                        go.GetComponents<ITriggerableMechanism>(lst);
-                        lst.Sort(TriggerableMechanismOrderComparer.Default);
-                    }
-                    else if (target is ITriggerableMechanism)
-                        lst.Add(target as ITriggerableMechanism);
-                      */
                     this.GetAllTriggersOnTarget(target, lst);
 
                     var e = lst.GetEnumerator();
@@ -159,31 +164,31 @@ namespace com.spacepuppyeditor.Base.Events
 
             void EventTriggerEvaluator.IEvaluator.TriggerSelectedTarget(object target, object sender, object arg)
             {
-                SignalTriggered(target as ITriggerable);
+                SignalTriggered(target);
                 EventTriggerEvaluator.Default.TriggerSelectedTarget(target, sender, arg);
             }
 
             void EventTriggerEvaluator.IEvaluator.CallMethodOnSelectedTarget(object target, string methodName, VariantReference[] methodArgs)
             {
-                SignalTriggered(GameObjectUtil.GetGameObjectFromSource(target));
+                SignalTriggered(target);
                 EventTriggerEvaluator.Default.CallMethodOnSelectedTarget(target, methodName, methodArgs);
             }
 
             void EventTriggerEvaluator.IEvaluator.SendMessageToTarget(object target, string message, object arg)
             {
-                SignalTriggered(GameObjectUtil.GetGameObjectFromSource(target));
+                SignalTriggered(target);
                 EventTriggerEvaluator.Default.SendMessageToTarget(target, message, arg);
             }
 
             void EventTriggerEvaluator.IEvaluator.EnableTarget(object target, EnableMode mode)
             {
-                SignalTriggered(GameObjectUtil.GetGameObjectFromSource(target));
+                SignalTriggered(target);
                 EventTriggerEvaluator.Default.EnableTarget(target, mode);
             }
 
             void EventTriggerEvaluator.IEvaluator.DestroyTarget(object target)
             {
-                SignalTriggered(GameObjectUtil.GetGameObjectFromSource(target));
+                SignalTriggered(target);
                 EventTriggerEvaluator.Default.DestroyTarget(target);
             }
 

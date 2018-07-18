@@ -69,6 +69,7 @@
     <Compile Include="Collections\ObjectInstanceIDEqualityComparer.cs" />
     <Compile Include="Collections\ObjectReferenceEqualityComparer.cs" />
     <Compile Include="Collections\OrdereredDelegate.cs" />
+    <Compile Include="Collections\PointOctree.cs" />
     <Compile Include="Collections\PrimeHelper.cs" />
     <Compile Include="Collections\ReusableStringReader.cs" />
     <Compile Include="Collections\TempCollection.cs" />

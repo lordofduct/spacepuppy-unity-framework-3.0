@@ -13,7 +13,7 @@ using com.spacepuppyeditor.Internal;
 namespace com.spacepuppyeditor.Settings
 {
 
-    [CreateAssetMenu(fileName = "InputSettings", menuName = "Spacepuppy/Input Settings", order = int.MaxValue)]
+    [CreateAssetMenu(fileName = "InputSettings", menuName = "Spacepuppy Build Pipeline/Input Settings")]
     public class InputSettings : ScriptableObject
     {
 

@@ -145,6 +145,7 @@
     <Compile Include="PropertyAttributeDrawers\WeightedValueCollectionPropertyDrawer.cs" />
     <Compile Include="ReorderableListHelper.cs" />
     <Compile Include="ScriptableObjectHelper.cs" />
+    <Compile Include="Settings\BulkBuildSettings.cs" />
     <Compile Include="Settings\ModelSettingsImportProcessor.cs" />
     <Compile Include="Settings\SpacepuppySettingsWindow.cs" />
     <Compile Include="Settings\BuildSettings.cs" />

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿#pragma warning disable 0649 // variable declared but not used.
+using UnityEngine;
 
 using com.spacepuppy.Geom;
 using com.spacepuppy.Utils;
@@ -12,14 +13,25 @@ namespace com.spacepuppy.Events
         #region Fields
         
         [SerializeField]
-        private EventActivatorMaskRef _mask;
+        private EventActivatorMaskRef _mask = new EventActivatorMaskRef();
         [SerializeField]
-        private float _cooldownInterval = 1.0f;
+        private float _cooldownInterval = 0f;
         [SerializeField]
         private bool _includeColliderAsTriggerArg = true;
 
         [System.NonSerialized()]
         private bool _coolingDown;
+
+        #endregion
+
+        #region CONSTRUCTOR
+
+        protected override void OnDisable()
+        {
+            base.OnDisable();
+
+            _coolingDown = false;
+        }
 
         #endregion
 
@@ -62,18 +74,20 @@ namespace com.spacepuppy.Events
                     this.ActivateTrigger();
                 }
 
-                _coolingDown = true;
-                //use global incase this gets disable
-                this.InvokeGuaranteed(() =>
+                if (_cooldownInterval > 0f)
                 {
-                    _coolingDown = false;
-                }, _cooldownInterval);
+                    _coolingDown = true;
+                    this.InvokeGuaranteed(() =>
+                    {
+                        _coolingDown = false;
+                    }, _cooldownInterval);
+                }
             }
         }
 
         void OnTriggerExit(Collider other)
         {
-            if (this.HasComponent<CompoundTrigger>()) return;
+            if (_coolingDown || this.HasComponent<CompoundTrigger>()) return;
 
             this.DoTestTriggerExit(other);
         }

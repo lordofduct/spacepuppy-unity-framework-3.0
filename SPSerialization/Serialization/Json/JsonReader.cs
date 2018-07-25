@@ -373,6 +373,7 @@ namespace com.spacepuppy.Serialization.Json
                     case ' ':
                     case '\t':
                     case '\n':
+                    case '\r':
                         goto done;
                     default:
                         throw new JsonException("Malformed numeric value.");

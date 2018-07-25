@@ -479,7 +479,6 @@ namespace com.spacepuppyeditor.PropertyAttributeDrawers
                 }
                 else
                 {
-                    area = EditorGUI.PrefixLabel(area, label);
                     SPEditorGUI.DefaultPropertyField(area, element, label, false);
                 }
             }

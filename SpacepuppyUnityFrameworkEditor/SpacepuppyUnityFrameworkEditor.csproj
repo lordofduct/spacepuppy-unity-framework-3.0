@@ -60,6 +60,7 @@
     <Compile Include="Base\ComparisonOperatorPropertyDrawer.cs" />
     <Compile Include="Base\ConstraintPropertyDrawer.cs" />
     <Compile Include="Base\DiscreteFloatPropertyDrawer.cs" />
+    <Compile Include="Base\Events\EventTriggerEvaluatorInspector.cs" />
     <Compile Include="Base\Events\EventTriggerTargetPropertyDrawer.cs" />
     <Compile Include="Base\Events\ITriggerableMechanismAddonDrawer.cs" />
     <Compile Include="Base\Events\TriggerableTargetObjectPropertyDrawer.cs" />
@@ -144,6 +145,7 @@
     <Compile Include="PropertyAttributeDrawers\WeightedValueCollectionPropertyDrawer.cs" />
     <Compile Include="ReorderableListHelper.cs" />
     <Compile Include="ScriptableObjectHelper.cs" />
+    <Compile Include="Settings\BulkBuildSettings.cs" />
     <Compile Include="Settings\ModelSettingsImportProcessor.cs" />
     <Compile Include="Settings\SpacepuppySettingsWindow.cs" />
     <Compile Include="Settings\BuildSettings.cs" />
@@ -157,6 +159,7 @@
     <Compile Include="SPGUI.cs" />
     <Compile Include="SPMenu.cs" />
     <Compile Include="Windows\AdvancedInputManagerWindow.cs" />
+    <Compile Include="Windows\ScreenshotRecorderWindow.cs" />
     <Compile Include="Windows\TypeSelectionDropDownWindow.cs" />
   </ItemGroup>
   <ItemGroup>

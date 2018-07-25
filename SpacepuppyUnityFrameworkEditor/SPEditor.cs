@@ -227,7 +227,8 @@ namespace com.spacepuppyeditor
         {
             return base.RequiresConstantRepaint() ||
                    (Application.isPlaying && _shownFields != null && _shownFields.Count > 0) ||
-                   (_constantlyRepaint != null && (Application.isPlaying || !_constantlyRepaint.RuntimeOnly));
+                   (_constantlyRepaint != null && (Application.isPlaying || !_constantlyRepaint.RuntimeOnly)) ||
+                   (_addons != null && _addons.Length > 0 && _addons.Any((o) => o.RequiresConstantRepaint()));
         }
 
         #endregion

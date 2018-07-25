@@ -16,6 +16,8 @@ namespace com.spacepuppyeditor.PropertyAttributeDrawers
     public class ReorderableArrayPropertyDrawer : PropertyDrawer, IArrayHandlingPropertyDrawer
     {
 
+        public delegate string FormatElementLabelCallback(SerializedProperty property, int index, bool isActive, bool isFocused);
+
         private static readonly float TOP_PAD = 2f + EditorGUIUtility.singleLineHeight;
         private const float BOTTOM_PAD = 2f;
         private const float MARGIN = 2f;
@@ -202,6 +204,12 @@ namespace com.spacepuppyeditor.PropertyAttributeDrawers
             set { _addCallback = value; }
         }
 
+        public FormatElementLabelCallback FormatElementLabel
+        {
+            get;
+            set;
+        }
+
         /// <summary>
         /// Can drag entries onto the inspector without needing to click + button. Only works for array/list of UnityEngine.Object sub/types.
         /// </summary>
@@ -321,7 +329,7 @@ namespace com.spacepuppyeditor.PropertyAttributeDrawers
 
                                     if (ev.type == EventType.DragPerform && refs.Any())
                                     {
-                                        ev.Use();
+                                        DragAndDrop.AcceptDrag();
                                         AddObjectsToARray(property, refs.ToArray());
                                     }
                                 }
@@ -406,7 +414,12 @@ namespace com.spacepuppyeditor.PropertyAttributeDrawers
             }
             else
             {
-                if (!string.IsNullOrEmpty(_elementLabelFormatString))
+                if (this.FormatElementLabel != null)
+                {
+                    string slbl = this.FormatElementLabel(element, index, isActive, isFocused);
+                    if (slbl != null) label = EditorHelper.TempContent(slbl);
+                }
+                else if (!string.IsNullOrEmpty(_elementLabelFormatString))
                 {
                     label = EditorHelper.TempContent(string.Format(_elementLabelFormatString, index));
                 }

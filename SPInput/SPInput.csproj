@@ -50,6 +50,7 @@
     <Compile Include="SPInput\CompositeInputSignature.cs" />
     <Compile Include="SPInput\DelegatedInputSignature.cs" />
     <Compile Include="SPInput\Enums.cs" />
+    <Compile Include="SPInput\Events\t_OnAnyInput.cs" />
     <Compile Include="SPInput\Events\t_OnSimpleButtonPress.cs" />
     <Compile Include="SPInput\GenericInputDevice.cs" />
     <Compile Include="SPInput\IMappedInputDevice.cs" />

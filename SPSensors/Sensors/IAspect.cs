@@ -13,6 +13,8 @@ namespace com.spacepuppy.Sensors
 
         float Precedence { get; }
 
+        bool OmniPresent { get; }
+
     }
     
 }

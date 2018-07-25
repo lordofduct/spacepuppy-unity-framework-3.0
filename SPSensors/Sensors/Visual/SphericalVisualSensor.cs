@@ -67,6 +67,11 @@ namespace com.spacepuppy.Sensors.Visual
 
         #region Methods
 
+        public override BoundingSphere GetBoundingSphere()
+        {
+            return new BoundingSphere(this.transform.position, _radius);
+        }
+
         protected override bool TestVisibility(VisualAspect aspect)
         {
             var sqrRadius = _radius * _radius;

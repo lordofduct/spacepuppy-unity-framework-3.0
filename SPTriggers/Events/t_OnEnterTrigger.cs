@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿#pragma warning disable 0649 // variable declared but not used.
+using UnityEngine;
 
 using com.spacepuppy.Geom;
 using com.spacepuppy.Utils;
@@ -12,9 +13,9 @@ namespace com.spacepuppy.Events
         #region Fields
         
         [SerializeField]
-        private EventActivatorMask _mask = new EventActivatorMask(-1);
+        private EventActivatorMaskRef _mask = new EventActivatorMaskRef();
         [SerializeField]
-        private float _cooldownInterval = 1.0f;
+        private float _cooldownInterval = 0f;
         [SerializeField]
         private bool _includeColliderAsTriggerArg = true;
 
@@ -23,12 +24,23 @@ namespace com.spacepuppy.Events
 
         #endregion
 
+        #region CONSTRUCTOR
+
+        protected override void OnDisable()
+        {
+            base.OnDisable();
+
+            _coolingDown = false;
+        }
+
+        #endregion
+
         #region Properties
 
-        public EventActivatorMask Mask
+        public IEventActivatorMask Mask
         {
-            get { return _mask; }
-            set { _mask = value; }
+            get { return _mask.Value; }
+            set { _mask.Value = value; }
         }
 
         public float CooldownInterval
@@ -51,7 +63,7 @@ namespace com.spacepuppy.Events
         {
             if (_coolingDown) return;
 
-            if (_mask.Intersects(other))
+            if (_mask.Value == null || _mask.Value.Intersects(other))
             {
                 if (_includeColliderAsTriggerArg)
                 {
@@ -62,18 +74,20 @@ namespace com.spacepuppy.Events
                     this.ActivateTrigger();
                 }
 
-                _coolingDown = true;
-                //use global incase this gets disable
-                this.InvokeGuaranteed(() =>
+                if (_cooldownInterval > 0f)
                 {
-                    _coolingDown = false;
-                }, _cooldownInterval);
+                    _coolingDown = true;
+                    this.InvokeGuaranteed(() =>
+                    {
+                        _coolingDown = false;
+                    }, _cooldownInterval);
+                }
             }
         }
 
         void OnTriggerEnter(Collider other)
         {
-            if (this.HasComponent<CompoundTrigger>()) return;
+            if (_coolingDown || this.HasComponent<CompoundTrigger>()) return;
 
             this.DoTestTriggerEnter(other);
         }

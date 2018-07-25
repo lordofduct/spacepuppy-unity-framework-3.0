@@ -174,7 +174,7 @@ namespace com.spacepuppyeditor.Anim.Legacy
             _currentLabel = label;
             if (this.fieldInfo.DeclaringType == typeof(SPLegacyAnimController)) _currentLabel.text = "Animation States";
 
-            property.isExpanded = EditorGUI.Foldout(new Rect(position.xMin, position.yMin, position.width, EditorGUIUtility.singleLineHeight), property.isExpanded, GUIContent.none);
+            property.isExpanded = SPEditorGUI.PrefixFoldoutLabel(position, property.isExpanded, GUIContent.none);
 
             if (!property.isExpanded)
             {

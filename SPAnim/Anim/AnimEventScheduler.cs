@@ -72,7 +72,7 @@ namespace com.spacepuppy.Anim
             //if (!_state.IsPlaying) throw new System.InvalidOperationException("Can only schedule a callback on a playing animation.");
             if (callback == null) throw new System.ArgumentNullException("callback");
 
-            if (_endOfLineCallback == null) _endOfLineCallback = new CallbackInfo() { timeout = float.PositiveInfinity };
+            if (_endOfLineCallback == null) _endOfLineCallback = new CallbackInfo() { timeout = float.NaN };
             _endOfLineCallback.callback += callback;
             
             GameLoop.UpdatePump.Add(this);
@@ -83,15 +83,16 @@ namespace com.spacepuppy.Anim
             //if (!_state.IsPlaying) throw new System.InvalidOperationException("Can only schedule a callback on a playing animation.");
             if (callback == null) throw new System.ArgumentNullException("callback");
 
-            if(timeout == float.PositiveInfinity)
+            if (float.IsPositiveInfinity(timeout) || float.IsNaN(timeout))
             {
-                if (_endOfLineCallback == null) _endOfLineCallback = new CallbackInfo() { timeout = float.PositiveInfinity };
+                if (_endOfLineCallback == null) _endOfLineCallback = new CallbackInfo() { timeout = float.NaN };
                 _endOfLineCallback.callback += callback;
             }
             else
             {
                 var info = _pool.GetInstance();
                 info.callback = callback;
+                info.current = 0f;
                 info.timeout = timeout;
                 info.supplier = (timeSupplier != null) ? timeSupplier : SPTime.Normal;
                 if (_inUpdate)
@@ -149,7 +150,7 @@ namespace com.spacepuppy.Anim
         void IUpdateable.Update()
         {
             _inUpdate = true;
-            if (!_state.IsPlaying)
+            if (TestAnimComplete(_state))
             {
                 //close them all down
                 this.CloseOutAllEventCallbacks();
@@ -161,8 +162,8 @@ namespace com.spacepuppy.Anim
                     var e = _timeoutInfos.GetEnumerator();
                     while (e.MoveNext())
                     {
-                        e.Current.timeout -= e.Current.supplier.Delta;
-                        if (e.Current.timeout <= 0f)
+                        e.Current.current += e.Current.supplier.Delta;
+                        if (e.Current.current >= e.Current.timeout)
                         {
                             var a = e.Current.callback;
                             e.Current.callback = null;
@@ -230,6 +231,7 @@ namespace com.spacepuppy.Anim
             (info) =>
             {
                 info.callback = null;
+                info.current = 0f;
                 info.timeout = 0f;
                 info.supplier = null;
             });
@@ -237,8 +239,38 @@ namespace com.spacepuppy.Anim
         private class CallbackInfo
         {
             public System.Action<ISPAnim> callback;
+            public float current;
             public float timeout;
             public ITimeSupplier supplier;
+        }
+
+        public static bool TestAnimComplete(ISPAnim anim)
+        {
+            if (anim == null) throw new System.ArgumentNullException("anim");
+
+            if (!anim.IsPlaying) return true;
+
+            var a = anim as com.spacepuppy.Anim.Legacy.SPAnim;
+            if (a != null)
+            {
+                if (a.Controller == null || !a.Controller.isActiveAndEnabled) return true;
+
+                switch (a.WrapMode)
+                {
+                    case WrapMode.Default:
+                    case WrapMode.Once:
+                        return Time.time > (a.StartTime + a.ScaledDuration);
+                    case WrapMode.Loop:
+                    case WrapMode.PingPong:
+                    case WrapMode.ClampForever:
+                    default:
+                        return true;
+                }
+            }
+            else
+            {
+                return false;
+            }
         }
 
         #endregion

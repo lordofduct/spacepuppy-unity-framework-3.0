@@ -511,6 +511,8 @@ namespace com.spacepuppy.Tween
 
         void IRadicalWaitHandle.OnComplete(System.Action<IRadicalWaitHandle> callback)
         {
+            if (callback == null) return;
+
             System.EventHandler d = null;
             d = (s, e) =>
             {

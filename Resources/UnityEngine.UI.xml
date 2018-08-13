@@ -151,6 +151,11 @@
         <para>The current BaseInput being used by the input module.</para>
       </summary>
     </member>
+    <member name="P:UnityEngine.EventSystems.BaseInputModule.inputOverride">
+      <summary>
+        <para>Used to override the default BaseInput for the input module.</para>
+      </summary>
+    </member>
     <member name="M:UnityEngine.EventSystems.BaseInputModule.ActivateModule">
       <summary>
         <para>Called when the module is activated. Override this if you want custom code to execute when you activate your module.</para>
@@ -375,7 +380,7 @@
     </member>
     <member name="M:UnityEngine.EventSystems.EventSystem.SetSelectedGameObject(UnityEngine.GameObject,UnityEngine.EventSystems.BaseEventData)">
       <summary>
-        <para>Set the object as selected. Will send an OnDeselect the the old selected object and OnSelect to the new selected object.</para>
+        <para>Set the GameObject as selected. Will send an OnDeselect the the old selected object and OnSelect to the new selected object.</para>
       </summary>
       <param name="selected">GameObject to select.</param>
       <param name="pointer">Associated EventData.</param>
@@ -713,7 +718,7 @@
     </member>
     <member name="T:UnityEngine.EventSystems.ExecuteEvents.EventFunction_1">
       <summary>
-        <para>Funtion definition for an EventFunction that is used to map a given EventInterface into a specific event call.</para>
+        <para>Function definition for an EventFunction that is used to map a given EventInterface into a specific event call.</para>
       </summary>
       <param name="handler"></param>
       <param name="eventData"></param>
@@ -1089,7 +1094,7 @@
     </member>
     <member name="P:UnityEngine.EventSystems.PointerEventData.pointerDrag">
       <summary>
-        <para>The object that is receiving 'OnDrag'.</para>
+        <para>The object that is receiving OnDrag.</para>
       </summary>
     </member>
     <member name="P:UnityEngine.EventSystems.PointerEventData.pointerEnter">
@@ -1736,11 +1741,10 @@
         <para>See MonoBehaviour.OnDisable.</para>
       </summary>
     </member>
-    <member name="M:UnityEngine.UI.AspectRatioFitter.SetDirty()">
+    <member name="M:UnityEngine.UI.AspectRatioFitter.SetDirty">
       <summary>
         <para>Mark the AspectRatioFitter as dirty.</para>
       </summary>
-      <param name="delayUpdate"></param>
     </member>
     <member name="M:UnityEngine.UI.AspectRatioFitter.SetLayoutHorizontal">
       <summary>
@@ -1909,7 +1913,7 @@
     <member name="F:UnityEngine.UI.CanvasScaler.ScaleMode.ScaleWithScreenSize">
       <summary>
         <para>Using the Scale With Screen Size mode, positions and sizes can be specified according to the pixels of a specified reference resolution.
-If the current screen resolution is larger then the reference resolution, the Canvas will keep having only the resolution of the reference resolution, but will scale up in order to fit the screen. If the current screen resolution is smaller than the reference resolution, the Canvas will similarly be scaled down to fit.</para>
+If the current screen resolution is larger than the reference resolution, the Canvas will keep having only the resolution of the reference resolution, but will scale up in order to fit the screen. If the current screen resolution is smaller than the reference resolution, the Canvas will similarly be scaled down to fit.</para>
       </summary>
     </member>
     <member name="T:UnityEngine.UI.CanvasScaler.ScreenMatchMode">
@@ -2403,7 +2407,7 @@ One point is 112 of a pica, and 172 of an inch.</para>
     </member>
     <member name="P:UnityEngine.UI.Dropdown.value">
       <summary>
-        <para>The index of the currently selected option. 0 is the first option, 1 is the second, and so on.</para>
+        <para>The Value is the index number of the current selection in the Dropdown. 0 is the first option in the Dropdown, 1 is the second, and so on.</para>
       </summary>
     </member>
     <member name="M:UnityEngine.UI.Dropdown.AddOptions(System.Collections.Generic.List`1&lt;UnityEngine.UI.Dropdown/OptionData&gt;)">
@@ -2589,7 +2593,7 @@ If you have modified the list of options, you should call this method afterwards
     </member>
     <member name="P:UnityEngine.UI.FontData.defaultFontData">
       <summary>
-        <para>Get a font data with sensible defaults.</para>
+        <para>Maintain a list of all the FontData features.</para>
       </summary>
     </member>
     <member name="P:UnityEngine.UI.FontData.font">
@@ -2747,6 +2751,11 @@ If you have modified the list of options, you should call this method afterwards
     <member name="M:UnityEngine.UI.Graphic.LayoutComplete">
       <summary>
         <para>See ICanvasElement.LayoutComplete.</para>
+      </summary>
+    </member>
+    <member name="M:UnityEngine.UI.Graphic.OnCullingChanged">
+      <summary>
+        <para>Callback function to call when the culling has changed.</para>
       </summary>
     </member>
     <member name="M:UnityEngine.UI.Graphic.OnDisable">
@@ -2916,7 +2925,7 @@ If you have modified the list of options, you should call this method afterwards
     </member>
     <member name="M:UnityEngine.UI.GraphicRaycaster.Raycast(UnityEngine.EventSystems.PointerEventData,System.Collections.Generic.List`1&lt;UnityEngine.EventSystems.RaycastResult&gt;)">
       <summary>
-        <para>See: BaseRaycaster.</para>
+        <para>Determines if the cursor is over a Graphics element in the Scene. See: BaseRaycaster.</para>
       </summary>
       <param name="eventData"></param>
       <param name="resultAppendList"></param>
@@ -3813,6 +3822,11 @@ A placeholder graphic can be used to show subtle hints or make it more obvious t
     <member name="P:UnityEngine.UI.InputField.textComponent">
       <summary>
         <para>The Text component that is going to be used to render the text to screen.</para>
+      </summary>
+    </member>
+    <member name="P:UnityEngine.UI.InputField.touchScreenKeyboard">
+      <summary>
+        <para>The TouchScreenKeyboard being used to edit the Input Field.</para>
       </summary>
     </member>
     <member name="P:UnityEngine.UI.InputField.wasCanceled">
@@ -4911,7 +4925,7 @@ Characters 0-9, . (dot), and - (dash / minus sign) are allowed. The dash is only
     </member>
     <member name="M:UnityEngine.UI.Scrollbar.OnBeginDrag(UnityEngine.EventSystems.PointerEventData)">
       <summary>
-        <para>Handling for when the scrollbar value is begin being dragged.</para>
+        <para>Handling for when the scrollbar value is beginning to be dragged.</para>
       </summary>
       <param name="eventData"></param>
     </member>
@@ -5155,9 +5169,9 @@ Characters 0-9, . (dot), and - (dash / minus sign) are allowed. The dash is only
     </member>
     <member name="M:UnityEngine.UI.ScrollRect.OnBeginDrag(UnityEngine.EventSystems.PointerEventData)">
       <summary>
-        <para>Handling for when the content is beging being dragged.</para>
+        <para>Handling for when the content is being dragged.</para>
       </summary>
-      <param name="eventData"></param>
+      <param name="eventData">The values used when the drag is started.</param>
     </member>
     <member name="M:UnityEngine.UI.ScrollRect.OnDisable">
       <summary>
@@ -5299,7 +5313,7 @@ Characters 0-9, . (dot), and - (dash / minus sign) are allowed. The dash is only
     </member>
     <member name="P:UnityEngine.UI.Selectable.interactable">
       <summary>
-        <para>UI.Selectable.interactable.</para>
+        <para>Use to enable or disable the ability to select a selectable UI element (for example, a Button).</para>
       </summary>
     </member>
     <member name="P:UnityEngine.UI.Selectable.navigation">
@@ -5377,7 +5391,7 @@ Characters 0-9, . (dot), and - (dash / minus sign) are allowed. The dash is only
     </member>
     <member name="M:UnityEngine.UI.Selectable.IsHighlighted(UnityEngine.EventSystems.BaseEventData)">
       <summary>
-        <para>Is the selectable currently 'highlighted'.</para>
+        <para>Returns whether the selectable is currently 'highlighted' or not.</para>
       </summary>
       <param name="eventData"></param>
     </member>

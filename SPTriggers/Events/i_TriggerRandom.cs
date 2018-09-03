@@ -40,35 +40,29 @@ namespace com.spacepuppy.Events
         }
 
         #endregion
-
-        #region Methdos
-
-        private void DoTriggerNext(object arg)
-        {
-            if (this._passAlongTriggerArg)
-                _targets.ActivateRandomTrigger(this, arg, true);
-            else
-                _targets.ActivateRandomTrigger(this, null, true);
-        }
-
-        #endregion
-
+        
         #region ITriggerableMechanism Interface
 
         public override bool Trigger(object sender, object arg)
         {
             if (!this.CanTrigger) return false;
 
-            if (_delay > 0f)
+            if (this._delay > 0f)
             {
                 this.InvokeGuaranteed(() =>
                 {
-                    this.DoTriggerNext(arg);
-                }, _delay);
+                    if (this._passAlongTriggerArg)
+                        _targets.ActivateRandomTrigger(this, arg, true);
+                    else
+                        _targets.ActivateRandomTrigger(this, null, true);
+                }, this._delay);
             }
             else
             {
-                this.DoTriggerNext(arg);
+                if (this._passAlongTriggerArg)
+                    _targets.ActivateRandomTrigger(this, arg, true);
+                else
+                    _targets.ActivateRandomTrigger(this, null, true);
             }
 
             return true;

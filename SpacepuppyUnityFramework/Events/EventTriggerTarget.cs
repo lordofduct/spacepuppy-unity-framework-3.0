@@ -168,10 +168,15 @@ namespace com.spacepuppy.Events
             this._activationType = TriggerActivationType.CallMethodOnSelectedTarget;
         }
 
+        public object CalculateTarget(object arg)
+        {
+            return (_triggerable is IProxy) ? (_triggerable as IProxy).GetTarget(arg) : _triggerable;
+        }
+
         #endregion
 
         #region Trigger Methods
-        
+
         public void Trigger(object sender, object incomingArg)
         {
             try

@@ -65,6 +65,7 @@
     <Compile Include="Events\i_StopAudioSource.cs" />
     <Compile Include="Events\i_Teleport.cs" />
     <Compile Include="Events\i_Trigger.cs" />
+    <Compile Include="Events\i_TriggerFirstEnabledTarget.cs" />
     <Compile Include="Events\i_TriggerOnEval.cs" />
     <Compile Include="Events\i_TriggerOnIfThen.cs" />
     <Compile Include="Events\i_TriggerRandom.cs" />

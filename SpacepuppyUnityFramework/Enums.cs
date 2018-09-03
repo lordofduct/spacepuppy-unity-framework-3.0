@@ -122,7 +122,8 @@ namespace com.spacepuppy
         GameObject = 12,
         Component = 13,
         LayerMask = 14,
-        Rect = 15
+        Rect = 15,
+        Numeric = 16
     }
 
     public enum DisableMode

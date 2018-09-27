@@ -99,6 +99,7 @@
     <Compile Include="Tween\Tweener.cs" />
     <Compile Include="Tween\TweenHash.cs" />
     <Compile Include="Tween\TweenSequence.cs" />
+    <Compile Include="VariantMember.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

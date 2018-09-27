@@ -73,6 +73,7 @@
     <Compile Include="Events\i_TriggerSequence.cs" />
     <Compile Include="Events\ObservableTargetData.cs" />
     <Compile Include="Events\t_AllTriggered.cs" />
+    <Compile Include="Events\t_AllTriggersOccupied.cs" />
     <Compile Include="Events\t_Flicker.cs" />
     <Compile Include="Events\t_Interval.cs" />
     <Compile Include="Events\t_IntervalRandom.cs" />
@@ -85,6 +86,7 @@
     <Compile Include="Events\t_OnStart.cs" />
     <Compile Include="Events\t_OnTriggerOccupied.cs" />
     <Compile Include="Events\t_OnUIEvent.cs" />
+    <Compile Include="Events\t_StateMachine.cs" />
     <Compile Include="Events\t_Timer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ProxyMediator.cs" />

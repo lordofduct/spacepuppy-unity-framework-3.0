@@ -18,7 +18,7 @@ namespace com.spacepuppy.Events
 
         [SerializeField]
         [TimeUnitsSelector()]
-        private float _fadeOutDur;
+        private SPTimePeriod _fadeOutDur;
 
         [SerializeField]
         private DisableMode _disableAudioSource;
@@ -32,7 +32,7 @@ namespace com.spacepuppy.Events
             get { return _target; }
         }
 
-        public float FadeOutDur
+        public SPTimePeriod FadeOutDur
         {
             get { return _fadeOutDur; }
             set { _fadeOutDur = value; }
@@ -55,11 +55,12 @@ namespace com.spacepuppy.Events
             if (targ == null) return false;
             if (!targ.isPlaying) return false;
 
-            if (_fadeOutDur > 0f)
+            if (_fadeOutDur.Seconds > 0f)
             {
                 float cache = targ.volume;
                 SPTween.Tween(targ)
-                       .To("volume", _fadeOutDur, 0f)
+                       .To("volume", _fadeOutDur.Seconds, 0f)
+                       .Use(_fadeOutDur.TimeSupplier)
                        .OnFinish((s, e) =>
                        {
                            targ.Stop();

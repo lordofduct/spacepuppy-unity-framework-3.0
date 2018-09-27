@@ -321,8 +321,8 @@ namespace com.spacepuppy.Dynamic
                     {
                         var rtp = GetReturnType(member);
                         object cobj = null;
-                        if (ConvertUtil.TryToPrim(obj, rtp, out cobj))
-                            obj = cobj;
+                        if (ConvertUtil.TryToPrim(value, rtp, out cobj))
+                            value = cobj;
 
                         switch (member.MemberType)
                         {

@@ -27,7 +27,7 @@ namespace com.spacepuppy.Events
 
         [SerializeField()]
         [TimeUnitsSelector()]
-        private float _delay = 0f;
+        private SPTimePeriod _delay = 0f;
 
         #endregion
 
@@ -44,7 +44,7 @@ namespace com.spacepuppy.Events
             set { _mode = value; }
         }
 
-        public float Delay
+        public SPTimePeriod Delay
         {
             get { return _delay; }
             set { _delay = value; }
@@ -114,12 +114,12 @@ namespace com.spacepuppy.Events
         {
             if (!this.CanTrigger) return false;
 
-            if (_delay > 0f)
+            if (_delay.Seconds > 0f)
             {
                 this.InvokeGuaranteed(() =>
                 {
                     this.SetEnabledByMode(arg);
-                }, _delay);
+                }, _delay.Seconds, _delay.TimeSupplier);
             }
             else
             {

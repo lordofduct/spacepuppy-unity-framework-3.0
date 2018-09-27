@@ -15,7 +15,7 @@ namespace com.spacepuppy
     /// object. See com.spacepuppy.Dynamic.Evaluator for more information on how to format eval statements.
     /// </summary>
     [System.Serializable()]
-    public sealed class VariantReference : ISerializationCallbackReceiver, System.Runtime.Serialization.ISerializable, ISPDisposable
+    public sealed class VariantReference : System.Runtime.Serialization.ISerializable, ISPDisposable
     {
         
         public enum RefMode : byte
@@ -47,6 +47,9 @@ namespace com.spacepuppy
 
         [SerializeField()]
         private UnityEngine.Object _unityObjectReference;
+
+        [System.NonSerialized]
+        private INumeric _numeric;
 
         #endregion
 
@@ -114,8 +117,11 @@ namespace com.spacepuppy
                             return this.LayerMaskValue;
                         case VariantType.Rect:
                             return this.RectValue;
+                        case VariantType.Numeric:
+                            return this.NumericValue;
                     }
                 }
+
                 return null;
             }
             set
@@ -181,6 +187,9 @@ namespace com.spacepuppy
                         case VariantType.Rect:
                             this.RectValue = (Rect)value;
                             break;
+                        case VariantType.Numeric:
+                            this.SetToNumeric(value as INumeric);
+                            break;
                     }
                 }
             }
@@ -193,7 +202,7 @@ namespace com.spacepuppy
                 return _type;
             }
         }
-        
+
         public string StringValue
         {
             get
@@ -201,10 +210,43 @@ namespace com.spacepuppy
                 switch (_mode)
                 {
                     case RefMode.Value:
-                        if (_type == VariantType.String)
-                            return _string;
-                        else
-                            return null;
+                        switch (_type)
+                        {
+                            case VariantType.Object:
+                                return null;
+                            case VariantType.String:
+                                return _string;
+                            case VariantType.Boolean:
+                                return this.BoolValue.ToString();
+                            case VariantType.Integer:
+                                return this.IntValue.ToString();
+                            case VariantType.Float:
+                                return this.FloatValue.ToString();
+                            case VariantType.Double:
+                                return this.DoubleValue.ToString();
+                            case VariantType.Vector2:
+                                return this.Vector2Value.ToString();
+                            case VariantType.Vector3:
+                                return this.Vector3Value.ToString();
+                            case VariantType.Vector4:
+                                return this.Vector4Value.ToString();
+                            case VariantType.Quaternion:
+                                return this.QuaternionValue.ToString();
+                            case VariantType.Color:
+                                return this.ColorValue.ToString();
+                            case VariantType.DateTime:
+                                return this.DateValue.ToString();
+                            case VariantType.GameObject:
+                            case VariantType.Component:
+                                return (_unityObjectReference != null) ? _unityObjectReference.ToString() : null;
+                            case VariantType.LayerMask:
+                                return this.LayerMaskValue.ToString();
+                            case VariantType.Rect:
+                                return this.RectValue.ToString();
+                            case VariantType.Numeric:
+                                return ConvertUtil.ToString(this.NumericValue);
+                        }
+                        break;
                     case RefMode.Property:
                         return System.Convert.ToString(this.EvaluateProperty());
                     case RefMode.Eval:
@@ -228,6 +270,7 @@ namespace com.spacepuppy
                 _w = 0d;
                 _string = value;
                 _unityObjectReference = null;
+                _numeric = null;
                 _type = VariantType.String;
                 _mode = RefMode.Value;
             }
@@ -239,7 +282,7 @@ namespace com.spacepuppy
                 switch (_mode)
                 {
                     case RefMode.Value:
-                        switch(_type)
+                        switch (_type)
                         {
                             case VariantType.Object:
                                 return _unityObjectReference != null;
@@ -264,6 +307,8 @@ namespace com.spacepuppy
                                 return (_x + _y + _z + _w) != 0;
                             case VariantType.Rect:
                                 return (_x + _y + _z + _w) != 0;
+                            case VariantType.Numeric:
+                                return ConvertUtil.ToBool(this.NumericValue);
                         }
                         break;
                     case RefMode.Property:
@@ -289,6 +334,7 @@ namespace com.spacepuppy
                 _w = 0d;
                 _string = null;
                 _unityObjectReference = null;
+                _numeric = null;
                 _type = VariantType.Boolean;
                 _mode = RefMode.Value;
             }
@@ -330,6 +376,8 @@ namespace com.spacepuppy
                                 return (int)_w;
                             case VariantType.Rect:
                                 return (int)_x;
+                            case VariantType.Numeric:
+                                return ConvertUtil.ToInt(this.NumericValue);
                         }
                         break;
                     case RefMode.Property:
@@ -355,6 +403,7 @@ namespace com.spacepuppy
                 _w = value;
                 _string = null;
                 _unityObjectReference = null;
+                _numeric = null;
                 _type = VariantType.Integer;
                 _mode = RefMode.Value;
             }
@@ -395,6 +444,8 @@ namespace com.spacepuppy
                                 return (int)_w;
                             case VariantType.Rect:
                                 return _x;
+                            case VariantType.Numeric:
+                                return ConvertUtil.ToSingle(this.NumericValue);
                         }
                         break;
                     case RefMode.Property:
@@ -420,6 +471,7 @@ namespace com.spacepuppy
                 _w = 0d;
                 _string = null;
                 _unityObjectReference = null;
+                _numeric = null;
                 _type = VariantType.Float;
                 _mode = RefMode.Value;
             }
@@ -460,6 +512,8 @@ namespace com.spacepuppy
                                 return (int)_w;
                             case VariantType.Rect:
                                 return _x;
+                            case VariantType.Numeric:
+                                return ConvertUtil.ToDouble(this.NumericValue);
                         }
                         break;
                     case RefMode.Property:
@@ -485,6 +539,7 @@ namespace com.spacepuppy
                 _w = value;
                 _string = null;
                 _unityObjectReference = null;
+                _numeric = null;
                 _type = VariantType.Double;
                 _mode = RefMode.Value;
             }
@@ -525,6 +580,8 @@ namespace com.spacepuppy
                                 return new Vector2((float)_w, 0f);
                             case VariantType.Rect:
                                 return new Vector2(_x, _y);
+                            case VariantType.Numeric:
+                                return ConvertUtil.ToVector2(this.NumericValue);
                         }
                         break;
                     case RefMode.Property:
@@ -550,6 +607,7 @@ namespace com.spacepuppy
                 _w = 0d;
                 _string = null;
                 _unityObjectReference = null;
+                _numeric = null;
                 _type = VariantType.Vector2;
                 _mode = RefMode.Value;
             }
@@ -590,6 +648,8 @@ namespace com.spacepuppy
                                 return new Vector3((float)_w, 0f, 0f);
                             case VariantType.Rect:
                                 return new Vector3(_x, _y, _z);
+                            case VariantType.Numeric:
+                                return ConvertUtil.ToVector3(this.NumericValue);
                         }
                         break;
                     case RefMode.Property:
@@ -615,6 +675,7 @@ namespace com.spacepuppy
                 _w = 0d;
                 _string = null;
                 _unityObjectReference = null;
+                _numeric = null;
                 _type = VariantType.Vector3;
                 _mode = RefMode.Value;
             }
@@ -655,6 +716,8 @@ namespace com.spacepuppy
                                 return new Vector4((float)_w, 0f, 0f, 0f);
                             case VariantType.Rect:
                                 return new Vector4(_x, _y, _z, (float)_w);
+                            case VariantType.Numeric:
+                                return ConvertUtil.ToVector4(this.NumericValue);
                         }
                         break;
                     case RefMode.Property:
@@ -680,6 +743,7 @@ namespace com.spacepuppy
                 _w = value.w;
                 _string = null;
                 _unityObjectReference = null;
+                _numeric = null;
                 _type = VariantType.Vector4;
                 _mode = RefMode.Value;
             }
@@ -724,6 +788,7 @@ namespace com.spacepuppy
                 _w = value.w;
                 _string = null;
                 _unityObjectReference = null;
+                _numeric = null;
                 _type = VariantType.Quaternion;
                 _mode = RefMode.Value;
             }
@@ -767,6 +832,8 @@ namespace com.spacepuppy
                                 return ConvertUtil.ToColor((int)_w);
                             case VariantType.Rect:
                                 return new Color(_x, _y, _z, (float)_w);
+                            case VariantType.Numeric:
+                                return ConvertUtil.ToColor(this.NumericValue);
                         }
                         break;
                     case RefMode.Property:
@@ -792,6 +859,7 @@ namespace com.spacepuppy
                 _w = value.a;
                 _string = null;
                 _unityObjectReference = null;
+                _numeric = null;
                 _type = VariantType.Color;
                 _mode = RefMode.Value;
             }
@@ -828,6 +896,8 @@ namespace com.spacepuppy
                                 return new System.DateTime(0L);
                             case VariantType.Rect:
                                 return new System.DateTime(0L);
+                            case VariantType.Numeric:
+                                return new System.DateTime(0L);
                         }
                         break;
                     case RefMode.Property:
@@ -842,6 +912,7 @@ namespace com.spacepuppy
                 _z = 0f;
                 _string = null;
                 _unityObjectReference = null;
+                _numeric = null;
                 _type = VariantType.DateTime;
                 _mode = RefMode.Value;
             }
@@ -867,6 +938,7 @@ namespace com.spacepuppy
                 _w = 0d;
                 _string = null;
                 _unityObjectReference = value;
+                _numeric = null;
                 _type = VariantType.GameObject;
                 _mode = RefMode.Value;
             }
@@ -898,6 +970,7 @@ namespace com.spacepuppy
                 _w = 0d;
                 _string = null;
                 _unityObjectReference = value;
+                _numeric = null;
                 _type = VariantType.Component;
                 _mode = RefMode.Value;
             }
@@ -932,6 +1005,7 @@ namespace com.spacepuppy
                 _w = 0d;
                 _string = null;
                 _unityObjectReference = value;
+                _numeric = null;
                 if (_unityObjectReference is GameObject)
                     _type = VariantType.GameObject;
                 else if (_unityObjectReference is Component)
@@ -977,6 +1051,11 @@ namespace com.spacepuppy
                                 return new LayerMask() { value = (int)_w };
                             case VariantType.Rect:
                                 return new LayerMask();
+                            case VariantType.Numeric:
+                                {
+                                    var n = this.NumericValue;
+                                    return n != null ? n.ToInt32(null) : 0;
+                                }
                         }
                         break;
                     case RefMode.Property:
@@ -1002,6 +1081,7 @@ namespace com.spacepuppy
                 _w = value;
                 _string = null;
                 _unityObjectReference = null;
+                _numeric = null;
                 _type = VariantType.LayerMask;
                 _mode = RefMode.Value;
             }
@@ -1045,6 +1125,11 @@ namespace com.spacepuppy
                                 return new Rect();
                             case VariantType.Rect:
                                 return new Rect(_x, _y, _z, (float)_w);
+                            case VariantType.Numeric:
+                                {
+                                    var n = this.NumericValue;
+                                    return n != null ? new Rect(n.ToSingle(null), 0f, 0f, 0f) : new Rect();
+                                }
                         }
                         break;
                     case RefMode.Property:
@@ -1076,8 +1161,65 @@ namespace com.spacepuppy
                 _w = value.height;
                 _string = null;
                 _unityObjectReference = null;
+                _numeric = null;
                 _type = VariantType.Rect;
                 _mode = RefMode.Value;
+            }
+        }
+
+        public INumeric NumericValue
+        {
+            get
+            {
+                switch (_mode)
+                {
+                    case RefMode.Value:
+                        switch (_type)
+                        {
+                            case VariantType.Object:
+                            case VariantType.Component:
+                                return _unityObjectReference as INumeric;
+                            case VariantType.Numeric:
+                                {
+                                    if (_numeric == null)
+                                    {
+                                        _numeric = this.UnravelNumeric();
+                                        if (_numeric == null) this.Value = null; //couldn't resolve numeric, set value to null
+                                    }
+                                    return _numeric;
+                                }
+                            default:
+                                return null;
+                        }
+                    case RefMode.Property:
+                        {
+                            var result = this.EvaluateProperty();
+                            if (result is INumeric)
+                                return result as INumeric;
+                            else
+                                return null;
+                        }
+                    case RefMode.Eval:
+                        try
+                        {
+                            var result = Evaluator.EvalValue(_string, ObjUtil.ReduceIfProxy(_unityObjectReference));
+                            if (result is INumeric)
+                                return result as INumeric;
+                            else
+                                return null;
+                        }
+                        catch
+                        {
+                            Debug.LogWarning("Failed to evaluate statement defined in VariantRefernce");
+                        }
+                        break;
+                }
+
+                return null;
+            }
+            set
+            {
+                this.SetToNumeric(value);
             }
         }
 
@@ -1123,6 +1265,8 @@ namespace com.spacepuppy
                     return this.LayerMaskValue;
                 case VariantType.Rect:
                     return this.RectValue;
+                case VariantType.Numeric:
+                    return this.NumericValue;
                 default:
                     return null;
             }
@@ -1185,65 +1329,110 @@ namespace com.spacepuppy
             return DynamicUtil.GetValue(ObjUtil.ReduceIfProxy(_unityObjectReference), _string);
         }
 
-        #endregion
 
-        #region ISerializationCallbackReceiver Interface
 
-        void ISerializationCallbackReceiver.OnBeforeSerialize()
+        public void SetToNumeric(INumeric value)
         {
-            //do nothing
+            _x = 0f;
+            _y = 0f;
+            _z = 0f;
+            _w = 0d;
+            _string = null;
+            _unityObjectReference = null;
+            _numeric = value;
+            _type = (_numeric != null) ? VariantType.Numeric : VariantType.Null;
+            _mode = RefMode.Value;
+
+            if (_numeric != null)
+            {
+                var tc = _numeric.GetUnderlyingTypeCode();
+                switch (tc)
+                {
+                    case System.TypeCode.Boolean:
+                    case System.TypeCode.Char:
+                    case System.TypeCode.Byte:
+                    case System.TypeCode.Int16:
+                    case System.TypeCode.UInt16:
+                    case System.TypeCode.Int32:
+                    case System.TypeCode.UInt32:
+                        {
+                            _x = (int)tc;
+                            _string = TypeReference.HashType(_numeric.GetType());
+                            _w = _numeric.ToDouble(null);
+                        }
+                        break;
+                    case System.TypeCode.Int64:
+                    case System.TypeCode.UInt64:
+                        {
+                            _x = (int)tc;
+                            _string = TypeReference.HashType(_numeric.GetType());
+                            long v = _numeric.ToInt64(null);
+                            _w = (double)(v >> 16);
+                            _z = (float)(v & 0xFFFF);
+                        }
+                        break;
+                    case System.TypeCode.Single:
+                    case System.TypeCode.Double:
+                        {
+                            _x = (int)tc;
+                            _string = TypeReference.HashType(_numeric.GetType());
+                            _w = _numeric.ToDouble(null);
+                        }
+                        break;
+                    default:
+                        {
+                            _x = 0;
+                            _string = EncodeB64Numeric(_numeric);
+                        }
+                        break;
+                }
+            }
         }
 
-        void ISerializationCallbackReceiver.OnAfterDeserialize()
+        private INumeric UnravelNumeric()
         {
-            //this is to update old VariantReference to the new format
-            if (_mode != RefMode.Value) return; //old VariantReference only had a 'value' mode
-            if (_type == VariantType.String) return; //string type is fine
-            if (string.IsNullOrEmpty(_string)) return; 
-
-            switch (_type)
+            var tc = (System.TypeCode)((int)_x);
+            switch (tc)
             {
-                case VariantType.Object:
-                case VariantType.Null:
-                case VariantType.String:
-                    _string = string.Empty;
-                    break;
-                case VariantType.Boolean:
-                    this.BoolValue = ConvertUtil.ToBool(_string);
-                    break;
-                case VariantType.Integer:
-                    this.IntValue = ConvertUtil.ToInt(_string);
-                    break;
-                case VariantType.Float:
-                    this.FloatValue = ConvertUtil.ToSingle(_string);
-                    break;
-                case VariantType.Double:
-                    this.DoubleValue = ConvertUtil.ToDouble(_string);
-                    break;
-                case VariantType.Vector2:
-                    this.Vector2Value = ConvertUtil.ToVector2(_string);
-                    break;
-                case VariantType.Vector3:
-                    this.Vector3Value = ConvertUtil.ToVector3(_string);
-                    break;
-                case VariantType.Quaternion:
-                    this.QuaternionValue = ConvertUtil.ToQuaternion(_string);
-                    break;
-                case VariantType.Color:
-                    this.ColorValue = ConvertUtil.ToColor(_string);
-                    break;
-                case VariantType.DateTime:
-                    this.DateValue = ConvertUtil.ToDate(_string);
-                    break;
-                case VariantType.GameObject:
-                case VariantType.Component:
-                    _string = string.Empty;
-                    break;
+                case System.TypeCode.Boolean:
+                case System.TypeCode.Char:
+                case System.TypeCode.Byte:
+                case System.TypeCode.Int16:
+                case System.TypeCode.UInt16:
+                case System.TypeCode.Int32:
+                case System.TypeCode.UInt32:
+                    {
+                        var tp = TypeReference.UnHashType(_string);
+                        if (tp == null || !typeof(INumeric).IsAssignableFrom(tp)) return null;
+
+                        return Numerics.CreateNumeric(tp, _w);
+                    }
+                case System.TypeCode.Int64:
+                case System.TypeCode.UInt64:
+                    {
+                        var tp = TypeReference.UnHashType(_string);
+                        if (tp == null || !typeof(INumeric).IsAssignableFrom(tp)) return null;
+
+                        long v = (long)_w;
+                        v = v << 16;
+                        v |= (long)((int)_z & 0xFFFF);
+                        return Numerics.CreateNumeric(tp, v);
+                    }
+                case System.TypeCode.Single:
+                case System.TypeCode.Double:
+                    {
+                        var tp = TypeReference.UnHashType(_string);
+                        if (tp == null || !typeof(INumeric).IsAssignableFrom(tp)) return null;
+
+                        return Numerics.CreateNumeric(tp, _w);
+                    }
+                default:
+                    return DecodeB64Numeric(_string);
             }
         }
 
         #endregion
-        
+
         #region ISerializable Interface
 
         void System.Runtime.Serialization.ISerializable.GetObjectData(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context)
@@ -1287,6 +1476,23 @@ namespace com.spacepuppy
                             case VariantType.GameObject:
                             case VariantType.Component:
                                 //do nothing
+                                break;
+                            case VariantType.Numeric:
+                                {
+                                    var n = this.NumericValue;
+                                    if (n == null)
+                                    {
+                                        info.SetValue("value", null);
+                                    }
+                                    else if (n.GetType().IsSerializable)
+                                    {
+                                        info.SetValue("value", n);
+                                    }
+                                    else
+                                    {
+                                        info.SetValue("value", EncodeB64Numeric(n));
+                                    }
+                                }
                                 break;
                         }
                     }
@@ -1343,6 +1549,23 @@ namespace com.spacepuppy
                         case VariantType.Component:
                             this.Value = null;
                             break;
+                        case VariantType.Numeric:
+                            {
+                                var data = info.GetValue("value", typeof(object));
+                                if (data is INumeric)
+                                {
+                                    this.NumericValue = data as INumeric;
+                                }
+                                else if (data is string)
+                                {
+                                    this.NumericValue = DecodeB64Numeric(data as string);
+                                }
+                                else
+                                {
+                                    this.Value = null;
+                                }
+                            }
+                            break;
                     }
                     break;
                 case RefMode.Property:
@@ -1380,6 +1603,7 @@ namespace com.spacepuppy
             _w = 0.0;
             _string = null;
             _unityObjectReference = null;
+            _numeric = null;
         }
 
         #endregion
@@ -1417,6 +1641,7 @@ namespace com.spacepuppy
             else if (typeof(Component).IsAssignableFrom(tp)) return true;
             else if (typeof(UnityEngine.Object).IsAssignableFrom(tp)) return true;
             else if (typeof(IComponent).IsAssignableFrom(tp)) return true;
+            else if (typeof(INumeric).IsAssignableFrom(tp)) return true;
             else if (tp.IsInterface) return true;
             else if (tp == typeof(Variant)) return true;
             else return false;
@@ -1453,6 +1678,7 @@ namespace com.spacepuppy
             else if (typeof(Component).IsAssignableFrom(tp)) return VariantType.Component;
             else if (typeof(UnityEngine.Object).IsAssignableFrom(tp)) return VariantType.Object;
             else if (typeof(IComponent).IsAssignableFrom(tp)) return VariantType.Component;
+            else if (typeof(INumeric).IsAssignableFrom(tp)) return VariantType.Numeric;
             else if (tp.IsInterface) return VariantType.Object;
 
             return VariantType.Null;
@@ -1492,6 +1718,8 @@ namespace com.spacepuppy
                     return typeof(LayerMask);
                 case VariantType.Rect:
                     return typeof(Rect);
+                case VariantType.Numeric:
+                    return typeof(INumeric);
             }
 
             return typeof(object);
@@ -1514,6 +1742,30 @@ namespace com.spacepuppy
             long ticks = (long)low & MASK_LOW;
             ticks |= ((long)high & MASK_HIGH) << 48;
             return new System.DateTime(ticks);
+        }
+
+        private static string EncodeB64Numeric(INumeric n)
+        {
+            if (n == null) return null;
+            return System.Convert.ToBase64String(n.ToByteArray()) + "|" + TypeReference.HashType(n.GetType());
+        }
+
+        private static INumeric DecodeB64Numeric(string sdata)
+        {
+            if (sdata == null) return null;
+            try
+            {
+                int i = sdata.IndexOf('|', 0);
+                if (i < 0) return null;
+                var tp = TypeReference.UnHashType(sdata.Substring(i + 1));
+                if (tp == null) return null;
+                var data = System.Convert.FromBase64String(sdata.Substring(0, i));
+                return Numerics.CreateNumeric(tp, data);
+            }
+            catch (System.Exception)
+            {
+                return null;
+            }
         }
 
         #endregion
@@ -1620,6 +1872,9 @@ namespace com.spacepuppy
                         break;
                     case VariantType.Component:
                         _variant._unityObjectReference = _variant._unityObjectReference as Component;
+                        break;
+                    case VariantType.Numeric:
+                        _variant._unityObjectReference = null;
                         break;
                 }
             }

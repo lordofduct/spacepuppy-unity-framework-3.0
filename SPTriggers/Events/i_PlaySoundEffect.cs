@@ -25,7 +25,7 @@ namespace com.spacepuppy.Events
 
         [SerializeField()]
         [TimeUnitsSelector()]
-        private float _delay;
+        private SPTimePeriod _delay;
 
         [Tooltip("Trigger something at the end of the sound effect. This is NOT perfectly accurate and really just starts a timer for the duration of the sound being played.")]
         [SerializeField()]
@@ -59,9 +59,10 @@ namespace com.spacepuppy.Events
             set { _interrupt = value; }
         }
 
-        public float Delay
+        public SPTimePeriod Delay
         {
             get { return _delay; }
+            set { _delay = value; }
         }
 
         public SPEvent OnAudioComplete
@@ -131,7 +132,7 @@ namespace com.spacepuppy.Events
 
             if (clip != null)
             {
-                if (this._delay > 0)
+                if (_delay.Seconds > 0)
                 {
                     this.InvokeGuaranteed(() =>
                     {
@@ -141,7 +142,7 @@ namespace com.spacepuppy.Events
                             //src.Play();
                             src.PlayOneShot(clip);
                         }
-                    }, this._delay);
+                    }, _delay.Seconds, _delay.TimeSupplier);
                 }
                 else
                 {

@@ -6,7 +6,7 @@ using System.Collections.Generic;
 namespace com.spacepuppy.Events
 {
 
-    public sealed class t_AllTriggered : TriggerComponent, IMStartOrEnableReceiver
+    public sealed class t_AllTriggered : SPComponent, IObservableTrigger, IMStartOrEnableReceiver
     {
 
         #region Fields
@@ -14,12 +14,15 @@ namespace com.spacepuppy.Events
         [SerializeField()]
         [ReorderableArray()]
         [DisableOnPlay()]
-        private ObservableTargetData[] _observedTargets;
+        private List<ObservableTargetData> _observedTargets;
 
         [SerializeField()]
         [OnChangedInEditor("ResetOnTriggeredChanged", OnlyAtRuntime = true)]
+        [Tooltip("After the obvserved targets all signal and this signals in turn, should it reset and start listening again.")]
         private bool _resetOnTriggered;
 
+        [SerializeField()]
+        private SPEvent _trigger = new SPEvent();
 
         [System.NonSerialized()]
         private HashSet<ObservableTargetData> _activatedTriggers = new HashSet<ObservableTargetData>();
@@ -79,7 +82,7 @@ namespace com.spacepuppy.Events
 
             ObservableTargetData targ;
             var d = new System.EventHandler<TempEventArgs>(this.OnTriggerActivated);
-            for (int i = 0; i < _observedTargets.Length; i++)
+            for (int i = 0; i < _observedTargets.Count; i++)
             {
                 targ = _observedTargets[i];
                 if(targ != null)
@@ -94,7 +97,7 @@ namespace com.spacepuppy.Events
         {
             ObservableTargetData targ;
             var d = new System.EventHandler<TempEventArgs>(this.OnTriggerActivated);
-            for (int i = 0; i < _observedTargets.Length; i++)
+            for (int i = 0; i < _observedTargets.Count; i++)
             {
                 targ = _observedTargets[i];
                 if (targ != null)
@@ -124,8 +127,17 @@ namespace com.spacepuppy.Events
                     _triggered = true;
                     this.UnRegisterListeners();
                 }
-                this.ActivateTrigger();
+                _trigger.ActivateTrigger(this, null);
             }
+        }
+
+        #endregion
+
+        #region IObservableTrigger Interface
+
+        BaseSPEvent[] IObservableTrigger.GetEvents()
+        {
+            return new BaseSPEvent[] { _trigger };
         }
 
         #endregion

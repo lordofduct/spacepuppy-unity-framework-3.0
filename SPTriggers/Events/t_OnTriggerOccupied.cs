@@ -2,32 +2,44 @@
 using UnityEngine;
 using System.Collections.Generic;
 
+using com.spacepuppy.Collections;
 using com.spacepuppy.Geom;
 using com.spacepuppy.Utils;
-using System;
 
 namespace com.spacepuppy.Events
 {
 
-    public class t_OnTriggerOccupied : SPComponent, ICompoundTriggerEnterResponder, ICompoundTriggerExitResponder, IObservableTrigger
+    public class t_OnTriggerOccupied : SPComponent, ICompoundTriggerEnterResponder, ICompoundTriggerExitResponder, IOccupiedTrigger, IUpdateable
     {
 
         #region Fields
+
+        [SerializeField]
+        private EventActivatorMaskRef _mask = new EventActivatorMaskRef();
+
+        [SerializeField]
+        [Tooltip("If true, when an object is intersected we'll habitually retest the object in case its state changes for any reason.")]
+        private bool _activelyRetestObjects;
 
         [SerializeField]
         private SPEvent _onTriggerOccupied;
 
         [SerializeField]
         private SPEvent _onTriggerLastExited;
-
-        [SerializeField]
-        private bool _useEntity;
-
-        [SerializeField]
-        private EventActivatorMaskRef _mask = new EventActivatorMaskRef();
-
-        [SerializeField]
+        
+        [System.NonSerialized]
         private HashSet<GameObject> _activeObjects = new HashSet<GameObject>();
+
+        #endregion
+
+        #region CONSTRUCTOR
+
+        protected override void OnDisable()
+        {
+            base.OnDisable();
+
+            GameLoop.UpdatePump.Remove(this);
+        }
 
         #endregion
 
@@ -42,17 +54,16 @@ namespace com.spacepuppy.Events
         {
             get { return _onTriggerLastExited; }
         }
-
-        public bool UseEntity
-        {
-            get { return _useEntity; }
-            set { _useEntity = value; }
-        }
-
+        
         public IEventActivatorMask Mask
         {
             get { return _mask.Value; }
             set { _mask.Value = value; }
+        }
+
+        public bool IsOccupied
+        {
+            get { return _activeObjects.Count > 0; }
         }
 
         #endregion
@@ -61,19 +72,12 @@ namespace com.spacepuppy.Events
 
         private void AddObject(GameObject obj)
         {
-            if (_useEntity)
-            {
-                var entity = SPEntity.Pool.GetFromSource(obj);
-                if (entity == null) return;
-
-                obj = entity.gameObject;
-            }
-
             if (_mask.Value != null && !_mask.Value.Intersects(obj)) return;
 
             if (_activeObjects.Count == 0)
             {
                 _activeObjects.Add(obj);
+                if (_activelyRetestObjects) GameLoop.UpdatePump.Add(this);
                 _onTriggerOccupied.ActivateTrigger(this, obj);
             }
             else
@@ -85,18 +89,11 @@ namespace com.spacepuppy.Events
         private void RemoveObject(GameObject obj)
         {
             if (_activeObjects.Count == 0) return;
-
-            if (_useEntity)
-            {
-                var entity = SPEntity.Pool.GetFromSource(obj);
-                if (entity == null) return;
-
-                obj = entity.gameObject;
-            }
-
+            
             _activeObjects.Remove(obj);
             if (_activeObjects.Count == 0)
             {
+                GameLoop.UpdatePump.Remove(this);
                 _onTriggerLastExited.ActivateTrigger(this, obj);
             }
         }
@@ -133,11 +130,63 @@ namespace com.spacepuppy.Events
 
         #endregion
 
+        #region IUpdateable Interface
+
+        void IUpdateable.Update()
+        {
+            if (!_activelyRetestObjects || !this.isActiveAndEnabled || _activeObjects.Count == 0)
+            {
+                GameLoop.UpdatePump.Remove(this);
+                return;
+            }
+
+            if (_mask.Value == null) return;
+
+            using (var toRemove = TempCollection.GetSet<GameObject>())
+            {
+                var e = _activeObjects.GetEnumerator();
+                while (e.MoveNext())
+                {
+                    if (!ObjUtil.IsObjectAlive(e.Current) || !e.Current.activeInHierarchy || !_mask.Value.Intersects(e.Current))
+                    {
+                        toRemove.Add(e.Current);
+                    }
+                }
+
+                if (toRemove.Count > 0)
+                {
+                    e = toRemove.GetEnumerator();
+                    while (e.MoveNext())
+                    {
+                        this.RemoveObject(e.Current);
+                    }
+
+                    if (_activeObjects.Count == 0)
+                    {
+                        GameLoop.UpdatePump.Remove(this);
+                        return;
+                    }
+                }
+            }
+        }
+
+        #endregion
+
         #region IObservableTrigger Interface
 
         BaseSPEvent[] IObservableTrigger.GetEvents()
         {
             return new BaseSPEvent[] { _onTriggerOccupied, _onTriggerLastExited };
+        }
+
+        BaseSPEvent IOccupiedTrigger.EnterEvent
+        {
+            get { return _onTriggerOccupied; }
+        }
+
+        BaseSPEvent IOccupiedTrigger.ExitEvent
+        {
+            get { return _onTriggerLastExited; }
         }
 
         #endregion

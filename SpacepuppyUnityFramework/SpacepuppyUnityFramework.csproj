@@ -82,7 +82,7 @@
     <Compile Include="Events\EventTriggerEvaluator.cs" />
     <Compile Include="Geom\CompoundTrigger.cs" />
     <Compile Include="CustomTimeSupplier.cs" />
-    <Compile Include="DiscreteFloat.cs" />
+    <Compile Include="Numerics.cs" />
     <Compile Include="Dynamic\DynamicMethodInfo.cs" />
     <Compile Include="Dynamic\DynamicParameterInfo.cs" />
     <Compile Include="Dynamic\DynamicPropertyInfo.cs" />
@@ -165,7 +165,6 @@
       <DependentUpon>AssemblyVersionInfo.tt</DependentUpon>
     </Compile>
     <Compile Include="PropertyAttributes.cs" />
-    <Compile Include="Proxy.cs" />
     <Compile Include="ProxyTarget.cs" />
     <Compile Include="RadicalCoroutine.cs" />
     <Compile Include="RadicalCoroutineManager.cs" />

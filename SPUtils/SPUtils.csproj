@@ -47,6 +47,7 @@
       <Link>Properties\AssemblyVersionInfo.cs</Link>
     </Compile>
     <Compile Include="Collections\StateFlagStack.cs" />
+    <Compile Include="CompoundStateLedger.cs" />
     <Compile Include="Dynamic\DoubleEvaluator.cs" />
     <Compile Include="Geom\ConfigurableForce.cs" />
     <Compile Include="Geom\PlanarSurfaceComponent.cs" />

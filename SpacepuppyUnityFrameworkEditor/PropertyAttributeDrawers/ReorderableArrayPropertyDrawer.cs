@@ -331,6 +331,7 @@ namespace com.spacepuppyeditor.PropertyAttributeDrawers
                                     {
                                         DragAndDrop.AcceptDrag();
                                         AddObjectsToARray(property, refs.ToArray());
+                                        GUI.changed = true;
                                     }
                                 }
                             }

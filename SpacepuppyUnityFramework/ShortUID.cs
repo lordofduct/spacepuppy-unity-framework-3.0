@@ -167,4 +167,196 @@ namespace com.spacepuppy
 
     }
 
+    /// <summary>
+    /// Similar to ShortUid in that it can store the same numeric value, but can also be customized to be a unique string instead. 
+    /// ShortUid can be implicitly converted to TokenId.
+    /// </summary>
+    [System.Serializable]
+    public struct TokenId
+    {
+
+        public static readonly TokenId Empty = new TokenId();
+
+        #region Fields
+
+        [UnityEngine.SerializeField]
+        private uint _low;
+        [UnityEngine.SerializeField]
+        private uint _high;
+        [UnityEngine.SerializeField]
+        private string _id;
+
+        #endregion
+
+        #region CONSTRUCTOR
+
+        public TokenId(long value)
+        {
+            _low = (uint)(value & uint.MaxValue);
+            _high = (uint)(value >> 32);
+            _id = null;
+        }
+
+        public TokenId(string value)
+        {
+            _low = 0;
+            _high = 0;
+            _id = value;
+        }
+
+        public static TokenId NewId()
+        {
+            return new TokenId(System.DateTime.UtcNow.Ticks);
+        }
+
+        #endregion
+
+        #region Properties
+
+        public bool HasValue
+        {
+            get { return !string.IsNullOrEmpty(_id) || _low != 0 || _high != 0; }
+        }
+
+        public long LongValue
+        {
+            get
+            {
+                return ((long)_high << 32) | (long)_low;
+            }
+        }
+
+        public bool IsLong
+        {
+            get
+            {
+                return string.IsNullOrEmpty(_id);
+            }
+        }
+
+        #endregion
+
+        #region Methods
+
+        /// <summary>
+        /// Returns the id as a string
+        /// </summary>
+        /// <returns></returns>
+        public override string ToString()
+        {
+            if (this.IsLong)
+                return this.LongValue.ToString("X16");
+            else
+                return _id ?? string.Empty;
+        }
+
+        /// <summary>
+        /// Returns a value indicating whether this instance and a
+        /// specified Object represent the same type and value.
+        /// </summary>
+        /// <param name="obj">The object to compare</param>
+        /// <returns></returns>
+        public override bool Equals(object obj)
+        {
+            if (obj is TokenId)
+            {
+                return this.Equals((TokenId)obj);
+            }
+            else if (obj is ShortUid)
+            {
+                return this.IsLong && ((ShortUid)obj).Value == this.LongValue;
+            }
+            return false;
+        }
+
+        public bool Equals(TokenId id)
+        {
+            if (this.IsLong)
+            {
+                return id.IsLong && this._high == id._high && this._low == id._low;
+            }
+            else
+            {
+                return !id.IsLong && this._id == id._id;
+            }
+        }
+
+        public bool Equals(ShortUid uid)
+        {
+            return this.IsLong && this.LongValue == uid.Value;
+        }
+
+        /// <summary>
+        /// Returns the HashCode for underlying id.
+        /// </summary>
+        /// <returns></returns>
+        public override int GetHashCode()
+        {
+            if (this.IsLong)
+                return (int)(_high ^ _low);
+            else
+                return _id.GetHashCode();
+        }
+
+        #endregion
+
+        #region Operators
+
+        /// <summary>
+        /// Determines if both TokenId have the same underlying
+        /// id value.
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <returns></returns>
+        public static bool operator ==(TokenId x, TokenId y)
+        {
+            return x.Equals(y);
+        }
+
+        /// <summary>
+        /// Determines if both TokenId do not have the
+        /// same underlying id value.
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <returns></returns>
+        public static bool operator !=(TokenId x, TokenId y)
+        {
+            return !x.Equals(y);
+        }
+
+        /// <summary>
+        /// Implicitly converts the TokenId to it's string equivilent
+        /// </summary>
+        /// <param name="uid"></param>
+        /// <returns></returns>
+        public static implicit operator string(TokenId uid)
+        {
+            return uid.ToString();
+        }
+
+        /// <summary>
+        /// Implicitly converts from a ShortUid to a TokenId
+        /// </summary>
+        /// <param name="uid"></param>
+        public static implicit operator TokenId(ShortUid uid)
+        {
+            return new TokenId(uid.Value);
+        }
+
+        #endregion
+
+        #region Special Types
+
+        public class ConfigAttribute : System.Attribute
+        {
+            public bool ReadOnly;
+            public bool AllowZero;
+        }
+
+        #endregion
+
+    }
+
 }

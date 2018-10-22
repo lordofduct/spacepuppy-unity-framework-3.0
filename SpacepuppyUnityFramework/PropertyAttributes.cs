@@ -419,8 +419,14 @@ namespace com.spacepuppy
     [System.AttributeUsage(System.AttributeTargets.Field, AllowMultiple = false)]
     public class DefaultFromSelfAttribute : PropertyModifierAttribute
     {
-        public bool UseEntity = false;
+        public EntityRelativity Relativity = EntityRelativity.Self;
         public bool HandleOnce = true;
+
+        public DefaultFromSelfAttribute(EntityRelativity relativity = EntityRelativity.Self)
+        {
+            this.Relativity = relativity;
+        }
+
     }
 
     [System.AttributeUsage(System.AttributeTargets.Field, AllowMultiple = false)]
@@ -465,12 +471,13 @@ namespace com.spacepuppy
     public class ForceFromSelfAttribute : PropertyModifierAttribute
     {
 
-        public EntityRelativity Relativity;
+        public EntityRelativity Relativity = EntityRelativity.Self;
 
-        public ForceFromSelfAttribute(EntityRelativity relativity)
+        public ForceFromSelfAttribute(EntityRelativity relativity = EntityRelativity.Self)
         {
             this.Relativity = relativity;
         }
+
     }
 
     [System.AttributeUsage(System.AttributeTargets.Field, AllowMultiple = false)]

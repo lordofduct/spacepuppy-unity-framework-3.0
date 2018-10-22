@@ -122,8 +122,7 @@ namespace com.spacepuppy.Events
 
         private void OnTriggerActivated(object sender, TempEventArgs e)
         {
-            var d = this.TriggerActivated;
-            if (d != null) d(this, e);
+            this.TriggerActivated?.Invoke(sender, e);
         }
 
         #endregion

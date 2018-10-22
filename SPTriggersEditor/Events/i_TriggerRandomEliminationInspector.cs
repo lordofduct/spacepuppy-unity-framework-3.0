@@ -15,9 +15,7 @@ namespace com.spacepuppyeditor.Events
     [CustomEditor(typeof(i_TriggerRandomElimination), true)]
     public class i_TriggerRandomEliminationInspector : SPEditor
     {
-
-        public const string PROP_ORDER = EditorHelper.PROP_ORDER;
-        public const string PROP_ACTIVATEON = "_activateOn";
+        
         public const string PROP_TARGETS = "_targets";
 
         private SPEventPropertyDrawer _targetsDrawer = new SPEventPropertyDrawer()
@@ -36,15 +34,15 @@ namespace com.spacepuppyeditor.Events
             this.serializedObject.Update();
 
             this.DrawPropertyField(EditorHelper.PROP_SCRIPT);
-            this.DrawPropertyField(PROP_ORDER);
-            this.DrawPropertyField(PROP_ACTIVATEON);
+            this.DrawPropertyField(EditorHelper.PROP_ORDER);
+            this.DrawPropertyField(EditorHelper.PROP_ACTIVATEON);
 
             var targetsProp = this.serializedObject.FindProperty(PROP_TARGETS);
             var label = EditorHelper.TempContent(targetsProp.displayName);
             var area = EditorGUILayout.GetControlRect(false, _targetsDrawer.GetPropertyHeight(targetsProp, label));
             _targetsDrawer.OnGUI(area, targetsProp, label);
 
-            this.DrawDefaultInspectorExcept(EditorHelper.PROP_SCRIPT, PROP_ORDER, PROP_ACTIVATEON, PROP_TARGETS);
+            this.DrawDefaultInspectorExcept(EditorHelper.PROP_SCRIPT, EditorHelper.PROP_ORDER, EditorHelper.PROP_ACTIVATEON, PROP_TARGETS);
 
 
             this.serializedObject.ApplyModifiedProperties();

@@ -20,7 +20,7 @@ namespace com.spacepuppy.Motor
         #region Fields
 
         [SerializeField]
-        [DefaultFromSelf(UseEntity = true)]
+        [DefaultFromSelf(Relativity = EntityRelativity.Entity)]
         private CharacterController _controller;
 
         [SerializeField]

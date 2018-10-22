@@ -218,7 +218,11 @@ namespace com.spacepuppy.Utils
         {
             if (obj.IsNullOrDestroyed()) return;
 
-            if(Application.isPlaying)
+            if (Application.isEditor && !Application.isPlaying)
+            {
+                UnityEngine.Object.Destroy(obj);
+            }
+            else
             {
                 using (var lst = TempCollection.GetList<IKillableEntity>())
                 {
@@ -242,11 +246,6 @@ namespace com.spacepuppy.Utils
                     }
                 }
             }
-            else
-            {
-                UnityEngine.Object.DestroyImmediate(obj);
-            }
-
         }
 
         /// <summary>

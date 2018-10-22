@@ -56,6 +56,7 @@
     <Compile Include="Events\i_Destroy.cs" />
     <Compile Include="Events\i_Enable.cs" />
     <Compile Include="Events\i_LookAt.cs" />
+    <Compile Include="Events\i_ModifyTag.cs" />
     <Compile Include="Events\i_PlaySoundEffect.cs" />
     <Compile Include="Events\i_QuitApplication.cs" />
     <Compile Include="Events\i_SetActiveUIElement.cs" />
@@ -66,6 +67,7 @@
     <Compile Include="Events\i_Teleport.cs" />
     <Compile Include="Events\i_Trigger.cs" />
     <Compile Include="Events\i_TriggerFirstEnabledTarget.cs" />
+    <Compile Include="Events\i_TriggerOnEnumState.cs" />
     <Compile Include="Events\i_TriggerOnEval.cs" />
     <Compile Include="Events\i_TriggerOnIfThen.cs" />
     <Compile Include="Events\i_TriggerRandom.cs" />
@@ -85,6 +87,7 @@
     <Compile Include="Events\t_OnProxyMediatorTriggered.cs" />
     <Compile Include="Events\t_OnStart.cs" />
     <Compile Include="Events\t_OnTriggerOccupied.cs" />
+    <Compile Include="Events\t_OnTriggerOccupiedActive.cs" />
     <Compile Include="Events\t_OnUIEvent.cs" />
     <Compile Include="Events\t_StateMachine.cs" />
     <Compile Include="Events\t_Timer.cs" />

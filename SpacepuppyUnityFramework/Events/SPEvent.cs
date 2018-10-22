@@ -129,11 +129,27 @@ namespace com.spacepuppy.Events
             this.OnTriggerActivated(sender, arg);
         }
 
-        protected void ActivateRandomTrigger(object sender, object arg, bool considerWeights)
+        protected void ActivateRandomTrigger(object sender, object arg, bool considerWeights, bool selectOnlyIfActive)
         {
             if (_targets.Count > 0)
             {
-                EventTriggerTarget trig = (considerWeights) ? _targets.PickRandom((t) => { return t.Weight; }) : _targets.PickRandom();
+                EventTriggerTarget trig;
+                if (selectOnlyIfActive)
+                {
+                    using (var lst = TempCollection.GetList<EventTriggerTarget>())
+                    {
+                        for (int i = 0; i < _targets.Count; i++)
+                        {
+                            var go = GameObjectUtil.GetGameObjectFromSource(_targets[i].CalculateTarget(arg));
+                            if (object.ReferenceEquals(go, null) || go.IsAliveAndActive()) lst.Add(_targets[i]);
+                        }
+                        trig = (considerWeights) ? lst.PickRandom((t) => { return t.Weight; }) : lst.PickRandom();
+                    }
+                }
+                else
+                {
+                    trig = (considerWeights) ? _targets.PickRandom((t) => { return t.Weight; }) : _targets.PickRandom();
+                }
                 if (trig != null) trig.Trigger(sender, arg);
             }
 
@@ -271,9 +287,9 @@ namespace com.spacepuppy.Events
             base.ActivateTriggerAt(index, sender, arg);
         }
 
-        public new void ActivateRandomTrigger(object sender, object arg, bool considerWeights)
+        public new void ActivateRandomTrigger(object sender, object arg, bool considerWeights, bool selectOnlyIfActive)
         {
-            base.ActivateRandomTrigger(sender, arg, considerWeights);
+            base.ActivateRandomTrigger(sender, arg, considerWeights, selectOnlyIfActive);
         }
 
         #endregion
@@ -308,11 +324,7 @@ namespace com.spacepuppy.Events
         public new event System.EventHandler<T> TriggerActivated;
         protected virtual void OnTriggerActivated(object sender, T e)
         {
-            if (TriggerActivated != null)
-            {
-                var d = this.TriggerActivated;
-                d(sender, e);
-            }
+            this.TriggerActivated?.Invoke(sender, e);
         }
 
         #endregion
@@ -354,9 +366,9 @@ namespace com.spacepuppy.Events
             this.OnTriggerActivated(sender, arg);
         }
 
-        public void ActivateRandomTrigger(object sender, T arg, bool considerWeights)
+        public void ActivateRandomTrigger(object sender, T arg, bool considerWeights, bool selectOnlyIfActive)
         {
-            base.ActivateRandomTrigger(sender, arg, considerWeights);
+            base.ActivateRandomTrigger(sender, arg, considerWeights, selectOnlyIfActive);
             this.OnTriggerActivated(sender, arg);
         }
 
@@ -446,9 +458,9 @@ namespace com.spacepuppy.Events
             this.OnTriggerActivated(sender, arg);
         }
 
-        public void ActivateRandomTrigger(object sender, T arg, bool considerWeights)
+        public void ActivateRandomTrigger(object sender, T arg, bool considerWeights, bool selectOnlyIfActive)
         {
-            base.ActivateRandomTrigger(sender, arg, considerWeights);
+            base.ActivateRandomTrigger(sender, arg, considerWeights, selectOnlyIfActive);
             this.OnTriggerActivated(sender, arg);
         }
 

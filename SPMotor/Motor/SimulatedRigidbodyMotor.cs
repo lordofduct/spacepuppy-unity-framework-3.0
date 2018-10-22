@@ -21,7 +21,7 @@ namespace com.spacepuppy.Motor
         #region Fields
 
         [SerializeField]
-        [DefaultFromSelf(UseEntity = true)]
+        [DefaultFromSelf(Relativity = EntityRelativity.Entity)]
         private Rigidbody _rigidbody;
         [SerializeField]
         [OneOrMany]

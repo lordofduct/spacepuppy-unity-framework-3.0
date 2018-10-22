@@ -65,6 +65,11 @@ namespace com.spacepuppy
 
         #region IProxy Interface
 
+        bool IProxy.QueriesTarget
+        {
+            get { return _target.ImplicityReducesEntireEntity; }
+        }
+
         public object GetTarget()
         {
             if (_cache)

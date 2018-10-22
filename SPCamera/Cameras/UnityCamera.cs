@@ -17,7 +17,7 @@ namespace com.spacepuppy.Cameras
         private CameraCategory _type;
 
         [SerializeField]
-        [DefaultFromSelf(UseEntity = true)]
+        [DefaultFromSelf(Relativity = EntityRelativity.Entity)]
         private Camera _camera;
 
         #endregion

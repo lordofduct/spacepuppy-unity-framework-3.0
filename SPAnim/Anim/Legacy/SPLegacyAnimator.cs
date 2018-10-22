@@ -13,7 +13,7 @@ namespace com.spacepuppy.Anim.Legacy
         #region Fields
 
         [SerializeField()]
-        [DefaultFromSelf(UseEntity = true)]
+        [DefaultFromSelf(Relativity = EntityRelativity.Entity)]
         private SPLegacyAnimController _controller;
 
         [System.NonSerialized]

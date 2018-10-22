@@ -16,8 +16,7 @@ namespace com.spacepuppyeditor.Anim
     [CustomEditor(typeof(i_StopAnimation), true)]
     public class i_StopAnimationInspector : SPEditor
     {
-
-        public const string PROP_ORDER = EditorHelper.PROP_ORDER;
+        
         public const string PROP_TARGETANIMATOR = "_targetAnimator";
         public const string PROP_MODE = "_mode";
         public const string PROP_ID = "_id";
@@ -30,7 +29,7 @@ namespace com.spacepuppyeditor.Anim
             this.serializedObject.Update();
 
             this.DrawPropertyField(EditorHelper.PROP_SCRIPT);
-            this.DrawPropertyField(PROP_ORDER);
+            this.DrawPropertyField(EditorHelper.PROP_ORDER);
 
             this.DrawTargetAnimatorProperty();
 
@@ -47,7 +46,7 @@ namespace com.spacepuppyeditor.Anim
                     break;
             }
 
-            this.DrawDefaultInspectorExcept(EditorHelper.PROP_SCRIPT, PROP_ORDER, PROP_TARGETANIMATOR, PROP_MODE, PROP_ID, PROP_LAYER);
+            this.DrawDefaultInspectorExcept(EditorHelper.PROP_SCRIPT, EditorHelper.PROP_ORDER, PROP_TARGETANIMATOR, PROP_MODE, PROP_ID, PROP_LAYER);
            
             this.serializedObject.ApplyModifiedProperties();
         }

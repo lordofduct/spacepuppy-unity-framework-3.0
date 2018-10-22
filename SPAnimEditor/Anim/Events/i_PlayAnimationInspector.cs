@@ -74,7 +74,8 @@ namespace com.spacepuppyeditor.Anim
                         {
                             this.serializedObject.FindProperty(PROP_CLIP).objectReferenceValue = null;
 
-                            this.DrawPropertyField(PROP_ID);
+                            //this.DrawPropertyField(PROP_ID);
+                            this.DrawAnimIdSelector(controller);
                         }
                         break;
                     case i_PlayAnimation.PlayByMode.PlayAnimFromResource:
@@ -165,6 +166,31 @@ namespace com.spacepuppyeditor.Anim
             }
         }
 
+        private void DrawAnimIdSelector(object animator)
+        {
+            if (animator == null)
+            {
+                this.DrawPropertyField(PROP_ID);
+                return;
+            }
+
+            using (var lst = com.spacepuppy.Collections.TempCollection.GetList<string>())
+            {
+                GetAnimationIds(lst, animator);
+                if (lst.Count == 0)
+                {
+                    this.DrawPropertyField(PROP_ID);
+                    return;
+                }
+                else
+                {
+                    var propId = this.serializedObject.FindProperty(PROP_ID);
+                    propId.stringValue = SPEditorGUILayout.OptionPopupWithCustom(propId.displayName, propId.stringValue, lst.ToArray());
+                }
+            }
+
+        }
+
 
 
         public static string DrawSPAnimatorFunctionPopup(Rect position, GUIContent label, ISPAnimator controller, string functionName)
@@ -213,6 +239,21 @@ namespace com.spacepuppyeditor.Anim
             }
         }
 
+
+        private static void GetAnimationIds(List<string> results, object animator)
+        {
+            if (animator is IProxy) animator = (animator as IProxy).GetTarget();
+            if (animator == null) return;
+
+            if (animator is Animation)
+            {
+                results.AddRange(from AnimationState st in (animator as System.Collections.IEnumerable) select (st as AnimationState).name);
+            }
+            else if (animator is SPLegacyAnimController)
+            {
+                results.AddRange((animator as SPLegacyAnimController).States.Keys);
+            }
+        }
 
     }
 

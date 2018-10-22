@@ -16,6 +16,9 @@ namespace com.spacepuppy.Events
         [SPEvent.Config(Weighted = true)]
         private SPEvent _targets;
 
+        [SerializeField]
+        private bool _selectOnlyActiveTargets;
+
         [SerializeField()]
         private bool _passAlongTriggerArg;
 
@@ -26,6 +29,12 @@ namespace com.spacepuppy.Events
         #endregion
 
         #region Properties
+
+        public bool SelectOnlyActiveTargets
+        {
+            get { return _selectOnlyActiveTargets; }
+            set { _selectOnlyActiveTargets = value; }
+        }
 
         public bool PassAlongTriggerArg
         {
@@ -52,17 +61,17 @@ namespace com.spacepuppy.Events
                 this.InvokeGuaranteed(() =>
                 {
                     if (this._passAlongTriggerArg)
-                        _targets.ActivateRandomTrigger(this, arg, true);
+                        _targets.ActivateRandomTrigger(this, arg, true, _selectOnlyActiveTargets);
                     else
-                        _targets.ActivateRandomTrigger(this, null, true);
+                        _targets.ActivateRandomTrigger(this, null, true, _selectOnlyActiveTargets);
                 }, _delay.Seconds, _delay.TimeSupplier);
             }
             else
             {
                 if (this._passAlongTriggerArg)
-                    _targets.ActivateRandomTrigger(this, arg, true);
+                    _targets.ActivateRandomTrigger(this, arg, true, _selectOnlyActiveTargets);
                 else
-                    _targets.ActivateRandomTrigger(this, null, true);
+                    _targets.ActivateRandomTrigger(this, null, true, _selectOnlyActiveTargets);
             }
 
             return true;

@@ -76,6 +76,7 @@
     <Compile Include="Base\VersionInfoPropertyDrawer.cs" />
     <Compile Include="Commands\FindReferencesToObjectMenu.cs" />
     <Compile Include="Commands\ScreenshotUtil.cs" />
+    <Compile Include="Commands\SearchByTagEditor.cs" />
     <Compile Include="Commands\TransformAltContextMenu.cs" />
     <Compile Include="Commands\TransformCopyMenu.cs" />
     <Compile Include="Components\RequireComponentInEntityHeaderDrawer.cs" />

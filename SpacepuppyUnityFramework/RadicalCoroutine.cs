@@ -1343,8 +1343,16 @@ namespace com.spacepuppy
 
                 if (_e.MoveNext())
                 {
-                    yieldObject = _e.Current;
-                    return true;
+                    if (_e == null)
+                    {
+                        yieldObject = null;
+                        return false;
+                    }
+                    else
+                    {
+                        yieldObject = _e.Current;
+                        return true;
+                    }
                 }
                 else
                 {

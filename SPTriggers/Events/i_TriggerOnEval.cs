@@ -20,7 +20,6 @@ namespace com.spacepuppy.Events
         private bool _passAlongTriggerArg;
 
         [SerializeField()]
-        [TimeUnitsSelector()]
         private SPTimePeriod _delay = 0f;
 
         #endregion

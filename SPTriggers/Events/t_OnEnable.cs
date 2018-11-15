@@ -10,7 +10,6 @@ namespace com.spacepuppy.Events
         #region Fields
 
         [SerializeField()]
-        [TimeUnitsSelector()]
         private SPTimePeriod _delay;
 
         #endregion

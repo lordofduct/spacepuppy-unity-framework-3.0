@@ -19,7 +19,7 @@ namespace com.spacepuppy.Anim.Events
         [SerializeField]
         private UnityEngine.Object _clip;
         [SerializeField]
-        public bool ApplyCustomSettings;
+        public AnimSettingsMask SettingsMask;
         [SerializeField]
         public AnimSettings Settings = AnimSettings.Default;
         [SerializeField]

@@ -29,7 +29,7 @@ namespace com.spacepuppyeditor.Anim.Events
         public const string PROP_CLIP_MODE = "_mode";
         public const string PROP_CLIP_ID = "_id";
         public const string PROP_CLIP_CLIP = "_clip";
-        public const string PROP_CLIP_APPPLYSETTINGS = "ApplyCustomSettings";
+        public const string PROP_CLIP_SETTINGSMASK= "SettingsMask";
         public const string PROP_CLIP_SETTINGS = "Settings";
         public const string PROP_CLIP_QUEUEMODE = "QueueMode";
         public const string PROP_CLIP_PLAYMODE = "PlayMode";

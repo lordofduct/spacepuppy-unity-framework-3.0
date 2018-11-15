@@ -444,10 +444,11 @@ namespace com.spacepuppy.Spawn
             if (_prefabToCache.ContainsKey(id)) return _prefabToCache[id];
 
             var controller = obj.FindComponent<SpawnedObjectController>();
-            if (controller == null && controller.Pool != this) return null;
+            if (controller == null || controller.Pool != this) return null;
 
             id = controller.PrefabID;
-            if (_prefabToCache.ContainsKey(id)) return _prefabToCache[id];
+            PrefabCache result;
+            if (_prefabToCache.TryGetValue(id, out result)) return result;
             
             return null;
         }
@@ -552,18 +553,26 @@ namespace com.spacepuppy.Spawn
             [System.NonSerialized()]
             private SpawnPool _owner;
             [System.NonSerialized()]
-            private HashSet<SpawnedObjectController> _instances = new HashSet<SpawnedObjectController>(ObjectReferenceEqualityComparer<SpawnedObjectController>.Default);
+            private HashSet<SpawnedObjectController> _instances;
             [System.NonSerialized()]
-            private HashSet<SpawnedObjectController> _activeInstances = new HashSet<SpawnedObjectController>(ObjectReferenceEqualityComparer<SpawnedObjectController>.Default);
+            private HashSet<SpawnedObjectController> _activeInstances;
 
             #endregion
 
             #region CONSTRUCTOR
 
+            protected PrefabCache()
+            {
+                _instances = new HashSet<SpawnedObjectController>(ObjectReferenceEqualityComparer<SpawnedObjectController>.Default);
+                _activeInstances = new HashSet<SpawnedObjectController>(ObjectReferenceEqualityComparer<SpawnedObjectController>.Default);
+            }
+            
             public PrefabCache(GameObject prefab, string name)
             {
                 _prefab = prefab;
                 _itemName = name;
+                _instances = new HashSet<SpawnedObjectController>(ObjectReferenceEqualityComparer<SpawnedObjectController>.Default);
+                _activeInstances = new HashSet<SpawnedObjectController>(ObjectReferenceEqualityComparer<SpawnedObjectController>.Default);
             }
 
             public void Init(SpawnPool owner)

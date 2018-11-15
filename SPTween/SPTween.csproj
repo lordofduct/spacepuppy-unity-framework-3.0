@@ -88,6 +88,7 @@
     <Compile Include="Tween\Enums.cs" />
     <Compile Include="Tween\Events\i_KillTween.cs" />
     <Compile Include="Tween\Events\i_TweenState.cs" />
+    <Compile Include="Tween\Events\i_TweenTo.cs" />
     <Compile Include="Tween\Events\i_TweenValue.cs" />
     <Compile Include="Tween\ITweenHash.cs" />
     <Compile Include="Tween\ITweenMemberAccessor.cs" />

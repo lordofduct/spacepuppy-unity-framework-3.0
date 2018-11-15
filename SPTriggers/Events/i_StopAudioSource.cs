@@ -17,7 +17,6 @@ namespace com.spacepuppy.Events
         private TriggerableTargetObject _target;
 
         [SerializeField]
-        [TimeUnitsSelector()]
         private SPTimePeriod _fadeOutDur;
 
         [SerializeField]

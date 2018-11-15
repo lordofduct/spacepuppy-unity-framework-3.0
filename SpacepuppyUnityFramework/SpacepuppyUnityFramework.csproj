@@ -165,7 +165,6 @@
       <DependentUpon>AssemblyVersionInfo.tt</DependentUpon>
     </Compile>
     <Compile Include="PropertyAttributes.cs" />
-    <Compile Include="ProxyTarget.cs" />
     <Compile Include="RadicalCoroutine.cs" />
     <Compile Include="RadicalCoroutineManager.cs" />
     <Compile Include="RadicalEnums.cs" />

@@ -118,6 +118,7 @@ namespace com.spacepuppy
     /// <summary>
     /// Sometimes you want to run Start late, to allow Start to be called on all other scripts. Basically adding a final ordering for Start similar to LateUpdate.
     /// </summary>
+    [MLateStartReceiverConstructor]
     public interface IMLateStartReceiver : IMixin, IEventfulComponent
     {
         void OnLateStart();
@@ -134,7 +135,7 @@ namespace com.spacepuppy
             {
                 c.OnStarted += (s, e) =>
                 {
-                    GameLoop.UpdateHandle.BeginInvoke(() =>
+                    GameLoop.LateUpdateHandle.BeginInvoke(() =>
                     {
                         c.OnLateStart();
                     });
@@ -166,7 +167,7 @@ namespace com.spacepuppy
             {
                 c.OnEnabled += (s, e) =>
                 {
-                    GameLoop.UpdateHandle.BeginInvoke(() =>
+                    GameLoop.LateUpdateHandle.BeginInvoke(() =>
                     {
                         c.OnLateStartOrEnable();
                     });

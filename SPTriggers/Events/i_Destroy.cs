@@ -14,7 +14,6 @@ namespace com.spacepuppy.Events
         private TriggerableTargetObject _target = new TriggerableTargetObject();
 
         [SerializeField()]
-        [TimeUnitsSelector()]
         private SPTimePeriod _delay = 0f;
 
         #endregion

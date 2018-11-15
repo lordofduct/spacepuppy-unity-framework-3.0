@@ -19,11 +19,7 @@ namespace com.spacepuppy.Render.Events
         private bool _killOnDisable;
 
         [SerializeField()]
-        private SPTime _timeSupplier;
-
-        [SerializeField()]
-        [TimeUnitsSelector()]
-        private float _duration;
+        private SPTimePeriod _duration;
 
         [SerializeField()]
         private EaseStyle _ease;
@@ -129,9 +125,9 @@ namespace com.spacepuppy.Render.Events
             }
 
             var twn = SPTween.Tween(_transition)
-                             .FromTo("Position", EaseMethods.GetEase(_ease), _duration, 0f, 1f)
+                             .FromTo("Position", EaseMethods.GetEase(_ease), _duration.Seconds, 0f, 1f)
                              .SetId(this.AutoKillId)
-                             .Use(_timeSupplier.TimeSupplier);
+                             .Use(_duration.TimeSupplier);
             
             if (_onComplete.Count > 0)
                 twn.OnFinish((t) => _onComplete.ActivateTrigger(this, null));

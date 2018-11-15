@@ -75,7 +75,7 @@ namespace com.spacepuppy.Events
         {
             base.OnEnable();
 
-            if ((_activateOn & ActivateEvent.OnStart) != 0 && !this.started) return;
+            if (!this.started) return;
 
             if ((_activateOn & ActivateEvent.OnEnable) != 0)
             {

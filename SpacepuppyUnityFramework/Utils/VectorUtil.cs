@@ -267,14 +267,17 @@ namespace com.spacepuppy.Utils
         {
             // // Due to float error the dot / mag can sometimes be ever so slightly over 1, which can cause NaN in acos.
             //return Mathf.Acos(Vector3.Dot(a, b) / (a.magnitude * b.magnitude)) * MathUtil.RAD_TO_DEG;
-            double d = (double)Vector3.Dot(a, b) / ((double)a.magnitude * (double)b.magnitude);
+            double d = System.Math.Sqrt((double)a.sqrMagnitude * (double)b.sqrMagnitude);
+            if (d < MathUtil.DBL_EPSILON) return 0f;
+
+            d = (double)Vector3.Dot(a, b) / d;
             if (d >= 1d) return 0f;
             else if (d <= -1d) return 180f;
             return (float)System.Math.Acos(d) * MathUtil.RAD_TO_DEG;
         }
 
         /// <summary>
-        /// Returns a vector adjacent to up in the general direction of forward.
+        /// Returns a vector orthogonal to up in the general direction of forward.
         /// </summary>
         /// <param name="up"></param>
         /// <param name="targForward"></param>
@@ -842,6 +845,27 @@ namespace com.spacepuppy.Utils
                 case CartesianAxis.Z:
                     v.z = value;
                     break;
+            }
+        }
+
+        public static float Get(this Vector3 v, CartesianAxis axis)
+        {
+            switch (axis)
+            {
+                case CartesianAxis.Zneg:
+                    return -v.z;
+                case CartesianAxis.Yneg:
+                    return -v.y;
+                case CartesianAxis.Xneg:
+                    return -v.x;
+                case CartesianAxis.X:
+                    return v.x;
+                case CartesianAxis.Y:
+                    return v.y;
+                case CartesianAxis.Z:
+                    return v.z;
+                default:
+                    return 0f;
             }
         }
 

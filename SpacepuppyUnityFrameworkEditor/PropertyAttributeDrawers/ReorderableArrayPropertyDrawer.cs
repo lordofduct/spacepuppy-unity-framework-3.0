@@ -45,7 +45,23 @@ namespace com.spacepuppyeditor.PropertyAttributeDrawers
 
         #region CONSTRUCTOR
 
-        private CachedReorderableList GetList(SerializedProperty property, GUIContent label)
+        public ReorderableArrayPropertyDrawer()
+        {
+
+        }
+
+        /// <summary>
+        /// Use this to set the element type of the list for drag & drop, if you're manually calling the drawer.
+        /// </summary>
+        /// <param name="elementType"></param>
+        public ReorderableArrayPropertyDrawer(System.Type elementType)
+        {
+            this.ElementType = elementType;
+        }
+
+
+
+        protected virtual CachedReorderableList GetList(SerializedProperty property, GUIContent label)
         {
             var lst = CachedReorderableList.GetListDrawer(property, _maskList_DrawHeader, _maskList_DrawElement, _addCallback);
             lst.draggable = _draggable;
@@ -133,6 +149,8 @@ namespace com.spacepuppyeditor.PropertyAttributeDrawers
 
             _lst = this.GetList(property, label);
             if (_lst.index >= _lst.count) _lst.index = -1;
+
+            if (this.fieldInfo != null) this.ElementType = TypeUtil.GetElementTypeOfListType(this.fieldInfo.FieldType);
         }
 
         private void EndOnGUI(SerializedProperty property, GUIContent label)
@@ -217,6 +235,15 @@ namespace com.spacepuppyeditor.PropertyAttributeDrawers
         {
             get { return _allowDragAndDrop; }
             set { _allowDragAndDrop = false; }
+        }
+
+        /// <summary>
+        /// The type of the element in the array/list, will effect drag & drop filtering (unless overriden).
+        /// </summary>
+        public System.Type ElementType
+        {
+            get;
+            set;
         }
 
         #endregion
@@ -313,31 +340,7 @@ namespace com.spacepuppyeditor.PropertyAttributeDrawers
                     }
                 }
 
-                if (_allowDragAndDrop && this.fieldInfo != null && Event.current != null)
-                {
-                    var ev = Event.current;
-                    switch (ev.type)
-                    {
-                        case EventType.DragUpdated:
-                        case EventType.DragPerform:
-                            {
-                                if (listArea.Contains(ev.mousePosition))
-                                {
-                                    var tp = TypeUtil.GetElementTypeOfListType(this.fieldInfo.FieldType);
-                                    var refs = (from o in DragAndDrop.objectReferences let obj = ObjUtil.GetAsFromSource(tp, o, false) where obj != null select obj);
-                                    DragAndDrop.visualMode = refs.Any() ? DragAndDropVisualMode.Link : DragAndDropVisualMode.Rejected;
-
-                                    if (ev.type == EventType.DragPerform && refs.Any())
-                                    {
-                                        DragAndDrop.AcceptDrag();
-                                        AddObjectsToARray(property, refs.ToArray());
-                                        GUI.changed = true;
-                                    }
-                                }
-                            }
-                            break;
-                    }
-                }
+                this.DoDragAndDrop(property, listArea);
 
                 if (property.isExpanded && _drawElementAtBottom && _lst.index >= 0 && _lst.index < property.arraySize)
                 {
@@ -512,6 +515,38 @@ namespace com.spacepuppyeditor.PropertyAttributeDrawers
 
         #endregion
 
+        #region Drag & Drop
+
+        protected virtual void DoDragAndDrop(SerializedProperty property, Rect listArea)
+        {
+            if (_allowDragAndDrop && this.ElementType != null && Event.current != null)
+            {
+                var ev = Event.current;
+                switch (ev.type)
+                {
+                    case EventType.DragUpdated:
+                    case EventType.DragPerform:
+                        {
+                            if (listArea.Contains(ev.mousePosition))
+                            {
+                                var refs = (from o in DragAndDrop.objectReferences let obj = ObjUtil.GetAsFromSource(this.ElementType, o, false) where obj != null select obj);
+                                DragAndDrop.visualMode = refs.Any() ? DragAndDropVisualMode.Link : DragAndDropVisualMode.Rejected;
+
+                                if (ev.type == EventType.DragPerform && refs.Any())
+                                {
+                                    DragAndDrop.AcceptDrag();
+                                    AddObjectsToArray(property, refs.ToArray());
+                                    GUI.changed = true;
+                                }
+                            }
+                        }
+                        break;
+                }
+            }
+        }
+
+        #endregion
+
 
         protected GUIContent TempElementLabel(SerializedProperty element, int index)
         {
@@ -555,7 +590,7 @@ namespace com.spacepuppyeditor.PropertyAttributeDrawers
             return property.hasChildren && property.propertyType == SerializedPropertyType.Generic;
         }
 
-        private static void AddObjectsToARray(SerializedProperty listProp, object[] objs)
+        private static void AddObjectsToArray(SerializedProperty listProp, object[] objs)
         {
             if (listProp == null) throw new System.ArgumentNullException("listProp");
             if (!listProp.isArray) throw new System.ArgumentException("Must be a SerializedProperty for an array/list.", "listProp");

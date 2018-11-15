@@ -145,7 +145,7 @@ namespace com.spacepuppy.Spawn
         {
             if (!_pool.Despawn(this))
             {
-                ObjUtil.SmartDestroy(this.gameObject);
+                Object.Destroy(this.gameObject);
             }
             else
             {

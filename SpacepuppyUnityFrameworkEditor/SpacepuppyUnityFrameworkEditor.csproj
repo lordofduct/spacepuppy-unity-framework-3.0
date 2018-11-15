@@ -100,6 +100,7 @@
     <Compile Include="PropertyAttributeDrawers\EnumPopupExcludingPropertyDrawer.cs" />
     <Compile Include="PropertyAttributeDrawers\EulerRotationInspectorPropertyDrawer.cs" />
     <Compile Include="PropertyAttributeDrawers\GenericMaskPropertyDrawer.cs" />
+    <Compile Include="PropertyAttributeDrawers\InputIDPropertyDrawer.cs" />
     <Compile Include="PropertyAttributeDrawers\MaxRangePropertyDrawer.cs" />
     <Compile Include="PropertyAttributeDrawers\MinRangePropertyDrawer.cs" />
     <Compile Include="PropertyAttributeDrawers\OneOrManyPropertyDrawer.cs" />

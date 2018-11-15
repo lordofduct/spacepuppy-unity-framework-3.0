@@ -18,11 +18,12 @@ namespace com.spacepuppyeditor.Anim.Events
         public const string PROP_MODE = "_mode";
         public const string PROP_ID = "_id";
         public const string PROP_CLIP = "_clip";
-        public const string PROP_APPPLYSETTINGS = "ApplyCustomSettings";
+        public const string PROP_SETTINGSMASK = "SettingsMask";
         public const string PROP_SETTINGS = "Settings";
         public const string PROP_QUEUEMODE = "QueueMode";
         public const string PROP_PLAYMODE = "PlayMode";
         public const string PROP_CROSSFADEDUR = "CrossFadeDur";
+        private static string[] PROPS_ANIMSETTINGS = new string[] { "weight", "speed", "layer", "wrapMode", "blendMode", "timeSupplier" };
 
         public bool DrawFlat;
 
@@ -36,16 +37,13 @@ namespace com.spacepuppyeditor.Anim.Events
                 if (controller is Animation || controller is SPLegacyAnimController)
                 {
                     float h = EditorGUIUtility.singleLineHeight * 6f;
-                    var propApplySetting = property.FindPropertyRelative(PROP_APPPLYSETTINGS);
-                    if (propApplySetting.boolValue)
+
+                    var propSettings = property.FindPropertyRelative(PROP_SETTINGS);
+                    h += EditorGUIUtility.singleLineHeight;
+                    int mask = property.FindPropertyRelative(PROP_SETTINGSMASK).intValue;
+                    for (int i = 0; i < PROPS_ANIMSETTINGS.Length; i++)
                     {
-                        var propSettings = property.FindPropertyRelative(PROP_SETTINGS);
-                        propSettings.isExpanded = true;
-                        h += SPEditorGUI.GetPropertyHeight(propSettings, EditorHelper.TempContent(propSettings.displayName), true);
-                    }
-                    else
-                    {
-                        h += EditorGUIUtility.singleLineHeight;
+                        if (propSettings.isExpanded || (mask & (1 << i)) != 0) h += EditorGUIUtility.singleLineHeight;
                     }
 
                     return h;
@@ -59,16 +57,12 @@ namespace com.spacepuppyeditor.Anim.Events
                     float h = EditorGUIUtility.singleLineHeight * 5f;
                     if (!this.DrawFlat) h += EditorGUIUtility.singleLineHeight;
 
-                    var propApplySetting = property.FindPropertyRelative(PROP_APPPLYSETTINGS);
-                    if (propApplySetting.boolValue)
+                    var propSettings = property.FindPropertyRelative(PROP_SETTINGS);
+                    h += EditorGUIUtility.singleLineHeight;
+                    int mask = property.FindPropertyRelative(PROP_SETTINGSMASK).intValue;
+                    for (int i = 0; i < PROPS_ANIMSETTINGS.Length; i++)
                     {
-                        var propSettings = property.FindPropertyRelative(PROP_SETTINGS);
-                        propSettings.isExpanded = true;
-                        h += SPEditorGUI.GetPropertyHeight(propSettings, EditorHelper.TempContent(propSettings.displayName), true);
-                    }
-                    else
-                    {
-                        h += EditorGUIUtility.singleLineHeight;
+                        if (propSettings.isExpanded || (mask & (1 << i)) != 0) h += EditorGUIUtility.singleLineHeight;
                     }
 
                     return h;
@@ -85,16 +79,12 @@ namespace com.spacepuppyeditor.Anim.Events
                 float h = EditorGUIUtility.singleLineHeight * 6f;
                 if (!this.DrawFlat) h += EditorGUIUtility.singleLineHeight;
 
-                var propApplySetting = property.FindPropertyRelative(PROP_APPPLYSETTINGS);
-                if (propApplySetting.boolValue)
+                var propSettings = property.FindPropertyRelative(PROP_SETTINGS);
+                h += EditorGUIUtility.singleLineHeight;
+                int mask = property.FindPropertyRelative(PROP_SETTINGSMASK).intValue;
+                for (int i = 0; i < PROPS_ANIMSETTINGS.Length; i++)
                 {
-                    var propSettings = property.FindPropertyRelative(PROP_SETTINGS);
-                    propSettings.isExpanded = true;
-                    h += SPEditorGUI.GetPropertyHeight(propSettings, EditorHelper.TempContent(propSettings.displayName), true);
-                }
-                else
-                {
-                    h += EditorGUIUtility.singleLineHeight;
+                    if (propSettings.isExpanded || (mask & (1 << i)) != 0) h += EditorGUIUtility.singleLineHeight;
                 }
 
                 return h;
@@ -221,16 +211,40 @@ namespace com.spacepuppyeditor.Anim.Events
 
         private void DrawSettings(Rect position, SerializedProperty property)
         {
-            var r3a = new Rect(position.xMin, position.yMin, position.width, EditorGUIUtility.singleLineHeight);
-            var propApplySettings = property.FindPropertyRelative(PROP_APPPLYSETTINGS);
-            SPEditorGUI.PropertyField(r3a, propApplySettings);
-            if (propApplySettings.boolValue)
+            var propMask = property.FindPropertyRelative(PROP_SETTINGSMASK);
+            var propSettings = property.FindPropertyRelative(PROP_SETTINGS);
+
+            int mask = propMask.intValue;
+
+            var r1 = new Rect(position.xMin, position.yMin, position.width, EditorGUIUtility.singleLineHeight);
+            propSettings.isExpanded = EditorGUI.Foldout(r1, propSettings.isExpanded, mask != 0 ? "Custom Settings : Active" : "Custom Settings");
+
+            EditorGUI.BeginChangeCheck();
+            int row = 0;
+            for (int i = 0; i < PROPS_ANIMSETTINGS.Length; i++)
             {
-                var r3b = new Rect(position.xMin, r3a.yMax, position.width, position.height - EditorGUIUtility.singleLineHeight);
-                EditorGUI.indentLevel++;
-                SPEditorGUI.FlatChildPropertyField(r3b, property.FindPropertyRelative(PROP_SETTINGS));
-                EditorGUI.indentLevel--;
+                int m = 1 << i;
+                bool active = (mask & m) != 0;
+                if (!propSettings.isExpanded && !active) continue;
+
+                var propSet = propSettings.FindPropertyRelative(PROPS_ANIMSETTINGS[i]);
+                var r2 = new Rect(position.xMin, r1.yMax + row * EditorGUIUtility.singleLineHeight, position.width, EditorGUIUtility.singleLineHeight);
+                var r2a = new Rect(r2.xMin, r2.yMin, 30f, r2.height);
+                var r2b = new Rect(r2a.xMax, r2.yMin, r2.width - r2a.width, r2.height);
+                if(EditorGUI.Toggle(r2a, active))
+                {
+                    mask |= m;
+                    EditorGUI.PropertyField(r2b, propSet);
+                }
+                else
+                {
+                    mask &= ~m;
+                    EditorGUI.PrefixLabel(r2b, EditorHelper.TempContent(propSet.displayName, propSet.tooltip));
+                }
+                row++;
             }
+            if (EditorGUI.EndChangeCheck())
+                propMask.intValue = mask;
         }
         
     }

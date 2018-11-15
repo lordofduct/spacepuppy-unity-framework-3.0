@@ -274,15 +274,7 @@ namespace com.spacepuppy.Utils
             if (entity != null)
                 return entity.gameObject;
             else
-            {
-                //var t = go.transform;
-                //while (t != null)
-                //{
-                //    if (MultiTagHelper.HasTag(t, SPConstants.TAG_ROOT)) return t.gameObject;
-                //    t = t.parent;
-                //}
-                return null;
-            }
+                return FindParentWithTag(go.transform, SPConstants.TAG_ROOT);
         }
 
         public static GameObject FindTrueRoot(this Component c)
@@ -293,15 +285,7 @@ namespace com.spacepuppy.Utils
             if (entity != null)
                 return entity.gameObject;
             else
-            {
-                //var t = c.transform;
-                //while (t != null)
-                //{
-                //    if (MultiTagHelper.HasTag(t, SPConstants.TAG_ROOT)) return t.gameObject;
-                //    t = t.parent;
-                //}
-                return null;
-            }
+                return FindParentWithTag(c.transform, SPConstants.TAG_ROOT);
         }
         
         /// <summary>
@@ -318,9 +302,8 @@ namespace com.spacepuppy.Utils
                 return entity.gameObject;
             else
             {
-                //var root = FindTrueRoot(go);
-                //return (root != null) ? root : go; //we return self if no root was found...
-                return null;
+                var root = FindParentWithTag(go.transform, SPConstants.TAG_ROOT);
+                return (root != null) ? root : go; //we return self if no root was found...
             }
         }
 
@@ -333,9 +316,8 @@ namespace com.spacepuppy.Utils
                 return entity.gameObject;
             else
             {
-                //var root = FindTrueRoot(c);
-                //return (root != null) ? root : c.gameObject;
-                return null;
+                var root = FindParentWithTag(c.transform, SPConstants.TAG_ROOT);
+                return (root != null) ? root : c.gameObject; //we return self if no root was found...
             }
         }
         

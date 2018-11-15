@@ -123,6 +123,8 @@ namespace com.spacepuppy.Utils
             return lst.Intersect(objs).Count() > 0;
         }
 
+#if !UNITY_4X
+
         public static IEnumerable<T> Append<T>(this IEnumerable<T> lst, T obj)
         {
             //foreach (var o in lst)
@@ -151,6 +153,8 @@ namespace com.spacepuppy.Utils
             }
         }
 
+#endif
+        
         public static bool Contains(this IEnumerable lst, object obj)
         {
             //foreach (var o in lst)
@@ -265,9 +269,9 @@ namespace com.spacepuppy.Utils
             }
         }
 
-        #endregion
+#endregion
 
-        #region Random Methods
+#region Random Methods
 
         public static void Shuffle<T>(T[] arr, IRandom rng = null)
         {
@@ -417,9 +421,9 @@ namespace com.spacepuppy.Utils
             }
         }
         
-        #endregion
+#endregion
 
-        #region Array Methods
+#region Array Methods
 
         public static T[] Empty<T>()
         {
@@ -493,9 +497,9 @@ namespace com.spacepuppy.Utils
         }
         
 
-        #endregion
+#endregion
 
-        #region HashSet Methods
+#region HashSet Methods
 
         public static T Pop<T>(this HashSet<T> set)
         {
@@ -511,9 +515,9 @@ namespace com.spacepuppy.Utils
             throw new System.ArgumentException("HashSet must not be empty.");
         }
 
-        #endregion
+#endregion
 
-        #region Special Types
+#region Special Types
 
         private class TempArray<T>
         {
@@ -651,7 +655,7 @@ namespace com.spacepuppy.Utils
             }
         }
 
-        #endregion
+#endregion
 
     }
 

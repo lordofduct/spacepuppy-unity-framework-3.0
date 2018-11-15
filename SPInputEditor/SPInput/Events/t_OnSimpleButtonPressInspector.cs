@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using com.spacepuppy.Events;
 using com.spacepuppy.SPInput.Events;
 
+using com.spacepuppyeditor.Settings;
+
 namespace com.spacepuppyeditor.SPInput.Events
 {
 
@@ -20,7 +22,7 @@ namespace com.spacepuppyeditor.SPInput.Events
         {
             base.OnEnable();
 
-            _inputIds = com.spacepuppyeditor.Windows.AdvancedInputManagerWindow.GetAllAvailableInputs();
+            _inputIds = InputSettings.GetGlobalInputIds();
         }
 
         protected override void OnSPInspectorGUI()

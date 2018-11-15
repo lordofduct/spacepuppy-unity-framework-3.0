@@ -99,9 +99,11 @@ namespace com.spacepuppy.Spawn.Events
             var go = pool.Spawn(entry.Prefab.gameObject, this.transform.position, this.transform.rotation, _spawnedObjectParent);
 
             var dur = (entry.Duration > 0f) ? entry.Duration : entry.Prefab.main.duration;
-            if (!float.IsNaN(dur) && !float.IsInfinity(dur))
+            var timeSupplier = (entry.Prefab.main.useUnscaledTime) ? SPTime.Real : SPTime.Normal;
+            if (!float.IsNaN(dur) && !float.IsInfinity(dur) && dur >= 0f)
             {
-                this.InvokeGuaranteed(() => go.Kill(), dur);
+                this.InvokeGuaranteed(() => go.Kill(), dur,
+                                                       entry.Prefab.main.useUnscaledTime ? SPTime.Real : SPTime.Normal);
             }
 
             if (_onSpawnedObject != null && _onSpawnedObject.Count > 0)

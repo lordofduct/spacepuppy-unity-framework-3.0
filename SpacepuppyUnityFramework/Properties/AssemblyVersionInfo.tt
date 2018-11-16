@@ -9,7 +9,7 @@
     //revision - preview = yyddd, stable = 0
 
     int major    = 3;
-    int minor    = 0;
+    int minor    = 1;
     int build    = 1;
 	int revision = 0;
 
@@ -33,3 +33,4 @@ using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 [assembly: AssemblyVersion("<#= version #>")]
+[assembly: AssemblyFileVersion("<#= version #>")]

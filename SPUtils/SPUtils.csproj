@@ -1,40 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{4FA4FB9B-8AD3-4D87-B895-F65F593A6867}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <TargetFrameworks>net35;net471</TargetFrameworks>
     <RootNamespace>com.spacepuppy</RootNamespace>
     <AssemblyName>SPUtils</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
+    <GenerateAssemblyVersionAttribute>false</GenerateAssemblyVersionAttribute>
+	<GenerateAssemblyFileVersionAttribute>false</GenerateAssemblyFileVersionAttribute>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Xml" />
+    <Compile Include="..\SpacepuppyUnityFramework\Properties\AssemblyVersionInfo.cs" Link="Properties\AssemblyVersionInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
     <Reference Include="UnityEngine">
       <HintPath>..\Resources\UnityEngine.dll</HintPath>
     </Reference>
@@ -43,44 +19,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\SpacepuppyUnityFramework\Properties\AssemblyVersionInfo.cs">
-      <Link>Properties\AssemblyVersionInfo.cs</Link>
-    </Compile>
-    <Compile Include="Collections\StateFlagStack.cs" />
-    <Compile Include="CompoundStateLedger.cs" />
-    <Compile Include="Dynamic\DoubleEvaluator.cs" />
-    <Compile Include="Geom\ConfigurableForce.cs" />
-    <Compile Include="Geom\PlanarSurfaceComponent.cs" />
-    <Compile Include="Geom\XYPlanarSurfaceAsset.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Render\Events\i_SetMaterialProperty.cs" />
-    <Compile Include="Render\Events\i_TweenMaterial.cs" />
-    <Compile Include="Render\MaterialPropertyReference.cs" />
-    <Compile Include="Render\MaterialSource.cs" />
-    <Compile Include="Render\MaterialTransition.cs" />
-    <Compile Include="Render\MaterialUtil.cs" />
-    <Compile Include="Render\RenderEnums.cs" />
-    <Compile Include="Render\RenderSettingsProxy.cs" />
-    <Compile Include="Utils\AudioUtil.cs" />
-    <Compile Include="Utils\ColliderUtil.cs" />
-    <Compile Include="Utils\ColorUtil.cs" />
-    <Compile Include="Utils\CompareUtil.cs" />
-    <Compile Include="Utils\DelegateUtil.cs" />
-    <Compile Include="Utils\PrefabUtil.cs" />
-    <Compile Include="Utils\Search.cs" />
-    <Compile Include="Utils\StreamUtil.cs" />
-    <Compile Include="Utils\UIEventUtil.cs" />
-    <Compile Include="VariableStore.cs" />
+    <ProjectReference Include="..\SpacepuppyUnityFramework\SpacepuppyUnityFramework.csproj" />
+    <ProjectReference Include="..\SPTween\SPTween.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SpacepuppyUnityFramework\SpacepuppyUnityFramework.csproj">
-      <Project>{3b57db6b-ba67-46ad-b929-fdd8e6ae511e}</Project>
-      <Name>SpacepuppyUnityFramework</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SPTween\SPTween.csproj">
-      <Project>{614b8c0c-0833-481b-8a76-d566887306f4}</Project>
-      <Name>SPTween</Name>
-    </ProjectReference>
+    <Folder Include="Properties\" />
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

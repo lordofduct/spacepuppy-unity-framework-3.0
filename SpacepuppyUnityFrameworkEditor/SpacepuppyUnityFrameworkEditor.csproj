@@ -1,42 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{7FE0B8D6-BA29-43A6-B272-5D4F442FC4FA}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <TargetFrameworks>net35;net471</TargetFrameworks>
     <RootNamespace>com.spacepuppyeditor</RootNamespace>
     <AssemblyName>SpacepuppyUnityFrameworkEditor</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
+    <GenerateAssemblyVersionAttribute>false</GenerateAssemblyVersionAttribute>
+	<GenerateAssemblyFileVersionAttribute>false</GenerateAssemblyFileVersionAttribute>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Xml" />
+    <Compile Include="..\SpacepuppyUnityFramework\Properties\AssemblyVersionInfo.cs" Link="Properties\AssemblyVersionInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
     <Reference Include="UnityEditor">
       <HintPath>..\Resources\UnityEditor.dll</HintPath>
     </Reference>
@@ -51,125 +25,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\SpacepuppyUnityFramework\Properties\AssemblyVersionInfo.cs">
-      <Link>Properties\AssemblyVersionInfo.cs</Link>
-    </Compile>
-    <Compile Include="Assertions.cs" />
-    <Compile Include="AssetHelper.cs" />
-    <Compile Include="Base\AdvancedAnimationInspector.cs" />
-    <Compile Include="Base\ComparisonOperatorPropertyDrawer.cs" />
-    <Compile Include="Base\ConstraintPropertyDrawer.cs" />
-    <Compile Include="Base\DiscreteFloatPropertyDrawer.cs" />
-    <Compile Include="Base\Events\EventTriggerEvaluatorInspector.cs" />
-    <Compile Include="Base\Events\EventTriggerTargetPropertyDrawer.cs" />
-    <Compile Include="Base\Events\ITriggerableMechanismAddonDrawer.cs" />
-    <Compile Include="Base\Events\TriggerableTargetObjectPropertyDrawer.cs" />
-    <Compile Include="Base\Events\SPEventPropertyDrawer.cs" />
-    <Compile Include="Base\Geom\IntervalInspector.cs" />
-    <Compile Include="Base\Project\CustomTimeLayersDataInspector.cs" />
-    <Compile Include="Base\Project\SerializableInterfaceRefPropertyDrawer.cs" />
-    <Compile Include="Base\Project\TagDataInspector.cs" />
-    <Compile Include="Base\ProxyPropertyDrawer.cs" />
-    <Compile Include="Base\ShortUidPropertyDrawer.cs" />
-    <Compile Include="Base\TagMaskPropertyDrawer.cs" />
-    <Compile Include="Base\VariantCollectionPropertyDrawer.cs" />
-    <Compile Include="Base\VersionInfoPropertyDrawer.cs" />
-    <Compile Include="Commands\FindReferencesToObjectMenu.cs" />
-    <Compile Include="Commands\ScreenshotUtil.cs" />
-    <Compile Include="Commands\SearchByTagEditor.cs" />
-    <Compile Include="Commands\TransformAltContextMenu.cs" />
-    <Compile Include="Commands\TransformCopyMenu.cs" />
-    <Compile Include="Components\RequireComponentInEntityHeaderDrawer.cs" />
-    <Compile Include="Components\RequireLayerHeaderDrawer.cs" />
-    <Compile Include="Components\UniqueToEntityHeaderDrawer.cs" />
-    <Compile Include="Decorators\InfoboxDecorator.cs" />
-    <Compile Include="Modifiers\DefaultFromSelfModifier.cs" />
-    <Compile Include="Modifiers\DisableIfModifier.cs" />
-    <Compile Include="Modifiers\DisableOnPlayModifier.cs" />
-    <Compile Include="Modifiers\FindInSelfModifier.cs" />
-    <Compile Include="Modifiers\ForceFromSelfModifier.cs" />
-    <Compile Include="Decorators\InsertButtonDecorator.cs" />
-    <Compile Include="Modifiers\OnChangedInEditorModifier.cs" />
-    <Compile Include="Modifiers\ReadOnlyModifier.cs" />
-    <Compile Include="PropertyAttributeDrawers\DefaultOrConfiguredAttributePropertyDrawer.cs" />
-    <Compile Include="PropertyAttributeDrawers\DisplayFlatPropertyDrawer.cs" />
-    <Compile Include="PropertyAttributeDrawers\DisplayNestedPropertyPropertyDrawer.cs" />
-    <Compile Include="PropertyAttributeDrawers\EnumFlagsPropertyDrawer.cs" />
-    <Compile Include="Base\MultiTagInspector.cs" />
-    <Compile Include="Base\RadicalCoroutineManagerInspector.cs" />
-    <Compile Include="PropertyAttributeDrawers\EnumPopupExcludingPropertyDrawer.cs" />
-    <Compile Include="PropertyAttributeDrawers\EulerRotationInspectorPropertyDrawer.cs" />
-    <Compile Include="PropertyAttributeDrawers\GenericMaskPropertyDrawer.cs" />
-    <Compile Include="PropertyAttributeDrawers\InputIDPropertyDrawer.cs" />
-    <Compile Include="PropertyAttributeDrawers\MaxRangePropertyDrawer.cs" />
-    <Compile Include="PropertyAttributeDrawers\MinRangePropertyDrawer.cs" />
-    <Compile Include="PropertyAttributeDrawers\OneOrManyPropertyDrawer.cs" />
-    <Compile Include="PropertyAttributeDrawers\ReorderableArrayPropertyDrawer.cs" />
-    <Compile Include="Base\SPEntityInspector.cs" />
-    <Compile Include="Base\SPTimePeriodPropertyDrawer.cs" />
-    <Compile Include="Base\SPTimePropertyDrawer.cs" />
-    <Compile Include="PropertyAttributeDrawers\TagSelectorPropertyDrawer.cs" />
-    <Compile Include="PropertyAttributeDrawers\TimeUnitsSelectorPropertyDrawer.cs" />
-    <Compile Include="Base\TypeReferencePropertyDrawer.cs" />
-    <Compile Include="Base\VariantReferencePropertyDrawer.cs" />
-    <Compile Include="ComponentHeaderDrawer.cs" />
-    <Compile Include="Components\ComponentTypeRestrictionPropertyDrawer.cs" />
-    <Compile Include="Components\IComponentChoiceSelector.cs" />
-    <Compile Include="Components\SelectableComponentPropertyDrawer.cs" />
-    <Compile Include="Components\SelectableObjectPropertyDrawer.cs" />
-    <Compile Include="EditorCoroutine.cs" />
-    <Compile Include="EditorHelper.cs" />
-    <Compile Include="EditorHierarchyAlternateContextMenuEvents.cs" />
-    <Compile Include="EditorHierarchyDrawerEvents.cs" />
-    <Compile Include="EditorProjectPrefs.cs" />
-    <Compile Include="EditorSceneEvents.cs" />
-    <Compile Include="HierarchyDrawer.cs" />
-    <Compile Include="IArrayHandlingPropertyDrawer.cs" />
-    <Compile Include="IconHelper.cs" />
-    <Compile Include="Internal\CachedReorderableList.cs" />
-    <Compile Include="Internal\DefaultPropertyHandler.cs" />
-    <Compile Include="Internal\GUIViewProxy.cs" />
-    <Compile Include="Internal\InternalTypeUtil.cs" />
-    <Compile Include="Internal\IPropertyHandler.cs" />
-    <Compile Include="Internal\MultiPropertyAttributePropertyHandler.cs" />
-    <Compile Include="Internal\PropertyDrawerActivator.cs" />
-    <Compile Include="Internal\PropertyHandlerCache.cs" />
-    <Compile Include="Internal\PropertyHandlerValidationUtility.cs" />
-    <Compile Include="Internal\ScriptAttributeUtility.cs" />
-    <Compile Include="Internal\StandardPropertyHandler.cs" />
-    <Compile Include="Internal\UnityInternalPropertyHandler.cs" />
-    <Compile Include="MaterialHelper.cs" />
-    <Compile Include="Modifiers\PropertyModifier.cs" />
-    <Compile Include="PrefabHelper.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="PropertyAttributeDrawers\UnitVectorPropertyDrawer.cs" />
-    <Compile Include="PropertyAttributeDrawers\VectorInspectorPropertyDrawer.cs" />
-    <Compile Include="PropertyAttributeDrawers\WeightedValueCollectionPropertyDrawer.cs" />
-    <Compile Include="ReorderableListHelper.cs" />
-    <Compile Include="ScriptableObjectHelper.cs" />
-    <Compile Include="Settings\BulkBuildSettings.cs" />
-    <Compile Include="Settings\ModelSettingsImportProcessor.cs" />
-    <Compile Include="Settings\SpacepuppySettingsWindow.cs" />
-    <Compile Include="Settings\BuildSettings.cs" />
-    <Compile Include="Settings\InputSettings.cs" />
-    <Compile Include="SpacepuppySettings.cs" />
-    <Compile Include="SPEditor.cs" />
-    <Compile Include="SPEditorAddonDrawer.cs" />
-    <Compile Include="SPEditorGUI.cs" />
-    <Compile Include="SPEditorGUILayout.cs" />
-    <Compile Include="SPEditorStyles.cs" />
-    <Compile Include="SPGUI.cs" />
-    <Compile Include="SPMenu.cs" />
-    <Compile Include="Windows\AdvancedInputManagerWindow.cs" />
-    <Compile Include="Windows\ScreenshotRecorderWindow.cs" />
-    <Compile Include="Windows\TypeSelectionDropDownWindow.cs" />
+    <ProjectReference Include="..\SpacepuppyUnityFramework\SpacepuppyUnityFramework.csproj" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\SpacepuppyUnityFramework\SpacepuppyUnityFramework.csproj">
-      <Project>{3b57db6b-ba67-46ad-b929-fdd8e6ae511e}</Project>
-      <Name>SpacepuppyUnityFramework</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup />
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

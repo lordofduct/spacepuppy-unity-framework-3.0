@@ -1,77 +1,35 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{DA26B8BD-BB04-49DA-88A1-C59178282858}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <TargetFrameworks>net35;net471</TargetFrameworks>
     <RootNamespace>com.spacepuppyeditor</RootNamespace>
     <AssemblyName>SPAnimEditor</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
+    <GenerateAssemblyVersionAttribute>false</GenerateAssemblyVersionAttribute>
+	<GenerateAssemblyFileVersionAttribute>false</GenerateAssemblyFileVersionAttribute>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Xml" />
+    <Compile Include="..\SpacepuppyUnityFramework\Properties\AssemblyVersionInfo.cs" Link="Properties\AssemblyVersionInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
     <Reference Include="UnityEditor">
       <HintPath>..\Resources\UnityEditor.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.Graphs">
+      <HintPath>..\Resources\UnityEditor.Graphs.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine">
       <HintPath>..\Resources\UnityEngine.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>..\Resources\UnityEngine.UI.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\SpacepuppyUnityFramework\Properties\AssemblyVersionInfo.cs">
-      <Link>Properties\AssemblyVersionInfo.cs</Link>
-    </Compile>
-    <Compile Include="Anim\AnimLayerPropertyDrawer.cs" />
-    <Compile Include="Anim\Events\i_PlayAnimationInspector.cs" />
-    <Compile Include="Anim\Events\i_PlayRandomAnimationInspector.cs" />
-    <Compile Include="Anim\Events\i_StopAnimationInspector.cs" />
-    <Compile Include="Anim\Events\PlayAnimInfoPropertyDrawer.cs" />
-    <Compile Include="Anim\IAnimLayerInformationSupplier.cs" />
-    <Compile Include="Anim\Legacy\SPAnimationMaskAssetInspector.cs" />
-    <Compile Include="Anim\Legacy\SPLegacyAnimControllerInspector.cs" />
-    <Compile Include="Anim\Legacy\SPAnimClipCollectionPropertyDrawer.cs" />
-    <Compile Include="Anim\Legacy\SPAnimClipPropertyDrawer.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Folder Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SpacepuppyUnityFrameworkEditor\SpacepuppyUnityFrameworkEditor.csproj">
-      <Project>{7fe0b8d6-ba29-43a6-b272-5d4f442fc4fa}</Project>
-      <Name>SpacepuppyUnityFrameworkEditor</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SpacepuppyUnityFramework\SpacepuppyUnityFramework.csproj">
-      <Project>{3b57db6b-ba67-46ad-b929-fdd8e6ae511e}</Project>
-      <Name>SpacepuppyUnityFramework</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SPAnim\SPAnim.csproj">
-      <Project>{2e21b07e-0968-4f86-97fd-692397dbfc20}</Project>
-      <Name>SPAnim</Name>
-    </ProjectReference>
+    <ProjectReference Include="..\SpacepuppyUnityFramework\SpacepuppyUnityFramework.csproj" />
+    <ProjectReference Include="..\SpacepuppyUnityFrameworkEditor\SpacepuppyUnityFrameworkEditor.csproj" />
+    <ProjectReference Include="..\SPAnim\SPAnim.csproj" />
   </ItemGroup>
-  <ItemGroup />
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

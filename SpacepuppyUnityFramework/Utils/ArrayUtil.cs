@@ -11,6 +11,40 @@ namespace com.spacepuppy.Utils
     public static class ArrayUtil
     {
 
+
+#if NET35
+
+        public static IEnumerable<T> Append<T>(this IEnumerable<T> lst, T obj)
+        {
+            //foreach (var o in lst)
+            //{
+            //    yield return o;
+            //}
+            var e = new LightEnumerator<T>(lst);
+            while (e.MoveNext())
+            {
+                yield return e.Current;
+            }
+            yield return obj;
+        }
+
+        public static IEnumerable<T> Prepend<T>(this IEnumerable<T> lst, T obj)
+        {
+            yield return obj;
+            //foreach (var o in lst)
+            //{
+            //    yield return o;
+            //}
+            var e = new LightEnumerator<T>(lst);
+            while (e.MoveNext())
+            {
+                yield return e.Current;
+            }
+        }
+
+#endif
+
+
         #region General Methods
 
         public static bool IsEmpty(this IEnumerable lst)
@@ -123,38 +157,6 @@ namespace com.spacepuppy.Utils
             return lst.Intersect(objs).Count() > 0;
         }
 
-#if !UNITY_4X
-
-        public static IEnumerable<T> Append<T>(this IEnumerable<T> lst, T obj)
-        {
-            //foreach (var o in lst)
-            //{
-            //    yield return o;
-            //}
-            var e = new LightEnumerator<T>(lst);
-            while (e.MoveNext())
-            {
-                yield return e.Current;
-            }
-            yield return obj;
-        }
-
-        public static IEnumerable<T> Prepend<T>(this IEnumerable<T> lst, T obj)
-        {
-            yield return obj;
-            //foreach (var o in lst)
-            //{
-            //    yield return o;
-            //}
-            var e = new LightEnumerator<T>(lst);
-            while(e.MoveNext())
-            {
-                yield return e.Current;
-            }
-        }
-
-#endif
-        
         public static bool Contains(this IEnumerable lst, object obj)
         {
             //foreach (var o in lst)

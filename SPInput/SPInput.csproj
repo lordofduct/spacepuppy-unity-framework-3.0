@@ -1,40 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{E61EEA45-EA08-4BA4-86F6-B748DD047B6D}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <TargetFrameworks>net35;net471</TargetFrameworks>
     <RootNamespace>com.spacepuppy</RootNamespace>
     <AssemblyName>SPInput</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
+    <GenerateAssemblyVersionAttribute>false</GenerateAssemblyVersionAttribute>
+	<GenerateAssemblyFileVersionAttribute>false</GenerateAssemblyFileVersionAttribute>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Xml" />
+    <Compile Include="..\SpacepuppyUnityFramework\Properties\AssemblyVersionInfo.cs" Link="Properties\AssemblyVersionInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
     <Reference Include="UnityEngine">
       <HintPath>..\Resources\UnityEngine.dll</HintPath>
     </Reference>
@@ -43,101 +19,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\SpacepuppyUnityFramework\Properties\AssemblyVersionInfo.cs">
-      <Link>Properties\AssemblyVersionInfo.cs</Link>
-    </Compile>
-    <Compile Include="IInputManager.cs" />
-    <Compile Include="SPInput\CompositeInputSignature.cs" />
-    <Compile Include="SPInput\DelegatedInputSignature.cs" />
-    <Compile Include="SPInput\Enums.cs" />
-    <Compile Include="SPInput\Events\t_OnAnyInput.cs" />
-    <Compile Include="SPInput\Events\t_OnKey.cs" />
-    <Compile Include="SPInput\Events\t_OnSimpleButtonPress.cs" />
-    <Compile Include="SPInput\GenericInputDevice.cs" />
-    <Compile Include="SPInput\IMappedInputDevice.cs" />
-    <Compile Include="SPInput\MappedInputDevice.cs" />
-    <Compile Include="SPInput\MappedInputSignatureCollection.cs" />
-    <Compile Include="SPInput\MergedInputSignature.cs" />
-    <Compile Include="SPInput\RepeatingButtonInputSignature.cs" />
-    <Compile Include="SPInput\SPInputManager.cs" />
-    <Compile Include="SPInput\IInputSignature.cs" />
-    <Compile Include="SPInput\InputSignatureCollection.cs" />
-    <Compile Include="SPInput\InputUtil.cs" />
-    <Compile Include="SPInput\IInputDevice.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SPInput\Unity\ConfigurableInputProfile.cs" />
-    <Compile Include="SPInput\Unity\Enums.cs" />
-    <Compile Include="SPInput\Unity\IInputProfile.cs" />
-    <Compile Include="SPInput\Unity\InputLayoutToken.cs" />
-    <Compile Include="SPInput\Unity\InputProfileDescriptionAttributes.cs" />
-    <Compile Include="SPInput\Unity\InputProfileLookupTable.cs" />
-    <Compile Include="SPInput\Unity\InputToken.cs" />
-    <Compile Include="SPInput\Unity\KeyboardProfile.cs" />
-    <Compile Include="SPInput\Unity\PollingButtonSignatureRoutine.cs" />
-    <Compile Include="SPInput\Unity\PollingAxisSignatureRoutine.cs" />
-    <Compile Include="SPInput\Unity\SPInputDirect.cs" />
-    <Compile Include="SPInput\Unity\SPInputFactory.cs" />
-    <Compile Include="SPInput\EventSystems\SPInputModule.cs" />
-    <Compile Include="SPInput\Legacy\UnityInputSignatures.cs" />
-    <Compile Include="SPInput\Unity\Xbox\Profiles\HamaBlockForceWinProfile.cs" />
-    <Compile Include="SPInput\Unity\Xbox\Profiles\LogitechF310LinuxProfile.cs" />
-    <Compile Include="SPInput\Unity\Xbox\Profiles\LogitechF310MacProfile.cs" />
-    <Compile Include="SPInput\Unity\Xbox\Profiles\LogitechF310WinProfile.cs" />
-    <Compile Include="SPInput\Unity\Xbox\Profiles\LogitechF510LinuxProfile.cs" />
-    <Compile Include="SPInput\Unity\Xbox\Profiles\LogitechF510WinProfile.cs" />
-    <Compile Include="SPInput\Unity\Xbox\Profiles\LogitechF710LinuxProfile.cs" />
-    <Compile Include="SPInput\Unity\Xbox\Profiles\LogitechF710MacProfile.cs" />
-    <Compile Include="SPInput\Unity\Xbox\Profiles\LogitechF710WinProfile.cs" />
-    <Compile Include="SPInput\Unity\Xbox\Profiles\LogitechRumblePad2MacProfile.cs" />
-    <Compile Include="SPInput\Unity\Xbox\Profiles\LogitechRumblePad2WinProfile.cs" />
-    <Compile Include="SPInput\Unity\Xbox\Profiles\LogitechWingManWinProfile.cs" />
-    <Compile Include="SPInput\Unity\Xbox\Profiles\MaxFireBlaze5WinProfile.cs" />
-    <Compile Include="SPInput\Unity\Xbox\Profiles\MogaProLinuxProfile.cs" />
-    <Compile Include="SPInput\Unity\Xbox\Profiles\MogaProMacProfile.cs" />
-    <Compile Include="SPInput\Unity\Xbox\Profiles\MogaProWinProfile.cs" />
-    <Compile Include="SPInput\Unity\Xbox\Profiles\NatecGenesisP44WinProfile.cs" />
-    <Compile Include="SPInput\Unity\Xbox\Profiles\NvidiaShieldAndroidProfile.cs" />
-    <Compile Include="SPInput\Unity\Xbox\Profiles\NvidiaShieldWinProfile.cs" />
-    <Compile Include="SPInput\Unity\Xbox\Profiles\OuyaLinuxProfile.cs" />
-    <Compile Include="SPInput\Unity\Xbox\Profiles\OuyaWinProfile.cs" />
-    <Compile Include="SPInput\Unity\Xbox\Profiles\PS2WinProfile.cs" />
-    <Compile Include="SPInput\Unity\Xbox\Profiles\PS3AndroidProfile.cs" />
-    <Compile Include="SPInput\Unity\Xbox\Profiles\PS3LinuxProfile.cs" />
-    <Compile Include="SPInput\Unity\Xbox\Profiles\PS3MacProfile.cs" />
-    <Compile Include="SPInput\Unity\Xbox\Profiles\PS3ShenghicWinProfile.cs" />
-    <Compile Include="SPInput\Unity\Xbox\Profiles\PS3WinProfile.cs" />
-    <Compile Include="SPInput\Unity\Xbox\Profiles\PS4AndroidProfile.cs" />
-    <Compile Include="SPInput\Unity\Xbox\Profiles\PS4ConsoleProfile.cs" />
-    <Compile Include="SPInput\Unity\Xbox\Profiles\PS4LinuxProfile.cs" />
-    <Compile Include="SPInput\Unity\Xbox\Profiles\PS4MacOSBTProfile.cs" />
-    <Compile Include="SPInput\Unity\Xbox\Profiles\PS4MacOSUSBProfile.cs" />
-    <Compile Include="SPInput\Unity\Xbox\Profiles\PS4WinProfile.cs" />
-    <Compile Include="SPInput\Unity\Xbox\Profiles\SpeedlinkStrikeMacProfile.cs" />
-    <Compile Include="SPInput\Unity\Xbox\Profiles\SpeedlinkStrikeWinProfile.cs" />
-    <Compile Include="SPInput\Unity\Xbox\Profiles\SteelSeriesFreeLinuxProfile.cs" />
-    <Compile Include="SPInput\Unity\Xbox\Profiles\SteelSeriesFreeMacProfile.cs" />
-    <Compile Include="SPInput\Unity\Xbox\Profiles\SteelSeriesFreeWinProfile.cs" />
-    <Compile Include="SPInput\Unity\Xbox\Profiles\ValveStreamingWinProfile.cs" />
-    <Compile Include="SPInput\Unity\Xbox\Profiles\Xbox360AndroidProfile.cs" />
-    <Compile Include="SPInput\Unity\Xbox\Profiles\Xbox360LinuxProfile.cs" />
-    <Compile Include="SPInput\Unity\Xbox\Profiles\Xbox360LinuxProfile_X.cs" />
-    <Compile Include="SPInput\Unity\Xbox\Profiles\Xbox360MacOSProfile.cs" />
-    <Compile Include="SPInput\Unity\Xbox\Profiles\Xbox360WinProfile.cs" />
-    <Compile Include="SPInput\Unity\Xbox\Profiles\XboxOneConsoleProfile.cs" />
-    <Compile Include="SPInput\Unity\Xbox\Profiles\XboxOneMacProfile.cs" />
-    <Compile Include="SPInput\Unity\Xbox\Profiles\XboxOneWinProfile.cs" />
-    <Compile Include="SPInput\Unity\Xbox\XboxControllerEnums.cs" />
-    <Compile Include="SPInput\Unity\Xbox\XboxInputImps.cs" />
-    <Compile Include="SPInput\Unity\Xbox\XboxInputProfile.cs" />
+    <ProjectReference Include="..\SpacepuppyUnityFramework\SpacepuppyUnityFramework.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SpacepuppyUnityFramework\SpacepuppyUnityFramework.csproj">
-      <Project>{3b57db6b-ba67-46ad-b929-fdd8e6ae511e}</Project>
-      <Name>SpacepuppyUnityFramework</Name>
-    </ProjectReference>
+    <Folder Include="Properties\" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="SPInput\Unity\Xbox\README.md" />
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

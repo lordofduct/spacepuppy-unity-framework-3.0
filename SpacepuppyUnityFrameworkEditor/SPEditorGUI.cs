@@ -586,7 +586,7 @@ namespace com.spacepuppyeditor
         public static string OptionPopupWithCustom(Rect position, string label, string value, string[] options)
         {
             if (options == null) options = ArrayUtil.Empty<string>();
-
+            
             var guiOptions = (from s in options select EditorHelper.TempContent(s)).Append(EditorHelper.TempContent("Custom...")).ToArray();
 
             int index = System.Array.IndexOf(options, value);

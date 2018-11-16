@@ -1,40 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{9C78E277-9614-4780-8C49-59B228F5A0BE}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <TargetFrameworks>net35;net471</TargetFrameworks>
     <RootNamespace>com.spacepuppy</RootNamespace>
     <AssemblyName>SPTriggers</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
+    <GenerateAssemblyVersionAttribute>false</GenerateAssemblyVersionAttribute>
+	<GenerateAssemblyFileVersionAttribute>false</GenerateAssemblyFileVersionAttribute>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Xml" />
+    <Compile Include="..\SpacepuppyUnityFramework\Properties\AssemblyVersionInfo.cs" Link="Properties\AssemblyVersionInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
     <Reference Include="UnityEngine">
       <HintPath>..\Resources\UnityEngine.dll</HintPath>
     </Reference>
@@ -43,67 +19,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\SpacepuppyUnityFramework\Properties\AssemblyVersionInfo.cs">
-      <Link>Properties\AssemblyVersionInfo.cs</Link>
-    </Compile>
-    <Compile Include="Events\HijackTriggerEvents.cs" />
-    <Compile Include="Events\IAutoSequenceSignal.cs" />
-    <Compile Include="Events\i_AddComponent.cs" />
-    <Compile Include="Events\i_AutoSequenceSignal.cs" />
-    <Compile Include="Events\i_ChangeCursorProperties.cs" />
-    <Compile Include="Events\i_CopyState.cs" />
-    <Compile Include="Events\i_DebugLog.cs" />
-    <Compile Include="Events\i_Destroy.cs" />
-    <Compile Include="Events\i_Enable.cs" />
-    <Compile Include="Events\i_LookAt.cs" />
-    <Compile Include="Events\i_ModifyTag.cs" />
-    <Compile Include="Events\i_PlaySoundEffect.cs" />
-    <Compile Include="Events\i_QuitApplication.cs" />
-    <Compile Include="Events\i_SetActiveUIElement.cs" />
-    <Compile Include="Events\i_SetParent.cs" />
-    <Compile Include="Events\i_SetValue.cs" />
-    <Compile Include="Events\i_SetValueOnTarget.cs" />
-    <Compile Include="Events\i_StopAudioSource.cs" />
-    <Compile Include="Events\i_Teleport.cs" />
-    <Compile Include="Events\i_Trigger.cs" />
-    <Compile Include="Events\i_TriggerFirstEnabledTarget.cs" />
-    <Compile Include="Events\i_TriggerOnEnumState.cs" />
-    <Compile Include="Events\i_TriggerOnEval.cs" />
-    <Compile Include="Events\i_TriggerOnIfThen.cs" />
-    <Compile Include="Events\i_TriggerRandom.cs" />
-    <Compile Include="Events\i_TriggerRandomElimination.cs" />
-    <Compile Include="Events\i_TriggerSequence.cs" />
-    <Compile Include="Events\ObservableTargetData.cs" />
-    <Compile Include="Events\t_AllTriggered.cs" />
-    <Compile Include="Events\t_AllTriggersOccupied.cs" />
-    <Compile Include="Events\t_Flicker.cs" />
-    <Compile Include="Events\t_Interval.cs" />
-    <Compile Include="Events\t_IntervalRandom.cs" />
-    <Compile Include="Events\t_OnCollisionEnter.cs" />
-    <Compile Include="Events\t_OnDisable.cs" />
-    <Compile Include="Events\t_OnEnable.cs" />
-    <Compile Include="Events\t_OnEnterTrigger.cs" />
-    <Compile Include="Events\t_OnExitTrigger.cs" />
-    <Compile Include="Events\t_OnProxyMediatorTriggered.cs" />
-    <Compile Include="Events\t_OnStart.cs" />
-    <Compile Include="Events\t_OnTriggerOccupied.cs" />
-    <Compile Include="Events\t_OnTriggerOccupiedActive.cs" />
-    <Compile Include="Events\t_OnUIEvent.cs" />
-    <Compile Include="Events\t_StateMachine.cs" />
-    <Compile Include="Events\t_Timer.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ProxyMediator.cs" />
+    <ProjectReference Include="..\SpacepuppyUnityFramework\SpacepuppyUnityFramework.csproj" />
+    <ProjectReference Include="..\SPTween\SPTween.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SpacepuppyUnityFramework\SpacepuppyUnityFramework.csproj">
-      <Project>{3b57db6b-ba67-46ad-b929-fdd8e6ae511e}</Project>
-      <Name>SpacepuppyUnityFramework</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SPTween\SPTween.csproj">
-      <Project>{614b8c0c-0833-481b-8a76-d566887306f4}</Project>
-      <Name>SPTween</Name>
-    </ProjectReference>
+    <Folder Include="Properties\" />
   </ItemGroup>
-  <ItemGroup />
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

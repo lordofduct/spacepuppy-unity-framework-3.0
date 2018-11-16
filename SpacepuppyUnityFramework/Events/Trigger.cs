@@ -68,7 +68,7 @@ namespace com.spacepuppy.Events
         #region Fields
 
         [SerializeField()]
-        private ActivateEvent _activateOn = ActivateEvent.OnStartAndEnable;
+        private ActivateEvent _activateOn = ActivateEvent.OnStartOrEnable;
 
         #endregion
 
@@ -98,7 +98,7 @@ namespace com.spacepuppy.Events
         {
             base.OnEnable();
 
-            if ((_activateOn & ActivateEvent.OnStart) != 0 && !this.started) return;
+            if (!this.started) return;
 
             if ((_activateOn & ActivateEvent.OnEnable) != 0)
             {

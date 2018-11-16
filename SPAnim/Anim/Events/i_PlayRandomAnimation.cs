@@ -43,11 +43,11 @@ namespace com.spacepuppy.Anim.Events
             {
                 if (info.CrossFadeDur > 0f)
                     return controller.CrossFadeAuxiliary(clip as AnimationClip,
-                                                         info.ApplyCustomSettings ? info.Settings : AnimSettings.Default,
+                                                         (info.SettingsMask != 0) ? AnimSettings.Intersect(AnimSettings.Default, info.Settings, info.SettingsMask) : AnimSettings.Default,
                                                          info.CrossFadeDur, info.QueueMode, info.PlayMode);
                 else
                     return controller.PlayAuxiliary(clip as AnimationClip,
-                                                    info.ApplyCustomSettings ? info.Settings : AnimSettings.Default,
+                                                    (info.SettingsMask != 0) ? AnimSettings.Intersect(AnimSettings.Default, info.Settings, info.SettingsMask) : AnimSettings.Default,
                                                     info.QueueMode, info.PlayMode);
             }
             else if (clip is IScriptableAnimationClip)
@@ -75,7 +75,7 @@ namespace com.spacepuppy.Anim.Events
                     anim = animController.CrossFadeQueued(id, info.CrossFadeDur, info.QueueMode, info.PlayMode);
                 else
                     anim = animController.PlayQueued(id, info.QueueMode, info.PlayMode);
-                if (info.ApplyCustomSettings) info.Settings.Apply(anim);
+                if (info.SettingsMask != 0) info.Settings.Apply(anim, info.SettingsMask);
                 return anim;
             }
 
@@ -98,7 +98,7 @@ namespace com.spacepuppy.Anim.Events
                                 anim.CrossFade(info.CrossFadeDur, info.QueueMode, info.PlayMode);
                             else
                                 anim.Play(info.QueueMode, info.PlayMode);
-                            if (info.ApplyCustomSettings) info.Settings.Apply(anim);
+                            if (info.SettingsMask != 0) info.Settings.Apply(anim, info.SettingsMask);
                             return anim;
                         }
                         return null;
@@ -121,7 +121,7 @@ namespace com.spacepuppy.Anim.Events
                                 anim = comp.CrossFadeQueued(info.Id, info.CrossFadeDur, info.QueueMode, info.PlayMode);
                             else
                                 anim = comp.PlayQueued(info.Id, info.QueueMode, info.PlayMode);
-                            if (info.ApplyCustomSettings) info.Settings.Apply(anim);
+                            if (info.SettingsMask != 0) info.Settings.Apply(anim, info.SettingsMask);
                             return anim;
                         }
                         return null;
@@ -140,7 +140,7 @@ namespace com.spacepuppy.Anim.Events
                             anim.CrossFade(info.CrossFadeDur, info.QueueMode, info.PlayMode);
                         else
                             anim.Play(info.QueueMode, info.PlayMode);
-                        if (info.ApplyCustomSettings) info.Settings.Apply(anim);
+                        if (info.SettingsMask != 0) info.Settings.Apply(anim, info.SettingsMask);
                         return anim;
                     }
                     return null;

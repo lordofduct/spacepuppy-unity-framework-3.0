@@ -26,7 +26,6 @@ namespace com.spacepuppy.Events
         private EnableMode _mode;
 
         [SerializeField()]
-        [TimeUnitsSelector()]
         private SPTimePeriod _delay = 0f;
 
         #endregion

@@ -255,7 +255,7 @@ namespace com.spacepuppyeditor.Settings
                         }
                     }
 
-                    BuildPipeline.BuildPlayer(scenes, path, this.BuildTarget, this.BuildOptions);
+                    var report = BuildPipeline.BuildPlayer(scenes, path, this.BuildTarget, this.BuildOptions);
 
                     if (cacheInputs != null)
                     {
@@ -283,19 +283,26 @@ namespace com.spacepuppyeditor.Settings
                         }
                     }
 
-                    //save
-                    if ((option & PostBuildOption.OpenFolder) != 0)
+                    if (report != null && report.summary.result == UnityEditor.Build.Reporting.BuildResult.Succeeded)
                     {
-                        EditorUtility.RevealInFinder(path);
-                    }
-                    if ((option & PostBuildOption.Run) != 0)
-                    {
-                        var proc = new System.Diagnostics.Process();
-                        proc.StartInfo.FileName = path;
-                        proc.Start();
-                    }
+                        //save
+                        if ((option & PostBuildOption.OpenFolder) != 0)
+                        {
+                            EditorUtility.RevealInFinder(path);
+                        }
+                        if ((option & PostBuildOption.Run) != 0)
+                        {
+                            var proc = new System.Diagnostics.Process();
+                            proc.StartInfo.FileName = path;
+                            proc.Start();
+                        }
 
-                    return true;
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
                 }
 
             }

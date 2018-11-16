@@ -277,18 +277,22 @@ namespace com.spacepuppy.Tween
             return this;
         }
 
-        public TweenHash UseCurve(string memberName, AnimationCurve curve, float dur, object option = null)
-        {
-            if (curve == null) throw new System.ArgumentNullException("curve");
-            _props.Add(new PropInfo(AnimMode.AnimCurve, memberName, EaseMethods.FromAnimationCurve(curve), dur, null, option));
-            return this;
-        }
-
         public TweenHash UseCurve(string memberName, AnimationCurve curve, object option = null)
         {
             if (curve == null) throw new System.ArgumentNullException("curve");
             float dur = (curve.keys.Length > 0) ? curve.keys.Last().time : 0f;
-            _props.Add(new PropInfo(AnimMode.AnimCurve, memberName, EaseMethods.FromAnimationCurve(curve), dur, null, option));
+            _props.Add(new PropInfo(AnimMode.AnimCurve, memberName,
+                                    EaseMethods.FromAnimationCurve(curve),
+                                    dur, null, option));
+            return this;
+        }
+
+        public TweenHash UseCurve(string memberName, AnimationCurve curve, float dur, object option = null)
+        {
+            if (curve == null) throw new System.ArgumentNullException("curve");
+            _props.Add(new PropInfo(AnimMode.AnimCurve, memberName,
+                                    EaseMethods.FromAnimationCurve(curve),
+                                    dur, null, option));
             return this;
         }
 

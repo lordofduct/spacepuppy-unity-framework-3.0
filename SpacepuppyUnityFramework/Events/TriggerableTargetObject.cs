@@ -167,7 +167,7 @@ namespace com.spacepuppy.Events
             if (obj == null) return null;
 
             var result = ObjUtil.GetAsFromSource<T>(obj);
-            if (result == null && this.ImplicityReducesEntireEntity && ComponentUtil.IsAcceptableComponentType(typeof(T)))
+            if (ObjUtil.IsNullOrDestroyed(result) && this.ImplicityReducesEntireEntity && ComponentUtil.IsAcceptableComponentType(typeof(T)))
             {
                 //if not configured, and the triggerArg didn't reduce properly, lets search the entity of the 'triggerArg'
                 var go = GameObjectUtil.FindRoot(GameObjectUtil.GetGameObjectFromSource(obj));
@@ -185,7 +185,7 @@ namespace com.spacepuppy.Events
             if (obj == null) return null;
 
             var result = ObjUtil.GetAsFromSource(tp, obj);
-            if (result == null && this.ImplicityReducesEntireEntity && ComponentUtil.IsAcceptableComponentType(tp))
+            if (ObjUtil.IsNullOrDestroyed(result) && this.ImplicityReducesEntireEntity && ComponentUtil.IsAcceptableComponentType(tp))
             {
                 //if not configured, and the triggerArg didn't reduce properly, lets search the entity of the 'triggerArg'
                 var go = GameObjectUtil.FindRoot(GameObjectUtil.GetGameObjectFromSource(obj));
@@ -202,7 +202,7 @@ namespace com.spacepuppy.Events
                 if (obj == null) continue;
 
                 var result = ObjUtil.GetAsFromSource<T>(obj);
-                if (result == null && !_configured && obj == triggerArg && ComponentUtil.IsAcceptableComponentType(typeof(T)))
+                if (ObjUtil.IsNullOrDestroyed(result) && !_configured && obj == triggerArg && ComponentUtil.IsAcceptableComponentType(typeof(T)))
                 {
                     //if not configured, and the triggerArg didn't reduce properly, lets search the entity of the 'triggerArg'
                     var go = GameObjectUtil.FindRoot(GameObjectUtil.GetGameObjectFromSource(obj));
@@ -220,7 +220,7 @@ namespace com.spacepuppy.Events
                 if (obj == null) continue;
 
                 var result = ObjUtil.GetAsFromSource(tp, obj);
-                if (result == null && !_configured && obj == triggerArg && ComponentUtil.IsAcceptableComponentType(tp))
+                if (ObjUtil.IsNullOrDestroyed(result) && !_configured && obj == triggerArg && ComponentUtil.IsAcceptableComponentType(tp))
                 {
                     //if not configured, and the triggerArg didn't reduce properly, lets search the entity of the 'triggerArg'
                     var go = GameObjectUtil.FindRoot(GameObjectUtil.GetGameObjectFromSource(obj));
@@ -241,7 +241,7 @@ namespace com.spacepuppy.Events
                 case FindCommand.Direct:
                     {
                         object obj = (_configured) ? targ : triggerArg;
-                        if (obj == null) return null;
+                        if (ObjUtil.IsNullOrDestroyed(obj)) return null;
                         switch (_resolveBy)
                         {
                             case ResolveByCommand.Nothing:
@@ -416,7 +416,7 @@ namespace com.spacepuppy.Events
                 case FindCommand.Direct:
                     {
                         object obj = (_configured) ? _target : triggerArg;
-                        if (obj == null) yield break;
+                        if (ObjUtil.IsNullOrDestroyed(obj)) yield break;
                         switch (_resolveBy)
                         {
                             case ResolveByCommand.Nothing:

@@ -362,6 +362,20 @@ namespace com.spacepuppy
         }
     }
 
+    [System.AttributeUsage(System.AttributeTargets.Field, AllowMultiple = false)]
+    public class InputIDAttribute : SPPropertyAttribute
+    {
+
+        public string[] RestrictedTo;
+        public string[] Exclude;
+
+        public InputIDAttribute()
+        {
+
+        }
+
+    }
+
     #endregion
 
     #region Default Or Configured Property Drawer Attribute

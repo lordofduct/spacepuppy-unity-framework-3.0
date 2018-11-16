@@ -11,6 +11,40 @@ namespace com.spacepuppy.Utils
     public static class ArrayUtil
     {
 
+
+#if NET35
+
+        public static IEnumerable<T> Append<T>(this IEnumerable<T> lst, T obj)
+        {
+            //foreach (var o in lst)
+            //{
+            //    yield return o;
+            //}
+            var e = new LightEnumerator<T>(lst);
+            while (e.MoveNext())
+            {
+                yield return e.Current;
+            }
+            yield return obj;
+        }
+
+        public static IEnumerable<T> Prepend<T>(this IEnumerable<T> lst, T obj)
+        {
+            yield return obj;
+            //foreach (var o in lst)
+            //{
+            //    yield return o;
+            //}
+            var e = new LightEnumerator<T>(lst);
+            while (e.MoveNext())
+            {
+                yield return e.Current;
+            }
+        }
+
+#endif
+
+
         #region General Methods
 
         public static bool IsEmpty(this IEnumerable lst)
@@ -121,34 +155,6 @@ namespace com.spacepuppy.Utils
         public static bool ContainsAny<T>(this IEnumerable<T> lst, IEnumerable<T> objs)
         {
             return lst.Intersect(objs).Count() > 0;
-        }
-
-        public static IEnumerable<T> Append<T>(this IEnumerable<T> lst, T obj)
-        {
-            //foreach (var o in lst)
-            //{
-            //    yield return o;
-            //}
-            var e = new LightEnumerator<T>(lst);
-            while (e.MoveNext())
-            {
-                yield return e.Current;
-            }
-            yield return obj;
-        }
-
-        public static IEnumerable<T> Prepend<T>(this IEnumerable<T> lst, T obj)
-        {
-            yield return obj;
-            //foreach (var o in lst)
-            //{
-            //    yield return o;
-            //}
-            var e = new LightEnumerator<T>(lst);
-            while(e.MoveNext())
-            {
-                yield return e.Current;
-            }
         }
 
         public static bool Contains(this IEnumerable lst, object obj)
@@ -265,9 +271,9 @@ namespace com.spacepuppy.Utils
             }
         }
 
-        #endregion
+#endregion
 
-        #region Random Methods
+#region Random Methods
 
         public static void Shuffle<T>(T[] arr, IRandom rng = null)
         {
@@ -417,9 +423,9 @@ namespace com.spacepuppy.Utils
             }
         }
         
-        #endregion
+#endregion
 
-        #region Array Methods
+#region Array Methods
 
         public static T[] Empty<T>()
         {
@@ -493,9 +499,9 @@ namespace com.spacepuppy.Utils
         }
         
 
-        #endregion
+#endregion
 
-        #region HashSet Methods
+#region HashSet Methods
 
         public static T Pop<T>(this HashSet<T> set)
         {
@@ -511,9 +517,9 @@ namespace com.spacepuppy.Utils
             throw new System.ArgumentException("HashSet must not be empty.");
         }
 
-        #endregion
+#endregion
 
-        #region Special Types
+#region Special Types
 
         private class TempArray<T>
         {
@@ -651,7 +657,7 @@ namespace com.spacepuppy.Utils
             }
         }
 
-        #endregion
+#endregion
 
     }
 

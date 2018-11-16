@@ -24,7 +24,6 @@ namespace com.spacepuppy.Events
         private AudioInterruptMode _interrupt = AudioInterruptMode.StopIfPlaying;
 
         [SerializeField()]
-        [TimeUnitsSelector()]
         private SPTimePeriod _delay;
 
         [Tooltip("Trigger something at the end of the sound effect. This is NOT perfectly accurate and really just starts a timer for the duration of the sound being played.")]
@@ -32,7 +31,7 @@ namespace com.spacepuppy.Events
         private SPEvent _onAudioComplete;
 
         [System.NonSerialized()]
-        private RadicalCoroutine _completeRoutine;
+        private System.IDisposable _completeRoutine;
 
         #endregion
 
@@ -107,7 +106,7 @@ namespace com.spacepuppy.Events
                 switch (this.Interrupt)
                 {
                     case AudioInterruptMode.StopIfPlaying:
-                        if (_completeRoutine != null) _completeRoutine.Cancel();
+                        if (_completeRoutine != null) _completeRoutine.Dispose();
                         _completeRoutine = null;
                         src.Stop();
                         break;
@@ -138,7 +137,7 @@ namespace com.spacepuppy.Events
                     {
                         if (src != null)
                         {
-                            _completeRoutine = this.Invoke(this.OnAudioCompleteHandler, clip.length);
+                            _completeRoutine = this.InvokeGuaranteed(this.OnAudioCompleteHandler, clip.length, SPTime.Real);
                             //src.Play();
                             src.PlayOneShot(clip);
                         }
@@ -146,7 +145,7 @@ namespace com.spacepuppy.Events
                 }
                 else
                 {
-                    _completeRoutine = this.Invoke(this.OnAudioCompleteHandler, clip.length);
+                    _completeRoutine = this.InvokeGuaranteed(this.OnAudioCompleteHandler, clip.length, SPTime.Real);
                     //src.Play();
                     src.PlayOneShot(clip);
                 }

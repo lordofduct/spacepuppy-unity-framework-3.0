@@ -56,6 +56,7 @@ namespace com.spacepuppy
         private static UpdatePump _tardyFixedUpdatePump;
 
         private static com.spacepuppy.Async.InvokePump _updateInvokeHandle;
+        private static com.spacepuppy.Async.InvokePump _lateUpdateInvokeHandle;
         private static com.spacepuppy.Async.InvokePump _fixedUpdateInvokeHandle;
 
         private static int _currentFrame;
@@ -108,6 +109,7 @@ namespace com.spacepuppy
             _tardyFixedUpdatePump = new UpdatePump();
 
             _updateInvokeHandle = new com.spacepuppy.Async.InvokePump();
+            _lateUpdateInvokeHandle = new com.spacepuppy.Async.InvokePump();
             _fixedUpdateInvokeHandle = new com.spacepuppy.Async.InvokePump();
         }
 
@@ -186,12 +188,17 @@ namespace com.spacepuppy
         public static UpdatePump LateUpdatePump { get { return _lateUpdatePump; } }
 
         /// <summary>
-        /// Used to get back to the Update loop from an asynchronous thread.
+        /// Used to schedule an action on the next Update regardless of threading.
         /// </summary>
         public static com.spacepuppy.Async.InvokePump UpdateHandle { get { return _updateInvokeHandle; } }
 
         /// <summary>
-        /// Used to get back to the FixedUpdate loop from an asynchronous thread.
+        /// Used to schedule an action on the next LateUpdate regardless of threading.
+        /// </summary>
+        public static com.spacepuppy.Async.InvokePump LateUpdateHandle { get { return _lateUpdateInvokeHandle; } }
+
+        /// <summary>
+        /// Used to schedule an action on the next FixedUpdate regardless of threading.
         /// </summary>
         public static com.spacepuppy.Async.InvokePump FixedUpdateHandle { get { return _fixedUpdateInvokeHandle; } }
 
@@ -368,6 +375,7 @@ namespace com.spacepuppy
 
         private void _tardyUpdateHook_LateUpdate(object sender, System.EventArgs e)
         {
+            _lateUpdateInvokeHandle.Update();
             if (TardyLateUpdate != null) TardyLateUpdate(this, e);
 
             //Track exit of update loop

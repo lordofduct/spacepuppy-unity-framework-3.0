@@ -427,7 +427,27 @@ namespace com.spacepuppy.Anim.Legacy
             if (_animation == null) throw new AnimationInvalidAccessException();
             if (!_initialized) this.Init();
 
-            var anim = _animation.PlayQueued(clipId, queueMode, playMode);
+            //HACK - StopSameLayer respects the base state's layer rather than the layer as configured...
+            AnimationState result;
+            if (playMode == PlayMode.StopSameLayer)
+            {
+                var st = _animation[clipId];
+                if (!object.ReferenceEquals(st, null) && st.layer != layer)
+                {
+                    int cache = st.layer;
+                    st.layer = layer;
+                    result = _animation.PlayQueued(clipId, queueMode, playMode);
+                    st.layer = cache;
+                }
+                else
+                {
+                    result = _animation.PlayQueued(clipId, queueMode, playMode);
+                }
+            }
+            else
+            {
+                result = _animation.PlayQueued(clipId, queueMode, playMode);
+            }
 
             if (_scriptableAnims != null && _scriptableAnims.Count > 0)
             {
@@ -441,7 +461,7 @@ namespace com.spacepuppy.Anim.Legacy
                 }
             }
 
-            return anim;
+            return result;
         }
 
         internal AnimationState CrossFadeQueuedInternal(string clipId, float fadeLength, QueueMode queueMode, PlayMode playMode, int layer)

@@ -6,7 +6,7 @@ using com.spacepuppy.Events;
 namespace com.spacepuppy.Tween.Events
 {
 
-    public class i_TweenValue : AutoTriggerable
+    public class i_TweenValue : AutoTriggerable, IObservableTrigger
     {
 
         #region Fields
@@ -117,6 +117,15 @@ namespace com.spacepuppy.Tween.Events
             public float Duration;
             [SerializeField]
             public int Option;
+        }
+
+        #endregion
+
+        #region IObservable Interface
+
+        BaseSPEvent[] IObservableTrigger.GetEvents()
+        {
+            return new BaseSPEvent[] { _onTick, _onComplete };
         }
 
         #endregion

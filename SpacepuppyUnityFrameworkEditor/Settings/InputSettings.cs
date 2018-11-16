@@ -421,6 +421,51 @@ namespace com.spacepuppyeditor.Settings
 
         #endregion
 
+        #region Static Utils
+
+        private static System.Func<string[]> _overrideGetGlobalInputIds;
+        /// <summary>
+        /// Get the input id's that should show up in a drop down list for any InputID property. This includes in the t_OnSimpleButtonPress editor.
+        /// 
+        /// Set this delegate to override the default entries as defined in InputManager.asset. This can be useful if you're using a custom input system 
+        /// that has named inputs unique from what is found in the InputSettings.asset configuration.
+        /// </summary>
+        public static System.Func<string[]> GetGlobalInputIds
+        {
+            get
+            {
+                if (_overrideGetGlobalInputIds == null) _overrideGetGlobalInputIds = GetGlobalInputIdsDefault;
+                return _overrideGetGlobalInputIds;
+            }
+            set
+            {
+                _overrideGetGlobalInputIds = value;
+            }
+        }
+
+        public static string[] GetGlobalInputIdsDefault()
+        {
+            var asset = AssetDatabase.LoadAllAssetsAtPath("ProjectSettings/InputManager.asset").FirstOrDefault();
+            if (asset != null)
+            {
+                var obj = new SerializedObject(asset);
+                var axes = obj.FindProperty(PROP_AXES);
+                string[] arr = new string[axes.arraySize];
+                for (int i = 0; i < arr.Length; i++)
+                {
+                    arr[i] = axes.GetArrayElementAtIndex(i).FindPropertyRelative("m_Name").stringValue;
+                }
+                obj.Dispose();
+                return arr;
+            }
+            else
+            {
+                return com.spacepuppy.Utils.ArrayUtil.Empty<string>();
+            }
+        }
+
+        #endregion
+
     }
 
     [CustomEditor(typeof(InputSettings), true)]

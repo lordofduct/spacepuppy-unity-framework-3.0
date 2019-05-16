@@ -101,10 +101,10 @@ namespace com.spacepuppy
         Transform IComponent.transform { get { return this.transform; } }
         */
 
-#endregion
+        #endregion
 
         #region ISPDisposable Interface
-    
+
         bool ISPDisposable.IsDisposed
         {
             get

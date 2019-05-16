@@ -18,8 +18,24 @@ namespace com.spacepuppyeditor.Sensors.Visual
 
         protected override void OnSPInspectorGUI()
         {
-            base.OnSPInspectorGUI();
+            this.serializedObject.Update();
 
+            this.DrawDefaultInspectorExcept("_mode", "_horizontalAngle", "_verticalAngle");
+
+            var modeProp = this.serializedObject.FindProperty("_mode");
+            EditorGUILayout.PropertyField(modeProp);
+            switch(modeProp.GetEnumValue<SphericalVisualSensor.Modes>())
+            {
+                case SphericalVisualSensor.Modes.Conical:
+                    this.DrawPropertyField("_horizontalAngle");
+                    break;
+                case SphericalVisualSensor.Modes.Frustum:
+                    this.DrawPropertyField("_horizontalAngle");
+                    this.DrawPropertyField("_verticalAngle");
+                    break;
+            }
+
+            //fix radii
             var radiusProp = this.serializedObject.FindProperty("_radius");
             var innerRadProp = this.serializedObject.FindProperty("_innerRadius");
             if (innerRadProp.floatValue < 0f) innerRadProp.floatValue = 0f;
@@ -31,95 +47,49 @@ namespace com.spacepuppyeditor.Sensors.Visual
         #endregion
 
         #region OnSceneGUI
-
+        
         void OnSceneGUI()
         {
             var targ = this.target as SphericalVisualSensor;
             if (targ == null) return;
             if (!targ.enabled) return;
-
-            Vector3 pos = targ.transform.position;
-            Quaternion rot = targ.transform.rotation;
-            float horAngle = Mathf.Clamp(targ.HorizontalAngle, 0f, 360f);
-            float verAngle = Mathf.Clamp(targ.VerticalAngle, 0f, 360f);
-
-            if(horAngle <= 0f || verAngle <= 0f)
+            
+            Handles.color = targ.SensorColor;
+            Handles.matrix = Matrix4x4.TRS(targ.transform.position, targ.transform.rotation, Vector3.one);
+            
+            switch(targ.Mode)
             {
-                return;
-            }
-
-            var color = targ.SensorColor;
-            color.a = 0.4f;
-
-            //draw lines
-            var lineMat = SensorRenderUtil.LineMaterial;
-            lineMat.SetColor("_Color", color);
-            for (int i = 0; i < lineMat.passCount; ++i)
-            {
-                lineMat.SetPass(i);
-                if(horAngle < 360f)
-                {
-                    Graphics.DrawMeshNow(PrimitiveUtil.LineMesh, Matrix4x4.TRS(pos, rot * Quaternion.Euler(0, horAngle * 0.5f, 0f), new Vector3(1f, 1f, targ.Radius * 1.8f)));
-                    Graphics.DrawMeshNow(PrimitiveUtil.LineMesh, Matrix4x4.TRS(pos, rot * Quaternion.Euler(0, horAngle * -0.5f, 0f), new Vector3(1f, 1f, targ.Radius * 1.8f)));
-                    if(verAngle >= 180f)
+                case SphericalVisualSensor.Modes.Conical:
                     {
-                        Graphics.DrawMeshNow(PrimitiveUtil.LineMesh, Matrix4x4.TRS(pos, rot * Quaternion.Euler(90f, 0f, 90f), new Vector3(1f, 1f, targ.Radius * 1.8f)));
-                        Graphics.DrawMeshNow(PrimitiveUtil.LineMesh, Matrix4x4.TRS(pos, rot * Quaternion.Euler(-90f, 0f, 90f), new Vector3(1f, 1f, targ.Radius * 1.8f)));
+                        HandlesHelper.DrawWireSphere(Vector3.zero, Quaternion.identity, targ.Radius, targ.HorizontalAngle);
+                        if(targ.InnerRadius > 0f) HandlesHelper.DrawWireSphere(Vector3.zero, Quaternion.identity, targ.InnerRadius, targ.HorizontalAngle);
+                        
+                        if(targ.HorizontalAngle < 360f)
+                        {
+                            float dx = Mathf.Cos(targ.HorizontalAngle * Mathf.Deg2Rad / 2f);
+                            float dy = Mathf.Sqrt(1f - dx * dx);
+                            var v = new Vector3(0f, dy, dx);
+                            Handles.DrawLine(v * targ.InnerRadius, v * targ.Radius);
+                            v = new Vector3(0f, -dy, dx);
+                            Handles.DrawLine(v * targ.InnerRadius, v * targ.Radius);
+                            v = new Vector3(dy, 0f, dx);
+                            Handles.DrawLine(v * targ.InnerRadius, v * targ.Radius);
+                            v = new Vector3(-dy, 0f, dx);
+                            Handles.DrawLine(v * targ.InnerRadius, v * targ.Radius);
+                        }
                     }
-                }
-                if(verAngle < 180f)
-                {
-                    Graphics.DrawMeshNow(PrimitiveUtil.LineMesh, Matrix4x4.TRS(pos, rot * Quaternion.Euler(verAngle * 0.5f, 0f, 90f), new Vector3(1f, 1f, targ.Radius * 1.8f)));
-                    Graphics.DrawMeshNow(PrimitiveUtil.LineMesh, Matrix4x4.TRS(pos, rot * Quaternion.Euler(verAngle * -0.5f, 0f, 90f), new Vector3(1f, 1f, targ.Radius * 1.8f)));
-                    if(horAngle >= 360f)
+                    break;
+                case SphericalVisualSensor.Modes.Frustum:
+                    if(targ.HorizontalAngle >= 360f && targ.VerticalAngle >= 180f)
                     {
-                        Graphics.DrawMeshNow(PrimitiveUtil.LineMesh, Matrix4x4.TRS(pos, rot * Quaternion.Euler(verAngle * 0.5f, 180f, 90f), new Vector3(1f, 1f, targ.Radius * 1.8f)));
-                        Graphics.DrawMeshNow(PrimitiveUtil.LineMesh, Matrix4x4.TRS(pos, rot * Quaternion.Euler(verAngle * -0.5f, 180f, 90f), new Vector3(1f, 1f, targ.Radius * 1.8f)));
+                        HandlesHelper.DrawWireSphere(Vector3.zero, Quaternion.identity, targ.Radius);
+                        if(targ.InnerRadius > 0f) HandlesHelper.DrawWireSphere(Vector3.zero, Quaternion.identity, targ.InnerRadius);
                     }
-                }
-                if(horAngle < 360f)
-                {
-                    Graphics.DrawMeshNow(PrimitiveUtil.LineMesh, Matrix4x4.TRS(pos, rot * Quaternion.Euler(verAngle * 0.5f, horAngle * 0.5f, 90f), new Vector3(1f, 1f, targ.Radius * 1.8f)));
-                    Graphics.DrawMeshNow(PrimitiveUtil.LineMesh, Matrix4x4.TRS(pos, rot * Quaternion.Euler(verAngle * 0.5f, horAngle * -0.5f, 90f), new Vector3(1f, 1f, targ.Radius * 1.8f)));
-                    Graphics.DrawMeshNow(PrimitiveUtil.LineMesh, Matrix4x4.TRS(pos, rot * Quaternion.Euler(verAngle * -0.5f, horAngle * 0.5f, 90f), new Vector3(1f, 1f, targ.Radius * 1.8f)));
-                    Graphics.DrawMeshNow(PrimitiveUtil.LineMesh, Matrix4x4.TRS(pos, rot * Quaternion.Euler(verAngle * -0.5f, horAngle * -0.5f, 90f), new Vector3(1f, 1f, targ.Radius * 1.8f)));
-                }
-            }
-
-            //draw ring
-            var mat = SensorRenderUtil.ArcMaterial;
-            mat.SetColor("_Color", color);
-            mat.SetFloat("_angle", horAngle / 360f);
-            for (int i = 0; i < mat.passCount; ++i)
-            {
-                mat.SetFloat("_tiltAngle", 0f);
-                mat.SetPass(i);
-                Graphics.DrawMeshNow(PrimitiveUtil.RingMesh, Matrix4x4.TRS(pos, rot, Vector3.one * targ.Radius * 2f));
-                if(verAngle < 180.0f)
-                {
-                    mat.SetFloat("_tiltAngle", verAngle * 0.5f * Mathf.Deg2Rad);
-                    mat.SetPass(i);
-                    Graphics.DrawMeshNow(PrimitiveUtil.RingMesh, Matrix4x4.TRS(pos, rot, Vector3.one * targ.Radius * 2f));
-                    Graphics.DrawMeshNow(PrimitiveUtil.RingMesh, Matrix4x4.TRS(pos, rot, new Vector3(1f, -1f, 1f) * targ.Radius * 2f));
-                }
-            }
-
-            var rot2 = rot * Quaternion.Euler(0f, 0f, 90f);
-            mat.SetFloat("_angle", verAngle / 360f);
-            mat.SetFloat("_tiltAngle", 0f);
-            for(int i = 0; i < mat.passCount; ++i)
-            {
-                mat.SetPass(i);
-                Graphics.DrawMeshNow(PrimitiveUtil.RingMesh, Matrix4x4.TRS(pos, rot2, Vector3.one * targ.Radius * 2f));
-                if(horAngle >= 360f)
-                {
-                    Graphics.DrawMeshNow(PrimitiveUtil.RingMesh, Matrix4x4.TRS(pos, rot2 * Quaternion.Euler(180f, 0f, 0f), Vector3.one * targ.Radius * 2f));
-                }
-                else
-                {
-                    Graphics.DrawMeshNow(PrimitiveUtil.RingMesh, Matrix4x4.TRS(pos, rot2 * Quaternion.Euler(horAngle * 0.5f, 0f, 0f), Vector3.one * targ.Radius * 2f));
-                    Graphics.DrawMeshNow(PrimitiveUtil.RingMesh, Matrix4x4.TRS(pos, rot2 * Quaternion.Euler(horAngle * -0.5f, 0f, 0f), Vector3.one * targ.Radius * 2f));
-                }
+                    else
+                    {
+                        HandlesHelper.DrawWireSphereFrustum(targ.InnerRadius, targ.Radius, targ.HorizontalAngle, targ.VerticalAngle);
+                    }
+                    break;
             }
         }
 

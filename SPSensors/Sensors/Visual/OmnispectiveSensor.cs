@@ -56,7 +56,7 @@ namespace com.spacepuppy.Sensors.Visual
 
         protected override bool TestVisibility(VisualAspect aspect)
         {
-            if (this.RequiresLineOfSight)
+            if (this.LineOfSightMask.value != 0)
             {
                 var v = aspect.transform.position - this.transform.position;
                 //RaycastHit[] hits = Physics.RaycastAll(this.transform.position, v, v.magnitude, this.LineOfSightMask);

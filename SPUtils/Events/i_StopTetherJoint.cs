@@ -1,0 +1,48 @@
+﻿#pragma warning disable 0649 // variable declared but not used.
+using UnityEngine;
+using System.Collections.Generic;
+
+using com.spacepuppy.Utils;
+
+namespace com.spacepuppy.Events
+{
+    public class i_StopTetherJoint : AutoTriggerable
+    {
+
+        #region Fields
+
+        [SerializeField]
+        [TriggerableTargetObject.Config(typeof(Transform))]
+        [Tooltip("Target that gets tethered to 'Link Target'.")]
+        private TriggerableTargetObject _target;
+
+        [SerializeField]
+        [Tooltip("Destroy the tether instead of just disabling it.")]
+        private bool _destroyTether;
+
+        #endregion
+
+        #region Triggerable Mechanism Interface
+
+        public override bool Trigger(object sender, object arg)
+        {
+            if (!this.CanTrigger) return false;
+
+            var targ = _target.GetTarget<Transform>(arg);
+            if (targ == null) return false;
+
+            var tether = targ.GetComponent<TetherJoint>();
+            if (tether == null) return false;
+
+            if (_destroyTether)
+                ObjUtil.SmartDestroy(tether);
+            else
+                tether.enabled = false;
+
+            return true;
+        }
+
+        #endregion
+
+    }
+}

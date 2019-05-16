@@ -674,9 +674,9 @@ namespace com.spacepuppy.Events
                 return _target.GetType();
 
             if (_resolveBy == ResolveByCommand.WithType)
-                return TypeUtil.FindType(_queryString);
+                return TypeUtil.FindType(_queryString) ?? typeof(UnityEngine.Object);
 
-            return null;
+            return typeof(UnityEngine.Object);
         }
 
         #endregion

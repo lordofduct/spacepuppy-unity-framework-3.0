@@ -110,7 +110,7 @@ namespace com.spacepuppyeditor.Internal
                     if (SerializedProperty.EqualContents(iterator, end))
                         break;
 
-                    SPEditorGUILayout.PropertyField(iterator, EditorHelper.TempContent(iterator.displayName), iterator.hasVisibleChildren, options);
+                    SPEditorGUILayout.PropertyField(iterator, EditorHelper.TempContent(iterator.displayName, iterator.tooltip), iterator.hasVisibleChildren, options);
                 }
             }
 

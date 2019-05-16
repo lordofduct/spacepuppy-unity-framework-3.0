@@ -466,7 +466,7 @@ namespace com.spacepuppyeditor.Settings
 
         #region Fields
 
-        private com.spacepuppyeditor.PropertyAttributeDrawers.ReorderableArrayPropertyDrawer _scenesDrawer = new com.spacepuppyeditor.PropertyAttributeDrawers.ReorderableArrayPropertyDrawer();
+        private com.spacepuppyeditor.PropertyAttributeDrawers.ReorderableArrayPropertyDrawer _scenesDrawer = new com.spacepuppyeditor.PropertyAttributeDrawers.ReorderableArrayPropertyDrawer(typeof(SceneAsset));
 
         #endregion
 

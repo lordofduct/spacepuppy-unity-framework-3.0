@@ -32,8 +32,35 @@ namespace com.spacepuppy.Utils
         public static Quaternion FromToRotation(Vector3 v1, Vector3 v2)
         {
             var a = Vector3.Cross(v1, v2);
-            var w = Mathf.Sqrt(v1.sqrMagnitude * v2.sqrMagnitude) + Vector3.Dot(v1, v2);
-            return new Quaternion(a.x, a.y, a.z, w);
+            double w = System.Math.Sqrt(v1.sqrMagnitude * v2.sqrMagnitude) + Vector3.Dot(v1, v2);
+            if (a.sqrMagnitude < 0.0001f)
+            {
+                //the vectors are parallel, check w to find direction
+                //if w is 0 then values are opposite, and we should rotate 180 degrees around some axis
+                //otherwise the vectors in the same direction and no rotation should occur
+                return (System.Math.Abs(w) < 0.0001d) ? new Quaternion(0f, 1f, 0f, 0f) : Quaternion.identity;
+            }
+            else
+            {
+                return new Quaternion(a.x, a.y, a.z, (float)w).normalized;
+            }
+        }
+
+        public static Quaternion FromToRotation(Vector3 v1, Vector3 v2, Vector3 defaultAxis)
+        {
+            var a = Vector3.Cross(v1, v2);
+            double w = System.Math.Sqrt(v1.sqrMagnitude * v2.sqrMagnitude) + Vector3.Dot(v1, v2);
+            if (a.sqrMagnitude < 0.0001f)
+            {
+                //the vectors are parallel, check w to find direction
+                //if w is 0 then values are opposite, and we should rotate 180 degrees around the supplied axis
+                //otherwise the vectors in the same direction and no rotation should occur
+                return (System.Math.Abs(w) < 0.0001d) ? new Quaternion(defaultAxis.x, defaultAxis.y, defaultAxis.z, 0f).normalized : Quaternion.identity;
+            }
+            else
+            {
+                return new Quaternion(a.x, a.y, a.z, (float)w).normalized;
+            }
         }
 
         /// <summary>

@@ -19,14 +19,12 @@ namespace com.spacepuppy.Sensors.Visual
         private Color _sensorColor = Color.blue;
         [SerializeField()]
         private bool _canDetectSelf;
+        [SerializeField]
+        [Tooltip("A mask for things we can sense, leave blank to sense all possible aspects.")]
+        private EventActivatorMaskRef _mask;
+        
         [SerializeField()]
-        private LayerMask _aspectLayerMask = -1;
-        [SerializeField()]
-        private TagMask _aspectTagMask = new TagMask();
-
-        [SerializeField()]
-        private bool _requiresLineOfSight;
-        [SerializeField()]
+        [Tooltip("Leave as 'Nothing' to not calculate line of sight.")]
         private LayerMask _lineOfSightMask;
 
         #endregion
@@ -45,23 +43,12 @@ namespace com.spacepuppy.Sensors.Visual
             set { _canDetectSelf = value; }
         }
 
-        public LayerMask AspectLayerMask
+        public IEventActivatorMask Mask
         {
-            get { return _aspectLayerMask; }
-            set { _aspectLayerMask = value; }
+            get { return _mask.Value; }
+            set { _mask.Value = value; }
         }
-
-        public TagMask AspectTagMask
-        {
-            get { return _aspectTagMask; }
-        }
-
-        public bool RequiresLineOfSight
-        {
-            get { return _requiresLineOfSight; }
-            set { _requiresLineOfSight = value; }
-        }
-
+        
         public LayerMask LineOfSightMask
         {
             get { return _lineOfSightMask; }
@@ -115,8 +102,7 @@ namespace com.spacepuppy.Sensors.Visual
         {
             if (vaspect == null) return false;
             if (!vaspect.isActiveAndEnabled) return false;
-            if (_aspectLayerMask != -1 && !_aspectLayerMask.Intersects(vaspect.gameObject)) return false;
-            if (!_aspectTagMask.Intersects(vaspect)) return false;
+            if (this.Mask != null && !this.Mask.Intersects(vaspect.gameObject)) return false;
             if (!_canDetectSelf && vaspect.entityRoot == this.entityRoot) return false;
 
             return true;
@@ -246,8 +232,7 @@ namespace com.spacepuppy.Sensors.Visual
 
             if (vaspect == null) return false;
             if (!vaspect.isActiveAndEnabled) return false;
-            if (_aspectLayerMask != -1 && !_aspectLayerMask.Intersects(aspect.gameObject)) return false;
-            if (!_aspectTagMask.Intersects(vaspect)) return false;
+            if (this.Mask != null && !this.Mask.Intersects(vaspect.gameObject)) return false;
             if (!_canDetectSelf && vaspect.entityRoot == this.entityRoot) return false;
             return vaspect.OmniPresent || this.TestVisibility(vaspect);
         }

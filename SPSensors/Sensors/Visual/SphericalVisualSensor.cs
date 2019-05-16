@@ -12,17 +12,14 @@ namespace com.spacepuppy.Sensors.Visual
     public class SphericalVisualSensor : VisualSensor
     {
 
+        public enum Modes
+        {
+            Conical = 0,
+            Frustum = 1
+        }
+
         #region Fields
 
-        [FormerlySerializedAs("HorizontalAngle")]
-        [Range(0f, 360f)]
-        [SerializeField()]
-        private float _horizontalAngle = 360f;
-        [FormerlySerializedAs("VerticalAngle")]
-        [Range(0f, 180f)]
-        [SerializeField()]
-        private float _verticalAngle = 180f;
-        [FormerlySerializedAs("Range")]
         [MinRange(0f)]
         [SerializeField()]
         private float _radius = 5.0f;
@@ -31,6 +28,15 @@ namespace com.spacepuppy.Sensors.Visual
         [SerializeField()]
         private float _innerRadius = 0f;
 
+        [SerializeField]
+        private Modes _mode;
+        [Range(0f, 360f)]
+        [SerializeField()]
+        private float _horizontalAngle = 360f;
+        [Range(0f, 180f)]
+        [SerializeField()]
+        private float _verticalAngle = 180f;
+
         #endregion
 
         #region CONSTRUCTOR
@@ -38,18 +44,6 @@ namespace com.spacepuppy.Sensors.Visual
         #endregion
 
         #region Properties
-
-        public float HorizontalAngle
-        {
-            get { return _horizontalAngle; }
-            set { _horizontalAngle = Mathf.Clamp(value, 0, 360f); }
-        }
-
-        public float VerticalAngle
-        {
-            get { return _verticalAngle; }
-            set { _verticalAngle = Mathf.Clamp(value, 0f, 180f); }
-        }
 
         public float Radius
         {
@@ -61,6 +55,24 @@ namespace com.spacepuppy.Sensors.Visual
         {
             get { return _innerRadius; }
             set { _innerRadius = Mathf.Clamp(value, 0f, _radius); }
+        }
+
+        public Modes Mode
+        {
+            get { return _mode; }
+            set { _mode = value; }
+        }
+
+        public float HorizontalAngle
+        {
+            get { return _horizontalAngle; }
+            set { _horizontalAngle = Mathf.Clamp(value, 0, 360f); }
+        }
+
+        public float VerticalAngle
+        {
+            get { return _verticalAngle; }
+            set { _verticalAngle = Mathf.Clamp(value, 0f, 180f); }
         }
 
         #endregion
@@ -81,35 +93,58 @@ namespace com.spacepuppy.Sensors.Visual
 
             if (sqrDist - (aspRad * aspRad) > sqrRadius) return false;
             if (this._innerRadius > aspRad && sqrDist < this._innerRadius * this._innerRadius) return false;
-
-            if (this._horizontalAngle < 360.0f && this._verticalAngle < 360.0f)
+            
+            switch (_mode)
             {
-                Vector3 directionOfAspectInLocalSpace = this.transform.InverseTransformDirection(v); //Quaternion.Inverse(this.transform.rotation) * v;
-                float a;
-                if (aspRad > MathUtil.EPSILON)
-                {
-                    float k = 2f * Mathf.Asin(aspRad / (Mathf.Sqrt(sqrDist + (aspRad * aspRad) / 4f))) * Mathf.Rad2Deg;
-                    a = VectorUtil.AngleBetween(new Vector2(1f, 0f), new Vector2(directionOfAspectInLocalSpace.z, directionOfAspectInLocalSpace.x));
+                case Modes.Conical:
+                    if (this._horizontalAngle < 360.0f)
+                    {
+                        var directionOfAspectInLocalSpace = this.transform.InverseTransformDirection(v);
+                        if (aspRad > MathUtil.EPSILON)
+                        {
+                            float k = 2f * Mathf.Asin(aspRad / (Mathf.Sqrt(sqrDist + (aspRad * aspRad) / 4f))) * Mathf.Rad2Deg;
+                            float a = VectorUtil.AngleBetween(Vector3.forward, directionOfAspectInLocalSpace);
+                            if (a > (this._horizontalAngle / 2f) - k)
+                                return false;
+                        }
+                        else
+                        {
+                            float a = VectorUtil.AngleBetween(Vector3.forward, directionOfAspectInLocalSpace);
+                            if (a > this._horizontalAngle / 2f)
+                                return false;
+                        }
+                    }
+                    break;
+                case Modes.Frustum:
+                    if (this._horizontalAngle < 360.0f && this._verticalAngle < 360.0f)
+                    {
+                        var directionOfAspectInLocalSpace = this.transform.InverseTransformDirection(v);
+                        if (aspRad > MathUtil.EPSILON)
+                        {
+                            float k = 2f * Mathf.Asin(aspRad / (Mathf.Sqrt(sqrDist + (aspRad * aspRad) / 4f))) * Mathf.Rad2Deg;
+                            float a = VectorUtil.AngleBetween(Vector2.right, new Vector2(directionOfAspectInLocalSpace.z, directionOfAspectInLocalSpace.x));
 
-                    if (a > (this._horizontalAngle / 2f) - k)
-                        return false;
-                    a = VectorUtil.AngleBetween(new Vector2(1f, 0f), new Vector2(directionOfAspectInLocalSpace.z, directionOfAspectInLocalSpace.y));
-                    if (a > (this._verticalAngle / 2f) - k)
-                        return false;
-                }
-                else
-                {
-                    a = VectorUtil.AngleBetween(new Vector2(1f, 0f), new Vector2(directionOfAspectInLocalSpace.z, directionOfAspectInLocalSpace.x));
-                    if (a > this._horizontalAngle / 2f)
-                        return false;
-                    a = VectorUtil.AngleBetween(new Vector2(1f, 0f), new Vector2(directionOfAspectInLocalSpace.z, directionOfAspectInLocalSpace.y));
-                    if (a > this._verticalAngle / 2f)
-                        return false;
-                }
-
+                            if (a > (this._horizontalAngle / 2f) - k)
+                                return false;
+                            a = VectorUtil.AngleBetween(Vector2.right, new Vector2(directionOfAspectInLocalSpace.z, directionOfAspectInLocalSpace.y));
+                            if (a > (this._verticalAngle / 2f) - k)
+                                return false;
+                        }
+                        else
+                        {
+                            float a = VectorUtil.AngleBetween(Vector2.right, new Vector2(directionOfAspectInLocalSpace.z, directionOfAspectInLocalSpace.x));
+                            if (a > this._horizontalAngle / 2f)
+                                return false;
+                            a = VectorUtil.AngleBetween(Vector2.right, new Vector2(directionOfAspectInLocalSpace.z, directionOfAspectInLocalSpace.y));
+                            if (a > this._verticalAngle / 2f)
+                                return false;
+                        }
+                    }
+                    break;
             }
 
-            if (this.RequiresLineOfSight)
+
+            if (this.LineOfSightMask.value != 0)
             {
                 using (var lst = com.spacepuppy.Collections.TempCollection.GetList<RaycastHit>())
                 {

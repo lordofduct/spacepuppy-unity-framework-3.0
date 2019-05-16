@@ -104,6 +104,12 @@ namespace com.spacepuppy.SPInput
             if (_vertical != null) _vertical.FixedUpdate();
         }
 
+        public void Reset()
+        {
+            if (_horizontal != null) _horizontal.Reset();
+            if (_vertical != null) _vertical.Reset();
+        }
+
         #endregion
 
     }

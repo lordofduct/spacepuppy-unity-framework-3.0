@@ -64,7 +64,7 @@ namespace com.spacepuppyeditor.Anim
                             this.serializedObject.FindProperty(PROP_ID).stringValue = string.Empty;
 
                             var clipProp = this.serializedObject.FindProperty(PROP_CLIP);
-                            var obj = EditorGUILayout.ObjectField(EditorHelper.TempContent(clipProp.displayName), clipProp.objectReferenceValue, typeof(UnityEngine.Object), true);
+                            var obj = EditorGUILayout.ObjectField(EditorHelper.TempContent(clipProp.displayName, clipProp.tooltip), clipProp.objectReferenceValue, typeof(UnityEngine.Object), true);
                             if (obj == null || obj is AnimationClip || obj is IScriptableAnimationClip)
                                 clipProp.objectReferenceValue = obj;
                             else if (GameObjectUtil.IsGameObjectSource(obj))

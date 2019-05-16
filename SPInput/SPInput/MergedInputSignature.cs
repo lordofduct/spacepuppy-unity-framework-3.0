@@ -58,6 +58,15 @@ namespace com.spacepuppy.SPInput
             }
         }
 
+        public override void Reset()
+        {
+            var e = _signatures.GetEnumerator();
+            while (e.MoveNext())
+            {
+                e.Current.Reset();
+            }
+        }
+
         #endregion
 
     }
@@ -158,6 +167,16 @@ namespace com.spacepuppy.SPInput
             }
             _currentFixed = InputUtil.GetNextButtonState(_currentFixed, down);
         }
+
+        public override void Reset()
+        {
+            base.Reset();
+
+            _current = ButtonState.None;
+            _currentFixed = ButtonState.None;
+            _lastDown = 0f;
+        }
+
     }
 
     public class MergedAxleInputSignature : MergedInputSignature<IAxleInputSignature>, IAxleInputSignature
@@ -235,6 +254,7 @@ namespace com.spacepuppy.SPInput
                 return InputUtil.CutoffAxis(result, this.DeadZone, this.Cutoff);
             }
         }
+
     }
 
     public class MergedDualAxleInputSignature : MergedInputSignature<IDualAxleInputSignature>, IDualAxleInputSignature

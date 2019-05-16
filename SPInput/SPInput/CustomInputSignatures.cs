@@ -174,6 +174,185 @@ namespace com.spacepuppy.SPInput
             _currentFixed = InputUtil.GetNextButtonState(_current, _button != null ? _button() : false);
         }
 
+        public override void Reset()
+        {
+            _current = ButtonState.None;
+            _currentFixed = ButtonState.None;
+            _lastDown = 0f;
+        }
+
+        #endregion
+
+    }
+
+    /// <summary>
+    /// A button that needs to be tapped multiple times before activating as 'down'.
+    /// 
+    /// Think like pressing A twice and holding to activate a 'turbo boost'.
+    /// </summary>
+    public class MultiTapButton : BaseInputSignature, IButtonInputSignature
+    {
+
+        #region Fields
+
+        private ButtonDelegate _delegate;
+        private int _taps;
+        private float _delay;
+
+        private ButtonState _current;
+        private ButtonState _currentFixed;
+        private float _lastDown;
+
+        private ButtonState _realState;
+        private int _count;
+        private float _lastRealDown;
+
+        #endregion
+
+        #region CONSTRUCTOR
+
+        public MultiTapButton(string id, ButtonDelegate del, int taps, float delay) : base(id)
+        {
+            _delegate = del;
+            _taps = Mathf.Max(1, taps);
+            _delay = delay;
+
+            _realState = ButtonState.None;
+            _count = 0;
+        }
+
+        #endregion
+
+        #region Properties
+
+        public ButtonDelegate Delegate
+        {
+            get { return _delegate; }
+            set { _delegate = value; }
+        }
+
+        public int Taps
+        {
+            get { return _taps; }
+            set { _taps = Mathf.Max(1, value); }
+        }
+
+        public float Delay
+        {
+            get { return _delay; }
+            set { _delay = value; }
+        }
+
+        #endregion
+
+        #region IButtonInputSignature Interface
+
+        public ButtonState CurrentState
+        {
+            get
+            {
+                if (GameLoop.CurrentSequence == UpdateSequence.FixedUpdate)
+                {
+                    return _currentFixed;
+                }
+                else
+                {
+                    return _current;
+                }
+            }
+        }
+
+        public float LastDownTime
+        {
+            get { return _lastDown; }
+        }
+
+        public void Consume()
+        {
+            if (GameLoop.CurrentSequence == UpdateSequence.FixedUpdate)
+            {
+                _currentFixed = InputUtil.ConsumeButtonState(_currentFixed);
+            }
+            else
+            {
+                _current = InputUtil.ConsumeButtonState(_current);
+            }
+        }
+
+        public ButtonState GetCurrentState(bool getFixedState)
+        {
+            return (getFixedState) ? _currentFixed : _current;
+        }
+
+        #endregion
+
+        #region IInputSignature Interfacce
+
+        public override void Update()
+        {
+            _realState = InputUtil.GetNextButtonState(_realState, _delegate != null ? _delegate() : false);
+            if (_count < _taps)
+            {
+                switch (_realState)
+                {
+                    case ButtonState.Down:
+                        {
+                            _count++;
+                            _lastRealDown = Time.realtimeSinceStartup;
+
+                            if (_count == _taps)
+                            {
+                                _current = ButtonState.Down;
+                                _lastDown = Time.realtimeSinceStartup;
+                            }
+                        }
+                        break;
+                    default:
+                        _current = ButtonState.None;
+                        if (Time.realtimeSinceStartup - _lastRealDown > _delay)
+                        {
+                            _count = 0;
+                        }
+                        break;
+                }
+            }
+            else if (_current > ButtonState.None)
+            {
+                switch (_realState)
+                {
+                    case ButtonState.Released:
+                    case ButtonState.None:
+                        _current = ButtonState.Released;
+                        _count = 0;
+                        break;
+                    default:
+                        _current = ButtonState.Held;
+                        break;
+                }
+            }
+            else
+            {
+                _current = ButtonState.None;
+                _count = 0;
+            }
+        }
+
+        public override void FixedUpdate()
+        {
+            _currentFixed = InputUtil.GetNextFixedButtonStateFromCurrent(_currentFixed, _current);
+        }
+
+        public override void Reset()
+        {
+            _current = ButtonState.None;
+            _currentFixed = ButtonState.None;
+            _lastDown = 0f;
+
+            _realState = ButtonState.None;
+            _lastRealDown = 0f;
+            _count = 0;
+        }
+
         #endregion
 
     }

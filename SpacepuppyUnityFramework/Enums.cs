@@ -3,6 +3,28 @@
 namespace com.spacepuppy
 {
 
+    public enum VariantType : sbyte
+    {
+        Object = -1,
+        Null = 0,
+        String = 1,
+        Boolean = 2,
+        Integer = 3,
+        Float = 4,
+        Double = 5,
+        Vector2 = 6,
+        Vector3 = 7,
+        Vector4 = 8,
+        Quaternion = 9,
+        Color = 10,
+        DateTime = 11,
+        GameObject = 12,
+        Component = 13,
+        LayerMask = 14,
+        Rect = 15,
+        Numeric = 16
+    }
+
     public enum AudioInterruptMode
     {
         StopIfPlaying = 0,
@@ -102,28 +124,6 @@ namespace com.spacepuppy
         Namespace = 0,
         Flat = 1,
         ComponentMenu = 2
-    }
-
-    public enum VariantType
-    {
-        Object = -1,
-        Null = 0,
-        String = 1,
-        Boolean = 2,
-        Integer = 3,
-        Float = 4,
-        Double = 5,
-        Vector2 = 6,
-        Vector3 = 7,
-        Vector4 = 8,
-        Quaternion = 9,
-        Color = 10,
-        DateTime = 11,
-        GameObject = 12,
-        Component = 13,
-        LayerMask = 14,
-        Rect = 15,
-        Numeric = 16
     }
 
     public enum DisableMode

@@ -9,7 +9,7 @@ using com.spacepuppy.Utils;
 namespace com.spacepuppy.Tween
 {
 
-    public class SPTween : ServiceComponent<SPTween>, IService
+    public sealed class SPTween : ServiceComponent<SPTween>, IService
     {
 
         #region Singleton Interface

@@ -89,6 +89,7 @@ namespace com.spacepuppyeditor
                         }
                     }
 
+                    Undo.RecordObject(tagData, "Sync TagData");
                     helper.UpdateTags(tags);
                     EditorUtility.SetDirty(tagData);
                     AssetDatabase.SaveAssets();

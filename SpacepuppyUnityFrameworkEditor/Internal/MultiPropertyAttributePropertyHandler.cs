@@ -22,11 +22,12 @@ namespace com.spacepuppyeditor.Internal
 
         private PropertyDrawer _drawer;
         private List<PropertyModifier> _modifiers;
+        private string _customTooltip;
 
         #endregion
 
         #region CONSTRUCTOR
-        
+
         public MultiPropertyAttributePropertyHandler(System.Reflection.FieldInfo fieldInfo, bool propertyIsArray, PropertyAttribute[] attribs)
         {
             if (fieldInfo == null) throw new System.ArgumentNullException("fieldInfo");
@@ -104,7 +105,12 @@ namespace com.spacepuppyeditor.Internal
                     _modifiers.Add(modifier);
                 }
             }
-            else if (attribute is TooltipAttribute || attribute is ContextMenuItemAttribute)
+            else if (attribute is TooltipAttribute)
+            {
+                _customTooltip = (attribute as TooltipAttribute).tooltip;
+                base.HandleAttribute(attribute, field, propertyType);
+            }
+            else if (attribute is ContextMenuItemAttribute)
             {
                 base.HandleAttribute(attribute, field, propertyType);
             }
@@ -209,15 +215,28 @@ namespace com.spacepuppyeditor.Internal
 
         public override bool OnGUI(Rect position, SerializedProperty property, GUIContent label, bool includeChildren)
         {
+            if (label == null)
+            {
+                label = EditorHelper.TempContent(property.displayName, _customTooltip ?? property.tooltip);
+            }
+            else if (string.IsNullOrEmpty(label.tooltip) && !string.IsNullOrEmpty(_customTooltip))
+            {
+                label = EditorHelper.CloneContent(label);
+                label.tooltip = _customTooltip;
+            }
+
+            bool cancelDraw = false;
+
             if (_modifiers != null)
             {
                 for (int i = 0; i < _modifiers.Count; i++)
                 {
-                    _modifiers[i].OnBeforeGUI(property);
+                    _modifiers[i].OnBeforeGUI(property, ref cancelDraw);
                 }
             }
 
-            bool result = base.OnGUI(position, property, label, includeChildren);
+            bool result = false;
+            if (!cancelDraw) result = base.OnGUI(position, property, label, includeChildren);
             PropertyHandlerValidationUtility.AddAsHandled(property, this);
 
             if (_modifiers != null)
@@ -233,15 +252,28 @@ namespace com.spacepuppyeditor.Internal
 
         public override bool OnGUILayout(SerializedProperty property, GUIContent label, bool includeChildren, GUILayoutOption[] options)
         {
+            if (label == null)
+            {
+                label = EditorHelper.TempContent(property.displayName, _customTooltip ?? property.tooltip);
+            }
+            else if (string.IsNullOrEmpty(label.tooltip) && !string.IsNullOrEmpty(_customTooltip))
+            {
+                label = EditorHelper.CloneContent(label);
+                label.tooltip = _customTooltip;
+            }
+
+            bool cancelDraw = false;
+
             if (_modifiers != null)
             {
                 for (int i = 0; i < _modifiers.Count; i++)
                 {
-                    _modifiers[i].OnBeforeGUI(property);
+                    _modifiers[i].OnBeforeGUI(property, ref cancelDraw);
                 }
             }
 
-            var result = base.OnGUILayout(property, label, includeChildren, options);
+            bool result = false;
+            if (!cancelDraw) result = base.OnGUILayout(property, label, includeChildren, options);
             PropertyHandlerValidationUtility.AddAsHandled(property, this);
 
             if (_modifiers != null)

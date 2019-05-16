@@ -371,6 +371,7 @@ namespace com.spacepuppyeditor.Base.Events
         public static void AddObjectsToTrigger(SerializedProperty triggerProperty, UnityEngine.Object[] objs)
         {
             if (triggerProperty == null) throw new System.ArgumentNullException("triggerProperty");
+            if (triggerProperty.serializedObject.isEditingMultipleObjects) throw new System.ArgumentException("Can not use this method for multi-selected SerializedObjects.", "triggerProperty");
 
             try
             {
@@ -378,6 +379,7 @@ namespace com.spacepuppyeditor.Base.Events
                 var trigger = EditorHelper.GetTargetObjectOfProperty(triggerProperty) as BaseSPEvent;
                 if (trigger == null) return;
 
+                Undo.RecordObject(triggerProperty.serializedObject.targetObject, "Add Trigger Targets");
                 using (var set = TempCollection.GetSet<UnityEngine.Object>())
                 {
                     for (int i = 0; i < trigger.Targets.Count; i++)

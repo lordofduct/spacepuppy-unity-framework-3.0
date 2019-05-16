@@ -77,6 +77,12 @@ namespace com.spacepuppy.SPInput
             }
         }
 
+        /// <summary>
+        /// Calculates the next button state from the current state and if the button is active or not.
+        /// </summary>
+        /// <param name="current"></param>
+        /// <param name="isButtonActive"></param>
+        /// <returns></returns>
         public static ButtonState GetNextButtonState(ButtonState current, bool isButtonActive)
         {
             if (isButtonActive)
@@ -105,6 +111,35 @@ namespace com.spacepuppy.SPInput
             }
 
             return ButtonState.None;
+        }
+
+        /// <summary>
+        /// During FixedUpdate of a InputSignature, this will calculate the current fixed button state based on the last fixed state and the current state as polled by Update. 
+        /// Use this if Update does very complicated stuff that is time consuming to calculate twice in both Update and FixedUpdate. 
+        /// </summary>
+        /// <param name="currentFixedState"></param>
+        /// <param name="current"></param>
+        /// <returns></returns>
+        public static ButtonState GetNextFixedButtonStateFromCurrent(ButtonState currentFixedState, ButtonState current)
+        {
+            switch (currentFixedState)
+            {
+                case ButtonState.Released:
+                    return ButtonState.None;
+                case ButtonState.None:
+                    if (current > ButtonState.None)
+                        return ButtonState.Down;
+                    else
+                        return ButtonState.None;
+                case ButtonState.Down:
+                case ButtonState.Held:
+                    if (current > ButtonState.None)
+                        return ButtonState.Held;
+                    else
+                        return ButtonState.Released;
+                default:
+                    return ButtonState.None;
+            }
         }
 
         

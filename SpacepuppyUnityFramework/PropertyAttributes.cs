@@ -106,7 +106,7 @@ namespace com.spacepuppy
         }
 
     }
-
+    
     [System.AttributeUsage(System.AttributeTargets.Field, AllowMultiple = false)]
     public class EnumFlagsAttribute : SPPropertyAttribute
     {
@@ -134,6 +134,19 @@ namespace com.spacepuppy
         public EnumPopupExcludingAttribute(params int[] excluded)
         {
             excludedValues = excluded;
+        }
+
+    }
+
+    [System.AttributeUsage(System.AttributeTargets.Field, AllowMultiple = false)]
+    public class EnumInCustomOrderAttribute : SPPropertyAttribute
+    {
+
+        public readonly int[] customOrder;
+
+        public EnumInCustomOrderAttribute(params int[] enumOrder)
+        {
+            this.customOrder = enumOrder;
         }
 
     }
@@ -239,6 +252,7 @@ namespace com.spacepuppy
         public float ElementPadding = 0f;
         public bool DrawElementAtBottom = false;
         public bool HideElementLabel = false;
+        public bool ShowTooltipInHeader = false;
 
         /// <summary>
         /// If DrawElementAtBottom is true, this child element can be displayed as the label in the reorderable list.
@@ -339,6 +353,22 @@ namespace com.spacepuppy
 
     }
     
+    [System.AttributeUsage(System.AttributeTargets.Field, AllowMultiple = false)]
+    public class AnimationCurveConstraintAttribute : PropertyAttribute
+    {
+        public float x;
+        public float y;
+        public float width = float.PositiveInfinity;
+        public float height = float.PositiveInfinity;
+        public Color color = Color.green;
+    }
+
+    public class AnimationCurveEaseScaleAttribute : PropertyAttribute
+    {
+        public float overscan = 1f;
+        public Color color = Color.green;
+    }
+
     /// <summary>
     /// A specialized PropertyDrawer that draws a struct/class in the shape:
     /// struct Pair
@@ -456,6 +486,22 @@ namespace com.spacepuppy
         public bool DisableIfNot;
 
         public DisableIfAttribute(string memberName)
+        {
+            this.MemberName = memberName;
+        }
+
+    }
+
+    /// <summary>
+    /// Display a field in the inspector only if the property/method returns true (supports private).
+    /// </summary>
+    [System.AttributeUsage(System.AttributeTargets.Field, AllowMultiple = false)]
+    public class DisplayIfAttribute : SPPropertyAttribute
+    {
+        public readonly string MemberName;
+        public bool DisplayIfNot;
+
+        public DisplayIfAttribute(string memberName)
         {
             this.MemberName = memberName;
         }

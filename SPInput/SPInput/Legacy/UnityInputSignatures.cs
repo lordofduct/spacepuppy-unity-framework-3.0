@@ -93,6 +93,13 @@ namespace com.spacepuppy.SPInput.Legacy
             _currentFixed = InputUtil.GetNextButtonState(_currentFixed, Input.GetButton(this.UnityInputId));
         }
 
+        public override void Reset()
+        {
+            _current = ButtonState.None;
+            _currentFixed = ButtonState.None;
+            _lastDown = 0f;
+        }
+
         #endregion
 
     }
@@ -240,6 +247,13 @@ namespace com.spacepuppy.SPInput.Legacy
             }
         }
 
+        public override void Reset()
+        {
+            _current = ButtonState.None;
+            _currentFixed = ButtonState.None;
+            _lastDown = 0f;
+        }
+
         #endregion
 
     }
@@ -316,6 +330,10 @@ namespace com.spacepuppy.SPInput.Legacy
             if (this.Invert) v *= -1;
             _current = InputUtil.CutoffAxis(v, this.DeadZone, this.Cutoff);
             */
+        }
+
+        public override void Reset()
+        {
         }
 
         #endregion
@@ -441,6 +459,10 @@ namespace com.spacepuppy.SPInput.Legacy
             */
         }
 
+        public override void Reset()
+        {
+        }
+
         #endregion
 
     }
@@ -470,6 +492,11 @@ namespace com.spacepuppy.SPInput.Legacy
         {
             //do nothing
         }
+
+        public override void Reset()
+        {
+        }
+
     }
 
     public class MouseClickInputSignature : BaseInputSignature, IButtonInputSignature
@@ -559,6 +586,13 @@ namespace com.spacepuppy.SPInput.Legacy
         {
             //determine based on history
             _currentFixed = InputUtil.GetNextButtonState(_currentFixed, Input.GetMouseButton(this.MouseButton));
+        }
+
+        public override void Reset()
+        {
+            _current = ButtonState.None;
+            _currentFixed = ButtonState.None;
+            _lastDown = 0f;
         }
 
         #endregion
@@ -664,6 +698,13 @@ namespace com.spacepuppy.SPInput.Legacy
             _currentFixed = InputUtil.GetNextButtonState(_currentFixed, Input.GetKey(this.Key));
         }
 
+        public override void Reset()
+        {
+            _current = ButtonState.None;
+            _currentFixed = ButtonState.None;
+            _lastDown = 0f;
+        }
+
         #endregion
 
     }
@@ -765,6 +806,10 @@ namespace com.spacepuppy.SPInput.Legacy
 
             if (this.DeadZone > 1f) _state = 0f;
             */
+        }
+
+        public override void Reset()
+        {
         }
 
         #endregion
@@ -918,6 +963,10 @@ namespace com.spacepuppy.SPInput.Legacy
             */
         }
 
+        public override void Reset()
+        {
+        }
+
         #endregion
 
     }
@@ -1019,6 +1068,10 @@ namespace com.spacepuppy.SPInput.Legacy
 
             if (this.DeadZone > 1f) _state = 0f;
             */
+        }
+
+        public override void Reset()
+        {
         }
 
         #endregion
@@ -1169,6 +1222,10 @@ namespace com.spacepuppy.SPInput.Legacy
 
             _state = InputUtil.CutoffDualAxis(_state, this.DeadZone, this.Cutoff, this.RadialDeadZone, this.RadialCutoff);
             */
+        }
+
+        public override void Reset()
+        {
         }
 
         #endregion

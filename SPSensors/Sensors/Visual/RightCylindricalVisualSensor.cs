@@ -147,7 +147,7 @@ namespace com.spacepuppy.Sensors.Visual
                 }
             }
 
-            if (this.RequiresLineOfSight)
+            if (this.LineOfSightMask.value != 0)
             {
                 var v = otherPos - center;
                 using (var lst = com.spacepuppy.Collections.TempCollection.GetList<RaycastHit>())

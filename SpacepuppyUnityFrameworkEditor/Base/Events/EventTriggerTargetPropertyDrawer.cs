@@ -566,7 +566,7 @@ DrawMethodName:
                     }
                     break;
                 case TriggerActivationType.DestroyTarget:
-                    result.ActivationTypeDisplayName = _triggerActivationTypeDisplayNames[6];
+                    result.ActivationTypeDisplayName = _triggerActivationTypeDisplayNames[7];
                     break;
             }
             return result;

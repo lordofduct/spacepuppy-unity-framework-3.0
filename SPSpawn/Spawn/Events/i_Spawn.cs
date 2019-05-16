@@ -21,7 +21,8 @@ namespace com.spacepuppy.Spawn.Events
         private SpawnPool _spawnPool;
         
         [SerializeField]
-        private Transform _spawnedObjectParent;
+        [TypeRestriction(typeof(Transform), AllowProxy = true, HideTypeDropDown = true)]
+        private UnityEngine.Object _spawnedObjectParent;
 
         [SerializeField()]
         [WeightedValueCollection("Weight", "Prefab")]
@@ -96,7 +97,7 @@ namespace com.spacepuppy.Spawn.Events
             if (prefab == null) return null;
 
             var pool = _spawnPool != null ? _spawnPool : SpawnPool.DefaultPool;
-            var go = pool.Spawn(prefab, this.transform.position, this.transform.rotation, _spawnedObjectParent);
+            var go = pool.Spawn(prefab, this.transform.position, this.transform.rotation, ObjUtil.GetAsFromSource<Transform>(_spawnedObjectParent, true));
 
             if (_onSpawnedObject != null && _onSpawnedObject.Count > 0)
                 _onSpawnedObject.ActivateTrigger(this, go);

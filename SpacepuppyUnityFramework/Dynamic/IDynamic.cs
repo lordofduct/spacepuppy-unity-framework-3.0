@@ -971,7 +971,8 @@ namespace com.spacepuppy.Dynamic
 
         public static object GetValueWithMember(MemberInfo info, object targObj, bool ignoreMethod)
         {
-            if (info == null) return null;
+            if (info == null || targObj == null) return null;
+            if (!TypeUtil.IsType(targObj.GetType(), info.DeclaringType)) return null;
 
             try
             {

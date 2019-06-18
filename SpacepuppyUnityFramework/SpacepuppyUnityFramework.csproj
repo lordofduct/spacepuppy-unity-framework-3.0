@@ -32,6 +32,7 @@
     <Compile Include="Async\RadicalTask.cs" />
     <Compile Include="Async\SPThreadPool.cs" />
     <Compile Include="Collections\BinaryHeap.cs" />
+    <Compile Include="Collections\CovariantCollections.cs" />
     <Compile Include="Collections\Deque.cs" />
     <Compile Include="Collections\ICachePool.cs" />
     <Compile Include="Collections\LightEnumerator.cs" />

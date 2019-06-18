@@ -843,6 +843,7 @@ namespace com.spacepuppyeditor
         {
             if (info == null) return null;
             targObj = ObjUtil.ReduceIfProxy(targObj);
+            if (targObj == null) return null;
 
             var tp = info.DeclaringType;
             if (TypeUtil.IsType(tp, typeof(Renderer)))
@@ -853,6 +854,14 @@ namespace com.spacepuppyeditor
                         return DynamicUtil.GetValue(targObj, "sharedMaterial");
                     case "materials":
                         return DynamicUtil.GetValue(targObj, "sharedMaterials");
+                }
+            }
+            else if (TypeUtil.IsType(tp, typeof(MeshFilter)))
+            {
+                switch (info.Name)
+                {
+                    case "mesh":
+                        return DynamicUtil.GetValue(targObj, "sharedMesh");
                 }
             }
 

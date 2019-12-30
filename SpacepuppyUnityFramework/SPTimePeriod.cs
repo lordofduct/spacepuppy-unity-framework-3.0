@@ -28,8 +28,6 @@ namespace com.spacepuppy
         private DeltaTimeType _timeSupplierType;
         [SerializeField()]
         private string _timeSupplierName;
-        //[System.NonSerialized()]
-        //private CustomTimeSupplier _customTime;
 
         #endregion
 
@@ -39,22 +37,21 @@ namespace com.spacepuppy
         {
             _seconds = seconds;
             _timeSupplierType = DeltaTimeType.Normal;
-            _timeSupplierName = null;
+            _timeSupplierName = SPTime.Normal.Id;
         }
 
-        public SPTimePeriod(float seconds, DeltaTimeType type, string timeSupplierName = null)
+        public SPTimePeriod(float seconds, SPTime time)
         {
             _seconds = seconds;
-            _timeSupplierType = type;
-            _timeSupplierName = timeSupplierName;
+            _timeSupplierType = time.TimeSupplierType;
+            _timeSupplierName = time.TimeSupplierName;
         }
 
         public SPTimePeriod(float seconds, ITimeSupplier supplier)
         {
             _seconds = seconds;
-            _timeSupplierType = DeltaTimeType.Normal;
-            _timeSupplierName = null;
-            this.TimeSupplier = supplier;
+            _timeSupplierType = SPTime.GetDeltaType(supplier);
+            _timeSupplierName = SPTime.GetValidatedId(supplier);
         }
 
         #endregion
@@ -72,7 +69,7 @@ namespace com.spacepuppy
             get { return _timeSupplierType; }
         }
 
-        public string CustomTimeSupplierName
+        public string TimeSupplierName
         {
             get { return _timeSupplierName; }
         }
@@ -85,18 +82,12 @@ namespace com.spacepuppy
             }
             set
             {
+                if (value == null) value = SPTime.Normal;
                 _timeSupplierType = SPTime.GetDeltaType(value);
-                if (_timeSupplierType == DeltaTimeType.Custom)
-                {
-                    var cts = value as CustomTimeSupplier;
-                    _timeSupplierName = (cts != null) ? cts.Id : null;
-                }
-                else
-                {
-                    _timeSupplierName = null;
-                }
+                _timeSupplierName = SPTime.GetValidatedId(value);
             }
         }
+
         public bool IsCustom
         {
             get { return _timeSupplierType == DeltaTimeType.Custom; }

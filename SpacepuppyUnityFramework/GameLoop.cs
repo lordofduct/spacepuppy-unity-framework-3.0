@@ -287,7 +287,13 @@ namespace com.spacepuppy
         /// <param name="d"></param>
         internal static void RegisterInternalEarlyUpdate(System.Action<bool> d)
         {
+            _internalEarlyUpdate -= d;
             _internalEarlyUpdate += d;
+        }
+
+        internal static void UnregisterInternalEarlyUpdate(System.Action<bool> d)
+        {
+            _internalEarlyUpdate -= d;
         }
 
         #endregion

@@ -2374,7 +2374,10 @@ namespace com.spacepuppy.Utils
         public static bool ValueIsNumericType(object obj)
         {
             if (obj == null) return false;
-            return obj is INumeric || IsNumericType(obj.GetType());
+            if (obj is INumeric) return true;
+
+            var tp = obj.GetType();
+            return tp.IsEnum || IsNumericType(System.Type.GetTypeCode(tp));
         }
 
         /// <summary>
@@ -2386,7 +2389,7 @@ namespace com.spacepuppy.Utils
         public static bool IsNumericType(System.Type tp)
         {
             if (tp == null) return false;
-            return typeof(INumeric).IsAssignableFrom(tp) || IsNumericType(System.Type.GetTypeCode(tp));
+            return typeof(INumeric).IsAssignableFrom(tp) || tp.IsEnum || IsNumericType(System.Type.GetTypeCode(tp));
         }
 
         public static bool IsNumericType(System.TypeCode code)

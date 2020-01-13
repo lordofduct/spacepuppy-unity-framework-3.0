@@ -121,10 +121,11 @@ namespace com.spacepuppyeditor
         {
             GUIContent[] arr = new GUIContent[count];
 
-            var m = _accessWrapper.GetStaticMethod("IconContent", typeof(System.Func<string, GUIContent>)) as System.Func<string, GUIContent>;
+            //var m = _accessWrapper.GetStaticMethod("IconContent", typeof(System.Func<string, GUIContent>)) as System.Func<string, GUIContent>;
             for (int index = 0; index < count; ++index)
             {
-                arr[index] = m(baseName + (startIndex + index).ToString() + postFix);
+                //arr[index] = m(baseName + (startIndex + index).ToString() + postFix);
+                arr[index] = EditorGUIUtility.IconContent(baseName + (startIndex + index).ToString() + postFix);
             }
 
             return arr;

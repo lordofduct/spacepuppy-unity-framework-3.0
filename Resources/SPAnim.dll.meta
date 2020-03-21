@@ -1,19 +1,16 @@
 fileFormatVersion: 2
-guid: ad1e09537abad9a43bd8de0065fde51d
-timeCreated: 1514358691
-licenseType: Free
+guid: 5aef1733af2a755488b0ef610f13ffc4
 PluginImporter:
   externalObjects: {}
   serializedVersion: 2
   iconMap: {}
   executionOrder:
-    com.spacepuppy.GameLoop: -32000
-    com.spacepuppy.Hooks.EarlyStartHook: -31999
-    com.spacepuppy.Hooks.EarlyExecutionUpdateEventHooks: -31900
-    com.spacepuppy.SPEntity: 31990
-    com.spacepuppy.Hooks.TardyExecutionUpdateEventHooks: 32000
+    com.spacepuppy.Anim.Legacy.SPLegacyAnimController: -31950
+  defineConstraints: []
   isPreloaded: 0
   isOverridable: 0
+  isExplicitlyReferenced: 0
+  validateReferences: 1
   platformData:
   - first:
       Any: 

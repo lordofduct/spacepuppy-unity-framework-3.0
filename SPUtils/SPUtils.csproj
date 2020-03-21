@@ -23,6 +23,7 @@
     <ProjectReference Include="..\SPTween\SPTween.csproj" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="StateMachines\" />
     <Folder Include="Properties\" />
   </ItemGroup>
 </Project>

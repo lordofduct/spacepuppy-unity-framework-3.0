@@ -112,6 +112,13 @@ namespace com.spacepuppyeditor.Settings
                 EditorHierarchyAlternateContextMenuEvents.SetActive(hierarchCustomContextMenu);
             }
 
+            EditorGUI.BeginChangeCheck();
+            bool signalValidateReceiver = EditorGUILayout.ToggleLeft("Signal IValidateReceiver OnValidate Event", SpacepuppySettings.SignalValidateReceiver);
+            if(EditorGUI.EndChangeCheck())
+            {
+                SpacepuppySettings.SignalValidateReceiver = signalValidateReceiver;
+            }
+
             GUILayout.EndVertical();
 
             /*

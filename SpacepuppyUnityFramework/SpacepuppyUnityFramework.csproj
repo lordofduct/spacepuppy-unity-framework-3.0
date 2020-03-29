@@ -52,6 +52,7 @@
     <Compile Include="Collections\TrackablObjectCachePool.cs" />
     <Compile Include="ColorHSV.cs" />
     <Compile Include="Dynamic\StateToken.cs" />
+    <Compile Include="EditorOnly\IValidateReceiver.cs" />
     <Compile Include="Events\EventTriggerEvaluator.cs" />
     <Compile Include="Geom\CompoundTrigger.cs" />
     <Compile Include="CustomTimeSupplier.cs" />

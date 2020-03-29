@@ -3,13 +3,12 @@ using System.Collections.Generic;
 
 using com.spacepuppy.Collections;
 using com.spacepuppy.Utils;
-using System;
 
 namespace com.spacepuppy.Events
 {
 
     [System.Serializable()]
-    public class BaseSPEvent : ICollection<EventTriggerTarget>
+    public abstract class BaseSPEvent
     {
 
         public const string ID_DEFAULT = "Trigger";
@@ -45,10 +44,13 @@ namespace com.spacepuppy.Events
 
         [SerializeField()]
         private List<EventTriggerTarget> _targets = new List<EventTriggerTarget>();
+        [System.NonSerialized]
+        private SignalingTargetList _signalList;
 
         [System.NonSerialized()]
         private string _id;
-
+        [System.NonSerialized]
+        private int _version;
 
         [System.NonSerialized]
         private HashSet<object> _hijackTokens;
@@ -66,20 +68,20 @@ namespace com.spacepuppy.Events
         {
             _id = id;
         }
-        
+
         #endregion
 
         #region Properties
-        
+
         public string ObservableTriggerId
         {
             get { return _id; }
             set { _id = value; }
         }
 
-        public List<EventTriggerTarget> Targets
+        public IList<EventTriggerTarget> Targets
         {
-            get { return _targets; }
+            get { return _signalList ?? (_signalList = new SignalingTargetList(this)); }
         }
 
         /// <summary>
@@ -110,6 +112,7 @@ namespace com.spacepuppy.Events
         {
             var targ = new EventTriggerTarget();
             _targets.Add(targ);
+            _version++;
             return targ;
         }
 
@@ -155,7 +158,7 @@ namespace com.spacepuppy.Events
                 var e = _targets.GetEnumerator();
                 while (e.MoveNext())
                 {
-                    if (e.Current != null) e.Current.Trigger(sender, arg);
+                    e.Current?.Trigger(sender, arg);
                 }
             }
 
@@ -166,8 +169,7 @@ namespace com.spacepuppy.Events
         {
             if (index >= 0 && index < _targets.Count && !this.CurrentlyHijacked)
             {
-                EventTriggerTarget trig = _targets[index];
-                if (trig != null) trig.Trigger(sender, arg);
+                _targets[index]?.Trigger(sender, arg);
             }
 
             this.OnTriggerActivated(sender, arg);
@@ -198,64 +200,6 @@ namespace com.spacepuppy.Events
             }
 
             this.OnTriggerActivated(sender, arg);
-        }
-
-        #endregion
-
-        #region ICollection Interface
-
-        public void Add(EventTriggerTarget item)
-        {
-            _targets.Add(item);
-        }
-
-        public void Clear()
-        {
-            _targets.Clear();
-        }
-
-        public bool Contains(EventTriggerTarget item)
-        {
-            return _targets.Contains(item);
-        }
-
-        public void CopyTo(EventTriggerTarget[] array, int arrayIndex)
-        {
-            _targets.CopyTo(array, arrayIndex);
-        }
-
-        int ICollection<EventTriggerTarget>.Count
-        {
-            get
-            {
-                return _targets.Count;
-            }
-        }
-
-        bool ICollection<EventTriggerTarget>.IsReadOnly
-        {
-            get { return false; }
-        }
-
-        public bool Remove(EventTriggerTarget item)
-        {
-            return _targets.Remove(item);
-        }
-
-        public Enumerator GetEnumerator()
-        {
-            //return _targets.GetEnumerator();
-            return new Enumerator(this);
-        }
-
-        IEnumerator<EventTriggerTarget> IEnumerable<EventTriggerTarget>.GetEnumerator()
-        {
-            return this.GetEnumerator();
-        }
-
-        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
-        {
-            return this.GetEnumerator();
         }
 
         #endregion
@@ -299,6 +243,104 @@ namespace com.spacepuppy.Events
 
         }
 
+        private class SignalingTargetList : IList<EventTriggerTarget>
+        {
+
+            private BaseSPEvent _owner;
+
+            public SignalingTargetList(BaseSPEvent owner)
+            {
+                _owner = owner;
+            }
+
+            public EventTriggerTarget this[int index] { get { return _owner._targets[index]; } set { throw new System.NotSupportedException(); } }
+
+            public int Count { get { return _owner._targets.Count; } }
+
+            public bool IsReadOnly { get { return false; } }
+
+            public void Add(EventTriggerTarget item)
+            {
+                if (_owner._targets.Contains(item)) return;
+                _owner._targets.Add(item);
+                _owner._version++;
+            }
+
+            public void Clear()
+            {
+                _owner._targets.Clear();
+                _owner._version++;
+            }
+
+            public bool Contains(EventTriggerTarget item)
+            {
+                return _owner._targets.Contains(item);
+            }
+
+            public void CopyTo(EventTriggerTarget[] array, int arrayIndex)
+            {
+                _owner._targets.CopyTo(array, arrayIndex);
+            }
+
+            public int IndexOf(EventTriggerTarget item)
+            {
+                return _owner._targets.IndexOf(item);
+            }
+
+            public void Insert(int index, EventTriggerTarget item)
+            {
+                int i = _owner._targets.IndexOf(item);
+                if (i >= 0)
+                {
+                    if (i < index)
+                    {
+                        _owner._targets.RemoveAt(i);
+                        index--; //slide back a slot to make up for the removal
+                    }
+                    else if (i == index)
+                    {
+                        //it already exists at index, do nothing
+                        return;
+                    }
+                    else
+                    {
+                        _owner._targets.RemoveAt(index);
+                    }
+                }
+
+                _owner._targets.Insert(index, item);
+                _owner._version++;
+            }
+
+            public bool Remove(EventTriggerTarget item)
+            {
+                bool result = _owner._targets.Remove(item);
+                _owner._version++;
+                return result;
+            }
+
+            public void RemoveAt(int index)
+            {
+                _owner._targets.RemoveAt(index);
+                _owner._version++;
+            }
+
+            public BaseSPEvent.Enumerator GetEnumerator()
+            {
+                return new BaseSPEvent.Enumerator(_owner);
+            }
+
+            IEnumerator<EventTriggerTarget> IEnumerable<EventTriggerTarget>.GetEnumerator()
+            {
+                return new BaseSPEvent.Enumerator(_owner);
+            }
+
+            System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
+            {
+                return new BaseSPEvent.Enumerator(_owner);
+            }
+        }
+
         #endregion
 
     }
@@ -306,7 +348,7 @@ namespace com.spacepuppy.Events
     [System.Serializable()]
     public class SPEvent : BaseSPEvent
     {
-        
+
         #region CONSTRUCTOR
 
         public SPEvent()
@@ -320,7 +362,7 @@ namespace com.spacepuppy.Events
         #endregion
 
         #region Methods
-        
+
         public new void ActivateTrigger(object sender, object arg)
         {
             base.ActivateTrigger(sender, arg);
@@ -339,7 +381,7 @@ namespace com.spacepuppy.Events
         #endregion
 
         #region Special Types
-        
+
         /*
          * This may be defined here, it is still usable on all types inheriting from BaseSPEvent. It's only here for namespace purposes to be consistent across the framework.
          */
@@ -360,7 +402,7 @@ namespace com.spacepuppy.Events
     }
 
     [System.Serializable()]
-    public class SPEvent<T> : BaseSPEvent where T : System.EventArgs
+    public abstract class SPEvent<T> : BaseSPEvent where T : System.EventArgs
     {
 
         #region Events
@@ -397,7 +439,7 @@ namespace com.spacepuppy.Events
                     return this.Targets.Count;
             }
         }
-        
+
         public void ActivateTrigger(object sender, T arg)
         {
             base.ActivateTrigger(sender, arg);
@@ -417,7 +459,7 @@ namespace com.spacepuppy.Events
         }
 
         #endregion
-        
+
     }
 
     [System.Serializable()]
@@ -430,13 +472,13 @@ namespace com.spacepuppy.Events
         private System.Action<object, T> _evCallback;
         protected virtual void OnTriggerActivated(object sender, T arg)
         {
-            if(_callback != null)
+            if (_callback != null)
             {
                 var c = _callback;
                 c(arg);
             }
 
-            if(_evCallback != null)
+            if (_evCallback != null)
             {
                 var c = _evCallback;
                 c(sender, arg);

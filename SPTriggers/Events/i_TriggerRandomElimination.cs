@@ -106,7 +106,7 @@ namespace com.spacepuppy.Events
                 _used.Clear();
             }
 
-            var targ = _targets.Where((t) => !_used.Contains(t)).PickRandom((t) => t.Weight);
+            var targ = _targets.Targets.Where((t) => !_used.Contains(t)).PickRandom((t) => t.Weight);
             if (targ != null)
             {
                 _used.Add(targ);

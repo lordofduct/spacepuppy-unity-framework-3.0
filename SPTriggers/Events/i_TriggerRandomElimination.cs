@@ -116,7 +116,7 @@ namespace com.spacepuppy.Events
                 if (_used.Count >= cnt)
                 {
                     _used.Clear();
-                    if (_onComplete.Count > 0) _onComplete.ActivateTrigger(this, null);
+                    if (_onComplete?.HasReceivers ?? false) _onComplete.ActivateTrigger(this, null);
                 }
 
                 return true;

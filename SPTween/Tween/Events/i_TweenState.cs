@@ -135,10 +135,10 @@ namespace com.spacepuppy.Tween.Events
                              .TweenWithToken(_mode, EaseMethods.GetEase(_ease), _duration.Seconds, source, _sourceAlt)
                              .Use(_duration.TimeSupplier)
                              .SetId(targ);
-            if (_onComplete.Count > 0)
+            if (_onComplete?.HasReceivers ?? false)
                 twn.OnFinish((t) => _onComplete.ActivateTrigger(this, null));
 
-            if (_onTick.Count > 0)
+            if (_onTick?.HasReceivers ?? false)
                 twn.OnStep((t) => _onTick.ActivateTrigger(this, null));
 
             twn.Play(true, _tweenToken);

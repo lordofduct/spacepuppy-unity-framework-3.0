@@ -36,7 +36,7 @@ namespace com.spacepuppyeditor.Events
             int i = EditorGUILayout.IntField("Current Index", prop.intValue);
             if (EditorGUI.EndChangeCheck())
             {
-                prop.intValue = Mathf.Clamp(i, 0, seq.TriggerSequence.Count - 1);
+                prop.intValue = Mathf.Clamp(i, 0, seq.TriggerSequence.TargetCount - 1);
             }
 
             Rect rect;
@@ -48,7 +48,7 @@ namespace com.spacepuppyeditor.Events
             rect = ITriggerableMechanismAddonDrawer.GetActivateButtonControlRect();
             if (GUI.Button(rect, "Move Ahead Index"))
             {
-                prop.intValue = Mathf.Clamp(i + 1, 0, seq.TriggerSequence.Count - 1);
+                prop.intValue = Mathf.Clamp(i + 1, 0, seq.TriggerSequence.TargetCount - 1);
             }
 
             this.serializedObject.ApplyModifiedProperties();

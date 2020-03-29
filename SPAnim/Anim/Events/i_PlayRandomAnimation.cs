@@ -214,7 +214,7 @@ namespace com.spacepuppy.Anim.Events
                 return false;
             }
 
-            if (_onAnimComplete.Count > 0)
+            if (_onAnimComplete?.HasReceivers ?? false)
             {
                 if (anim is ISPAnim)
                 {

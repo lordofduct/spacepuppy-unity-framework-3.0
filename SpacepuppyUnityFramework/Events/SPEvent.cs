@@ -15,7 +15,7 @@ namespace com.spacepuppy.Events
 
         #region Events
 
-        protected System.EventHandler<TempEventArgs> _triggerActivated;
+        private System.EventHandler<TempEventArgs> _triggerActivated;
         public event System.EventHandler<TempEventArgs> TriggerActivated
         {
             add
@@ -85,18 +85,19 @@ namespace com.spacepuppy.Events
         }
 
         /// <summary>
-        /// Count is total count of targets including the TriggerActivated event. 
-        /// Check the count of 'Targets' for the direct targets only.
+        /// Number of registered targets, same as Targets.Count. This may return 0 even if there are event listeners.
         /// </summary>
-        public virtual int Count
+        public int TargetCount
         {
-            get
-            {
-                if (_triggerActivated != null)
-                    return _targets.Count + 1;
-                else
-                    return _targets.Count;
-            }
+            get { return _targets.Count; }
+        }
+
+        /// <summary>
+        /// Returns true if TargetCount > 0 or there are event receivers attached. 
+        /// </summary>
+        public virtual bool HasReceivers
+        {
+            get { return _triggerActivated != null || _targets.Count > 0; }
         }
 
         public bool CurrentlyHijacked
@@ -408,10 +409,6 @@ namespace com.spacepuppy.Events
         #region Events
 
         public new event System.EventHandler<T> TriggerActivated;
-        protected virtual void OnTriggerActivated(object sender, T e)
-        {
-            this.TriggerActivated?.Invoke(sender, e);
-        }
 
         #endregion
 
@@ -429,33 +426,27 @@ namespace com.spacepuppy.Events
 
         #region Methods
 
-        public override int Count
+        public override bool HasReceivers
         {
-            get
-            {
-                if (this.TriggerActivated != null || _triggerActivated != null)
-                    return this.Targets.Count + 1;
-                else
-                    return this.Targets.Count;
-            }
+            get { return TriggerActivated != null || base.HasReceivers; }
         }
 
         public void ActivateTrigger(object sender, T arg)
         {
             base.ActivateTrigger(sender, arg);
-            this.OnTriggerActivated(sender, arg);
+            this.TriggerActivated?.Invoke(sender, arg);
         }
 
         public void ActivateTriggerAt(int index, object sender, T arg)
         {
             base.ActivateTriggerAt(index, sender, arg);
-            this.OnTriggerActivated(sender, arg);
+            this.TriggerActivated?.Invoke(sender, arg);
         }
 
         public void ActivateRandomTrigger(object sender, T arg, bool considerWeights, bool selectOnlyIfActive)
         {
             base.ActivateRandomTrigger(sender, arg, considerWeights, selectOnlyIfActive);
-            this.OnTriggerActivated(sender, arg);
+            this.TriggerActivated?.Invoke(sender, arg);
         }
 
         #endregion
@@ -501,15 +492,9 @@ namespace com.spacepuppy.Events
 
         #region Methods
 
-        public override int Count
+        public override bool HasReceivers
         {
-            get
-            {
-                if (_callback != null || _evCallback != null || _triggerActivated != null)
-                    return this.Targets.Count + 1;
-                else
-                    return this.Targets.Count;
-            }
+            get { return _callback != null || _evCallback != null || base.HasReceivers; }
         }
 
         public void AddListener(System.Action<T> callback)

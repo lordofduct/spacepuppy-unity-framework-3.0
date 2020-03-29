@@ -113,6 +113,9 @@ namespace com.spacepuppyeditor.Base.Events
 
         #region Special Types
         
+        /// <summary>
+        /// Evaluator used while in the editor and triggering when the game is not in play.
+        /// </summary>
         private class SpecialEventTriggerEvaluator : EventTriggerEvaluator.IEvaluator
         {
 

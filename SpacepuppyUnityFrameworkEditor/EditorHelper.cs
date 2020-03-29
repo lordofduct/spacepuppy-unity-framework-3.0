@@ -232,6 +232,26 @@ namespace com.spacepuppyeditor
             return obj;
         }
 
+        public static object GetTargetObjectOfProperty(SerializedProperty prop, object targetObj)
+        {
+            var path = prop.propertyPath.Replace(".Array.data[", "[");
+            var elements = path.Split('.');
+            foreach (var element in elements)
+            {
+                if (element.Contains("["))
+                {
+                    var elementName = element.Substring(0, element.IndexOf("["));
+                    var index = System.Convert.ToInt32(element.Substring(element.IndexOf("[")).Replace("[", "").Replace("]", ""));
+                    targetObj = GetValue_Imp(targetObj, elementName, index);
+                }
+                else
+                {
+                    targetObj = GetValue_Imp(targetObj, element);
+                }
+            }
+            return targetObj;
+        }
+
         public static void SetTargetObjectOfProperty(SerializedProperty prop, object value)
         {
             var path = prop.propertyPath.Replace(".Array.data[", "[");

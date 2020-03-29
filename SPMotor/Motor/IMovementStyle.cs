@@ -9,6 +9,9 @@ namespace com.spacepuppy.Motor
     public interface IMovementStyle : IComponent
     {
         
+        /// <summary>
+        /// Returns true if UpdateMovement should be called during FixedUpdate. If the movementstyle relies on an IMotor, just return the PrefersFixedUpdate property of the IMotor.
+        /// </summary>
         bool PrefersFixedUpdate { get; }
 
         /// <summary>

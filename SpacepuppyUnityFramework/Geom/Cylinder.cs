@@ -199,7 +199,7 @@ namespace com.spacepuppy.Geom
             else
             {
                 float radialDistSqr = rod.sqrMagnitude - dot * dot / sqrRailLength;
-                if (radialDistSqr > radius * radius || radialDistSqr < innerRadius * innerRadius)
+                if (radialDistSqr > radius * radius || (innerRadius > 0f && radialDistSqr < innerRadius * innerRadius))
                     return false;
                 else
                     return true;
@@ -241,7 +241,7 @@ namespace com.spacepuppy.Geom
             }
             else
             {
-                float radialDistSqr = rod.sqrMagnitude - dot * dot / sqrRailLength;
+                float radialDistSqr = rod.sqrMagnitude - (dot * dot) / sqrRailLength;
                 if (radialDistSqr > radius * radius + sqrSphereRad || radialDistSqr < innerRadius * innerRadius - sqrSphereRad)
                     return false;
                 else

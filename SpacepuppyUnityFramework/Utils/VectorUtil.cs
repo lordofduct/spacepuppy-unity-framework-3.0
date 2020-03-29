@@ -118,6 +118,12 @@ namespace com.spacepuppy.Utils
             return Mathf.Atan2(y, x) * MathUtil.RAD_TO_DEG;
         }
 
+        /// <summary>
+        /// The angle between 2 vectors in degrees.
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="b"></param>
+        /// <returns></returns>
         public static float AngleBetween(Vector2 a, Vector2 b)
         {
             // // Due to float error the dot / mag can sometimes be ever so slightly over 1, which can cause NaN in acos.
@@ -126,6 +132,38 @@ namespace com.spacepuppy.Utils
             if (d >= 1d) return 0f;
             else if (d <= -1d) return 180f;
             return (float)System.Math.Acos(d) * MathUtil.RAD_TO_DEG;
+        }
+
+        /// <summary>
+        /// The angle between 2 lines, regardless of heading (+/- versions of vector are normalized so that opposite vectors are treated as an angle of 0). 
+        /// This means a value near 0 means the vectors are parrallel, a value near 90 means they're perpendicular.
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="b"></param>
+        /// <returns>Returns an angle in degrees from 0 -> 90</returns>
+        public static float AngleAgainst(Vector2 a, Vector2 b)
+        {
+            // // Due to float error the dot / mag can sometimes be ever so slightly over 1, which can cause NaN in acos.
+            //return Mathf.Acos(Vector2.Dot(a, b) / (a.magnitude * b.magnitude)) * MathUtil.RAD_TO_DEG;
+            double d = System.Math.Abs((double)Vector2.Dot(a, b) / ((double)a.magnitude * (double)b.magnitude));
+            if (d >= 1d) return 0f;
+            else if (d <= 0d) return 90f;
+            return (float)System.Math.Acos(d) * MathUtil.RAD_TO_DEG;
+        }
+
+        /// <summary>
+        /// The cosine between 2 vectors regardless of magnitude. Acos this value to get the angle between.
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="b"></param>
+        /// <returns></returns>
+        public static float CosBetween(Vector2 a, Vector2 b)
+        {
+            // // Due to float error the dot / mag can sometimes be ever so slightly over 1, which can cause NaN in acos.
+            double d = System.Math.Abs((double)Vector2.Dot(a, b) / ((double)a.magnitude * (double)b.magnitude));
+            if (d >= 1d) return 1f;
+            else if (d <= 0d) return 0f;
+            return (float)d;
         }
 
         /// <summary>
@@ -263,6 +301,12 @@ namespace com.spacepuppy.Utils
 
         #region Vector3 Trig
 
+        /// <summary>
+        /// The angle between 2 vectors in degrees.
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="b"></param>
+        /// <returns></returns>
         public static float AngleBetween(Vector3 a, Vector3 b)
         {
             // // Due to float error the dot / mag can sometimes be ever so slightly over 1, which can cause NaN in acos.
@@ -274,6 +318,44 @@ namespace com.spacepuppy.Utils
             if (d >= 1d) return 0f;
             else if (d <= -1d) return 180f;
             return (float)System.Math.Acos(d) * MathUtil.RAD_TO_DEG;
+        }
+
+        /// <summary>
+        /// The angle between 2 lines, regardless of heading (+/- versions of vector are normalized so that opposite vectors are treated as an angle of 0). 
+        /// This means a value near 0 means the vectors are parrallel, a value near 90 means they're orthogonal.
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="b"></param>
+        /// <returns>Returns an angle in degrees from 0 -> 90</returns>
+        public static float AngleAgainst(Vector3 a, Vector3 b)
+        {
+            // // Due to float error the dot / mag can sometimes be ever so slightly over 1, which can cause NaN in acos.
+            //return Mathf.Acos(Vector3.Dot(a, b) / (a.magnitude * b.magnitude)) * MathUtil.RAD_TO_DEG;
+            double d = System.Math.Sqrt((double)a.sqrMagnitude * (double)b.sqrMagnitude);
+            if (d < MathUtil.DBL_EPSILON) return 0f;
+
+            d = System.Math.Abs((double)Vector3.Dot(a, b) / d);
+            if (d >= 1d) return 0f;
+            else if (d <= 0d) return 90f;
+            return (float)System.Math.Acos(d) * MathUtil.RAD_TO_DEG;
+        }
+
+        /// <summary>
+        /// The cosine between 2 vectors regardless of magnitude. Acos this value to get the angle between.
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="b"></param>
+        /// <returns></returns>
+        public static float CosBetween(Vector3 a, Vector3 b)
+        {
+            // // Due to float error the dot / mag can sometimes be ever so slightly over 1, which can cause NaN in acos.
+            double d = System.Math.Sqrt((double)a.sqrMagnitude * (double)b.sqrMagnitude);
+            if (d < MathUtil.DBL_EPSILON) return 0f;
+
+            d = (double)Vector3.Dot(a, b) / d;
+            if (d >= 1d) return 1f;
+            else if (d <= -1d) return -1f;
+            return (float)d;
         }
 
         /// <summary>
@@ -329,7 +411,7 @@ namespace com.spacepuppy.Utils
                 q = Quaternion.AngleAxis(-a, axis);
             return q * v;
         }
-        
+
         #endregion
 
         #region Vector2 Mod

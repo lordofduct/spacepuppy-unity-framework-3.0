@@ -371,9 +371,13 @@ namespace com.spacepuppy.Motor
 
         private void OnTardyLateUpdate_Imp(object sender, System.EventArgs e)
         {
-            if (_fullTalliedMove != Vector3.zero)
+            //if (_fullTalliedMove != Vector3.zero)
+            //{
+            //    _rigidbody.MovePosition(_rigidbody.position + _fullTalliedMove);
+            //}
+            if (_vel != Vector3.zero)
             {
-                _rigidbody.MovePosition(_rigidbody.position + _fullTalliedMove);
+                _rigidbody.MovePosition(_rigidbody.position + _vel);
             }
 
             _lastDt = Time.deltaTime;

@@ -10,7 +10,7 @@ namespace com.spacepuppy.Events
 {
 
     [Infobox("Watches a set of IOccupiedTriggers (example: t_OnTriggerOccupied) for when all of them are occupied and signals.")]
-    public class t_AllTriggersOccupied : SPComponent, IOccupiedTrigger, IMStartOrEnableReceiver
+    public sealed class t_AllTriggersOccupied : SPComponent, IOccupiedTrigger, IMStartOrEnableReceiver
     {
 
         #region Fields

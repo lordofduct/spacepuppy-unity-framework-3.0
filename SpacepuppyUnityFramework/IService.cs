@@ -455,7 +455,7 @@ namespace com.spacepuppy
         void IService.SignalServiceUnregistered()
         {
             this.OnServiceUnregistered();
-            if (this.ServiceUnregistered != null) this.ServiceUnregistered(this, System.EventArgs.Empty);
+            this.ServiceUnregistered?.Invoke(this, System.EventArgs.Empty);
         }
 
         protected virtual void OnServiceUnregistered()

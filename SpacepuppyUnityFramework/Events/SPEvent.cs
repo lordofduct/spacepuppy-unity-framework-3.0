@@ -45,12 +45,10 @@ namespace com.spacepuppy.Events
         [SerializeField()]
         private List<EventTriggerTarget> _targets = new List<EventTriggerTarget>();
         [System.NonSerialized]
-        private SignalingTargetList _signalList;
+        private TargetList _targetsWrapper;
 
         [System.NonSerialized()]
         private string _id;
-        [System.NonSerialized]
-        private int _version;
 
         [System.NonSerialized]
         private HashSet<object> _hijackTokens;
@@ -81,7 +79,7 @@ namespace com.spacepuppy.Events
 
         public IList<EventTriggerTarget> Targets
         {
-            get { return _signalList ?? (_signalList = new SignalingTargetList(this)); }
+            get { return _targetsWrapper ?? (_targetsWrapper = new TargetList(this)); }
         }
 
         /// <summary>
@@ -113,7 +111,6 @@ namespace com.spacepuppy.Events
         {
             var targ = new EventTriggerTarget();
             _targets.Add(targ);
-            _version++;
             return targ;
         }
 
@@ -244,12 +241,12 @@ namespace com.spacepuppy.Events
 
         }
 
-        private class SignalingTargetList : IList<EventTriggerTarget>
+        private class TargetList : IList<EventTriggerTarget>
         {
 
             private BaseSPEvent _owner;
 
-            public SignalingTargetList(BaseSPEvent owner)
+            public TargetList(BaseSPEvent owner)
             {
                 _owner = owner;
             }
@@ -264,13 +261,11 @@ namespace com.spacepuppy.Events
             {
                 if (_owner._targets.Contains(item)) return;
                 _owner._targets.Add(item);
-                _owner._version++;
             }
 
             public void Clear()
             {
                 _owner._targets.Clear();
-                _owner._version++;
             }
 
             public bool Contains(EventTriggerTarget item)
@@ -310,20 +305,17 @@ namespace com.spacepuppy.Events
                 }
 
                 _owner._targets.Insert(index, item);
-                _owner._version++;
             }
 
             public bool Remove(EventTriggerTarget item)
             {
                 bool result = _owner._targets.Remove(item);
-                _owner._version++;
                 return result;
             }
 
             public void RemoveAt(int index)
             {
                 _owner._targets.RemoveAt(index);
-                _owner._version++;
             }
 
             public BaseSPEvent.Enumerator GetEnumerator()
@@ -346,6 +338,176 @@ namespace com.spacepuppy.Events
 
     }
 
+    [System.Serializable]
+    public abstract class BaseSPDelegate<TDelegate> : BaseSPEvent where TDelegate : System.Delegate
+    {
+
+        #region Fields
+
+        private TDelegate _handle = null;
+
+        #endregion
+
+        #region CONSTRUCTOR
+
+        public BaseSPDelegate()
+        {
+        }
+
+        public BaseSPDelegate(string id) : base(id)
+        {
+        }
+
+        #endregion
+
+        #region Methods
+
+        public virtual void Register(TDelegate callback)
+        {
+            _handle = System.Delegate.Combine(_handle, callback) as TDelegate;
+        }
+
+        public virtual void Unregister(TDelegate callback)
+        {
+            _handle = System.Delegate.Remove(_handle, callback) as TDelegate;
+        }
+
+        protected TDelegate Trigger
+        {
+            get
+            {
+                return _handle;
+            }
+        }
+
+        #endregion
+
+    }
+
+
+
+    [System.Serializable]
+    public abstract class SPDelegate : BaseSPDelegate<System.Action>
+    {
+
+        #region CONSTRUCTOR
+
+        public SPDelegate()
+        {
+        }
+
+        public SPDelegate(string id) : base(id)
+        {
+        }
+
+        #endregion
+
+        public virtual void ActivateTrigger(object sender)
+        {
+            base.ActivateTrigger(sender, null);
+            this.Trigger?.Invoke();
+        }
+
+    }
+
+    [System.Serializable]
+    public abstract class SPDelegate<T> : BaseSPDelegate<System.Action<T>>
+    {
+
+        #region CONSTRUCTOR
+
+        public SPDelegate()
+        {
+        }
+
+        public SPDelegate(string id) : base(id)
+        {
+        }
+
+        #endregion
+
+        public virtual void ActivateTrigger(object sender, T arg)
+        {
+            base.ActivateTrigger(sender, null);
+            this.Trigger?.Invoke(arg);
+        }
+
+    }
+
+    [System.Serializable]
+    public abstract class SPDelegate<T1, T2> : BaseSPDelegate<System.Action<T1, T2>>
+    {
+
+        #region CONSTRUCTOR
+
+        public SPDelegate()
+        {
+        }
+
+        public SPDelegate(string id) : base(id)
+        {
+        }
+
+        #endregion
+
+        public virtual void ActivateTrigger(object sender, T1 arg1, T2 arg2)
+        {
+            base.ActivateTrigger(sender, null);
+            this.Trigger?.Invoke(arg1, arg2);
+        }
+
+    }
+
+    [System.Serializable]
+    public abstract class SPDelegate<T1, T2, T3> : BaseSPDelegate<System.Action<T1, T2, T3>>
+    {
+
+        #region CONSTRUCTOR
+
+        public SPDelegate()
+        {
+        }
+
+        public SPDelegate(string id) : base(id)
+        {
+        }
+
+        #endregion
+
+        public virtual void ActivateTrigger(object sender, T1 arg1, T2 arg2, T3 arg3)
+        {
+            base.ActivateTrigger(sender, null);
+            this.Trigger?.Invoke(arg1, arg2, arg3);
+        }
+
+    }
+
+    [System.Serializable]
+    public abstract class SPDelegate<T1, T2, T3, T4> : BaseSPDelegate<System.Action<T1, T2, T3, T4>>
+    {
+
+        #region CONSTRUCTOR
+
+        public SPDelegate()
+        {
+        }
+
+        public SPDelegate(string id) : base(id)
+        {
+        }
+
+        #endregion
+
+        public virtual void ActivateTrigger(object sender, T1 arg1, T2 arg2, T3 arg3, T4 arg4)
+        {
+            base.ActivateTrigger(sender, null);
+            this.Trigger?.Invoke(arg1, arg2, arg3, arg4);
+        }
+
+    }
+
+
+
     [System.Serializable()]
     public class SPEvent : BaseSPEvent
     {
@@ -364,17 +526,17 @@ namespace com.spacepuppy.Events
 
         #region Methods
 
-        public new void ActivateTrigger(object sender, object arg)
+        public new virtual void ActivateTrigger(object sender, object arg)
         {
             base.ActivateTrigger(sender, arg);
         }
 
-        public new void ActivateTriggerAt(int index, object sender, object arg)
+        public new virtual void ActivateTriggerAt(int index, object sender, object arg)
         {
             base.ActivateTriggerAt(index, sender, arg);
         }
 
-        public new void ActivateRandomTrigger(object sender, object arg, bool considerWeights, bool selectOnlyIfActive)
+        public new virtual void ActivateRandomTrigger(object sender, object arg, bool considerWeights, bool selectOnlyIfActive)
         {
             base.ActivateRandomTrigger(sender, arg, considerWeights, selectOnlyIfActive);
         }
@@ -403,12 +565,22 @@ namespace com.spacepuppy.Events
     }
 
     [System.Serializable()]
-    public abstract class SPEvent<T> : BaseSPEvent where T : System.EventArgs
+    public abstract class SPEvent<T> : BaseSPDelegate<System.EventHandler<T>> where T : System.EventArgs
     {
 
         #region Events
 
-        public new event System.EventHandler<T> TriggerActivated;
+        public new event System.EventHandler<T> TriggerActivated
+        {
+            add
+            {
+                this.Register(value);
+            }
+            remove
+            {
+                this.Unregister(value);
+            }
+        }
 
         #endregion
 
@@ -426,116 +598,99 @@ namespace com.spacepuppy.Events
 
         #region Methods
 
-        public override bool HasReceivers
+        public virtual void ActivateTrigger(object sender, T e)
         {
-            get { return TriggerActivated != null || base.HasReceivers; }
-        }
-
-        public void ActivateTrigger(object sender, T arg)
-        {
-            base.ActivateTrigger(sender, arg);
-            this.TriggerActivated?.Invoke(sender, arg);
-        }
-
-        public void ActivateTriggerAt(int index, object sender, T arg)
-        {
-            base.ActivateTriggerAt(index, sender, arg);
-            this.TriggerActivated?.Invoke(sender, arg);
-        }
-
-        public void ActivateRandomTrigger(object sender, T arg, bool considerWeights, bool selectOnlyIfActive)
-        {
-            base.ActivateRandomTrigger(sender, arg, considerWeights, selectOnlyIfActive);
-            this.TriggerActivated?.Invoke(sender, arg);
+            base.ActivateTrigger(sender, e);
+            this.Trigger?.Invoke(sender, e);
         }
 
         #endregion
 
     }
 
-    [System.Serializable()]
-    public class SPActionEvent<T> : BaseSPEvent
+
+
+    [System.Serializable]
+    public abstract class SPAggregatedDelegate<TSignature> : SPDelegate where TSignature : SPAggregatedDelegate<TSignature>, new()
     {
 
-        #region Events
+        public readonly static TSignature Global = new TSignature();
 
-        private System.Action<T> _callback;
-        private System.Action<object, T> _evCallback;
-        protected virtual void OnTriggerActivated(object sender, T arg)
+        public override void ActivateTrigger(object sender)
         {
-            if (_callback != null)
-            {
-                var c = _callback;
-                c(arg);
-            }
-
-            if (_evCallback != null)
-            {
-                var c = _evCallback;
-                c(sender, arg);
-            }
+            base.ActivateTrigger(sender);
+            Global.ActivateTrigger(sender);
         }
 
-        #endregion
+    }
 
-        #region CONSTRUCTOR
+    [System.Serializable]
+    public abstract class SPAggregatedDelegate<TSignature, T> : SPDelegate<T> where TSignature : SPAggregatedDelegate<TSignature, T>, new()
+    {
 
-        public SPActionEvent()
-        {
-        }
+        public readonly static TSignature Global = new TSignature();
 
-        public SPActionEvent(string id) : base(id)
-        {
-        }
-
-        #endregion
-
-        #region Methods
-
-        public override bool HasReceivers
-        {
-            get { return _callback != null || _evCallback != null || base.HasReceivers; }
-        }
-
-        public void AddListener(System.Action<T> callback)
-        {
-            _callback += callback;
-        }
-
-        public void AddListener(System.Action<object, T> callback)
-        {
-            _evCallback += callback;
-        }
-
-        public void RemoveListener(System.Action<T> callback)
-        {
-            _callback -= callback;
-        }
-
-        public void RemoveListener(System.Action<object, T> callback)
-        {
-            _evCallback -= callback;
-        }
-
-        public void ActivateTrigger(object sender, T arg)
+        public override void ActivateTrigger(object sender, T arg)
         {
             base.ActivateTrigger(sender, arg);
-            this.OnTriggerActivated(sender, arg);
+            Global.ActivateTrigger(sender, arg);
         }
 
-        public void ActivateTriggerAt(int index, object sender, T arg)
+    }
+
+    [System.Serializable]
+    public abstract class SPAggregatedDelegate<TSignature, T1, T2> : SPDelegate<T1, T2> where TSignature : SPAggregatedDelegate<TSignature, T1, T2>, new()
+    {
+
+        public readonly static TSignature Global = new TSignature();
+
+        public override void ActivateTrigger(object sender, T1 arg1, T2 arg2)
         {
-            base.ActivateTriggerAt(index, sender, arg);
-            this.OnTriggerActivated(sender, arg);
+            base.ActivateTrigger(sender, arg1, arg2);
+            Global.ActivateTrigger(sender, arg1, arg2);
         }
 
-        public void ActivateRandomTrigger(object sender, T arg, bool considerWeights, bool selectOnlyIfActive)
+    }
+
+    [System.Serializable]
+    public abstract class SPAggregatedDelegate<TSignature, T1, T2, T3> : SPDelegate<T1, T2, T3> where TSignature : SPAggregatedDelegate<TSignature, T1, T2, T3>, new()
+    {
+
+        public readonly static TSignature Global = new TSignature();
+
+        public override void ActivateTrigger(object sender, T1 arg1, T2 arg2, T3 arg3)
         {
-            base.ActivateRandomTrigger(sender, arg, considerWeights, selectOnlyIfActive);
-            this.OnTriggerActivated(sender, arg);
+            base.ActivateTrigger(sender, arg1, arg2, arg3);
+            Global.ActivateTrigger(sender, arg1, arg2, arg3);
         }
 
-        #endregion
+    }
+
+    [System.Serializable]
+    public abstract class SPAggregatedDelegate<TSignature, T1, T2, T3, T4> : SPDelegate<T1, T2, T3, T4> where TSignature : SPAggregatedDelegate<TSignature, T1, T2, T3, T4>, new()
+    {
+
+        public readonly static TSignature Global = new TSignature();
+
+        public override void ActivateTrigger(object sender, T1 arg1, T2 arg2, T3 arg3, T4 arg4)
+        {
+            base.ActivateTrigger(sender, arg1, arg2, arg3, arg4);
+            Global.ActivateTrigger(sender, arg1, arg2, arg3, arg4);
+        }
+
+    }
+
+    [System.Serializable]
+    public abstract class SPAggregatedEvent<TSignature, TEvent> : SPEvent<TEvent> where TSignature : SPAggregatedDelegate<TSignature, TEvent>, new() where TEvent : System.EventArgs
+    {
+
+        public readonly static TSignature Global = new TSignature();
+
+        public override void ActivateTrigger(object sender, TEvent e)
+        {
+            base.ActivateTrigger(sender, e);
+            Global.ActivateTrigger(sender, e);
+        }
 
     }
 

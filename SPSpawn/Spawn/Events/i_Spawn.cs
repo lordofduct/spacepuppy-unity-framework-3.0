@@ -161,7 +161,7 @@ namespace com.spacepuppy.Spawn.Events
         #region Special Types
 
         [System.Serializable]
-        public class OnSpawnEvent : SPActionEvent<GameObject>
+        public class OnSpawnEvent : SPDelegate<GameObject>
         {
             public OnSpawnEvent() : base(TRG_ONSPAWNED)
             {

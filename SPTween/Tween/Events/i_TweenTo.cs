@@ -138,10 +138,10 @@ namespace com.spacepuppy.Tween.Events
             twn.Use(_duration.TimeSupplier);
             twn.SetId(_target);
 
-            if (_onComplete.Count > 0)
+            if (_onComplete?.HasReceivers ?? false)
                 twn.OnFinish((t) => _onComplete.ActivateTrigger(this, null));
 
-            if (_onTick.Count > 0)
+            if (_onTick?.HasReceivers ?? false)
                 twn.OnStep((t) => _onTick.ActivateTrigger(this, null));
 
             twn.Play(true, _tweenToken);

@@ -99,7 +99,7 @@ namespace com.spacepuppy.Spawn.Events
             var pool = _spawnPool != null ? _spawnPool : SpawnPool.DefaultPool;
             var go = pool.Spawn(prefab, this.transform.position, this.transform.rotation, ObjUtil.GetAsFromSource<Transform>(_spawnedObjectParent, true));
 
-            if (_onSpawnedObject != null && _onSpawnedObject.Count > 0)
+            if (_onSpawnedObject?.HasReceivers ?? false)
                 _onSpawnedObject.ActivateTrigger(this, go);
 
             return go;
@@ -161,7 +161,7 @@ namespace com.spacepuppy.Spawn.Events
         #region Special Types
 
         [System.Serializable]
-        public class OnSpawnEvent : SPActionEvent<GameObject>
+        public class OnSpawnEvent : SPDelegate<GameObject>
         {
             public OnSpawnEvent() : base(TRG_ONSPAWNED)
             {

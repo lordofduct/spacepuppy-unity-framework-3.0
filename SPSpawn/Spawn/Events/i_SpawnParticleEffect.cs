@@ -106,7 +106,7 @@ namespace com.spacepuppy.Spawn.Events
                                                        entry.Prefab.main.useUnscaledTime ? SPTime.Real : SPTime.Normal);
             }
 
-            if (_onSpawnedObject != null && _onSpawnedObject.Count > 0)
+            if (_onSpawnedObject?.HasReceivers ?? false)
                 _onSpawnedObject.ActivateTrigger(this, go);
 
             return go;
@@ -168,7 +168,7 @@ namespace com.spacepuppy.Spawn.Events
         #region Special Types
 
         [System.Serializable]
-        public class OnSpawnEvent : SPActionEvent<GameObject>
+        public class OnSpawnEvent : SPDelegate<GameObject>
         {
             public OnSpawnEvent() : base(TRG_ONSPAWNED)
             {

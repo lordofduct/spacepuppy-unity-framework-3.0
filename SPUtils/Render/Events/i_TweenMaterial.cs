@@ -129,10 +129,10 @@ namespace com.spacepuppy.Render.Events
                              .SetId(this.AutoKillId)
                              .Use(_duration.TimeSupplier);
             
-            if (_onComplete.Count > 0)
+            if (_onComplete?.HasReceivers ?? false)
                 twn.OnFinish((t) => _onComplete.ActivateTrigger(this, null));
 
-            if (_onTick.Count > 0)
+            if (_onTick?.HasReceivers ?? false)
                 twn.OnStep((t) => _onTick.ActivateTrigger(this, null));
 
             twn.Play(true);

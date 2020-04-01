@@ -466,13 +466,13 @@ namespace com.spacepuppyeditor.Settings
 
         #region Fields
 
-        private com.spacepuppyeditor.PropertyAttributeDrawers.ReorderableArrayPropertyDrawer _scenesDrawer = new com.spacepuppyeditor.PropertyAttributeDrawers.ReorderableArrayPropertyDrawer(typeof(SceneAsset));
+        private com.spacepuppyeditor.Core.PropertyDrawers.ReorderableArrayPropertyDrawer _scenesDrawer = new com.spacepuppyeditor.Core.PropertyDrawers.ReorderableArrayPropertyDrawer(typeof(SceneAsset));
 
         #endregion
 
         #region Properties
 
-        public com.spacepuppyeditor.PropertyAttributeDrawers.ReorderableArrayPropertyDrawer ScenesDrawer
+        public com.spacepuppyeditor.Core.PropertyDrawers.ReorderableArrayPropertyDrawer ScenesDrawer
         {
             get { return _scenesDrawer; }
         }

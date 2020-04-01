@@ -6,7 +6,7 @@ using com.spacepuppy;
 using com.spacepuppy.Project;
 using com.spacepuppy.Collections;
 
-namespace com.spacepuppyeditor.Base
+namespace com.spacepuppyeditor.Core
 {
 
     [CustomPropertyDrawer(typeof(SPTime))]

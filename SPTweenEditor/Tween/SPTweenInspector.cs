@@ -8,7 +8,7 @@ using com.spacepuppy.Dynamic;
 using com.spacepuppy.Tween;
 using com.spacepuppy.Utils;
 
-using com.spacepuppyeditor.Base;
+using com.spacepuppyeditor.Core;
 
 namespace com.spacepuppyeditor.Tween
 {

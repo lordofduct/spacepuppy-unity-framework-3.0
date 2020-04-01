@@ -7,7 +7,7 @@ using com.spacepuppy.Dynamic;
 using com.spacepuppy.Project;
 using com.spacepuppy.Utils;
 
-namespace com.spacepuppyeditor.Base.Project
+namespace com.spacepuppyeditor.Core.Project
 {
 
     [CustomPropertyDrawer(typeof(BaseSerializableInterfaceRef), true)]

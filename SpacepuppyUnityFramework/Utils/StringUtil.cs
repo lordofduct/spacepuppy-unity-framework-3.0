@@ -84,12 +84,20 @@ namespace com.spacepuppy.Utils
 
         public static bool IsNullOrWhitespace(string value)
         {
-            return (value + "").Trim() == "";
+#if NET35
+            return (value + "").Trim() == ""; ;
+#else
+            return string.IsNullOrWhiteSpace(value);
+#endif
         }
 
         public static bool IsNotNullOrWhitespace(string value)
         {
+#if NET35
             return (value + "").Trim() != "";
+#else
+            return !string.IsNullOrWhiteSpace(value);
+#endif
         }
 
 
@@ -203,9 +211,9 @@ namespace com.spacepuppy.Utils
             return false;
         }
 
-        #endregion
+#endregion
 
-        #region Morphing
+#region Morphing
 
         public static string ToLower(string value)
         {
@@ -327,15 +335,15 @@ namespace com.spacepuppy.Utils
             return null;
         }
 
-        #endregion
+#endregion
 
 
-        #region Special Formatting
+#region Special Formatting
 
         private class LoDExtendedFormatter : ICustomFormatter, IFormatProvider
         {
 
-            #region ICustomFormatter Interface
+#region ICustomFormatter Interface
 
             public string Format(string formatString, object arg, IFormatProvider formatProvider)
             {
@@ -428,16 +436,16 @@ namespace com.spacepuppy.Utils
                 return "";
             }
 
-            #endregion
+#endregion
 
-            #region FormatPrivider Interface
+#region FormatPrivider Interface
 
             public object GetFormat(Type formatType)
             {
                 return this;
             }
 
-            #endregion
+#endregion
 
         }
 
@@ -473,10 +481,10 @@ namespace com.spacepuppy.Utils
             return arr;
         }
 
-        #endregion
+#endregion
 
 
-        #region Replace Chars
+#region Replace Chars
 
         //####################
         //EnsureNotStartWith
@@ -533,13 +541,13 @@ namespace com.spacepuppy.Utils
             else return value;
         }
 
-        #endregion
+#endregion
 
 
 
 
 
-        #region StringBuilders
+#region StringBuilders
 
         private static ObjectCachePool<StringBuilder> _pool = new ObjectCachePool<StringBuilder>(10, () => new StringBuilder());
         
@@ -570,7 +578,7 @@ namespace com.spacepuppy.Utils
 
         }
 
-        #endregion
+#endregion
 
     }
 

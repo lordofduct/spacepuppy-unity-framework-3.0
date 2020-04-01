@@ -4,7 +4,7 @@ using UnityEditor;
 using com.spacepuppy;
 using com.spacepuppy.Utils;
 
-namespace com.spacepuppyeditor.Base
+namespace com.spacepuppyeditor.Core
 {
 
     [CustomPropertyDrawer(typeof(DiscreteFloat))]

@@ -7,7 +7,7 @@ using com.spacepuppy.Events;
 using com.spacepuppy.Tween;
 using com.spacepuppy.Tween.Events;
 
-using com.spacepuppyeditor.Base.Events;
+using com.spacepuppyeditor.Core.Events;
 
 namespace com.spacepuppyeditor.Tween.Events
 {

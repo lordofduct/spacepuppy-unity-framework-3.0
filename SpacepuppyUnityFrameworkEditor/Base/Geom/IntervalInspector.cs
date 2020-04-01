@@ -7,7 +7,7 @@ using com.spacepuppy;
 using com.spacepuppy.Geom;
 using com.spacepuppy.Utils;
 
-namespace com.spacepuppyeditor.Base.Geom
+namespace com.spacepuppyeditor.Core.Geom
 {
 
     [CustomPropertyDrawer(typeof(Interval))]

@@ -7,10 +7,9 @@ using com.spacepuppy;
 using com.spacepuppy.Dynamic;
 using com.spacepuppy.Utils;
 
-using com.spacepuppyeditor.Base;
-using com.spacepuppyeditor.Components;
+using com.spacepuppyeditor.Core.PropertyDrawers;
 
-namespace com.spacepuppyeditor.Base
+namespace com.spacepuppyeditor.Core
 {
 
     [CustomPropertyDrawer(typeof(QueryProxy))]

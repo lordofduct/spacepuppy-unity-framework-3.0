@@ -12,7 +12,7 @@ using com.spacepuppy.Tween.Accessors;
 using com.spacepuppy.Tween.Events;
 using com.spacepuppy.Utils;
 
-using com.spacepuppyeditor.Base;
+using com.spacepuppyeditor.Core;
 using com.spacepuppyeditor.Internal;
 
 namespace com.spacepuppyeditor.Tween.Events
@@ -95,8 +95,8 @@ namespace com.spacepuppyeditor.Tween.Events
             //TODO - member
             position = CalcNextRect(ref area);
             var memberProp = el.FindPropertyRelative(PROP_DATA_MEMBER);
-            System.Type targType = com.spacepuppyeditor.Base.Events.TriggerableTargetObjectPropertyDrawer.GetTargetType(_targetProp);
-            object targObj = com.spacepuppyeditor.Base.Events.TriggerableTargetObjectPropertyDrawer.GetTarget(_targetProp, targType);
+            System.Type targType = com.spacepuppyeditor.Core.Events.TriggerableTargetObjectPropertyDrawer.GetTargetType(_targetProp);
+            object targObj = com.spacepuppyeditor.Core.Events.TriggerableTargetObjectPropertyDrawer.GetTarget(_targetProp, targType);
             System.Type propType;
             memberProp.stringValue = i_TweenValueInspector.ReflectedPropertyAndCustomTweenAccessorField(position,
                                                                                                         EditorHelper.TempContent("Property", "The property on the target to set."),

@@ -10,7 +10,7 @@ using com.spacepuppy.Utils;
 
 using com.spacepuppyeditor.Internal;
 
-namespace com.spacepuppyeditor.Base.Project
+namespace com.spacepuppyeditor.Core.Project
 {
 
     [CustomEditor(typeof(CustomTimeLayersData))]

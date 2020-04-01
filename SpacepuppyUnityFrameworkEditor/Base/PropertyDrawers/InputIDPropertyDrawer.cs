@@ -8,7 +8,7 @@ using com.spacepuppy.Utils;
 
 using com.spacepuppyeditor.Settings;
 
-namespace com.spacepuppyeditor.PropertyAttributeDrawers
+namespace com.spacepuppyeditor.Core.PropertyDrawers
 {
 
     [CustomPropertyDrawer(typeof(InputIDAttribute))]

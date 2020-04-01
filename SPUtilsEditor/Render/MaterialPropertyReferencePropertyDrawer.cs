@@ -8,7 +8,7 @@ using com.spacepuppy.Collections;
 using com.spacepuppy.Render;
 using com.spacepuppy.Utils;
 
-using com.spacepuppyeditor.Base;
+using com.spacepuppyeditor.Core;
 using com.spacepuppyeditor.Internal;
 
 namespace com.spacepuppyeditor.Render

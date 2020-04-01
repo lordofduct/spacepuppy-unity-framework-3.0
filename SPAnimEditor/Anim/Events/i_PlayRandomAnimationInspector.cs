@@ -9,9 +9,9 @@ using com.spacepuppy.Anim.Events;
 using com.spacepuppy.Anim.Legacy;
 using com.spacepuppy.Utils;
 
-using com.spacepuppyeditor.Base;
-using com.spacepuppyeditor.Base.Events;
-using com.spacepuppyeditor.PropertyAttributeDrawers;
+using com.spacepuppyeditor.Core;
+using com.spacepuppyeditor.Core.Events;
+using com.spacepuppyeditor.Core.PropertyDrawers;
 
 namespace com.spacepuppyeditor.Anim.Events
 {
@@ -39,7 +39,7 @@ namespace com.spacepuppyeditor.Anim.Events
         {
             ManuallyConfigured = true,
             SearchChildren = false,
-            ChoiceSelector = new com.spacepuppyeditor.Components.MultiTypeComponentChoiceSelector()
+            ChoiceSelector = new com.spacepuppyeditor.Core.MultiTypeComponentChoiceSelector()
             {
                 AllowedTypes = new System.Type[] { typeof(Animation), typeof(ISPAnimationSource), typeof(ISPAnimator) }
             }

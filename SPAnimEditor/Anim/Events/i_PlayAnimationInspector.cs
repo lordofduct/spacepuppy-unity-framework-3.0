@@ -9,7 +9,7 @@ using com.spacepuppy.Anim.Events;
 using com.spacepuppy.Anim.Legacy;
 using com.spacepuppy.Utils;
 
-using com.spacepuppyeditor.Base.Events;
+using com.spacepuppyeditor.Core.Events;
 
 namespace com.spacepuppyeditor.Anim
 {
@@ -35,7 +35,7 @@ namespace com.spacepuppyeditor.Anim
         {
             ManuallyConfigured = true,
             SearchChildren = false,
-            ChoiceSelector = new com.spacepuppyeditor.Components.MultiTypeComponentChoiceSelector()
+            ChoiceSelector = new com.spacepuppyeditor.Core.MultiTypeComponentChoiceSelector()
             {
                 AllowedTypes = new System.Type[] { typeof(Animation), typeof(ISPAnimationSource), typeof(ISPAnimator) }
             }

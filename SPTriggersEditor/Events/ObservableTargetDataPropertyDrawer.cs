@@ -9,7 +9,7 @@ using com.spacepuppy.Utils;
 
 using com.spacepuppyeditor.Components;
 
-namespace com.spacepuppyeditor.Base.Events
+namespace com.spacepuppyeditor.Core.Events
 {
 
     [CustomPropertyDrawer(typeof(ObservableTargetData), true)]

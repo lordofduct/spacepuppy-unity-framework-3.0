@@ -10,7 +10,7 @@ using com.spacepuppy.Utils;
 
 using com.spacepuppyeditor.Internal;
 
-namespace com.spacepuppyeditor.Base
+namespace com.spacepuppyeditor.Core
 {
 
     [CustomPropertyDrawer(typeof(VariantCollection), true)]

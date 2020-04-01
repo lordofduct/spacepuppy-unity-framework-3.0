@@ -11,7 +11,7 @@ using com.spacepuppy.Utils;
 
 using com.spacepuppyeditor.Internal;
 
-namespace com.spacepuppyeditor.Base.Events
+namespace com.spacepuppyeditor.Core.Events
 {
 
     [CustomPropertyDrawer(typeof(BaseSPEvent), true)]

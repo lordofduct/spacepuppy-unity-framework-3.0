@@ -7,8 +7,7 @@ using com.spacepuppy.Anim;
 using com.spacepuppy.Anim.Legacy;
 using com.spacepuppy.Utils;
 
-using com.spacepuppyeditor.Components;
-using com.spacepuppyeditor.Internal;
+using com.spacepuppyeditor.Core.PropertyDrawers;
 
 namespace com.spacepuppyeditor.Anim.Legacy
 {

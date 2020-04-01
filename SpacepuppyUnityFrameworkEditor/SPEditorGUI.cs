@@ -5,7 +5,6 @@ using System.Linq;
 
 using com.spacepuppy;
 using com.spacepuppy.Collections;
-using com.spacepuppy.Geom;
 using com.spacepuppy.Utils;
 using com.spacepuppy.Dynamic;
 

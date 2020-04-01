@@ -9,7 +9,7 @@ using com.spacepuppy.Utils;
 
 using com.spacepuppyeditor.Internal;
 
-namespace com.spacepuppyeditor.PropertyAttributeDrawers
+namespace com.spacepuppyeditor.Core.PropertyDrawers
 {
 
     [CustomPropertyDrawer(typeof(ReorderableArrayAttribute))]

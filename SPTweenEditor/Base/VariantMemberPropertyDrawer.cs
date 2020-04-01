@@ -3,9 +3,9 @@ using UnityEditor;
 
 using com.spacepuppy;
 
-using com.spacepuppyeditor.Components;
+using com.spacepuppyeditor.Core.PropertyDrawers;
 
-namespace com.spacepuppyeditor.Base
+namespace com.spacepuppyeditor.Core
 {
 
     [CustomPropertyDrawer(typeof(VariantMember))]

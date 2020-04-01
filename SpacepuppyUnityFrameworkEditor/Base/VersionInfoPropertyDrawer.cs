@@ -3,7 +3,7 @@ using UnityEditor;
 
 using com.spacepuppy;
 
-namespace com.spacepuppyeditor.Base
+namespace com.spacepuppyeditor.Core
 {
 
     [CustomPropertyDrawer(typeof(VersionInfo))]

@@ -6,7 +6,7 @@ using System.Linq;
 using com.spacepuppy;
 using com.spacepuppy.Collections;
 
-namespace com.spacepuppyeditor.PropertyAttributeDrawers
+namespace com.spacepuppyeditor.Core.PropertyDrawers
 {
 
     [CustomPropertyDrawer(typeof(TagSelectorAttribute))]

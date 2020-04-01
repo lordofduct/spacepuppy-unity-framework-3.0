@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using com.spacepuppy;
 using com.spacepuppy.Utils;
 
-namespace com.spacepuppyeditor.PropertyAttributeDrawers
+namespace com.spacepuppyeditor.Core.PropertyDrawers
 {
 
     [CustomPropertyDrawer(typeof(EulerRotationInspectorAttribute))]

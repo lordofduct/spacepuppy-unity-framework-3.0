@@ -18,7 +18,7 @@ namespace com.spacepuppy.Project
     /// </summary>
     /// <typeparam name="T"></typeparam>
     [System.Serializable]
-    public class SerializableInterfaceRef<T> : BaseSerializableInterfaceRef where T : class
+    public class SerializableInterfaceRef<T> : BaseSerializableInterfaceRef, ISerializationCallbackReceiver where T : class
     {
 
         #region Fields
@@ -50,14 +50,27 @@ namespace com.spacepuppy.Project
         {
             get
             {
-                if (_value != null) return _value;
-                return _obj as T;
+                return _value;
             }
             set
             {
                 _obj = value as UnityEngine.Object;
                 _value = value;
             }
+        }
+
+        #endregion
+
+        #region ISerializationCallbackReceiver Interface
+
+        public void OnAfterDeserialize()
+        {
+            _value = _obj as T;
+        }
+
+        public void OnBeforeSerialize()
+        {
+            _obj = _value as UnityEngine.Object;
         }
 
         #endregion

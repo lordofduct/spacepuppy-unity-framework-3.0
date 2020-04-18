@@ -38,7 +38,7 @@ namespace com.spacepuppy.Dynamic
         public TypeAccessWrapper(Type type, object obj, bool includeNonPublic = false)
         {
             if (type == null) throw new ArgumentNullException("type");
-            if (obj != null && !type.IsAssignableFrom(obj.GetType())) throw new ArgumentException("Wrapped Object must be of type assignable to target type.");
+            if (obj != null && !type.IsInstanceOfType(obj)) throw new ArgumentException("Wrapped Object must be of type assignable to target type.");
 
             _wrappedType = type;
             _includeNonPublic = includeNonPublic;
@@ -56,7 +56,7 @@ namespace com.spacepuppy.Dynamic
             get { return _wrappedObject; }
             set
             {
-                if (value != null && !_wrappedType.IsAssignableFrom(value.GetType())) throw new ArgumentException("Wrapped Object must be of type assignable to target type.");
+                if (value != null && !_wrappedType.IsInstanceOfType(value)) throw new ArgumentException("Wrapped Object must be of type assignable to target type.");
                 _wrappedObject = value;
             }
         }

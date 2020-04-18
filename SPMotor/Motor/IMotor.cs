@@ -31,4 +31,10 @@ namespace com.spacepuppy.Motor
 
     }
 
+    [System.Serializable]
+    public class MotorRef : com.spacepuppy.Project.SerializableInterfaceRef<IMotor>
+    {
+
+    }
+
 }

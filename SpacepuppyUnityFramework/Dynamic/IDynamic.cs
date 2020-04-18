@@ -1423,7 +1423,7 @@ namespace com.spacepuppy.Dynamic
                 {
                     continue;
                 }
-                if (args[i].GetType().IsAssignableFrom(paramInfos[i].ParameterType))
+                else if (paramInfos[i].ParameterType.IsInstanceOfType(args[i]))
                 {
                     continue;
                 }
@@ -1448,12 +1448,11 @@ namespace com.spacepuppy.Dynamic
                 {
                     continue;
                 }
-                var atp = args[i].GetType();
-                if (atp.IsAssignableFrom(paramInfos[i].ParameterType))
+                else if (paramInfos[i].ParameterType.IsInstanceOfType(args[i]))
                 {
                     continue;
                 }
-                if (ConvertUtil.IsNumericType(atp) && ConvertUtil.IsNumericType(paramInfos[i].ParameterType))
+                else if (ConvertUtil.IsNumericType(args[i].GetType()) && ConvertUtil.IsNumericType(paramInfos[i].ParameterType))
                 {
                     continue;
                 }
@@ -1471,12 +1470,11 @@ namespace com.spacepuppy.Dynamic
                         {
                             continue;
                         }
-                        var atp = args[i].GetType();
-                        if (atp.IsAssignableFrom(paramInfos[i].ParameterType))
+                        else if (paramInfos[i].ParameterType.IsInstanceOfType(args[i]))
                         {
                             continue;
                         }
-                        if (ConvertUtil.IsNumericType(atp) && ConvertUtil.IsNumericType(paramInfos[i].ParameterType))
+                        else if (ConvertUtil.IsNumericType(args[i].GetType()) && ConvertUtil.IsNumericType(paramInfos[i].ParameterType))
                         {
                             args[i] = ConvertUtil.ToPrim(args[i], paramInfos[i].ParameterType);
                         }

@@ -568,7 +568,10 @@ namespace com.spacepuppy.Utils
         /// <returns></returns>
         public static bool NearSameAxis(Vector3 a, Vector3 b, float epsilon = MathUtil.EPSILON)
         {
-            return MathUtil.FuzzyEqual(Mathf.Abs(Vector3.Dot(a.normalized, b.normalized)), 1.0f, epsilon);
+            //return MathUtil.FuzzyEqual(Mathf.Abs(Vector3.Dot(a.normalized, b.normalized)), 1.0f, epsilon);
+            float dot = Vector3.Dot(a, b);
+            dot = (dot * dot) / (a.sqrMagnitude * b.sqrMagnitude);
+            return System.Math.Abs(1f - dot) < epsilon * epsilon;
         }
 
         public static bool NearZeroVector(this Vector4 v)

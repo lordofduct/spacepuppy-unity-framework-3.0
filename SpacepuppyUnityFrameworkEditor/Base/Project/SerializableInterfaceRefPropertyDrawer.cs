@@ -38,9 +38,11 @@ namespace com.spacepuppyeditor.Core.Project
                 return;
             }
 
-            //var val = EditorGUI.ObjectField(position, label, objProp.objectReferenceValue, valueType, true);
-            var val = EditorGUI.ObjectField(position, label, objProp.objectReferenceValue, typeof(UnityEngine.Object), true);
-            if (val != null && !TypeUtil.IsType(val.GetType(), valueType)) val = null;
+            var val = ObjUtil.GetAsFromSource(valueType, EditorGUI.ObjectField(position, label, objProp.objectReferenceValue, typeof(UnityEngine.Object), true));
+            if (val != null && !valueType.IsInstanceOfType(val))
+            {
+                val = null;
+            }
             objProp.objectReferenceValue = val as UnityEngine.Object;
         }
 

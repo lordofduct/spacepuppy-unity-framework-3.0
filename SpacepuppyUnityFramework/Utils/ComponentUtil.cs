@@ -8,7 +8,16 @@ namespace com.spacepuppy.Utils
 {
     public static class ComponentUtil
     {
-        
+
+        public static T SanitizeActiveAndEnabled<T>(T comp) where T : Component
+        {
+            if (comp == null) return null;
+            if (comp is Behaviour) return (comp as Behaviour).isActiveAndEnabled ? comp : null;
+            if (!comp.gameObject.activeInHierarchy) return null;
+            if (comp is Collider && !(comp as Collider).enabled) return null;
+            return comp;
+        }
+
         public static bool IsComponentType(System.Type tp)
         {
             if (tp == null) return false;

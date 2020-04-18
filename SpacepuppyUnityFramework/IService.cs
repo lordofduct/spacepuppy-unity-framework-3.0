@@ -399,34 +399,42 @@ namespace com.spacepuppy
 
             if (!(this is T))
             {
-                this.AutoDestruct();
+                if (_destroyIfMultiple)
+                {
+                    ObjUtil.SmartDestroy(this);
+                }
                 return;
             }
 
+            if (this.ValidateService())
+            {
+                this.OnValidAwake();
+            }
+        }
+
+        private bool ValidateService()
+        {
             var inst = Services.Get<T>();
             if (inst == null)
             {
-                if(_autoRegisterService)
+                if (_autoRegisterService)
+                {
                     Services.Register<T>(this as T);
+                }
+
+                return true;
             }
             else if (object.ReferenceEquals(this, inst))
             {
-                //do nothing
+                return true;
             }
             else
             {
-                this.AutoDestruct();
-                return;
-            }
-
-            this.OnValidAwake();
-        }
-
-        private void AutoDestruct()
-        {
-            if (_destroyIfMultiple)
-            {
-                ObjUtil.SmartDestroy(this);
+                if (_destroyIfMultiple)
+                {
+                    ObjUtil.SmartDestroy(this);
+                }
+                return false;
             }
         }
 
@@ -443,6 +451,30 @@ namespace com.spacepuppy
             if (object.ReferenceEquals(this, inst))
             {
                 Services.Unregister<T>();
+            }
+        }
+
+        #endregion
+
+        #region Properties
+
+        public bool AutoRegisterService
+        {
+            get { return _autoRegisterService; }
+            set
+            {
+                _autoRegisterService = value;
+                if (value && this.started) this.ValidateService();
+            }
+        }
+
+        public bool DestroyIfMultiple
+        {
+            get { return _destroyIfMultiple; }
+            set
+            {
+                _destroyIfMultiple = value;
+                if (value && this.started) this.ValidateService();
             }
         }
 

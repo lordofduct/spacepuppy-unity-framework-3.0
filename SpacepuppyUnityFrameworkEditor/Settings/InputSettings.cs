@@ -490,6 +490,7 @@ namespace com.spacepuppyeditor.Settings
         public const string PROP_JOYNUM = "JoyNum";
 
         private SPReorderableList _entryList;
+        private Vector2 _scrollPos;
 
         protected override void OnEnable()
         {
@@ -503,10 +504,16 @@ namespace com.spacepuppyeditor.Settings
         protected override void OnSPInspectorGUI()
         {
             this.serializedObject.Update();
-
             this.DrawPropertyField(EditorHelper.PROP_SCRIPT);
+
+            EditorGUILayout.BeginVertical();
+            float listMaxHeight = _entryList.GetHeight();
+            float maxHeight = Screen.height - (_entryList.index >= 0 ? 380f : 260f);
+            _scrollPos = EditorGUILayout.BeginScrollView(_scrollPos, GUILayout.Height(Mathf.Min(listMaxHeight, maxHeight)));
             _entryList.DoLayoutList();
+            EditorGUILayout.EndScrollView();
             this.DrawDetailArea();
+            EditorGUILayout.EndVertical();
 
             this.serializedObject.ApplyModifiedProperties();
 

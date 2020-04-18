@@ -152,7 +152,7 @@ namespace com.spacepuppy.Utils
         }
 
         /// <summary>
-        /// Broadcast a message globally to all registered for T. This is faster than FindAndBroadcast, but requires manuall registering/unregistering.
+        /// Broadcast a message globally to all registered for T. This is faster than FindAndBroadcast, but requires manual registering/unregistering.
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="functor"></param>
@@ -165,7 +165,7 @@ namespace com.spacepuppy.Utils
         }
 
         /// <summary>
-        /// Broadcast a message globally to all registered for T. This is faster than FindAndBroadcast, but requires manuall registering/unregistering.
+        /// Broadcast a message globally to all registered for T. This is faster than FindAndBroadcast, but requires manual registering/unregistering.
         /// </summary>
         /// <typeparam name="TInterface"></typeparam>
         /// <typeparam name="TArg"></typeparam>

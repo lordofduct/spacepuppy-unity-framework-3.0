@@ -357,23 +357,35 @@ namespace com.spacepuppy.Utils
         #endregion
 
         #region Casting
-        
+
+        /// <summary>
+        /// Returns true null if the UnityEngine.Object is dead, otherwise returns itself.
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        public static T SanitizeRef<T>(this T obj) where T : class
+        {
+            return (obj is UnityEngine.Object && (obj as UnityEngine.Object) == null) ? null : obj;
+        }
+
         public static object ReduceIfProxy(this object obj)
         {
             if (obj is IProxy) return (obj as IProxy).GetTarget();
 
-            return obj;
+            return obj.SanitizeRef();
         }
 
         public static object ReduceIfProxy(this object obj, object arg)
         {
             if (obj is IProxy) return (obj as IProxy).GetTarget(arg);
 
-            return obj;
+            return obj.SanitizeRef();
         }
+
 
         public static T GetAsFromSource<T>(object obj) where T : class
         {
+            obj = obj.SanitizeRef();
             if (obj == null) return null;
             if (obj is T) return obj as T;
             if (obj is IComponent)
@@ -383,7 +395,7 @@ namespace com.spacepuppy.Utils
             }
             var go = GameObjectUtil.GetGameObjectFromSource(obj);
             if (go is T) return go as T;
-            
+
             //if (go != null && ComponentUtil.IsAcceptableComponentType(typeof(T))) return go.GetComponentAlt<T>();
             if (go != null)
             {
@@ -399,6 +411,7 @@ namespace com.spacepuppy.Utils
 
         public static bool GetAsFromSource<T>(object obj, out T result, bool respectProxy = false) where T : class
         {
+            obj = obj.SanitizeRef();
             result = null;
             if (obj == null) return false;
 
@@ -456,6 +469,7 @@ namespace com.spacepuppy.Utils
 
         public static object GetAsFromSource(System.Type tp, object obj)
         {
+            obj = obj.SanitizeRef();
             if (obj == null) return null;
 
             var otp = obj.GetType();
@@ -469,7 +483,7 @@ namespace com.spacepuppy.Utils
             var go = GameObjectUtil.GetGameObjectFromSource(obj);
             if (tp == typeof(UnityEngine.GameObject)) return go;
 
-            if(go != null)
+            if (go != null)
             {
                 if (typeof(SPEntity).IsAssignableFrom(tp))
                     return SPEntity.Pool.GetFromSource(tp, go);
@@ -482,6 +496,7 @@ namespace com.spacepuppy.Utils
 
         public static bool GetAsFromSource(System.Type tp, object obj, out object result, bool respectProxy = false)
         {
+            obj = obj.SanitizeRef();
             result = null;
             if (obj == null) return false;
 
@@ -540,6 +555,7 @@ namespace com.spacepuppy.Utils
 
         public static T GetAsFromSource<T>(object obj, bool respectProxy) where T : class
         {
+            obj = obj.SanitizeRef();
             if (obj == null) return null;
 
             if (respectProxy && obj is IProxy)
@@ -572,6 +588,7 @@ namespace com.spacepuppy.Utils
 
         public static object GetAsFromSource(System.Type tp, object obj, bool respectProxy)
         {
+            obj = obj.SanitizeRef();
             if (obj == null) return null;
 
             if (respectProxy && obj is IProxy)
@@ -603,9 +620,9 @@ namespace com.spacepuppy.Utils
         }
 
 
-
         public static T[] GetAllFromSource<T>(object obj, bool includeChildren = false) where T : class
         {
+            obj = obj.SanitizeRef();
             if (obj == null) return ArrayUtil.Empty<T>();
 
             using (var set = TempCollection.GetSet<T>())
@@ -660,6 +677,7 @@ namespace com.spacepuppy.Utils
 
         public static object[] GetAllFromSource(System.Type tp, object obj, bool includeChildren = false)
         {
+            obj = obj.SanitizeRef();
             if (obj == null) return ArrayUtil.Empty<object>();
 
             using (var set = TempCollection.GetSet<object>())
@@ -721,8 +739,6 @@ namespace com.spacepuppy.Utils
                 return set.Count > 0 ? set.ToArray() : ArrayUtil.Empty<object>();
             }
         }
-
-
 
         public static bool IsType(object obj, System.Type tp)
         {

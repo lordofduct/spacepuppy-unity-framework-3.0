@@ -16,16 +16,22 @@ namespace com.spacepuppyeditor.Core
     public class VariantReferencePropertyDrawer : PropertyDrawer
     {
 
+        public const string PROP_MODE = "_mode";
+        public const string PROP_TYPE = "_type";
+        public const string PROP_X = "_x";
+        public const string PROP_Y = "_y";
+        public const string PROP_Z = "_z";
+        public const string PROP_W = "_w";
+        public const string PROP_STRING = "_string";
+        public const string PROP_OBJREF = "_unityObjectReference";
+
         #region Fields
 
-        const string PROP_VARIANTTYPE = "_type";
-        const string PROP_UNITYOBJREF = "_unityObjectReference";
-        const string PROP_STRING = "_string";
         const float REF_SELECT_WIDTH = 70f;
 
         public bool RestrictVariantType = false;
 
-        
+
         private VariantType _variantTypeRestrictedTo;
         private System.Type _typeRestrictedTo = typeof(UnityEngine.Object);
         private System.Type _forcedObjectType = typeof(UnityEngine.Object);
@@ -36,7 +42,7 @@ namespace com.spacepuppyeditor.Core
         #endregion
 
         #region Properties
-        
+
         public VariantType VariantTypeRestrictedTo
         {
             get { return _variantTypeRestrictedTo; }
@@ -99,7 +105,7 @@ namespace com.spacepuppyeditor.Core
             position = this.DrawRefModeSelectionDropDown(position, property, _helper);
 
             //draw value
-            switch(_helper._mode)
+            switch (_helper._mode)
             {
                 case VariantReference.RefMode.Value:
                     {
@@ -148,7 +154,7 @@ namespace com.spacepuppyeditor.Core
 
             var r0 = new Rect(position.xMin, position.yMin, 90.0f, EditorGUIUtility.singleLineHeight);
             var r1 = new Rect(r0.xMax, position.yMin, position.xMax - r0.xMax, EditorGUIUtility.singleLineHeight);
-            
+
             var cache = SPGUI.DisableIf(this.RestrictVariantType);
             EditorGUI.BeginChangeCheck();
             var valueType = variant.ValueType;
@@ -159,7 +165,7 @@ namespace com.spacepuppyeditor.Core
             }
             cache.Reset();
 
-            if(_typeRestrictedTo.IsEnum)
+            if (_typeRestrictedTo.IsEnum)
             {
                 variant.IntValue = ConvertUtil.ToInt(EditorGUI.EnumPopup(r1, ConvertUtil.ToEnumOfType(_typeRestrictedTo, variant.IntValue)));
             }
@@ -214,7 +220,7 @@ namespace com.spacepuppyeditor.Core
                             _selectComponentDrawer.AllowNonComponents = false;
                             _selectComponentDrawer.RestrictionType = ComponentUtil.IsAcceptableComponentType(_forcedObjectType) ? _forcedObjectType : typeof(Component);
                             _selectComponentDrawer.ShowXButton = true;
-                            var targProp = property.FindPropertyRelative(PROP_UNITYOBJREF);
+                            var targProp = property.FindPropertyRelative(PROP_OBJREF);
                             EditorGUI.BeginChangeCheck();
                             _selectComponentDrawer.OnGUI(r1, targProp);
                             if (EditorGUI.EndChangeCheck())
@@ -226,14 +232,14 @@ namespace com.spacepuppyeditor.Core
                     case VariantType.Object:
                         {
                             var obj = variant.ObjectValue;
-                            if(ComponentUtil.IsAcceptableComponentType(_forcedObjectType))
+                            if (ComponentUtil.IsAcceptableComponentType(_forcedObjectType))
                             {
                                 if (obj is GameObject || obj is Component)
                                 {
                                     _selectComponentDrawer.AllowNonComponents = false;
                                     _selectComponentDrawer.RestrictionType = _forcedObjectType;
                                     _selectComponentDrawer.ShowXButton = true;
-                                    var targProp = property.FindPropertyRelative(PROP_UNITYOBJREF);
+                                    var targProp = property.FindPropertyRelative(PROP_OBJREF);
                                     EditorGUI.BeginChangeCheck();
                                     _selectComponentDrawer.OnGUI(r1, targProp);
                                     if (EditorGUI.EndChangeCheck())
@@ -245,13 +251,13 @@ namespace com.spacepuppyeditor.Core
                                 {
                                     EditorGUI.BeginChangeCheck();
                                     obj = EditorGUI.ObjectField(r1, obj, typeof(UnityEngine.Object), true);
-                                    if(EditorGUI.EndChangeCheck())
+                                    if (EditorGUI.EndChangeCheck())
                                     {
-                                        if(obj == null)
+                                        if (obj == null)
                                         {
                                             variant.ObjectValue = null;
                                         }
-                                        else if(TypeUtil.IsType(obj.GetType(), _forcedObjectType))
+                                        else if (_forcedObjectType.IsInstanceOfType(obj))
                                         {
                                             variant.ObjectValue = obj;
                                         }
@@ -307,15 +313,15 @@ namespace com.spacepuppyeditor.Core
 
             }
         }
-        
+
         private void DrawValueFieldInPropertyMode(Rect position, SerializedProperty property, VariantReference.EditorHelper helper)
         {
             _selectComponentDrawer.AllowNonComponents = true;
             _selectComponentDrawer.RestrictionType = null;
             _selectComponentDrawer.ShowXButton = false;
-            var targProp = property.FindPropertyRelative(PROP_UNITYOBJREF);
+            var targProp = property.FindPropertyRelative(PROP_OBJREF);
             var memberProp = property.FindPropertyRelative(PROP_STRING);
-            var vtypeProp = property.FindPropertyRelative(PROP_VARIANTTYPE);
+            var vtypeProp = property.FindPropertyRelative(PROP_TYPE);
 
             if (targProp.objectReferenceValue == null)
             {
@@ -340,9 +346,9 @@ namespace com.spacepuppyeditor.Core
             _selectComponentDrawer.AllowNonComponents = true;
             _selectComponentDrawer.RestrictionType = null;
             _selectComponentDrawer.ShowXButton = false;
-            var targProp = property.FindPropertyRelative(PROP_UNITYOBJREF);
+            var targProp = property.FindPropertyRelative(PROP_OBJREF);
             var evalProp = property.FindPropertyRelative(PROP_STRING);
-            var vtypeProp = property.FindPropertyRelative(PROP_VARIANTTYPE);
+            var vtypeProp = property.FindPropertyRelative(PROP_TYPE);
 
             var r1 = new Rect(position.xMin, position.yMin, position.width * 0.4f, position.height);
             var r2 = new Rect(r1.xMax, position.yMin, position.width - r1.width, position.height);
@@ -357,29 +363,48 @@ namespace com.spacepuppyeditor.Core
 
         public static void CopyValuesToHelper(SerializedProperty property, VariantReference.EditorHelper helper)
         {
-            helper._mode = property.FindPropertyRelative("_mode").GetEnumValue<VariantReference.RefMode>();
-            helper._type = property.FindPropertyRelative("_type").GetEnumValue<VariantType>();
-            helper._x = property.FindPropertyRelative("_x").floatValue;
-            helper._y = property.FindPropertyRelative("_y").floatValue;
-            helper._z = property.FindPropertyRelative("_z").floatValue;
-            helper._w = property.FindPropertyRelative("_w").doubleValue;
-            helper._string = property.FindPropertyRelative("_string").stringValue;
-            helper._unityObjectReference = property.FindPropertyRelative("_unityObjectReference").objectReferenceValue;
+            helper._mode = property.FindPropertyRelative(PROP_MODE).GetEnumValue<VariantReference.RefMode>();
+            helper._type = property.FindPropertyRelative(PROP_TYPE).GetEnumValue<VariantType>();
+            helper._x = property.FindPropertyRelative(PROP_X).floatValue;
+            helper._y = property.FindPropertyRelative(PROP_Y).floatValue;
+            helper._z = property.FindPropertyRelative(PROP_Z).floatValue;
+            helper._w = property.FindPropertyRelative(PROP_W).doubleValue;
+            helper._string = property.FindPropertyRelative(PROP_STRING).stringValue;
+            helper._unityObjectReference = property.FindPropertyRelative(PROP_OBJREF).objectReferenceValue;
         }
 
         public static void CopyValuesFromHelper(SerializedProperty property, VariantReference.EditorHelper helper)
         {
-            property.FindPropertyRelative("_mode").SetEnumValue(helper._mode);
-            property.FindPropertyRelative("_type").SetEnumValue(helper._type);
-            property.FindPropertyRelative("_x").floatValue = helper._x;
-            property.FindPropertyRelative("_y").floatValue = helper._y;
-            property.FindPropertyRelative("_z").floatValue = helper._z;
-            property.FindPropertyRelative("_w").doubleValue = helper._w;
-            property.FindPropertyRelative("_string").stringValue = helper._string;
-            property.FindPropertyRelative("_unityObjectReference").objectReferenceValue = helper._unityObjectReference;
+            property.FindPropertyRelative(PROP_MODE).SetEnumValue(helper._mode);
+            property.FindPropertyRelative(PROP_TYPE).SetEnumValue(helper._type);
+            property.FindPropertyRelative(PROP_X).floatValue = helper._x;
+            property.FindPropertyRelative(PROP_Y).floatValue = helper._y;
+            property.FindPropertyRelative(PROP_Z).floatValue = helper._z;
+            property.FindPropertyRelative(PROP_W).doubleValue = helper._w;
+            property.FindPropertyRelative(PROP_STRING).stringValue = helper._string;
+            property.FindPropertyRelative(PROP_OBJREF).objectReferenceValue = helper._unityObjectReference;
+        }
+
+        public static void SetSerializedProperty(SerializedProperty property, object obj)
+        {
+            if (property == null) throw new System.ArgumentNullException(nameof(property));
+
+            var variant = new VariantReference();
+            variant.Value = obj;
+            CopyValuesFromHelper(property, new VariantReference.EditorHelper(variant));
+        }
+
+        public static object GetFromSerializedProperty(SerializedProperty property)
+        {
+            if (property == null) throw new System.ArgumentNullException(nameof(property));
+
+            var helper = new VariantReference.EditorHelper();
+            CopyValuesToHelper(property, helper);
+            return helper.Target.Value;
         }
 
         #endregion
 
     }
+
 }

@@ -57,12 +57,12 @@ namespace com.spacepuppyeditor.Anim.Events
                 DrawElementAtBottom = true,
                 Draggable = true,
                 ElementLabelFormatString = "Clip {0:00}",
-                OnAddCallback = this.OnAddCallback,
                 InternalDrawer = new PlayAnimInfoPropertyDrawer()
                 {
                     DrawFlat = true
                 }
             };
+            _clipsDrawer.ElementAdded += OnElementAdded;
         }
 
         protected override void OnSPInspectorGUI()
@@ -127,11 +127,12 @@ namespace com.spacepuppyeditor.Anim.Events
             }
         }
 
-        private void OnAddCallback(UnityEditorInternal.ReorderableList lst)
+        private void OnElementAdded(object sender, System.EventArgs e)
         {
-            lst.serializedProperty.arraySize++;
-            lst.index = lst.serializedProperty.arraySize - 1;
+            var drawer = sender as ReorderableArrayPropertyDrawer;
+            if (drawer == null || drawer.CurrentReorderableList == null) return;
 
+            var lst = drawer.CurrentReorderableList;
             var infoProp = lst.serializedProperty.GetArrayElementAtIndex(lst.index);
             var settingsProp = infoProp.FindPropertyRelative(PlayAnimInfoPropertyDrawer.PROP_SETTINGS);
             if(settingsProp != null)

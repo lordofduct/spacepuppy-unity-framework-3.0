@@ -471,7 +471,7 @@ namespace com.spacepuppyeditor
             }
         }
 
-        public static void SetPropertyValue(SerializedProperty prop, object value)
+        public static void SetPropertyValue(this SerializedProperty prop, object value, bool ignoreSpecialWrappers = false)
         {
             if (prop == null) throw new System.ArgumentNullException("prop");
 
@@ -526,12 +526,33 @@ namespace com.spacepuppyeditor
                 case SerializedPropertyType.Bounds:
                     prop.boundsValue = (Bounds)value;
                     break;
-                case SerializedPropertyType.Gradient:
-                    throw new System.InvalidOperationException("Can not handle Gradient types.");
+                case SerializedPropertyType.Generic:
+                    {
+                        if (!ignoreSpecialWrappers)
+                        {
+                            var fieldType = prop.GetTargetType();
+                            if (fieldType != null)
+                            {
+                                if (TypeUtil.IsType(fieldType, typeof(VariantReference)))
+                                {
+                                    com.spacepuppyeditor.Core.VariantReferencePropertyDrawer.SetSerializedProperty(prop, value);
+                                    return;
+                                }
+                                else if (TypeUtil.IsType(fieldType, typeof(com.spacepuppy.Project.BaseSerializableInterfaceRef)))
+                                {
+                                    com.spacepuppyeditor.Core.Project.SerializableInterfaceRefPropertyDrawer.SetSerializedProperty(prop, value as UnityEngine.Object);
+                                    return;
+                                }
+                            }
+
+                            SetTargetObjectOfProperty(prop, value);
+                        }
+                    }
+                    break;
             }
         }
 
-        public static object GetPropertyValue(SerializedProperty prop)
+        public static object GetPropertyValue(this SerializedProperty prop, bool ignoreSpecialWrappers = false)
         {
             if (prop == null) throw new System.ArgumentNullException("prop");
 
@@ -569,11 +590,83 @@ namespace com.spacepuppyeditor
                     return prop.animationCurveValue;
                 case SerializedPropertyType.Bounds:
                     return prop.boundsValue;
-                case SerializedPropertyType.Gradient:
-                    throw new System.InvalidOperationException("Can not handle Gradient types.");
+                case SerializedPropertyType.Generic:
+                    {
+                        if (!ignoreSpecialWrappers)
+                        {
+                            var fieldType = prop.GetTargetType();
+                            if (fieldType != null)
+                            {
+                                if (TypeUtil.IsType(fieldType, typeof(VariantReference)))
+                                {
+                                    return com.spacepuppyeditor.Core.VariantReferencePropertyDrawer.GetFromSerializedProperty(prop);
+                                }
+                                else if (TypeUtil.IsType(fieldType, typeof(com.spacepuppy.Project.BaseSerializableInterfaceRef)))
+                                {
+                                    return com.spacepuppyeditor.Core.Project.SerializableInterfaceRefPropertyDrawer.GetFromSerializedProperty(prop);
+                                }
+                            }
+                        }
+
+                        return GetTargetObjectOfProperty(prop);
+                    }
             }
 
             return null;
+        }
+
+        public static T GetPropertyValue<T>(this SerializedProperty prop, bool ignoreSpecialWrappers = false)
+        {
+            var obj = GetPropertyValue(prop, ignoreSpecialWrappers);
+            if (obj is T) return (T)obj;
+
+            var tp = typeof(T);
+            try
+            {
+                return (T)System.Convert.ChangeType(obj, tp);
+            }
+            catch (System.Exception)
+            {
+                return default(T);
+            }
+        }
+
+        /// <summary>
+        /// Returns the type that the SerializedProperty is interpreted as when calling SetPropertyValue or GetPropertyValue.
+        /// </summary>
+        /// <param name="prop"></param>
+        /// <param name="ignoreSpecialWrappers"></param>
+        /// <returns></returns>
+        public static System.Type GetPropertyValueType(this SerializedProperty prop, bool ignoreSpecialWrappers = false)
+        {
+            if (prop == null) throw new System.ArgumentNullException("prop");
+
+            var fieldType = prop.GetTargetType();
+            if (fieldType != null && !ignoreSpecialWrappers)
+            {
+                if (TypeUtil.IsType(fieldType, typeof(com.spacepuppy.Project.BaseSerializableInterfaceRef)))
+                {
+                    fieldType = com.spacepuppyeditor.Core.Project.SerializableInterfaceRefPropertyDrawer.GetRefTypeFromSerializedProperty(prop);
+                }
+            }
+
+            return fieldType ?? typeof(object);
+        }
+
+        public static T GetPropertyValue<T>(this SerializedProperty prop)
+        {
+            var obj = GetPropertyValue(prop);
+            if (obj is T) return (T)obj;
+
+            var tp = typeof(T);
+            try
+            {
+                return (T)System.Convert.ChangeType(obj, tp);
+            }
+            catch (System.Exception)
+            {
+                return default(T);
+            }
         }
 
         public static SerializedPropertyType GetPropertyType(System.Type tp)
@@ -692,6 +785,42 @@ namespace com.spacepuppyeditor
             }
         }
 
+        public static IEnumerable<SerializedProperty> EnumerateArray(this SerializedProperty prop)
+        {
+            if (!prop.isArray) yield break;
+
+            for (int i = 0; i < prop.arraySize; i++)
+            {
+                yield return prop.GetArrayElementAtIndex(i);
+            }
+        }
+
+        public static T[] GetAsArray<T>(this SerializedProperty prop)
+        {
+            if (prop == null) throw new System.ArgumentNullException("prop");
+            if (!prop.isArray) throw new System.ArgumentException("SerializedProperty does not represent an Array.", "prop");
+
+            var arr = new T[prop.arraySize];
+            for (int i = 0; i < arr.Length; i++)
+            {
+                arr[i] = GetPropertyValue<T>(prop.GetArrayElementAtIndex(i));
+            }
+            return arr;
+        }
+
+        public static void SetAsArray<T>(this SerializedProperty prop, T[] arr)
+        {
+            if (prop == null) throw new System.ArgumentNullException("prop");
+            if (!prop.isArray) throw new System.ArgumentException("SerializedProperty does not represent an Array.", "prop");
+
+            int sz = arr != null ? arr.Length : 0;
+            prop.arraySize = sz;
+            for (int i = 0; i < sz; i++)
+            {
+                prop.GetArrayElementAtIndex(i).SetPropertyValue(arr[i]);
+            }
+        }
+
 
 
         public static int GetChildPropertyCount(SerializedProperty property, bool includeGrandChildren = false)
@@ -723,28 +852,30 @@ namespace com.spacepuppyeditor
 
             var path = prop.propertyPath.Replace(".Array.data[", "[");
             var elements = path.Split('.');
-            System.Reflection.FieldInfo field;
-            foreach (var element in elements.Take(elements.Length - 1))
+            System.Reflection.FieldInfo field = null;
+            foreach (var element in elements)
             {
                 if (element.Contains("["))
                 {
                     var elementName = element.Substring(0, element.IndexOf("["));
                     var index = System.Convert.ToInt32(element.Substring(element.IndexOf("[")).Replace("[", "").Replace("]", ""));
 
-                    field = tp.GetMember(elementName, MemberTypes.Field, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance).FirstOrDefault() as System.Reflection.FieldInfo;
+                    //field = tp.GetMember(elementName, MemberTypes.Field, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance).FirstOrDefault() as System.Reflection.FieldInfo;
+                    field = DynamicUtil.GetMemberFromType(tp, element, true, MemberTypes.Field) as System.Reflection.FieldInfo;
                     if (field == null) return null;
                     tp = field.FieldType;
                 }
                 else
                 {
-                    field = tp.GetMember(element, MemberTypes.Field, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance).FirstOrDefault() as System.Reflection.FieldInfo;
+                    //tp.GetMember(element, MemberTypes.Field, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance).FirstOrDefault() as System.Reflection.FieldInfo;
+                    field = DynamicUtil.GetMemberFromType(tp, element, true, MemberTypes.Field) as System.Reflection.FieldInfo;
                     if (field == null) return null;
                     tp = field.FieldType;
                 }
             }
-            return null;
+            return field;
         }
-        
+
         /// <summary>
         /// Get the type defined in a TypeRestrictionAttribute attached to the field, otherwise returns the FieldType as defined by the field itself.
         /// </summary>

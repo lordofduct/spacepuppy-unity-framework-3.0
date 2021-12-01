@@ -1,3 +1,10 @@
+# TODO OBSOLETE - See Spacepuppy Unity Framework 4.0
+https://github.com/lordofduct/spacepuppy-unity-framework-4.0
+
+This version of spacepuppy is now obsolete. We've moved to a newer version of Unity that supports the newer C# versions in the compiler.
+
+This framework will remain for posterity sake.
+
 # spacepuppy-unity-framwork-3.0
 A modular framework of tools for use with the Unity game engine version 2017.3.
 

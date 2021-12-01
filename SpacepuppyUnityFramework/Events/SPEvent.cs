@@ -619,7 +619,7 @@ namespace com.spacepuppy.Events
         public override void ActivateTrigger(object sender)
         {
             base.ActivateTrigger(sender);
-            Global.ActivateTrigger(sender);
+            if (this != Global) Global.ActivateTrigger(sender);
         }
 
     }
@@ -633,7 +633,7 @@ namespace com.spacepuppy.Events
         public override void ActivateTrigger(object sender, T arg)
         {
             base.ActivateTrigger(sender, arg);
-            Global.ActivateTrigger(sender, arg);
+            if (this != Global) Global.ActivateTrigger(sender, arg);
         }
 
     }
@@ -647,7 +647,7 @@ namespace com.spacepuppy.Events
         public override void ActivateTrigger(object sender, T1 arg1, T2 arg2)
         {
             base.ActivateTrigger(sender, arg1, arg2);
-            Global.ActivateTrigger(sender, arg1, arg2);
+            if (this != Global) Global.ActivateTrigger(sender, arg1, arg2);
         }
 
     }
@@ -661,7 +661,7 @@ namespace com.spacepuppy.Events
         public override void ActivateTrigger(object sender, T1 arg1, T2 arg2, T3 arg3)
         {
             base.ActivateTrigger(sender, arg1, arg2, arg3);
-            Global.ActivateTrigger(sender, arg1, arg2, arg3);
+            if (this != Global) Global.ActivateTrigger(sender, arg1, arg2, arg3);
         }
 
     }
@@ -675,13 +675,13 @@ namespace com.spacepuppy.Events
         public override void ActivateTrigger(object sender, T1 arg1, T2 arg2, T3 arg3, T4 arg4)
         {
             base.ActivateTrigger(sender, arg1, arg2, arg3, arg4);
-            Global.ActivateTrigger(sender, arg1, arg2, arg3, arg4);
+            if (this != Global) Global.ActivateTrigger(sender, arg1, arg2, arg3, arg4);
         }
 
     }
 
     [System.Serializable]
-    public abstract class SPAggregatedEvent<TSignature, TEvent> : SPEvent<TEvent> where TSignature : SPAggregatedDelegate<TSignature, TEvent>, new() where TEvent : System.EventArgs
+    public abstract class SPAggregatedEvent<TSignature, TEvent> : SPEvent<TEvent> where TSignature : SPAggregatedEvent<TSignature, TEvent>, new() where TEvent : System.EventArgs
     {
 
         public readonly static TSignature Global = new TSignature();
@@ -689,7 +689,7 @@ namespace com.spacepuppy.Events
         public override void ActivateTrigger(object sender, TEvent e)
         {
             base.ActivateTrigger(sender, e);
-            Global.ActivateTrigger(sender, e);
+            if (this != Global) Global.ActivateTrigger(sender, e);
         }
 
     }

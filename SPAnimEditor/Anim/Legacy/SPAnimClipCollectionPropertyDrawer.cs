@@ -6,6 +6,7 @@ using System.Linq;
 
 using com.spacepuppy.Anim;
 using com.spacepuppy.Anim.Legacy;
+using com.spacepuppy.Utils;
 
 using com.spacepuppyeditor.Internal;
 
@@ -94,7 +95,7 @@ namespace com.spacepuppyeditor.Anim.Legacy
                             stateProp.FindPropertyRelative(SPAnimClip.PROP_LAYER).intValue = _defaultLayer;
                             stateProp.FindPropertyRelative(SPAnimClip.PROP_WRAPMODE).intValue = 0;
                             stateProp.FindPropertyRelative(SPAnimClip.PROP_BLENDMODE).intValue = 0;
-                            stateProp.FindPropertyRelative(SPAnimClip.PROP_MASK).objectReferenceValue = null;
+                            stateProp.FindPropertyRelative(SPAnimClip.PROP_MASK).SetPropertyValue(null);
                         }
                     }
                     for (int i = 0; i < statesProp.arraySize; i++)
@@ -140,6 +141,31 @@ namespace com.spacepuppyeditor.Anim.Legacy
             {
                 return 0f;
             }
+        }
+
+        private SerializedProperty AddNewState(ReorderableList lst)
+        {
+            lst.serializedProperty.arraySize++;
+            lst.index = lst.serializedProperty.arraySize - 1;
+
+            var stateProp = lst.serializedProperty.GetArrayElementAtIndex(lst.index);
+
+            string prefix = string.IsNullOrEmpty(_entryPrefix) ? "State" : _entryPrefix;
+            int cnt = lst.serializedProperty.arraySize;
+            while (_target.Keys.Contains(prefix + cnt.ToString("00")))
+            {
+                cnt++;
+            }
+
+            stateProp.FindPropertyRelative("_name").stringValue = prefix + cnt.ToString("00");
+            stateProp.FindPropertyRelative("_clip").objectReferenceValue = null;
+            stateProp.FindPropertyRelative(SPAnimClip.PROP_WEIGHT).floatValue = 1f;
+            stateProp.FindPropertyRelative(SPAnimClip.PROP_SPEED).floatValue = 1f;
+            stateProp.FindPropertyRelative(SPAnimClip.PROP_LAYER).intValue = _defaultLayer;
+            stateProp.FindPropertyRelative(SPAnimClip.PROP_WRAPMODE).intValue = 0;
+            stateProp.FindPropertyRelative(SPAnimClip.PROP_BLENDMODE).intValue = 0;
+            stateProp.FindPropertyRelative(SPAnimClip.PROP_MASK).SetPropertyValue(null);
+            return stateProp;
         }
 
         #endregion
@@ -194,6 +220,8 @@ namespace com.spacepuppyeditor.Anim.Legacy
                 _animList.DoList(position);
                 if (EditorGUI.EndChangeCheck()) property.serializedObject.ApplyModifiedProperties();
 
+                this.DoDragAndDrop(property, position);
+
                 if (!_hideDetailRegion && _animList.index >= 0)
                 {
                     try
@@ -222,6 +250,53 @@ namespace com.spacepuppyeditor.Anim.Legacy
 
         #endregion
 
+        #region Drag & Drop
+
+        protected virtual void DoDragAndDrop(SerializedProperty property, Rect listArea)
+        {
+            if (Event.current == null) return;
+
+            var ev = Event.current;
+            switch (ev.type)
+            {
+                case EventType.DragUpdated:
+                case EventType.DragPerform:
+                    {
+                        if (listArea.Contains(ev.mousePosition))
+                        {
+                            var refs = (from o in DragAndDrop.objectReferences let obj = ObjUtil.GetAsFromSource<AnimationClip>(o) where obj != null select obj);
+                            DragAndDrop.visualMode = refs.Any() ? DragAndDropVisualMode.Link : DragAndDropVisualMode.Rejected;
+
+                            if (ev.type == EventType.DragPerform && refs.Any())
+                            {
+                                DragAndDrop.AcceptDrag();
+
+                                var names = _animList.serializedProperty.EnumerateArray().Select(o => o.FindPropertyRelative("_name").stringValue).ToHashSet();
+                                foreach (var clip in refs)
+                                {
+                                    var stateprop = this.AddNewState(_animList);
+                                    stateprop.FindPropertyRelative("_clip").objectReferenceValue = clip;
+
+                                    string nm = clip.name;
+                                    string format = nm + "{0:00}";
+                                    int cnt = 0;
+                                    while (names.Contains(nm))
+                                    {
+                                        nm = string.Format(format, ++cnt);
+                                    }
+                                    stateprop.FindPropertyRelative("_name").stringValue = nm;
+                                }
+
+                                GUI.changed = true;
+                            }
+                        }
+                    }
+                    break;
+            }
+        }
+
+        #endregion
+
         #region Anim ReorderableList Handlers
 
         private void _animList_DrawHeader(Rect area)
@@ -240,26 +315,7 @@ namespace com.spacepuppyeditor.Anim.Legacy
 
         private void _animList_OnAdded(ReorderableList lst)
         {
-            lst.serializedProperty.arraySize++;
-            lst.index = lst.serializedProperty.arraySize - 1;
-
-            var stateProp = lst.serializedProperty.GetArrayElementAtIndex(lst.index);
-
-            string prefix = string.IsNullOrEmpty(_entryPrefix) ? "State" : _entryPrefix;
-            int cnt = lst.serializedProperty.arraySize;
-            while (_target.Keys.Contains(prefix + cnt.ToString("00")))
-            {
-                cnt++;
-            }
-
-            stateProp.FindPropertyRelative("_name").stringValue = prefix + cnt.ToString("00");
-            stateProp.FindPropertyRelative("_clip").objectReferenceValue = null;
-            stateProp.FindPropertyRelative(SPAnimClip.PROP_WEIGHT).floatValue = 1f;
-            stateProp.FindPropertyRelative(SPAnimClip.PROP_SPEED).floatValue = 1f;
-            stateProp.FindPropertyRelative(SPAnimClip.PROP_LAYER).intValue = _defaultLayer;
-            stateProp.FindPropertyRelative(SPAnimClip.PROP_WRAPMODE).intValue = 0;
-            stateProp.FindPropertyRelative(SPAnimClip.PROP_BLENDMODE).intValue = 0;
-            stateProp.FindPropertyRelative(SPAnimClip.PROP_MASK).objectReferenceValue = null;
+            this.AddNewState(lst);
         }
 
         #endregion

@@ -404,7 +404,7 @@ namespace com.spacepuppy.Anim.Legacy
             }
             else if(_clip is IScriptableAnimationClip)
             {
-                var a = (_clip as IScriptableAnimationClip).CreateState() ?? SPAnim.Null;
+                var a = (_clip as IScriptableAnimationClip).CreateState(_controller) ?? SPAnim.Null;
                 a.Speed = _speed;
                 a.Layer = _layer;
                 if (_timeSupplier.IsCustom) a.TimeSupplier = _timeSupplier.TimeSupplier as ITimeSupplier;
@@ -440,7 +440,7 @@ namespace com.spacepuppy.Anim.Legacy
             }
             else if(_clip is IScriptableAnimationClip)
             {
-                var state = (_clip as IScriptableAnimationClip).CreateState() ?? SPAnim.Null;
+                var state = (_clip as IScriptableAnimationClip).CreateState(_controller) ?? SPAnim.Null;
                 state.Speed = _speed;
                 state.Layer = _layer;
                 if (_timeSupplier.IsCustom) state.TimeSupplier = _timeSupplier.TimeSupplier as ITimeSupplier;
@@ -486,7 +486,7 @@ namespace com.spacepuppy.Anim.Legacy
             }
             else
             {
-                var state = (_clip as IScriptableAnimationClip).CreateState() ?? SPAnim.Null;
+                var state = (_clip as IScriptableAnimationClip).CreateState(_controller) ?? SPAnim.Null;
                 state.Speed = _speed;
                 state.Layer = _layer;
                 if (_timeSupplier.IsCustom) state.TimeSupplier = _timeSupplier.TimeSupplier as ITimeSupplier;

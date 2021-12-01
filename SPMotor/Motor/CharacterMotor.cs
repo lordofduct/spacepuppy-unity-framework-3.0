@@ -283,7 +283,6 @@ namespace com.spacepuppy.Motor
         {
             _lastPos = _controller.transform.position;
             _lastVel = _vel;
-            _vel = Vector3.zero;
             _talliedVel = Vector3.zero;
         }
         

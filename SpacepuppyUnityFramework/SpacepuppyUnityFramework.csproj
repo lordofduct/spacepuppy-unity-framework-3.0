@@ -35,6 +35,7 @@
     <Compile Include="Collections\CovariantCollections.cs" />
     <Compile Include="Collections\Deque.cs" />
     <Compile Include="Collections\ICachePool.cs" />
+    <Compile Include="Collections\IIndexedEnumerable.cs" />
     <Compile Include="Collections\LightEnumerator.cs" />
     <Compile Include="Collections\ListDictionary.cs" />
     <Compile Include="Collections\MultitonPool.cs" />

@@ -267,13 +267,19 @@ namespace com.spacepuppy.Tween
             if (_instance == null) return;
             if (_instance._runningTweens.Count == 0) return;
 
-            _instance.LockTweenSet();
-            var e = _instance._runningTweens.GetEnumerator();
-            while (e.MoveNext())
+            try
             {
-                if (pred(e.Current)) return;
+                _instance.LockTweenSet();
+                var e = _instance._runningTweens.GetEnumerator();
+                while (e.MoveNext())
+                {
+                    if (pred(e.Current)) return;
+                }
             }
-            _instance.UnlockTweenSet();
+            finally
+            {
+                _instance.UnlockTweenSet();
+            }
         }
         
         #endregion

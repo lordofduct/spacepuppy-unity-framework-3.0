@@ -169,7 +169,7 @@ namespace com.spacepuppy.Anim.Legacy
             if (!_initialized) this.Init();
             if (this.ControllerMask != null && !this.ControllerMask.CanPlay(clip)) return SPAnim.Null;
 
-            var state = clip.CreateState() ?? SPAnim.Null;
+            var state = clip.CreateState(this) ?? SPAnim.Null;
             state.Play(QueueMode.PlayNow, mode);
             return state;
         }

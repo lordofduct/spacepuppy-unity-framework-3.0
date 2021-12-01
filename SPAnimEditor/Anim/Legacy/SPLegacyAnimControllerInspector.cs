@@ -33,7 +33,7 @@ namespace com.spacepuppyeditor.Anim.Legacy
 
             this.DrawPropertyField(EditorHelper.PROP_SCRIPT);
             this.DrawPlayAnimPopup();
-            this.DrawDefaultInspectorExcept(EditorHelper.PROP_SCRIPT, PROP_ANIMTOPLAYONSTART, PROP_STATES, PROP_ANIMATEPHYSICS, PROP_ANIMCULLING, PROP_TIMESUPPLIER, PROP_SPEED);
+            this.DrawDefaultInspectorExcept(EditorHelper.PROP_SCRIPT, PROP_ANIMTOPLAYONSTART, PROP_STATES, PROP_ANIMATEPHYSICS, PROP_ANIMCULLING, PROP_TIMESUPPLIER, PROP_SPEED, PROP_MASK);
             this.DrawSPAnimationControllerProps();
 
             this.serializedObject.ApplyModifiedProperties();

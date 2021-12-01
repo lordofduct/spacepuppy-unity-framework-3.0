@@ -127,7 +127,7 @@ namespace com.spacepuppy
     /// 
     /// Such a component should not change parents frequently as it would be expensive.
     /// </summary>
-    public class SPEntityComponent : SPComponent
+    public abstract class SPEntityComponent : SPComponent
     {
 
         #region Fields

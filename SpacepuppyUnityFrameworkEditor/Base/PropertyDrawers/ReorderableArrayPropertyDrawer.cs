@@ -16,6 +16,8 @@ namespace com.spacepuppyeditor.Core.PropertyDrawers
     public class ReorderableArrayPropertyDrawer : PropertyDrawer, IArrayHandlingPropertyDrawer
     {
 
+        public event System.EventHandler ElementAdded;
+
         public delegate string FormatElementLabelCallback(SerializedProperty property, int index, bool isActive, bool isFocused);
 
         private static readonly float TOP_PAD = 2f + EditorGUIUtility.singleLineHeight;
@@ -36,7 +38,6 @@ namespace com.spacepuppyeditor.Core.PropertyDrawers
         private string _childPropertyAsEntry;
         private string _elementLabelFormatString;
         private float _elementPadding;
-        private ReorderableList.AddCallbackDelegate _addCallback;
         private bool _allowDragAndDrop = true;
         private bool _showTooltipInHeader;
 
@@ -64,7 +65,7 @@ namespace com.spacepuppyeditor.Core.PropertyDrawers
 
         protected virtual CachedReorderableList GetList(SerializedProperty property, GUIContent label)
         {
-            var lst = CachedReorderableList.GetListDrawer(property, _maskList_DrawHeader, _maskList_DrawElement, _addCallback);
+            var lst = CachedReorderableList.GetListDrawer(property, _maskList_DrawHeader, _maskList_DrawElement, _maskList_OnElementAdded);
             lst.draggable = _draggable;
 
             if (property.arraySize > 0)
@@ -126,25 +127,6 @@ namespace com.spacepuppyeditor.Core.PropertyDrawers
                 _elementPadding = attrib.ElementPadding;
                 _allowDragAndDrop = attrib.AllowDragAndDrop;
                 _showTooltipInHeader = attrib.ShowTooltipInHeader;
-                if (!string.IsNullOrEmpty(attrib.OnAddCallback))
-                {
-                    _addCallback = (lst) =>
-                    {
-                        lst.serializedProperty.arraySize++;
-                        lst.index = lst.serializedProperty.arraySize - 1;
-                        lst.serializedProperty.serializedObject.ApplyModifiedProperties();
-
-                        var prop = lst.serializedProperty.GetArrayElementAtIndex(lst.index);
-                        var obj = EditorHelper.GetTargetObjectOfProperty(prop);
-                        obj = com.spacepuppy.Dynamic.DynamicUtil.InvokeMethod(lst.serializedProperty.serializedObject.targetObject, attrib.OnAddCallback, obj);
-                        EditorHelper.SetTargetObjectOfProperty(prop, obj);
-                        lst.serializedProperty.serializedObject.Update();
-                    };
-                }
-                else
-                {
-                    _addCallback = null;
-                }
             }
 
             _labelContent = label;
@@ -178,10 +160,17 @@ namespace com.spacepuppyeditor.Core.PropertyDrawers
 
         #region Properties
 
-        protected ReorderableList ListDrawer
-        {
-            get { return _lst; }
-        }
+        /*
+         * Current State
+         */
+
+        public ReorderableList CurrentReorderableList { get { return _lst; } }
+
+        public SerializedProperty CurrentArrayProperty { get { return _lst != null ? _lst.serializedProperty : null; } }
+
+        /*
+         * Configuration
+         */
 
         public bool DisallowFoldout
         {
@@ -229,12 +218,6 @@ namespace com.spacepuppyeditor.Core.PropertyDrawers
         {
             get { return _elementPadding; }
             set { _elementPadding = value; }
-        }
-
-        public ReorderableList.AddCallbackDelegate OnAddCallback
-        {
-            get { return _addCallback; }
-            set { _addCallback = value; }
         }
 
         public FormatElementLabelCallback FormatElementLabel
@@ -450,38 +433,66 @@ namespace com.spacepuppyeditor.Core.PropertyDrawers
             var element = _lst.serializedProperty.GetArrayElementAtIndex(index);
             if (element == null) return;
 
-            //EditorGUI.PropertyField(area, element, GUIContent.none, false);
-            GUIContent label = null;
-            if(_hideElementLabel)
-            {
-                label = GUIContent.none;
-            }
-            else
-            {
-                if (this.FormatElementLabel != null)
-                {
-                    string slbl = this.FormatElementLabel(element, index, isActive, isFocused);
-                    if (slbl != null) label = EditorHelper.TempContent(slbl);
-                }
-                else if (!string.IsNullOrEmpty(_elementLabelFormatString))
-                {
-                    label = EditorHelper.TempContent(string.Format(_elementLabelFormatString, index));
-                }
-                else
-                {
-                    label = TempElementLabel(element, index);
-                }
-                if (_elementPadding > 0f)
-                {
-                    area = new Rect(area.xMin + _elementPadding, area.yMin, Mathf.Max(0f, area.width - _elementPadding), area.height);
-                }
-            }
-
+            var label = this.GetFormattedElementLabel(area, index, isActive, isFocused);
             this.DrawElement(area, element, label, index);
 
             if (GUI.enabled) ReorderableListHelper.DrawDraggableElementDeleteContextMenu(_lst, area, index, isActive, isFocused);
         }
-        
+
+        private void _maskList_OnElementAdded(ReorderableList lst)
+        {
+            lst.serializedProperty.arraySize++;
+            lst.index = lst.serializedProperty.arraySize - 1;
+
+            var attrib = this.attribute as ReorderableArrayAttribute;
+            if (attrib != null && !string.IsNullOrEmpty(attrib.OnAddCallback))
+            {
+                lst.serializedProperty.serializedObject.ApplyModifiedProperties();
+
+                var prop = lst.serializedProperty.GetArrayElementAtIndex(lst.index);
+                var obj = EditorHelper.GetTargetObjectOfProperty(prop);
+                obj = com.spacepuppy.Dynamic.DynamicUtil.InvokeMethod(lst.serializedProperty.serializedObject.targetObject, attrib.OnAddCallback, obj);
+                EditorHelper.SetTargetObjectOfProperty(prop, obj);
+                lst.serializedProperty.serializedObject.Update();
+            }
+
+            this.OnElementAdded(lst);
+        }
+
+        protected virtual void OnElementAdded(ReorderableList lst)
+        {
+            var d = this.ElementAdded;
+            if (d != null) d(this, System.EventArgs.Empty);
+        }
+
+        protected virtual GUIContent GetFormattedElementLabel(Rect area, int index, bool isActive, bool isFocused)
+        {
+            var element = _lst.serializedProperty.GetArrayElementAtIndex(index);
+            if (element == null) return GUIContent.none;
+
+            var attrib = this.attribute as ReorderableArrayAttribute;
+            GUIContent label = null;
+            if (this.FormatElementLabel != null)
+            {
+                string slbl = this.FormatElementLabel(element, index, isActive, isFocused);
+                if (slbl != null) label = EditorHelper.TempContent(slbl);
+            }
+            else if (attrib != null)
+            {
+                if (!string.IsNullOrEmpty(attrib.ElementLabelFormatString))
+                {
+                    label = EditorHelper.TempContent(string.Format(attrib.ElementLabelFormatString, index));
+                }
+                if (attrib.ElementPadding > 0f)
+                {
+                    area = new Rect(area.xMin + attrib.ElementPadding, area.yMin, Mathf.Max(0f, area.width - attrib.ElementPadding), area.height);
+                }
+            }
+            if (label == null) label = (_hideElementLabel) ? GUIContent.none : TempElementLabel(element, index);
+
+            return label;
+        }
+
         protected virtual void DrawElement(Rect area, SerializedProperty element, GUIContent label, int elementIndex)
         {
             if(_drawElementAtBottom)

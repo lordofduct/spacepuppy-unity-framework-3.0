@@ -13,7 +13,7 @@ namespace com.spacepuppy.Anim
     public interface IScriptableAnimationClip : IAnimatable
     {
         
-        ISPAnim CreateState();
+        ISPAnim CreateState(ISPAnimationSource source);
 
     }
     

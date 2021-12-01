@@ -26,7 +26,7 @@ namespace com.spacepuppyeditor.Core.PropertyDrawers
             var attrib = this.attribute as EnumInCustomOrderAttribute;
             if (attrib != null && attrib.customOrder != null)
             {
-                var values = (from i in attrib.customOrder select EditorHelper.TempContent(System.Enum.GetName(enumType, i))).ToArray();
+                var values = attrib.customOrder.Select(i => EditorHelper.TempContent(EnumUtil.GetFriendlyName(System.Enum.ToObject(enumType, i) as System.Enum))).ToArray();
                 int index = System.Array.IndexOf(attrib.customOrder, property.intValue);
                 index = EditorGUI.Popup(position, label, index, values);
                 property.intValue = index >= 0 && index < attrib.customOrder.Length ? attrib.customOrder[index] : -1;

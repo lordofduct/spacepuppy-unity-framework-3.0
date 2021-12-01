@@ -47,6 +47,16 @@ namespace com.spacepuppy.Utils
 
         #region General Methods
 
+        public static HashSet<T> ToHashSet<T>(this IEnumerable<T> e)
+        {
+            return new HashSet<T>(e);
+        }
+
+        public static HashSet<T> ToHashSet<T>(this IEnumerable<T> e, IEqualityComparer<T> comparer)
+        {
+            return new HashSet<T>(e, comparer);
+        }
+
         public static bool IsEmpty(this IEnumerable lst)
         {
             if(lst is IList)
@@ -56,6 +66,46 @@ namespace com.spacepuppy.Utils
             else
             {
                 return !lst.GetEnumerator().MoveNext();
+            }
+        }
+
+        public static T LastOrDefault<T>(this IEnumerable<T> e, T defaultvalue)
+        {
+            var lst = e as IList<T>;
+            if (lst != null)
+            {
+                int cnt = lst.Count;
+                return cnt > 0 ? lst[cnt - 1] : defaultvalue;
+            }
+            else
+            {
+                var en = e.GetEnumerator();
+                T result = defaultvalue;
+                while (en.MoveNext())
+                {
+                    result = en.Current;
+                }
+                return result;
+            }
+        }
+
+        public static T FirstOrDefault<T>(this IEnumerable<T> e, T defaultvalue)
+        {
+            var lst = e as IList<T>;
+            if (lst != null)
+            {
+                int cnt = lst.Count;
+                return cnt > 0 ? lst[0] : defaultvalue;
+            }
+            else
+            {
+                var en = e.GetEnumerator();
+                T result = defaultvalue;
+                if (en.MoveNext())
+                {
+                    result = en.Current;
+                }
+                return result;
             }
         }
 

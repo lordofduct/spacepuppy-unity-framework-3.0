@@ -234,8 +234,8 @@ namespace com.spacepuppy.Utils
             var sa = System.Math.Sin(a);
             var rx = v.x * ca - v.y * sa;
 
-            v.x = (float)rx;
             v.y = (float)(v.x * sa + v.y * ca);
+            v.x = (float)rx;
         }
 
         /// <summary>
